@@ -1,0 +1,169 @@
+{
+	// Use IntelliSense to learn about possible attributes.
+	// Hover to view descriptions of existing attributes.
+	// For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
+	"version": "0.2.0",
+	"configurations": [
+		{
+			"name": "cli version",
+			"type": "node",
+			"request": "launch",
+			"skipFiles": [
+				"<node_internals>/**"
+			],
+			"program": "${workspaceFolder}/src/index.ts",
+			"envFile": "${workspaceFolder}/test.env",
+			"args": [
+				"version"
+			]
+		},
+		{
+			"name": "cli init",
+			"type": "node",
+			"request": "launch",
+			"skipFiles": [
+				"<node_internals>/**"
+			],
+			"program": "${workspaceFolder}/src/index.ts",
+			"envFile": "${workspaceFolder}/test.env",
+			"args": [
+				"init",
+				"-w",
+				"lab_01"
+			]
+		},
+		{
+			"name": "cli update",
+			"type": "node",
+			"request": "launch",
+			"skipFiles": [
+				"<node_internals>/**"
+			],
+			"program": "${workspaceFolder}/src/index.ts",
+			"envFile": "${workspaceFolder}/test.env",
+			"args": [
+				"update",
+				"-w",
+				"lab_01"
+			]
+		},
+		{
+			"name": "cli sync",
+			"type": "node",
+			"request": "launch",
+			"skipFiles": [
+				"<node_internals>/**"
+			],
+			"program": "${workspaceFolder}/src/index.ts",
+			"envFile": "${workspaceFolder}/test.env",
+			"args": [
+				"sync",
+				"-w",
+				"lab_01"
+			]
+		},
+		{
+			"name": "cli run",
+			"type": "node",
+			"request": "launch",
+			"skipFiles": [
+				"<node_internals>/**"
+			],
+			"program": "${workspaceFolder}/src/index.ts",
+			"envFile": "${workspaceFolder}/test.env",
+			"args": [
+				"run",
+				"-w",
+				"lab_01",
+				"-e",
+				"Country.bulkInsert()",
+				"-c",
+				"./lab_01/countries.json"
+				//"[{ \"\"id\"\": 4, \"\"name\"\": \"\"Afghanistan2\"\", \"\"alpha2\"\": \"\"af\"\", \"\"alpha3\"\": \"\"afg\"\"}]"
+			]
+		},
+		{
+			"name": "cli export",
+			"type": "node",
+			"request": "launch",
+			"skipFiles": [
+				"<node_internals>/**"
+			],
+			"program": "${workspaceFolder}/src/index.ts",
+			"envFile": "${workspaceFolder}/test.env",
+			"args": [
+				"export",
+				"-w",
+				"lab_01"
+			]
+		},
+		{
+			"name": "cli run delete",
+			"type": "node",
+			"request": "launch",
+			"skipFiles": [
+				"<node_internals>/**"
+			],
+			"program": "${workspaceFolder}/src/index.ts",
+			"envFile": "${workspaceFolder}/test.env",
+			"args": [
+				"run",
+				"-w",
+				"lab_01",
+				"-e",
+				"Country.deleteAll()"
+			]
+		},
+		{
+			"name": "cli import",
+			"type": "node",
+			"request": "launch",
+			"skipFiles": [
+				"<node_internals>/**"
+			],
+			"program": "${workspaceFolder}/src/index.ts",
+			"envFile": "${workspaceFolder}/test.env",
+			"args": [
+				"import",
+				"-w",
+				"lab_01",
+				"-s",
+				"lab_01-export.json"
+			]
+		},
+		{
+			"name": "cli drop",
+			"type": "node",
+			"request": "launch",
+			"skipFiles": [
+				"<node_internals>/**"
+			],
+			"program": "${workspaceFolder}/src/index.ts",
+			"envFile": "${workspaceFolder}/test.env",
+			"args": [
+				"drop",
+				"-w",
+				"lab_01"
+			]
+		},
+		{
+			"name": "cli debug",
+			"type": "node",
+			"request": "launch",
+			"skipFiles": [
+				"<node_internals>/**"
+			],
+			"program": "${workspaceFolder}/src/index.ts",
+			"envFile": "${workspaceFolder}/test.env",
+			"args": [
+				"run",
+				"-w",
+				"./",
+				"-n",
+				"source",
+				"-e",
+				"Customers.filter( p=> p.id == 'WOLZA').include(p=> p.orders)"
+			]
+		}
+	]
+}
