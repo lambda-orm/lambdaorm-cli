@@ -1,6 +1,6 @@
 {
 	"name": "lambdaorm-cli",
-	"version": "0.0.47",
+	"version": "0.0.1-alpha",
 	"description": "LambdaORM CLI",
 	"author": "Flavio Lionel Rita <flaviolrita@hotmail.com>",
 	"license": "Apache-2.0 License",
@@ -23,7 +23,7 @@
 		"doc": "typedoc"
 	},
 	"dependencies": {
-		"lambdaorm": "0.0.47",
+		"lambdaorm": "0.0.48-alpha",
 		"yargs": "^17.2.1"
 	},
 	"devDependencies": {

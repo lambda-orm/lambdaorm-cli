@@ -12,7 +12,6 @@
 				"<node_internals>/**"
 			],
 			"program": "${workspaceFolder}/src/index.ts",
-			"envFile": "${workspaceFolder}/test.env",
 			"args": [
 				"version"
 			]
@@ -25,11 +24,10 @@
 				"<node_internals>/**"
 			],
 			"program": "${workspaceFolder}/src/index.ts",
-			"envFile": "${workspaceFolder}/test.env",
 			"args": [
 				"init",
 				"-w",
-				"lab_01"
+				"lab-countries"
 			]
 		},
 		{
@@ -40,11 +38,10 @@
 				"<node_internals>/**"
 			],
 			"program": "${workspaceFolder}/src/index.ts",
-			"envFile": "${workspaceFolder}/test.env",
 			"args": [
 				"update",
 				"-w",
-				"lab_01"
+				"lab-countries"
 			]
 		},
 		{
@@ -55,11 +52,10 @@
 				"<node_internals>/**"
 			],
 			"program": "${workspaceFolder}/src/index.ts",
-			"envFile": "${workspaceFolder}/test.env",
 			"args": [
 				"sync",
 				"-w",
-				"lab_01"
+				"lab-countries"
 			]
 		},
 		{
@@ -70,15 +66,14 @@
 				"<node_internals>/**"
 			],
 			"program": "${workspaceFolder}/src/index.ts",
-			"envFile": "${workspaceFolder}/test.env",
 			"args": [
 				"run",
 				"-w",
-				"lab_01",
+				"lab-countries",
 				"-e",
-				"Country.bulkInsert()",
+				"Countries.bulkInsert()",
 				"-c",
-				"./lab_01/countries.json"
+				"./lab-countries/countries.json"
 				//"[{ \"\"id\"\": 4, \"\"name\"\": \"\"Afghanistan2\"\", \"\"alpha2\"\": \"\"af\"\", \"\"alpha3\"\": \"\"afg\"\"}]"
 			]
 		},
@@ -90,11 +85,12 @@
 				"<node_internals>/**"
 			],
 			"program": "${workspaceFolder}/src/index.ts",
-			"envFile": "${workspaceFolder}/test.env",
 			"args": [
 				"export",
 				"-w",
-				"lab_01"
+				"lab-countries",
+				"-t",
+				"./lab-countries/data"
 			]
 		},
 		{
@@ -105,13 +101,12 @@
 				"<node_internals>/**"
 			],
 			"program": "${workspaceFolder}/src/index.ts",
-			"envFile": "${workspaceFolder}/test.env",
 			"args": [
 				"run",
 				"-w",
-				"lab_01",
+				"lab-countries",
 				"-e",
-				"Country.deleteAll()"
+				"Countries.deleteAll()"
 			]
 		},
 		{
@@ -122,13 +117,30 @@
 				"<node_internals>/**"
 			],
 			"program": "${workspaceFolder}/src/index.ts",
-			"envFile": "${workspaceFolder}/test.env",
 			"args": [
 				"import",
 				"-w",
-				"lab_01",
+				"lab-countries",
 				"-s",
-				"lab_01-export.json"
+				"./lab-countries/data/mydb-export.json"
+			]
+		},
+		{
+			"name": "cli run query",
+			"type": "node",
+			"request": "launch",
+			"skipFiles": [
+				"<node_internals>/**"
+			],
+			"program": "${workspaceFolder}/src/index.ts",
+			"args": [
+				"run",
+				"-w",
+				"lab-countries",
+				"-n",
+				"mydb",
+				"-e",
+				"Countries.filter( p=> p.alpha2 == 'br')"
 			]
 		},
 		{
@@ -139,30 +151,10 @@
 				"<node_internals>/**"
 			],
 			"program": "${workspaceFolder}/src/index.ts",
-			"envFile": "${workspaceFolder}/test.env",
 			"args": [
 				"drop",
 				"-w",
-				"lab_01"
-			]
-		},
-		{
-			"name": "cli debug",
-			"type": "node",
-			"request": "launch",
-			"skipFiles": [
-				"<node_internals>/**"
-			],
-			"program": "${workspaceFolder}/src/index.ts",
-			"envFile": "${workspaceFolder}/test.env",
-			"args": [
-				"run",
-				"-w",
-				"./",
-				"-n",
-				"source",
-				"-e",
-				"Customers.filter( p=> p.id == 'WOLZA').include(p=> p.orders)"
+				"lab-countries"
 			]
 		}
 	]
