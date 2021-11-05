@@ -59,7 +59,7 @@
 			]
 		},
 		{
-			"name": "cli run",
+			"name": "cli run bulkInsert",
 			"type": "node",
 			"request": "launch",
 			"skipFiles": [
@@ -72,7 +72,7 @@
 				"lab-countries",
 				"-e",
 				"Countries.bulkInsert()",
-				"-c",
+				"-d",
 				"./lab-countries/countries.json"
 				//"[{ \"\"id\"\": 4, \"\"name\"\": \"\"Afghanistan2\"\", \"\"alpha2\"\": \"\"af\"\", \"\"alpha3\"\": \"\"afg\"\"}]"
 			]

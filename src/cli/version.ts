@@ -9,6 +9,7 @@ export class VersionCommand implements CommandModule {
 	async handler () {
 		const packageName = 'lambdaorm'
 		const orm = new Orm()
+
 		const localNpmVersion = await orm.lib.getLocalPackage(packageName, process.cwd())
 		const globalNpmVersion = await orm.lib.getGlobalPackage(packageName)
 
