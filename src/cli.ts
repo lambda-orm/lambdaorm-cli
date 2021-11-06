@@ -1,4 +1,5 @@
-#!/usr/bin / env node
+#!/usr/bin/env node
+
 import yargs from 'yargs'
 import { InitCommand } from './cli/init'
 import { VersionCommand } from './cli/version'
