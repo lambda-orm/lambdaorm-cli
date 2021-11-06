@@ -1,20 +1,20 @@
 {
-	"name": "lambdaorm-cli",
+	"name": "lambdactl",
 	"version": "0.0.1-alpha",
-	"description": "LambdaORM CLI",
+	"description": "Lambda ORM CLI",
 	"author": "Flavio Lionel Rita <flaviolrita@hotmail.com>",
 	"license": "Apache-2.0 License",
 	"main": "./index.js",
 	"bin": {
-		"lambdaorm": "./index.js"
+		"lambdactl": "./index.js"
 	},
-	"homepage": "https://github.com/FlavioLionelRita/lambda-orm-cli#readme",
+	"homepage": "https://github.com/FlavioLionelRita/lambdactl#readme",
 	"bugs": {
-		"url": "https://github.com/FlavioLionelRita/lambda-orm-cli/issues"
+		"url": "https://github.com/FlavioLionelRita/lambdactl/issues"
 	},
 	"repository": {
 		"type": "git",
-		"url": "https://github.com/FlavioLionelRita/lambda-orm-cli.git"
+		"url": "https://github.com/FlavioLionelRita/lambdactl.git"
 	},
 	"scripts": {
 		"lint": "grunt lint",
