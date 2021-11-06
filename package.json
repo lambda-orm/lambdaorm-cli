@@ -1,20 +1,21 @@
 {
-	"name": "lambdactl",
-	"version": "0.0.7-alpha",
-	"description": "Lambda ORM CLI",
+	"name": "lambdaorm-cli",
+	"version": "0.0.8-alpha",
+	"description": "The lambdaorm command line interface",
 	"author": "Flavio Lionel Rita <flaviolrita@hotmail.com>",
 	"license": "Apache-2.0 License",
-	"main": "./index.js",
-	"bin": {
-		"lambdactl": "./index.js"
+	"engines": {
+		"node": ">=10"
 	},
-	"homepage": "https://github.com/FlavioLionelRita/lambdactl#readme",
+	"main": "./cli.js",
+	"bin": "cli.js",
+	"homepage": "https://github.com/FlavioLionelRita/lambdaorm-cli#readme",
 	"bugs": {
-		"url": "https://github.com/FlavioLionelRita/lambdactl/issues"
+		"url": "https://github.com/FlavioLionelRita/lambdaorm-cli/issues"
 	},
 	"repository": {
 		"type": "git",
-		"url": "https://github.com/FlavioLionelRita/lambdactl.git"
+		"url": "https://github.com/FlavioLionelRita/lambdaorm-cli.git"
 	},
 	"scripts": {
 		"lint": "grunt lint",
@@ -23,7 +24,7 @@
 		"doc": "typedoc"
 	},
 	"dependencies": {
-		"lambdaorm": "0.0.50-alpha",
+		"lambdaorm": "0.0.51-alpha",
 		"yargs": "^17.2.1",
 		"mongodb": "^4.1.3",
 		"mysql2": "^2.2.5",

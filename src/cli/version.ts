@@ -7,24 +7,18 @@ export class VersionCommand implements CommandModule {
 	describe = 'Prints lambdaorm version this project uses.';
 
 	async handler () {
-		const packageName = 'lambdaorm'
 		const orm = new Orm()
 
-		const localNpmVersion = await orm.lib.getLocalPackage(packageName, process.cwd())
-		const globalNpmVersion = await orm.lib.getGlobalPackage(packageName)
+		const lambdaormVersion = await orm.lib.getLocalPackage('lambdaorm', process.cwd())
+		const lambdactlVersion = await orm.lib.getGlobalPackage('lambdactl')
 
-		if (localNpmVersion) {
-			console.log('Local installed version:', localNpmVersion)
-		} else {
-			console.log(`No local installed ${packageName} was found.`)
+		if (lambdactlVersion) {
+			console.log(`Global lambdactl version: ${lambdactlVersion}`)
 		}
-		if (globalNpmVersion) {
-			console.log(`Global installed ${packageName} version: ${globalNpmVersion}`)
+		if (lambdaormVersion) {
+			console.log('Local lambdaorm version:', lambdaormVersion)
 		} else {
-			console.log('No global installed was found.')
-		}
-		if (localNpmVersion && globalNpmVersion && localNpmVersion !== globalNpmVersion) {
-			console.log(`To avoid issues with CLI please make sure your global and local ${packageName} versions match, or you are using locally installed ${packageName} instead of global one.`)
+			console.log('Local lambdaorm not found.')
 		}
 	}
 }
