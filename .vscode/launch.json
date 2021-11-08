@@ -11,7 +11,7 @@
 			"skipFiles": [
 				"<node_internals>/**"
 			],
-			"program": "${workspaceFolder}/src/index.ts",
+			"program": "${workspaceFolder}/src/cli.ts",
 			"args": [
 				"version"
 			]
@@ -23,7 +23,7 @@
 			"skipFiles": [
 				"<node_internals>/**"
 			],
-			"program": "${workspaceFolder}/src/index.ts",
+			"program": "${workspaceFolder}/src/cli.ts",
 			"args": [
 				"init",
 				"-w",
@@ -37,7 +37,7 @@
 			"skipFiles": [
 				"<node_internals>/**"
 			],
-			"program": "${workspaceFolder}/src/index.ts",
+			"program": "${workspaceFolder}/src/cli.ts",
 			"args": [
 				"update",
 				"-w",
@@ -51,7 +51,7 @@
 			"skipFiles": [
 				"<node_internals>/**"
 			],
-			"program": "${workspaceFolder}/src/index.ts",
+			"program": "${workspaceFolder}/src/cli.ts",
 			"args": [
 				"sync",
 				"-w",
@@ -65,7 +65,7 @@
 			"skipFiles": [
 				"<node_internals>/**"
 			],
-			"program": "${workspaceFolder}/src/index.ts",
+			"program": "${workspaceFolder}/src/cli.ts",
 			"args": [
 				"run",
 				"-w",
@@ -84,7 +84,7 @@
 			"skipFiles": [
 				"<node_internals>/**"
 			],
-			"program": "${workspaceFolder}/src/index.ts",
+			"program": "${workspaceFolder}/src/cli.ts",
 			"args": [
 				"export",
 				"-w",
@@ -100,7 +100,7 @@
 			"skipFiles": [
 				"<node_internals>/**"
 			],
-			"program": "${workspaceFolder}/src/index.ts",
+			"program": "${workspaceFolder}/src/cli.ts",
 			"args": [
 				"run",
 				"-w",
@@ -116,7 +116,7 @@
 			"skipFiles": [
 				"<node_internals>/**"
 			],
-			"program": "${workspaceFolder}/src/index.ts",
+			"program": "${workspaceFolder}/src/cli.ts",
 			"args": [
 				"import",
 				"-w",
@@ -132,7 +132,7 @@
 			"skipFiles": [
 				"<node_internals>/**"
 			],
-			"program": "${workspaceFolder}/src/index.ts",
+			"program": "${workspaceFolder}/src/cli.ts",
 			"args": [
 				"run",
 				"-w",
@@ -150,7 +150,7 @@
 			"skipFiles": [
 				"<node_internals>/**"
 			],
-			"program": "${workspaceFolder}/src/index.ts",
+			"program": "${workspaceFolder}/src/cli.ts",
 			"args": [
 				"drop",
 				"-w",
