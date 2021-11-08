@@ -1,6 +1,7 @@
 /* eslint-disable no-mixed-spaces-and-tabs */
 import { CommandModule } from 'yargs'
 import { Orm } from 'lambdaorm'
+import { Manager } from '../manager'
 
 export class VersionCommand implements CommandModule {
 	command = 'version';
@@ -8,9 +9,10 @@ export class VersionCommand implements CommandModule {
 
 	async handler () {
 		const orm = new Orm()
+		const manager = new Manager(orm)
 
-		const lambdaormVersion = await orm.lib.getLocalPackage('lambdaorm', process.cwd())
-		const lambdactlVersion = await orm.lib.getGlobalPackage('lambdactl')
+		const lambdaormVersion = await manager.getLocalPackage('lambdaorm', process.cwd())
+		const lambdactlVersion = await manager.getGlobalPackage('lambdactl')
 
 		if (lambdactlVersion) {
 			console.log(`Global lambdactl version: ${lambdactlVersion}`)

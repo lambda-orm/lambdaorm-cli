@@ -1,6 +1,7 @@
 /* eslint-disable no-mixed-spaces-and-tabs */
 import { CommandModule, Argv, Arguments } from 'yargs'
 import { Orm } from 'lambdaorm'
+import { Manager } from '../manager'
 import path from 'path'
 
 export class UpdateCommand implements CommandModule {
@@ -18,14 +19,15 @@ export class UpdateCommand implements CommandModule {
 	async handler (args: Arguments) {
 		const workspace = path.resolve(process.cwd(), args.workspace as string || '.')
 		const orm = new Orm(workspace)
+		const manager = new Manager(orm)
 		try {
 			const config = await orm.lib.getConfig(workspace)
 			// write models
-			await orm.lib.writeModel(config)
+			await manager.writeModel(config)
 			// create structure
-			await orm.lib.createStructure(config)
+			await manager.createStructure(config)
 			// add libraries for dialect
-			await orm.lib.addDialects(config)
+			await manager.addDialects(config)
 		} catch (error) {
 			console.error(`error: ${error}`)
 		}

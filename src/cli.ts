@@ -1,14 +1,14 @@
 #!/usr/bin/env node
 
 import yargs from 'yargs'
-import { InitCommand } from './cli/init'
-import { VersionCommand } from './cli/version'
-import { DropCommand } from './cli/drop'
-import { SyncCommand } from './cli/sync'
-import { ImportCommand } from './cli/import'
-import { ExportCommand } from './cli/export'
-import { RunCommand } from './cli/run'
-import { UpdateCommand } from './cli/update'
+import { InitCommand } from './command/init'
+import { VersionCommand } from './command/version'
+import { DropCommand } from './command/drop'
+import { SyncCommand } from './command/sync'
+import { ImportCommand } from './command/import'
+import { ExportCommand } from './command/export'
+import { RunCommand } from './command/run'
+import { UpdateCommand } from './command/update'
 
 // eslint-disable-next-line no-unused-expressions
 yargs
