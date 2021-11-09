@@ -26,9 +26,9 @@ app:
   models: models
   defaultDatabase: lab_01
 databases:
-  - name: lab_01
+  - name: mydb
     dialect: mysql
-    schema: lab_01
+    schema: countries
     connection:
       host: localhost
       port: 3306
@@ -40,31 +40,22 @@ databases:
       connectionLimit: 10
       queueLimit: 0
 schemas:
-  - name: lab_01
+  - name: countries
     enums: []
     entities:
       - name: Countries
-        mapping: COUNTRY
         primaryKey: ["id"]
         uniqueKey: ["name"]
         properties:
           - name: id
-            mapping: ID
             type: integer
             nullable: false
           - name: name
-            mapping: NAME
             nullable: false
-            type: string
-            length: 127
           - name: alpha2
-            mapping: ALPHA_2
             nullable: false
-            type: string
             length: 2
           - name: alpha3
-            mapping: ALPHA_3
-            nullable: false
             type: string
             length: 3
 
