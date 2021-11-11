@@ -31,4 +31,4 @@ npm install lambdaorm-cli -g
 
 ### Labs
 
-- [CLI](https://github.com/FlavioLionelRita/lambdaorm/wiki/Lab-CLI)
+- [lab 01](https://github.com/FlavioLionelRita/lambdaorm-lab01)

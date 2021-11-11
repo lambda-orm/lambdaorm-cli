@@ -16,7 +16,7 @@ export class Manager {
 		// if the sintaxis.d.ts does not exist create it
 		const sintaxisPath = path.join(this.orm.workspace, config.app.src, 'sintaxis.d.ts')
 		if (!await Helper.existsPath(sintaxisPath)) {
-			await Helper.copyFile(path.join(__dirname, './../sintaxis.d.ts'), sintaxisPath)
+			await Helper.copyFile(path.join(__dirname, './sintaxis.d.ts'), sintaxisPath)
 		}
 
 		// if the package.json does not exist create it
@@ -157,9 +157,6 @@ export class Manager {
 		if (schema === undefined) {
 			config.schemas.push({ name: db.schema, enums: [], entities: [] })
 		}
-		if (config.app.configFile === undefined) {
-			config.app.configFile = 'lambdaorm.yaml'
-		}
 		if (config.app.defaultDatabase === undefined) {
 			config.app.defaultDatabase = db.name
 		}
@@ -235,20 +232,15 @@ export class Manager {
 		}
 	}
 
-	public async writeConfig (config: Config): Promise<void> {
-		if (config.app.configFile !== undefined) {
-			const configPath = path.join(this.orm.workspace, config.app.configFile)
-			if (path.extname(configPath) === '.yaml' || path.extname(configPath) === '.yml') {
-				const content = yaml.dump(config)
-				await Helper.writeFile(configPath, content)
-			} else if (path.extname(configPath) === '.json') {
-				const content = JSON.stringify(config, null, 2)
-				await Helper.writeFile(configPath, content)
-			} else {
-				throw new Error(`Config file: ${configPath} not supported`)
-			}
+	public async writeConfig (configPath:string, config: Config): Promise<void> {
+		if (path.extname(configPath) === '.yaml' || path.extname(configPath) === '.yml') {
+			const content = yaml.dump(config)
+			await Helper.writeFile(configPath, content)
+		} else if (path.extname(configPath) === '.json') {
+			const content = JSON.stringify(config, null, 2)
+			await Helper.writeFile(configPath, content)
 		} else {
-			throw new Error('Config not defined')
+			throw new Error(`Config file: ${configPath} not supported`)
 		}
 	}
 
@@ -265,6 +257,7 @@ export class Manager {
 			await Helper.writeFile(schemaPath, content)
 			for (const q in schema.entities) {
 				const entity = schema.entities[q]
+				if (entity.abstract) continue
 				const singular = entity.singular ? entity.singular : Helper.singular(entity.name)
 				const repositoryPath = path.join(modelsPath, `repository${singular}.ts`)
 				references.push(`repository${singular}`)
