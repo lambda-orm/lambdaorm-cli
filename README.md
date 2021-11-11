@@ -27,8 +27,36 @@ npm install lambdaorm-cli -g
 
 ## Documentation
 
-- [Wiki](https://github.com/FlavioLionelRita/lambdaorm/wiki)
+- [lambdaorm cli wiki](https://github.com/FlavioLionelRita/lambdaorm-cli/wiki)
+- [lambdaorm wiki](https://github.com/FlavioLionelRita/lambdaorm/wiki)
+- [lambdaorm](https://github.com/FlavioLionelRita/lambdaorm)
 
-### Labs
+## Labs
 
-- [lab 01](https://github.com/FlavioLionelRita/lambdaorm-lab01)
+### Lab 01
+
+The goal of this lab is to use the Lambdaorm-cli commands
+
+[source code](https://github.com/FlavioLionelRita/lambdaorm-lab01)
+
+### Lab 02
+
+In this laboratory we will see:
+
+- How to insert data from a file to more than one table.
+- how to extend entities using abstract entities
+- how to run queries from cli to perform different types of queries
+
+[source code](https://github.com/FlavioLionelRita/lambdaorm-lab02)
+
+### Lab 03
+
+In this laboratory we will see:
+
+- How to insert data from a file to more than one table.
+- how to extend entities using abstract entities
+- how to extend a schema to create a new one, overwriting the mapping
+- how to work with two schemas and databases that share the same model
+- how to use imported data from one database to import it into another
+
+[source code](https://github.com/FlavioLionelRita/lambdaorm-lab03)
