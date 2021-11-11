@@ -12,10 +12,10 @@ export class VersionCommand implements CommandModule {
 		const manager = new Manager(orm)
 
 		const lambdaormVersion = await manager.getLocalPackage('lambdaorm', process.cwd())
-		const lambdactlVersion = await manager.getGlobalPackage('lambdactl')
+		const lambdaormCliVersion = await manager.getGlobalPackage('lambdaorm-cli')
 
-		if (lambdactlVersion) {
-			console.log(`Global lambdactl version: ${lambdactlVersion}`)
+		if (lambdaormCliVersion) {
+			console.log(`Global lambdaorm cli version: ${lambdaormCliVersion}`)
 		}
 		if (lambdaormVersion) {
 			console.log('Local lambdaorm version:', lambdaormVersion)

@@ -10,9 +10,11 @@ module.exports = function (grunt) {
 			tsc: { cmd: 'npx tsc ' }
 		},
 		clean: {
+			build: ['build'],
 			dist: ['dist']
 		},
 		copy: {
+			sintaxis: { expand: true, cwd: './src', src: './sintaxis.d.ts', dest: 'build/' },
 			build: { expand: true, cwd: 'build/', src: '**', dest: 'dist/' },
 			readme: { expand: true, src: './README.md', dest: 'dist/' },
 			license: { expand: true, src: './LICENSE', dest: 'dist/' }
@@ -23,13 +25,15 @@ module.exports = function (grunt) {
 		const data = require('./package.json')
 		delete data.devDependencies
 		delete data.scripts
-		data.main = 'index.js'
-		data.types = 'index.d.ts'
+		delete data.private
+		data.main = 'cli.js'
+		data.bin = { lambdaorm: 'cli.js' }
+		data.types = 'cli.d.ts'
 		fs.writeFileSync('dist/package.json', JSON.stringify(data, null, 2), 'utf8')
 	})
 
-	grunt.registerTask('build', ['exec:tsc'])
+	grunt.registerTask('build', ['clean:build', 'exec:tsc', 'copy:sintaxis'])
 	grunt.registerTask('lint', ['exec:lint'])
-	grunt.registerTask('dist', ['exec:tsc', 'clean:dist', 'copy:build', 'copy:readme', 'copy:license', 'create-package'])
+	grunt.registerTask('dist', ['clean:dist', 'build', 'copy:build', 'copy:readme', 'copy:license', 'create-package'])
 	grunt.registerTask('default', [])
 }

@@ -44,12 +44,10 @@ export class InitCommand implements CommandModule {
 			// if (config.app.workspace === undefined) {
 			// config.app.workspace = workspace
 			// }
-			if (config.app.configFile === undefined) {
-				config.app.configFile = 'lambdaorm.yaml'
-			}
 			manager.completeConfig(config, database, dialect, connection)
 			// write lambdaorm config
-			await manager.writeConfig(config)
+			const configPath = path.join(workspace, 'lambdaorm.yaml')
+			await manager.writeConfig(configPath, config)
 			// create structure
 			await manager.createStructure(config)
 			// add libraries for dialect
