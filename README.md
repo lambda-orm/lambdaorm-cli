@@ -48,8 +48,10 @@ In this laboratory we will see:
 
 In this laboratory we will see:
 
-- How to insert data from a file to more than one table.
+- how to create a project that uses lambda ORM
+- How to define a schema
 - how to extend entities using abstract entities
+- How to insert data from a file.
 - how to run queries from cli to perform different types of queries
 
 [source code](https://github.com/FlavioLionelRita/lambdaorm-lab02)
