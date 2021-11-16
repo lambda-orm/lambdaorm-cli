@@ -33,7 +33,14 @@ npm install lambdaorm-cli -g
 
 ### Lab 01
 
-The goal of this lab is to use the Lambdaorm-cli commands
+In this laboratory we will see:
+
+- How to use the Lambdaorm-cli commands
+- how to create a project that uses lambda ORM
+- How to define a schema
+- how to run a bulckInsert from a file
+- how to export data from a schema
+- how to import data into a schema from a previously generated export file
 
 [source code](https://github.com/FlavioLionelRita/lambdaorm-lab01)
 
@@ -58,3 +65,15 @@ In this laboratory we will see:
 - how to use imported data from one database to import it into another
 
 [source code](https://github.com/FlavioLionelRita/lambdaorm-lab03)
+
+### Lab 04
+
+In this laboratory we will see:
+
+- How to insert data from a file to more than one table.
+- how to extend entities using abstract entities
+- how to define a schema that works with entities in different databases
+- how to run a bulkinsert on entities in different databases
+- how to export and import entity data in different databases
+
+[source code](https://github.com/FlavioLionelRita/lambdaorm-lab04)
