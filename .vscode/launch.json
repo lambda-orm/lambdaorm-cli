@@ -144,6 +144,26 @@
 			]
 		},
 		{
+			"name": "cli run query with context",
+			"type": "node",
+			"request": "launch",
+			"skipFiles": [
+				"<node_internals>/**"
+			],
+			"program": "${workspaceFolder}/src/cli.ts",
+			"args": [
+				"run",
+				"-w",
+				"lab-countries",
+				"-e",
+				"OrderDetails.filter(p => between(p.order.shippedDate, from, to) && p.unitPrice > minValue).map(p => ({ category: p.product.category.name, product: p.product.name, unitPrice: p.unitPrice, quantity: p.quantity })).sort(p => [p.category, p.product])",
+				"-d",
+				//"{ \"\"a\"\":\"\"1997-01-01\"\" }"
+				"{ \"\"minValue\"\": 10, \"\"from\"\": \"\"1997-01-01\"\", \"\"to\"\": \"\"1997-12-31\"\" }"
+				//"[{ \"\"id\"\": 4, \"\"name\"\": \"\"Afghanistan2\"\", \"\"alpha2\"\": \"\"af\"\", \"\"alpha3\"\": \"\"afg\"\"}]"
+			]
+		},
+		{
 			"name": "cli drop",
 			"type": "node",
 			"request": "launch",

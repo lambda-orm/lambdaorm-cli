@@ -1,0 +1,23 @@
+app:
+  src: src
+  data: data
+  models: models
+  defaultDatabase: lab-countries
+databases:
+  - name: lab-countries
+    dialect: mysql
+    schema: lab-countries
+    connection:
+      host: localhost
+      port: 3306
+      user: test
+      password: test
+      database: test
+      multipleStatements: true
+      waitForConnections: true
+      connectionLimit: 10
+      queueLimit: 0
+schemas:
+  - name: lab-countries
+    enums: []
+    entities: []
