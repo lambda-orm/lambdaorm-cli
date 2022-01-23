@@ -13,13 +13,13 @@ export class DropCommand implements CommandModule {
 				alias: 'workspace',
 				describe: 'project path.'
 			})
-			.option('n', {
-				alias: 'name',
-				describe: 'Name of database'
-			})
 			.option('s', {
-				alias: 'sentences',
-				describe: 'Generates the sentences but does not apply.'
+				alias: 'stage',
+				describe: 'Name of stage'
+			})
+			.option('q', {
+				alias: 'query',
+				describe: 'Generates the queries but does not apply.'
 			})
 			.option('f', {
 				alias: 'force',
@@ -29,21 +29,21 @@ export class DropCommand implements CommandModule {
 
 	async handler (args: Arguments) {
 		const workspace = path.resolve(process.cwd(), args.workspace as string || '.')
-		const database = args.name as string
-		const sentences = args.sentences !== undefined
+		const stageName = args.stage as string
+		const query = args.query !== undefined
 		const force = args.force !== undefined
 		const orm = new Orm(workspace)
 
 		try {
 			const config = await orm.lib.getConfig(workspace)
-			const db = orm.lib.getDatabase(database, config)
+			const stage = orm.schema.stage.get(stageName)
 			await orm.init(config)
 
-			if (sentences) {
-				const result = await orm.database.clean(db.name).sentence()
-				console.log(result)
+			if (query) {
+				const sentences = await orm.stage.clean(stage.name).sentence()
+				console.log(sentences)
 			} else {
-				const result = await orm.database.clean(db.name).execute(force)
+				const result = await orm.stage.clean(stage.name).execute(force)
 				console.log(JSON.stringify(result, null, 2))
 			}
 		} catch (error) {

@@ -13,9 +13,9 @@ export class ImportCommand implements CommandModule {
 				alias: 'workspace',
 				describe: 'project path.'
 			})
-			.option('n', {
-				alias: 'name',
-				describe: 'Name of database'
+			.option('s', {
+				alias: 'stage',
+				describe: 'Name of stage'
 			})
 			.option('s', {
 				alias: 'source',
@@ -25,7 +25,7 @@ export class ImportCommand implements CommandModule {
 
 	async handler (args: Arguments) {
 		const workspace = path.resolve(process.cwd(), args.workspace as string || '.')
-		const database = args.name as string
+		const stageName = args.stage as string
 		const source = args.source as string
 		const orm = new Orm(workspace)
 
@@ -36,7 +36,7 @@ export class ImportCommand implements CommandModule {
 
 		try {
 			const config = await orm.lib.getConfig(workspace)
-			const db = orm.lib.getDatabase(database, config)
+			const stage = orm.schema.stage.get(stageName)
 			await orm.init(config)
 			// get content
 			const content = await Helper.readFile(source)
@@ -45,7 +45,7 @@ export class ImportCommand implements CommandModule {
 			}
 			// import data
 			const data = JSON.parse(content)
-			await orm.database.import(db.name).execute(data)
+			await orm.stage.import(stage.name).execute(data)
 		} catch (error) {
 			console.error(`error: ${error}`)
 		} finally {

@@ -24,7 +24,7 @@
 		"doc": "typedoc"
 	},
 	"dependencies": {
-		"lambdaorm": "0.1.4-alpha",
+		"lambdaorm": "0.1.5-alpha",
 		"yargs": "^17.2.1",
 		"mongodb": "^4.1.3",
 		"mysql2": "^2.2.5",

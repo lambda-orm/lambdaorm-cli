@@ -13,9 +13,9 @@ export class RunCommand implements CommandModule {
 				alias: 'workspace',
 				describe: 'project path.'
 			})
-			.option('n', {
-				alias: 'name',
-				describe: 'Name of database'
+			.option('s', {
+				alias: 'stage',
+				describe: 'Name of stage'
 			})
 			.option('e', {
 				alias: 'expression',
@@ -23,11 +23,11 @@ export class RunCommand implements CommandModule {
 			})
 			.option('d', {
 				alias: 'data',
-				describe: 'DataContext used to execute expression'
+				describe: 'Data used to execute expression'
 			})
-			.option('s', {
-				alias: 'sentences',
-				describe: 'Generates the sentences but does not apply.'
+			.option('q', {
+				alias: 'query',
+				describe: 'Generates the queries but does not apply.'
 			})
 			.option('m', {
 				alias: 'metadata',
@@ -38,9 +38,9 @@ export class RunCommand implements CommandModule {
 	async handler (args: Arguments) {
 		const workspace = path.resolve(process.cwd(), args.workspace as string || '.')
 		const expression = args.expression as string
-		let dataContext = args.data || {}
-		const database = args.name as string
-		const sentences = args.sentences as string
+		let data = args.data || {}
+		const stageName = args.stage as string
+		const query = args.query !== undefined
 		const metadata = args.metadata !== undefined
 		const orm = new Orm(workspace)
 		if (expression === undefined) {
@@ -49,38 +49,38 @@ export class RunCommand implements CommandModule {
 		}
 		try {
 			const config = await orm.lib.getConfig(workspace)
-			const db = orm.lib.getDatabase(database, config)
+			const stage = orm.schema.stage.get(stageName)
 			await orm.init(config)
 			// read context
-			if (typeof dataContext === 'string') {
-				let data = Helper.tryParse(dataContext as string)
-				if (data !== null) {
-					dataContext = data
+			if (typeof data === 'string') {
+				const _data = Helper.tryParse(data as string)
+				if (_data !== null) {
+					data = _data
 				} else {
 					try {
-						data = await Helper.readFile(path.join(process.cwd(), dataContext as string))
-						dataContext = JSON.parse(data as string)
+						data = await Helper.readFile(path.join(process.cwd(), data as string))
+						data = JSON.parse(data as string)
 					} catch (error) {
 						throw new Error(`Errror to read context: ${error}`)
 					}
 				}
 			}
 			// execute or get metadata
-			if (sentences || metadata) {
-				if (sentences) {
-					const resullt = await orm.expression(expression).sentence(db.name)
+			if (query || metadata) {
+				if (query) {
+					const resullt = await orm.sentence(expression, stage.name)
 					console.log(resullt)
 				}
 				if (metadata) {
-					const model = await orm.expression(expression).model(db.name)
-					const metadata = await orm.expression(expression).metadata(db.name)
+					const model = await orm.model(expression)
+					const metadata = await orm.metadata(expression)
 					console.log('model:')
 					console.log(JSON.stringify(model, null, 2))
 					console.log('metadata:')
 					console.log(JSON.stringify(metadata, null, 2))
 				}
 			} else {
-				const result = await orm.expression(expression).execute(dataContext, db.name)
+				const result = await orm.execute(expression, data, {}, stage.name)
 				console.log(JSON.stringify(result, null, 2))
 			}
 		} catch (error) {
