@@ -40,18 +40,18 @@ export class InitCommand implements CommandModule {
 			// create workspace
 			await Helper.createIfNotExists(workspace)
 			// create config file if not exists
-			const config = await orm.lib.getConfig(workspace)
+			const schema = await orm.schema.get(workspace)
 			// if (config.app.workspace === undefined) {
 			// config.app.workspace = workspace
 			// }
-			manager.completeConfig(config, database, dialect, connection)
+			manager.completeSchema(schema, database, dialect, connection)
 			// write lambdaorm config
 			const configPath = path.join(workspace, 'lambdaorm.yaml')
-			await manager.writeConfig(configPath, config)
+			await manager.writeSchema(configPath, schema)
 			// create structure
-			await manager.createStructure(config)
+			await manager.createStructure(schema)
 			// add libraries for dialect
-			await manager.addDialects(config)
+			await manager.addDialects(schema)
 		} catch (error) {
 			console.error(`error: ${error}`)
 		}

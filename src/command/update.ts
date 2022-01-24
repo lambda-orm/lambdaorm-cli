@@ -21,13 +21,13 @@ export class UpdateCommand implements CommandModule {
 		const orm = new Orm(workspace)
 		const manager = new Manager(orm)
 		try {
-			const config = await orm.lib.getConfig(workspace)
+			const schema = await orm.schema.get(workspace)
 			// create structure
-			await manager.createStructure(config)
+			await manager.createStructure(schema)
 			// add libraries for dialect
-			await manager.addDialects(config)
+			await manager.addDialects(schema)
 			// write models
-			await manager.writeModel(config)
+			await manager.writeModel(schema)
 		} catch (error) {
 			console.error(`error: ${error}`)
 		}

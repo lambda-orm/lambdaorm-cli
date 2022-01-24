@@ -35,9 +35,9 @@ export class ImportCommand implements CommandModule {
 		}
 
 		try {
-			const config = await orm.lib.getConfig(workspace)
+			const schema = await orm.schema.get(workspace)
 			const stage = orm.schema.stage.get(stageName)
-			await orm.init(config)
+			await orm.init(schema)
 			// get content
 			const content = await Helper.readFile(source)
 			if (content === null) {

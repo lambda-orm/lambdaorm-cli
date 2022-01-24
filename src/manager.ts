@@ -1,4 +1,4 @@
-import { Orm, Helper, Config, Database, Schema, Entity } from 'lambdaorm'
+import { Orm, Helper, Schema, DataSource, Entity } from 'lambdaorm'
 import path from 'path'
 const yaml = require('js-yaml')
 export class Manager {
@@ -8,13 +8,13 @@ export class Manager {
 		this.orm = orm
 	}
 
-	public async createStructure (config: Config) {
+	public async createStructure (schema: Schema) {
 		// create initial structure
-		await Helper.createIfNotExists(path.join(this.orm.workspace, config.app.src))
-		await Helper.createIfNotExists(path.join(this.orm.workspace, config.app.data))
+		await Helper.createIfNotExists(path.join(this.orm.workspace, schema.app.src))
+		await Helper.createIfNotExists(path.join(this.orm.workspace, schema.app.data))
 
 		// if the sintaxis.d.ts does not exist create it
-		const sintaxisPath = path.join(this.orm.workspace, config.app.src, 'sintaxis.d.ts')
+		const sintaxisPath = path.join(this.orm.workspace, schema.app.src, 'sintaxis.d.ts')
 		if (!await Helper.existsPath(sintaxisPath)) {
 			await Helper.copyFile(path.join(__dirname, './sintaxis.d.ts'), sintaxisPath)
 		}
@@ -45,11 +45,11 @@ export class Manager {
 		}
 	}
 
-	public async addDialects (config: Config) {
-		for (const p in config.databases) {
-			const database = config.databases[p]
+	public async addDialects (schema: Schema) {
+		for (const p in schema.dataSources) {
+			const dataSource = schema.dataSources[p]
 			// if the library is not installed locally corresponding to the dialect it will be installed
-			const libs = this.getLibs(database.dialect)
+			const libs = this.getLibs(dataSource.dialect)
 			for (const p in libs) {
 				const lib = libs[p]
 				const localLib = await this.getLocalPackage(lib, this.orm.workspace)
@@ -126,41 +126,58 @@ export class Manager {
 		}
 	}
 
-	public completeConfig (config: Config, database: string, dialect?:string, connection?: any):Database {
-		let db = config.databases.find(p => p.name === database)
-		if (db === undefined) {
+	public completeSchema (schema: Schema, dataSource: string, dialect?:string, connection?: any):DataSource {
+		if (schema.entities === undefined) {
+			schema.entities = []
+		}
+		if (schema.enums === undefined) {
+			schema.enums = []
+		}
+		if (schema.dataSources === undefined) {
+			schema.dataSources = []
+		}
+		let ds = schema.dataSources.find(p => p.name === dataSource)
+		if (ds === undefined) {
 			// si la base de datos no esta definida la crea
 			if (connection === undefined) {
 				connection = this.defaultConnection(dialect || 'mysql')
 			}
-			db = { name: database, dialect: dialect || 'mysql', schema: database, connection: connection }
-			config.databases.push(db)
+			ds = { name: dataSource, dialect: dialect || 'mysql', mapping: dataSource, connection: connection }
+			schema.dataSources.push(ds)
 		} else {
 			// si la base de datos esta definida
-
 			// actualiza el dialecto si corresponse
-			if ((dialect !== undefined && db.dialect !== dialect) || (db.dialect === undefined)) {
-				db.dialect = dialect || 'mysql'
+			if ((dialect !== undefined && ds.dialect !== dialect) || (ds.dialect === undefined)) {
+				ds.dialect = dialect || 'mysql'
 			}
 			// actualiza la connecion si correspose
 			if (connection !== undefined) {
-				db.connection = connection
-			} else if (db.connection === undefined) {
-				db.connection = this.defaultConnection(db.dialect)
+				ds.connection = connection
+			} else if (ds.connection === undefined) {
+				ds.connection = this.defaultConnection(ds.dialect)
 			}
-			// setea el schema si no fue seteado
-			if (db.schema === undefined) {
-				db.schema = db.name
+			// setea el mapping si no fue seteado
+			if (ds.mapping === undefined) {
+				ds.mapping = ds.name
 			}
 		}
-		const schema = config.schemas.find(p => p.name === db?.schema)
-		if (schema === undefined) {
-			config.schemas.push({ name: db.schema, enums: [], entities: [] })
+		// si no existe el mapping lo crea
+		if (schema.mappings === undefined) {
+			schema.mappings = []
 		}
-		if (config.app.defaultDatabase === undefined) {
-			config.app.defaultDatabase = db.name
+		const mapping = schema.mappings.find(p => p.name === ds?.mapping)
+		if (mapping === undefined) {
+			schema.mappings.push({ name: ds?.mapping, entities: [] })
 		}
-		return db
+
+		// si no existe el mapping lo crea
+		if (schema.stages === undefined) {
+			schema.stages = [{
+				name: 'default', dataSources: [{ name: ds.name }]
+
+			}]
+		}
+		return ds
 	}
 
 	public defaultConnection (dialect: string): any {
@@ -232,47 +249,48 @@ export class Manager {
 		}
 	}
 
-	public async writeConfig (configPath:string, config: Config): Promise<void> {
+	public async writeSchema (configPath:string, schema: Schema): Promise<void> {
 		if (path.extname(configPath) === '.yaml' || path.extname(configPath) === '.yml') {
-			const content = yaml.dump(config)
+			const content = yaml.dump(schema)
 			await Helper.writeFile(configPath, content)
 		} else if (path.extname(configPath) === '.json') {
-			const content = JSON.stringify(config, null, 2)
+			const content = JSON.stringify(schema, null, 2)
 			await Helper.writeFile(configPath, content)
 		} else {
 			throw new Error(`Config file: ${configPath} not supported`)
 		}
 	}
 
-	public async writeModel (config: Config) {
-		const schemas = this.orm.lib.getModel(config)
-		for (const p in schemas) {
-			const references: string[] = []
-			const schema = schemas[p] as Schema
-			const content = this.getModelContent(schema)
-			const modelsPath = path.join(this.orm.workspace, config.app.src, config.app.models, schema.name)
-			Helper.createIfNotExists(modelsPath)
-			const schemaPath = path.join(modelsPath, 'model.ts')
-			references.push('model')
-			await Helper.writeFile(schemaPath, content)
-			for (const q in schema.entities) {
-				const entity = schema.entities[q]
-				if (entity.abstract) continue
-				const singular = entity.singular ? entity.singular : Helper.singular(entity.name)
-				const repositoryPath = path.join(modelsPath, `repository${singular}.ts`)
-				references.push(`repository${singular}`)
-				if (!await Helper.existsPath(repositoryPath)) {
-					const repositoryContent = this.getRepositoryContent(entity)
-					await Helper.writeFile(repositoryPath, repositoryContent)
-				}
+	public async writeModel (schema: Schema) {
+		// TODO cambiar por complete dado que el modelo se debe escribir sin extenderlo
+		this.orm.schema.complete(schema)
+		// for (const p in schemas) {
+		// const references: string[] = []
+		// const schema = schemas[p] as Schema
+		const references: string[] = []
+		const content = this.getModelContent(schema)
+		const modelsPath = path.join(this.orm.workspace, schema.app.src, schema.app.model)
+		Helper.createIfNotExists(modelsPath)
+		const schemaPath = path.join(modelsPath, 'model.ts')
+		references.push('model')
+		await Helper.writeFile(schemaPath, content)
+		for (const q in schema.entities) {
+			const entity = schema.entities[q]
+			if (entity.abstract) continue
+			const singular = entity.singular ? entity.singular : Helper.singular(entity.name)
+			const repositoryPath = path.join(modelsPath, `repository${singular}.ts`)
+			references.push(`repository${singular}`)
+			if (!await Helper.existsPath(repositoryPath)) {
+				const repositoryContent = this.getRepositoryContent(entity)
+				await Helper.writeFile(repositoryPath, repositoryContent)
 			}
-			const lines:string[] = []
-			for (const p in references) {
-				const reference = references[p]
-				lines.push(`export * from './${reference}'`)
-			}
-			await Helper.writeFile(path.join(modelsPath, 'index.ts'), lines.join('\n') + '\n')
 		}
+		const lines:string[] = []
+		for (const p in references) {
+			const reference = references[p]
+			lines.push(`export * from './${reference}'`)
+		}
+		await Helper.writeFile(path.join(modelsPath, 'index.ts'), lines.join('\n') + '\n')
 	}
 
 	private getRepositoryContent (entity: Entity): string {

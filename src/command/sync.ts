@@ -29,9 +29,9 @@ export class SyncCommand implements CommandModule {
 		const query = args.query !== undefined
 		const orm = new Orm(workspace)
 		try {
-			const config = await orm.lib.getConfig(workspace)
+			const schema = await orm.schema.get(workspace)
 			const stage = orm.schema.stage.get(stageName)
-			await orm.init(config)
+			await orm.init(schema)
 
 			if (query !== undefined) {
 				const sentence = await orm.stage.sync(stage.name).sentence()

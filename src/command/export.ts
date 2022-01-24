@@ -30,8 +30,8 @@ export class ExportCommand implements CommandModule {
 		const orm = new Orm(workspace)
 
 		try {
-			const config = await orm.lib.getConfig(workspace)
-			await orm.init(config)
+			const schema = await orm.schema.get(workspace)
+			await orm.init(schema)
 			const stage = orm.schema.stage.get(stageName)
 			const exportFile = path.join(target, stage.name + '-export.json')
 			const dataExport = orm.stage.export(stage.name)
