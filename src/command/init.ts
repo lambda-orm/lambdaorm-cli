@@ -14,9 +14,9 @@ export class InitCommand implements CommandModule {
 				default: 'my-project',
 				describe: 'project path.'
 			})
-			.option('n', {
-				alias: 'name',
-				describe: 'Name of database.'
+			.option('s', {
+				alias: 'datasource',
+				describe: 'Name of data source.'
 			})
 			.option('d', {
 				alias: 'dialect',
@@ -31,20 +31,19 @@ export class InitCommand implements CommandModule {
 	async handler (args: Arguments) {
 		try {
 			const workspace = path.resolve(process.cwd(), args.workspace as string || '.') // args.workspace as string || path.join(process.cwd(), name)
-			const database = args.name as string || path.basename(workspace) // name of database
+			const datasource = args.datasource as string || path.basename(workspace) // name of datasource
 			const dialect: string = args.dialect as string
 			const connection: string = args.connection as string
 			const orm = new Orm(workspace)
 			const manager = new Manager(orm)
-
 			// create workspace
 			await Helper.createIfNotExists(workspace)
 			// create config file if not exists
-			const schema = await orm.schema.get(workspace)
+			let schema = await orm.schema.get(workspace)
 			// if (config.app.workspace === undefined) {
 			// config.app.workspace = workspace
 			// }
-			manager.completeSchema(schema, database, dialect, connection)
+			schema = manager.completeSchema(schema, datasource, dialect, connection)
 			// write lambdaorm config
 			const configPath = path.join(workspace, 'lambdaorm.yaml')
 			await manager.writeSchema(configPath, schema)

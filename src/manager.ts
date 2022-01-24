@@ -126,24 +126,25 @@ export class Manager {
 		}
 	}
 
-	public completeSchema (schema: Schema, dataSource: string, dialect?:string, connection?: any):DataSource {
-		if (schema.entities === undefined) {
-			schema.entities = []
+	public completeSchema (source: Schema, dataSource: string, dialect?: string, connection?: any): Schema {
+		const target:Schema = Helper.clone(source)
+		if (target.entities === undefined) {
+			target.entities = []
 		}
-		if (schema.enums === undefined) {
-			schema.enums = []
+		if (target.enums === undefined) {
+			target.enums = []
 		}
-		if (schema.dataSources === undefined) {
-			schema.dataSources = []
+		if (target.dataSources === undefined) {
+			target.dataSources = []
 		}
-		let ds = schema.dataSources.find(p => p.name === dataSource)
+		let ds = target.dataSources.find(p => p.name === dataSource)
 		if (ds === undefined) {
 			// si la base de datos no esta definida la crea
 			if (connection === undefined) {
 				connection = this.defaultConnection(dialect || 'mysql')
 			}
 			ds = { name: dataSource, dialect: dialect || 'mysql', mapping: dataSource, connection: connection }
-			schema.dataSources.push(ds)
+			target.dataSources.push(ds)
 		} else {
 			// si la base de datos esta definida
 			// actualiza el dialecto si corresponse
@@ -162,22 +163,22 @@ export class Manager {
 			}
 		}
 		// si no existe el mapping lo crea
-		if (schema.mappings === undefined) {
-			schema.mappings = []
+		if (target.mappings === undefined) {
+			target.mappings = []
 		}
-		const mapping = schema.mappings.find(p => p.name === ds?.mapping)
+		const mapping = target.mappings.find(p => p.name === ds?.mapping)
 		if (mapping === undefined) {
-			schema.mappings.push({ name: ds?.mapping, entities: [] })
+			target.mappings.push({ name: ds?.mapping, entities: [] })
 		}
 
 		// si no existe el mapping lo crea
-		if (schema.stages === undefined) {
-			schema.stages = [{
-				name: 'default', dataSources: [{ name: ds.name }]
-
-			}]
+		if (target.stages === undefined) {
+			target.stages = []
 		}
-		return ds
+		if (target.stages.length === 0) {
+			target.stages.push({ name: 'default', dataSources: [{ name: ds.name }] })
+		}
+		return target
 	}
 
 	public defaultConnection (dialect: string): any {
@@ -299,8 +300,8 @@ export class Manager {
 		lines.push('import { Respository, IOrm } from \'lambdaorm\'')
 		lines.push(`import { ${singular}, Qry${singular} } from './model'`)
 		lines.push(`export class ${singular}Respository extends Respository<${singular}, Qry${singular}> {`)
-		lines.push('\tconstructor (database?: string, Orm?:IOrm) {')
-		lines.push(`\t\tsuper('${entity.name}', database, Orm)`)
+		lines.push('\tconstructor (stage?: string, Orm?:IOrm) {')
+		lines.push(`\t\tsuper('${entity.name}', stage, Orm)`)
 		lines.push('\t}')
 		lines.push('\t// Add your code here')
 		lines.push('}')
