@@ -16,6 +16,7 @@ entities:
     uniqueKey: ["name"]
     properties:
       - name: name
+        length: 127
         nullable: false
       - name: iso3
         length: 3
@@ -36,6 +37,7 @@ entities:
         type: integer
         nullable: false
       - name: name
+        length: 127
         nullable: false
       - name: countryCode
         nullable: false

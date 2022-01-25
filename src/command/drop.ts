@@ -36,8 +36,8 @@ export class DropCommand implements CommandModule {
 
 		try {
 			const schema = await orm.schema.get(workspace)
-			const stage = orm.schema.stage.get(stageName)
 			await orm.init(schema)
+			const stage = orm.schema.stage.get(stageName)
 
 			if (query) {
 				const sentences = await orm.stage.clean(stage.name).sentence()

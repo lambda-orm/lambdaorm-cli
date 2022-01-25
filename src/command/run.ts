@@ -1,7 +1,8 @@
 /* eslint-disable no-mixed-spaces-and-tabs */
 import { CommandModule, Argv, Arguments } from 'yargs'
-import { Orm, Helper } from 'lambdaorm'
+import { Orm } from 'lambdaorm'
 import path from 'path'
+import { Manager } from '../manager'
 
 export class RunCommand implements CommandModule {
 	command = 'run';
@@ -49,22 +50,11 @@ export class RunCommand implements CommandModule {
 		}
 		try {
 			const schema = await orm.schema.get(workspace)
-			const stage = orm.schema.stage.get(stageName)
 			await orm.init(schema)
-			// read context
-			if (typeof data === 'string') {
-				const _data = Helper.tryParse(data as string)
-				if (_data !== null) {
-					data = _data
-				} else {
-					try {
-						data = await Helper.readFile(path.join(process.cwd(), data as string))
-						data = JSON.parse(data as string)
-					} catch (error) {
-						throw new Error(`Errror to read context: ${error}`)
-					}
-				}
-			}
+			const stage = orm.schema.stage.get(stageName)
+			const manager = new Manager(orm)
+			// read Data
+			data = await manager.readData(data)
 			// execute or get metadata
 			if (query || metadata) {
 				if (query) {

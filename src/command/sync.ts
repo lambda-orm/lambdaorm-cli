@@ -30,10 +30,10 @@ export class SyncCommand implements CommandModule {
 		const orm = new Orm(workspace)
 		try {
 			const schema = await orm.schema.get(workspace)
-			const stage = orm.schema.stage.get(stageName)
 			await orm.init(schema)
+			const stage = orm.schema.stage.get(stageName)
 
-			if (query !== undefined) {
+			if (query) {
 				const sentence = await orm.stage.sync(stage.name).sentence()
 				console.log(sentence)
 			} else {

@@ -71,10 +71,9 @@
 				"-w",
 				"lab-countries",
 				"-e",
-				"Countries.bulkInsert()",
+				"Countries.bulkInsert().include(p => p.states)",
 				"-d",
-				"./lab-countries/countries.json"
-				//"[{ \"\"id\"\": 4, \"\"name\"\": \"\"Afghanistan2\"\", \"\"alpha2\"\": \"\"af\"\", \"\"alpha3\"\": \"\"afg\"\"}]"
+				"./countries.json"
 			]
 		},
 		{
@@ -94,7 +93,23 @@
 			]
 		},
 		{
-			"name": "cli run delete",
+			"name": "cli run delete States",
+			"type": "node",
+			"request": "launch",
+			"skipFiles": [
+				"<node_internals>/**"
+			],
+			"program": "${workspaceFolder}/src/cli.ts",
+			"args": [
+				"run",
+				"-w",
+				"lab-countries",
+				"-e",
+				"States.deleteAll()"
+			]
+		},
+		{
+			"name": "cli run delete Countries",
 			"type": "node",
 			"request": "launch",
 			"skipFiles": [
@@ -121,8 +136,8 @@
 				"import",
 				"-w",
 				"lab-countries",
-				"-s",
-				"./lab-countries/data/mydb-export.json"
+				"-d",
+				"./lab-countries/data/default-export.json"
 			]
 		},
 		{
@@ -137,30 +152,8 @@
 				"run",
 				"-w",
 				"lab-countries",
-				"-n",
-				"mydb",
 				"-e",
-				"Countries.filter( p=> p.alpha2 == 'br')"
-			]
-		},
-		{
-			"name": "cli run query with context",
-			"type": "node",
-			"request": "launch",
-			"skipFiles": [
-				"<node_internals>/**"
-			],
-			"program": "${workspaceFolder}/src/cli.ts",
-			"args": [
-				"run",
-				"-w",
-				"lab-countries",
-				"-e",
-				"OrderDetails.filter(p => between(p.order.shippedDate, from, to) && p.unitPrice > minValue).map(p => ({ category: p.product.category.name, product: p.product.name, unitPrice: p.unitPrice, quantity: p.quantity })).sort(p => [p.category, p.product])",
-				"-d",
-				//"{ \"\"a\"\":\"\"1997-01-01\"\" }"
-				"{ \"\"minValue\"\": 10, \"\"from\"\": \"\"1997-01-01\"\", \"\"to\"\": \"\"1997-12-31\"\" }"
-				//"[{ \"\"id\"\": 4, \"\"name\"\": \"\"Afghanistan2\"\", \"\"alpha2\"\": \"\"af\"\", \"\"alpha3\"\": \"\"afg\"\"}]"
+				"Countries.filter( p=> p.iso3 == 'AFG' || p.iso3 == 'ARG'  ).include(p=> p.states)"
 			]
 		},
 		{

@@ -1,4 +1,4 @@
-import { Orm, Helper, Schema, DataSource, Entity } from 'lambdaorm'
+import { Orm, Helper, Schema, Entity } from 'lambdaorm'
 import path from 'path'
 const yaml = require('js-yaml')
 export class Manager {
@@ -292,6 +292,24 @@ export class Manager {
 			lines.push(`export * from './${reference}'`)
 		}
 		await Helper.writeFile(path.join(modelsPath, 'index.ts'), lines.join('\n') + '\n')
+	}
+
+	public async readData (data:any):Promise<any> {
+		// read Data
+		if (typeof data === 'string') {
+			const _data = Helper.tryParse(data as string)
+			if (_data !== null) {
+				data = _data
+			} else {
+				try {
+					data = await Helper.readFile(path.join(process.cwd(), data as string))
+					data = JSON.parse(data as string)
+				} catch (error) {
+					throw new Error(`Errror to read context: ${error}`)
+				}
+			}
+		}
+		return data
 	}
 
 	private getRepositoryContent (entity: Entity): string {
