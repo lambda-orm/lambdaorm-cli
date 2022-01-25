@@ -1,12 +1,57 @@
 app:
   src: src
   data: data
-  models: models
-  defaultDatabase: lab-countries
-databases:
+  model: model
+entities:
+  - name: Positions
+    abstract: true
+    properties:
+      - name: latitude
+        length: 16
+      - name: longitude
+        length: 16
+  - name: Countries
+    extends: Positions
+    primaryKey: ["iso3"]
+    uniqueKey: ["name"]
+    properties:
+      - name: name
+        length: 127
+        nullable: false
+      - name: iso3
+        length: 3
+        nullable: false
+    relations:
+      - name: states
+        type: manyToOne
+        composite: true
+        from: iso3
+        entity: States
+        to: countryCode
+  - name: States
+    extends: Positions
+    primaryKey: ["id"]
+    uniqueKey: ["countryCode", "name"]
+    properties:
+      - name: id
+        type: integer
+        nullable: false
+      - name: name
+        length: 127
+        nullable: false
+      - name: countryCode
+        nullable: false
+        length: 3
+    relations:
+      - name: country
+        from: countryCode
+        entity: Countries
+        to: iso3
+enums: []
+dataSources:
   - name: lab-countries
     dialect: mysql
-    schema: lab-countries
+    mapping: lab-countries
     connection:
       host: localhost
       port: 3306
@@ -17,7 +62,10 @@ databases:
       waitForConnections: true
       connectionLimit: 10
       queueLimit: 0
-schemas:
+mappings:
   - name: lab-countries
-    enums: []
     entities: []
+stages:
+  - name: default
+    dataSources:
+      - name: lab-countries

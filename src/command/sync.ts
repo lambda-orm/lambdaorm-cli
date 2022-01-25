@@ -13,31 +13,31 @@ export class SyncCommand implements CommandModule {
 				alias: 'workspace',
 				describe: 'project path.'
 			})
-			.option('n', {
-				alias: 'name',
-				describe: 'Name of database'
-			})
 			.option('s', {
-				alias: 'sentences',
-				describe: 'Generates the sentences but does not apply.'
+				alias: 'stage',
+				describe: 'Name of stage'
+			})
+			.option('q', {
+				alias: 'query',
+				describe: 'Generates the queries but does not apply.'
 			})
 	}
 
 	async handler (args: Arguments) {
 		const workspace = path.resolve(process.cwd(), args.workspace as string || '.')
-		const database = args.name as string
-		const sentences = args.sentences as string
+		const stageName = args.stage as string
+		const query = args.query !== undefined
 		const orm = new Orm(workspace)
 		try {
-			const config = await orm.lib.getConfig(workspace)
-			const db = orm.lib.getDatabase(database, config)
-			await orm.init(config)
+			const schema = await orm.schema.get(workspace)
+			await orm.init(schema)
+			const stage = orm.schema.stage.get(stageName)
 
-			if (sentences !== undefined) {
-				const result = await orm.database.sync(db.name).sentence()
-				console.log(result)
+			if (query) {
+				const sentence = await orm.stage.sync(stage.name).sentence()
+				console.log(sentence)
 			} else {
-				await orm.database.sync(db.name).execute()
+				await orm.stage.sync(stage.name).execute()
 			}
 		} catch (error) {
 			console.error(`error: ${error}`)

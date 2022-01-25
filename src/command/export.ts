@@ -13,9 +13,9 @@ export class ExportCommand implements CommandModule {
 				alias: 'workspace',
 				describe: 'project path.'
 			})
-			.option('n', {
-				alias: 'name',
-				describe: 'Name of database'
+			.option('s', {
+				alias: 'stage',
+				describe: 'Name of stage'
 			})
 			.option('t', {
 				alias: 'target',
@@ -25,16 +25,16 @@ export class ExportCommand implements CommandModule {
 
 	async handler (args: Arguments) {
 		const workspace = path.resolve(process.cwd(), args.workspace as string || '.')
-		const database = args.name as string
+		const stageName = args.stage as string
 		const target = path.resolve(process.cwd(), args.target as string || '.')
 		const orm = new Orm(workspace)
 
 		try {
-			const config = await orm.lib.getConfig(workspace)
-			await orm.init(config)
-			const db = orm.lib.getDatabase(database, config)
-			const exportFile = path.join(target, db.name + '-export.json')
-			const dataExport = orm.database.export(db.name)
+			const schema = await orm.schema.get(workspace)
+			await orm.init(schema)
+			const stage = orm.schema.stage.get(stageName)
+			const exportFile = path.join(target, stage.name + '-export.json')
+			const dataExport = orm.stage.export(stage.name)
 			const data = await dataExport.execute()
 			await Helper.writeFile(exportFile, JSON.stringify(data))
 		} catch (error) {
