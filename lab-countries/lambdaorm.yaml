@@ -12,8 +12,10 @@ entities:
         length: 16
   - name: Countries
     extends: Positions
-    primaryKey: ["iso3"]
-    uniqueKey: ["name"]
+    primaryKey:
+      - iso3
+    uniqueKey:
+      - name
     properties:
       - name: name
         length: 127
@@ -30,8 +32,11 @@ entities:
         to: countryCode
   - name: States
     extends: Positions
-    primaryKey: ["id"]
-    uniqueKey: ["countryCode", "name"]
+    primaryKey:
+      - id
+    uniqueKey:
+      - countryCode
+      - name
     properties:
       - name: id
         type: integer

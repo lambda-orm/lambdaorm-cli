@@ -73,7 +73,7 @@
 				"-e",
 				"Countries.bulkInsert().include(p => p.states)",
 				"-d",
-				"./countries.json"
+				"./lab-countries/countries.json"
 			]
 		},
 		{

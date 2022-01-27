@@ -70,7 +70,7 @@ export class RunCommand implements CommandModule {
 					console.log(JSON.stringify(metadata, null, 2))
 				}
 			} else {
-				const result = await orm.execute(expression, data, {}, stage.name)
+				const result = await orm.execute(expression, data, stage.name)
 				console.log(JSON.stringify(result, null, 2))
 			}
 		} catch (error) {
