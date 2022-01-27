@@ -59,6 +59,20 @@
 			]
 		},
 		{
+			"name": "cli sync 2",
+			"type": "node",
+			"request": "launch",
+			"skipFiles": [
+				"<node_internals>/**"
+			],
+			"program": "${workspaceFolder}/src/cli.ts",
+			"args": [
+				"sync",
+				"-w",
+				"C:/personal/develop/labs/lab_01"
+			]
+		},
+		{
 			"name": "cli run bulkInsert",
 			"type": "node",
 			"request": "launch",

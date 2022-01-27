@@ -1,17 +1,8 @@
 /* eslint-disable no-use-before-define */
 // THIS FILE IS NOT EDITABLE, IS MANAGED BY LAMBDA ORM
 import { Queryable } from 'lambdaorm'
-export abstract class Position {
-	latitude?: string
-	longitude?: string
-}
-export interface QryPosition {
-	latitude: string
-	longitude: string
-}
-export class Country extends Position {
+export class Country {
 	constructor () {
-		super()
 		this.states = []
 	}
 
@@ -19,23 +10,22 @@ export class Country extends Position {
 	iso3?: string
 	states: State[]
 }
-export interface QryCountry extends QryPosition {
+export interface QryCountry {
 	name: string
 	iso3: string
 	states: ManyToOne<State> & State[]
 }
-export class State extends Position {
+export class State {
 	id?: number
 	name?: string
 	countryCode?: string
 	country?: Country
 }
-export interface QryState extends QryPosition {
+export interface QryState {
 	id: number
 	name: string
 	countryCode: string
 	country: Country & OneToMany<Country> & Country
 }
-export let Positions: Queryable<QryPosition>
 export let Countries: Queryable<QryCountry>
 export let States: Queryable<QryState>
