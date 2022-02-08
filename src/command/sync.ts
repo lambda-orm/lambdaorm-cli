@@ -25,10 +25,10 @@ export class SyncCommand implements CommandModule {
 
 	async handler (args: Arguments) {
 		const workspace = path.resolve(process.cwd(), args.workspace as string || '.')
-		const stageName = args.stage as string
-		const query = args.query !== undefined
 		const orm = new Orm(workspace)
 		try {
+			const stageName = args.stage as string
+			const query = args.query !== undefined
 			const schema = await orm.schema.get(workspace)
 			await orm.init(schema)
 			const stage = orm.schema.stage.get(stageName)
