@@ -1,0 +1,78 @@
+entities:
+  - name: Countries
+    primaryKey:
+      - iso3
+    uniqueKey:
+      - name
+    properties:
+      - name: name
+        nullable: false
+      - name: iso3
+        nullable: false
+        length: 3
+    relations:
+      - name: states
+        type: manyToOne
+        composite: true
+        from: iso3
+        entity: States
+        to: countryCode
+  - name: States
+    primaryKey:
+      - id
+    uniqueKey:
+      - countryCode
+      - name
+    properties:
+      - name: id
+        type: integer
+        nullable: false
+      - name: name
+        nullable: false
+      - name: countryCode
+        nullable: false
+        length: 3
+    relations:
+      - name: country
+        from: countryCode
+        entity: Countries
+        to: iso3
+dataSources:
+  - name: mydb
+    dialect: mysql
+    schema: countries
+    connection:
+      host: localhost
+      port: 3306
+      user: test
+      password: test
+      database: test
+      multipleStatements: true
+      waitForConnections: true
+      connectionLimit: 10
+      queueLimit: 0
+  - name: lab-countries
+    dialect: mysql
+    mapping: lab-countries
+    connection:
+      host: localhost
+      port: 3306
+      user: test
+      password: test
+      database: test
+      multipleStatements: true
+      waitForConnections: true
+      connectionLimit: 10
+      queueLimit: 0
+app:
+  src: src
+  data: data
+  model: model
+enums: []
+mappings:
+  - name: lab-countries
+    entities: []
+stages:
+  - name: default
+    dataSources:
+      - name: lab-countries

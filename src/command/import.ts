@@ -3,6 +3,7 @@ import { CommandModule, Argv, Arguments } from 'yargs'
 import { Orm } from 'lambdaorm'
 import path from 'path'
 import { Manager } from '../manager'
+import dotenv from 'dotenv'
 
 export class ImportCommand implements CommandModule {
 	command = 'import';
@@ -22,16 +23,25 @@ export class ImportCommand implements CommandModule {
 				alias: 'data',
 				describe: 'Data file to import.'
 			})
+			.option('e', {
+				alias: 'envfile',
+				describe: 'Read in a file of environment variables'
+			})
 	}
 
 	async handler (args: Arguments) {
 		const workspace = path.resolve(process.cwd(), args.workspace as string || '.')
 		const stageName = args.stage as string
 		const data = args.data || {}
+		const envfile = args.envfile as string
 
 		if (data === undefined) {
 			console.error('the data argument is required')
 			return
+		}
+		if (envfile) {
+			const fullpath = path.resolve(process.cwd(), envfile)
+			dotenv.config({ path: fullpath, override: true })
 		}
 		const orm = new Orm(workspace)
 

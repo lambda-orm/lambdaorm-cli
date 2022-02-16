@@ -3,6 +3,7 @@ import { CommandModule, Argv, Arguments } from 'yargs'
 import { Orm } from 'lambdaorm'
 import path from 'path'
 import { Manager } from '../manager'
+import dotenv from 'dotenv'
 
 export class RunCommand implements CommandModule {
 	command = 'run';
@@ -12,40 +13,46 @@ export class RunCommand implements CommandModule {
 		return args
 			.option('w', {
 				alias: 'workspace',
-				describe: 'project path.'
+				describe: 'project path'
 			})
 			.option('s', {
 				alias: 'stage',
 				describe: 'Name of stage'
 			})
-			.option('e', {
-				alias: 'expression',
-				describe: 'Expression to execute'
+			.option('q', {
+				alias: 'query',
+				describe: 'Query expression'
 			})
 			.option('d', {
 				alias: 'data',
 				describe: 'Data used to execute expression'
 			})
-			.option('q', {
-				alias: 'query',
-				describe: 'Generates the queries but does not apply.'
+			.option('e', {
+				alias: 'envfile',
+				describe: 'Read in a file of environment variables'
 			})
-			.option('m', {
-				alias: 'metadata',
-				describe: 'Generates the metadata but does not apply.'
+			.option('o', {
+				alias: 'output',
+				describe: 'Generates an output with the information according to the following possible values [sentence|model|parameters|metadata] but it does not apply'
 			})
 	}
 
 	async handler (args: Arguments) {
 		const workspace = path.resolve(process.cwd(), args.workspace as string || '.')
-		const expression = args.expression as string
+		const query = args.query as string
 		let data = args.data || {}
 		const stageName = args.stage as string
-		const query = args.query !== undefined
-		const metadata = args.metadata !== undefined
+		const output = args.output as string
+		const envfile = args.envfile as string
+
+		if (envfile) {
+			const fullpath = path.resolve(process.cwd(), envfile)
+			dotenv.config({ path: fullpath, override: true })
+		}
+
 		const orm = new Orm(workspace)
-		if (expression === undefined) {
-			console.error('the expression argument is required')
+		if (query === undefined) {
+			console.error('the query expression argument is required')
 			return
 		}
 		try {
@@ -56,21 +63,26 @@ export class RunCommand implements CommandModule {
 			// read Data
 			data = await manager.readData(data)
 			// execute or get metadata
-			if (query || metadata) {
-				if (query) {
-					const resullt = await orm.sentence(expression, stage.name)
+			if (output) {
+				if (output === 'query') {
+					const resullt = await orm.sentence(query, stage.name)
 					console.log(resullt)
-				}
-				if (metadata) {
-					const model = await orm.model(expression)
-					const metadata = await orm.metadata(expression)
-					console.log('model:')
+				} else if (output === 'model') {
+					const model = await orm.model(query)
 					console.log(JSON.stringify(model, null, 2))
-					console.log('metadata:')
+				} else if (output === 'parameters') {
+					const metadata = await orm.parameters(query)
+					console.log(JSON.stringify(metadata, null, 2))
+				} else if (output === 'metadata') {
+					const metadata = await orm.metadata(query)
+					console.log(JSON.stringify(metadata, null, 2))
+				} else {
+					// output metadata is default
+					const metadata = await orm.metadata(query)
 					console.log(JSON.stringify(metadata, null, 2))
 				}
 			} else {
-				const result = await orm.execute(expression, data, stage.name)
+				const result = await orm.execute(query, data, stage.name)
 				console.log(JSON.stringify(result, null, 2))
 			}
 		} catch (error) {
