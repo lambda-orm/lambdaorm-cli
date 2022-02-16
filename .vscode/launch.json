@@ -5,183 +5,231 @@
 	"version": "0.2.0",
 	"configurations": [
 		{
-			"name": "cli version",
+			"name": "version",
 			"type": "node",
 			"request": "launch",
 			"skipFiles": [
 				"<node_internals>/**"
 			],
-			"program": "${workspaceFolder}/src/cli.ts",
+			"program": "${workspaceFolder}/src/index.ts",
 			"args": [
 				"version"
 			]
 		},
+		// counties -------------------------------------------------------------------------------------------------------------------------------------
 		{
-			"name": "cli init",
+			"name": "countries init",
 			"type": "node",
 			"request": "launch",
 			"skipFiles": [
 				"<node_internals>/**"
 			],
-			"program": "${workspaceFolder}/src/cli.ts",
+			"program": "${workspaceFolder}/src/index.ts",
 			"args": [
 				"init",
 				"-w",
-				"lab-countries"
+				"lab/countries"
 			]
 		},
 		{
-			"name": "cli update",
+			"name": "countries update",
 			"type": "node",
 			"request": "launch",
 			"skipFiles": [
 				"<node_internals>/**"
 			],
-			"program": "${workspaceFolder}/src/cli.ts",
+			"program": "${workspaceFolder}/src/index.ts",
 			"args": [
 				"update",
 				"-w",
-				"lab-countries"
+				"lab/countries"
 			]
 		},
 		{
-			"name": "cli sync",
+			"name": "countries sync",
 			"type": "node",
 			"request": "launch",
 			"skipFiles": [
 				"<node_internals>/**"
 			],
-			"program": "${workspaceFolder}/src/cli.ts",
+			"program": "${workspaceFolder}/src/index.ts",
 			"args": [
 				"sync",
 				"-w",
-				"lab-countries"
+				"lab/countries"
 			]
 		},
 		{
-			"name": "cli sync 2",
+			"name": "countries run bulkInsert",
 			"type": "node",
 			"request": "launch",
 			"skipFiles": [
 				"<node_internals>/**"
 			],
-			"program": "${workspaceFolder}/src/cli.ts",
-			"args": [
-				"sync",
-				"-w",
-				"C:/personal/develop/labs/lab_01"
-			]
-		},
-		{
-			"name": "cli run bulkInsert",
-			"type": "node",
-			"request": "launch",
-			"skipFiles": [
-				"<node_internals>/**"
-			],
-			"program": "${workspaceFolder}/src/cli.ts",
+			"program": "${workspaceFolder}/src/index.ts",
 			"args": [
 				"run",
 				"-w",
-				"lab-countries",
-				"-e",
+				"lab/countries",
+				"-q",
 				"Countries.bulkInsert().include(p => p.states)",
 				"-d",
-				"./lab-countries/countries.json"
+				"./lab/countries/countries.json"
 			]
 		},
 		{
-			"name": "cli export",
+			"name": "countries export",
 			"type": "node",
 			"request": "launch",
 			"skipFiles": [
 				"<node_internals>/**"
 			],
-			"program": "${workspaceFolder}/src/cli.ts",
+			"program": "${workspaceFolder}/src/index.ts",
 			"args": [
 				"export",
 				"-w",
-				"lab-countries",
+				"lab/countries",
 				"-t",
-				"./lab-countries/data"
+				"./lab/countries/data"
 			]
 		},
 		{
-			"name": "cli run delete States",
+			"name": "countries delete States",
 			"type": "node",
 			"request": "launch",
 			"skipFiles": [
 				"<node_internals>/**"
 			],
-			"program": "${workspaceFolder}/src/cli.ts",
+			"program": "${workspaceFolder}/src/index.ts",
 			"args": [
 				"run",
 				"-w",
-				"lab-countries",
-				"-e",
+				"lab/countries",
+				"-q",
 				"States.deleteAll()"
 			]
 		},
 		{
-			"name": "cli run delete Countries",
+			"name": "countries delete Countries",
 			"type": "node",
 			"request": "launch",
 			"skipFiles": [
 				"<node_internals>/**"
 			],
-			"program": "${workspaceFolder}/src/cli.ts",
+			"program": "${workspaceFolder}/src/index.ts",
 			"args": [
 				"run",
 				"-w",
-				"lab-countries",
-				"-e",
+				"lab/countries",
+				"-q",
 				"Countries.deleteAll()"
 			]
 		},
 		{
-			"name": "cli import",
+			"name": "countries import",
 			"type": "node",
 			"request": "launch",
 			"skipFiles": [
 				"<node_internals>/**"
 			],
-			"program": "${workspaceFolder}/src/cli.ts",
+			"program": "${workspaceFolder}/src/index.ts",
 			"args": [
 				"import",
 				"-w",
-				"lab-countries",
+				"lab/countries",
 				"-d",
-				"./lab-countries/data/default-export.json"
+				"./lab/countries/data/default-export.json"
 			]
 		},
 		{
-			"name": "cli run query",
+			"name": "countries run query",
 			"type": "node",
 			"request": "launch",
 			"skipFiles": [
 				"<node_internals>/**"
 			],
-			"program": "${workspaceFolder}/src/cli.ts",
+			"program": "${workspaceFolder}/src/index.ts",
 			"args": [
 				"run",
 				"-w",
-				"lab-countries",
-				"-e",
+				"lab/countries",
+				"-q",
 				"Countries.filter( p=> p.iso3 == 'AFG' || p.iso3 == 'ARG'  ).include(p=> p.states)"
 			]
 		},
 		{
-			"name": "cli drop",
+			"name": "countries drop",
 			"type": "node",
 			"request": "launch",
 			"skipFiles": [
 				"<node_internals>/**"
 			],
-			"program": "${workspaceFolder}/src/cli.ts",
+			"program": "${workspaceFolder}/src/index.ts",
 			"args": [
 				"drop",
 				"-w",
-				"lab-countries"
+				"lab/countries"
+			]
+		},
+		// devicenet-----------------------------------------------------------------------------------------------
+		{
+			"name": "devicenet init",
+			"type": "node",
+			"request": "launch",
+			"skipFiles": [
+				"<node_internals>/**"
+			],
+			"program": "${workspaceFolder}/src/index.ts",
+			"args": [
+				"init",
+				"-w",
+				"lab/devicenet"
+			]
+		},
+		{
+			"name": "devicenet update",
+			"type": "node",
+			"request": "launch",
+			"skipFiles": [
+				"<node_internals>/**"
+			],
+			"program": "${workspaceFolder}/src/index.ts",
+			"args": [
+				"update",
+				"-w",
+				"lab/devicenet"
+			]
+		},
+		{
+			"name": "devicenet sync",
+			"type": "node",
+			"request": "launch",
+			"skipFiles": [
+				"<node_internals>/**"
+			],
+			"program": "${workspaceFolder}/src/index.ts",
+			"args": [
+				"sync",
+				"-w",
+				"lab/devicenet",
+				"-e",
+				"lab/devicenet/.env"
+			]
+		},
+		{
+			"name": "devicenet drop",
+			"type": "node",
+			"request": "launch",
+			"skipFiles": [
+				"<node_internals>/**"
+			],
+			"program": "${workspaceFolder}/src/index.ts",
+			"args": [
+				"drop",
+				"-w",
+				"lab/devicenet",
+				"-e",
+				"lab/devicenet/.env"
 			]
 		}
 	]

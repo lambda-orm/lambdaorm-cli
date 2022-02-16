@@ -2,6 +2,7 @@
 import { CommandModule, Argv, Arguments } from 'yargs'
 import { Orm, Helper } from 'lambdaorm'
 import path from 'path'
+import dotenv from 'dotenv'
 
 export class ExportCommand implements CommandModule {
 	command = 'export';
@@ -17,6 +18,10 @@ export class ExportCommand implements CommandModule {
 				alias: 'stage',
 				describe: 'Name of stage'
 			})
+			.option('e', {
+				alias: 'envfile',
+				describe: 'Read in a file of environment variables'
+			})
 			.option('t', {
 				alias: 'target',
 				describe: 'Destination file with export data.'
@@ -27,6 +32,12 @@ export class ExportCommand implements CommandModule {
 		const workspace = path.resolve(process.cwd(), args.workspace as string || '.')
 		const stageName = args.stage as string
 		const target = path.resolve(process.cwd(), args.target as string || '.')
+		const envfile = args.envfile as string
+
+		if (envfile) {
+			const fullpath = path.resolve(process.cwd(), envfile)
+			dotenv.config({ path: fullpath, override: true })
+		}
 		const orm = new Orm(workspace)
 
 		try {

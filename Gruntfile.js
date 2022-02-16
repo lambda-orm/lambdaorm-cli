@@ -26,9 +26,9 @@ module.exports = function (grunt) {
 		delete data.devDependencies
 		delete data.scripts
 		delete data.private
-		data.main = 'cli.js'
-		data.bin = { lambdaorm: 'cli.js' }
-		data.types = 'cli.d.ts'
+		data.main = 'index.js'
+		data.bin = { lambdaorm: 'index.js' }
+		data.types = 'index.d.ts'
 		fs.writeFileSync('dist/package.json', JSON.stringify(data, null, 2), 'utf8')
 	})
 
