@@ -330,91 +330,113 @@ export class Manager {
 		const lines: string[] = []
 		lines.push('/* eslint-disable no-use-before-define */')
 		lines.push('// THIS FILE IS NOT EDITABLE, IS MANAGED BY LAMBDA ORM')
-
 		lines.push('import { Queryable } from \'lambdaorm\'')
-		for (const p in source.entities) {
-			const entity = source.entities[p]
-			const singular = entity.singular ? entity.singular : Helper.singular(entity.name)
-			const _abstract = entity.abstract ? ' abstract ' : ' '
-			const _extends = entity.extends ? ' extends ' + Helper.singular(entity.extends) + ' ' : ' '
 
-			// create class
-			lines.push(`export${_abstract}class ${singular}${_extends}{`)
-			if (entity.relations && entity.relations.some(p => p.type === 'manyToOne')) {
-				lines.push('\tconstructor () {')
-				if (entity.extends) {
-					lines.push('\t\tsuper()')
+		if (source.enums) {
+			for (const p in source.enums) {
+				const _enum = source.enums[p]
+				lines.push(`export enum ${_enum.name}{`)
+
+				for (let j = 0; j < _enum.values.length; j++) {
+					const value = _enum.values[j]
+					const separator = j === _enum.values.length - 1 ? '' : ','
+					if (typeof value.value === 'number') {
+						lines.push(`\t${value.name} = ${value.value}${separator}`)
+					} else {
+						lines.push(`\t${value.name} = '${value.value}'${separator}`)
+					}
+				}
+				lines.push('}')
+			}
+		}
+
+		if (source.entities) {
+			for (const p in source.entities) {
+				const entity = source.entities[p]
+				const singular = entity.singular ? entity.singular : Helper.singular(entity.name)
+				const _abstract = entity.abstract ? ' abstract ' : ' '
+				const _extends = entity.extends ? ' extends ' + Helper.singular(entity.extends) + ' ' : ' '
+
+				// create class
+				lines.push(`export${_abstract}class ${singular}${_extends}{`)
+				if (entity.relations && entity.relations.some(p => p.type === 'manyToOne')) {
+					lines.push('\tconstructor () {')
+					if (entity.extends) {
+						lines.push('\t\tsuper()')
+					}
+					for (const q in entity.relations) {
+						const relation = entity.relations[q]
+						if (relation.type === 'manyToOne') {
+							lines.push(`\t\tthis.${relation.name} = []`)
+						}
+					}
+					lines.push('\t}')
+					lines.push('')
+				}
+
+				for (const q in entity.properties) {
+					const property = entity.properties[q]
+					const type = property.enum ? property.enum : Helper.tsType(property.type)
+					if (property.nullable === false && property.default === undefined) {
+						lines.push(`\t${property.name}?: ${type}`)
+					} else {
+						lines.push(`\t${property.name}?: ${type}`)
+					}
 				}
 				for (const q in entity.relations) {
 					const relation = entity.relations[q]
-					if (relation.type === 'manyToOne') {
-						lines.push(`\t\tthis.${relation.name} = []`)
+					const relationEntity = source.entities.find(p => p.name === relation.entity) as Entity
+					if (relationEntity === undefined) {
+						throw new Error(`Not exists ${relation.entity} relation in ${entity.name} entity`)
+					}
+					const relationEntitySingularName = relationEntity.singular ? relationEntity.singular : Helper.singular(relationEntity.name)
+					// const relationEntity = Helper.singular(relation.entity)
+					switch (relation.type) {
+					case 'oneToMany':
+					case 'oneToOne':
+						lines.push(`\t${relation.name}?: ${relationEntitySingularName}`)
+						break
+					case 'manyToOne':
+						lines.push(`\t${relation.name}: ${relationEntitySingularName}[]`)
+						break
 					}
 				}
-				lines.push('\t}')
-				lines.push('')
-			}
+				lines.push('}')
 
-			for (const q in entity.properties) {
-				const property = entity.properties[q]
-				const type = Helper.tsType(property.type)
-				if (property.nullable === undefined || property.nullable === true) {
-					lines.push(`\t${property.name}?: ${type}`)
-				} else {
-					lines.push(`\t${property.name}?: ${type}`)
+				// create interface
+				const _extendsInterface = entity.extends ? ' extends Qry' + Helper.singular(entity.extends) + ' ' : ' '
+				lines.push(`export interface Qry${singular}${_extendsInterface}{`)
+				for (const q in entity.properties) {
+					const property = entity.properties[q]
+					const type = property.enum ? property.enum : Helper.tsType(property.type)
+					lines.push(`\t${property.name}: ${type}`)
+				}
+				for (const q in entity.relations) {
+					const relation = entity.relations[q]
+					const relationEntity = source.entities.find(p => p.name === relation.entity) as Entity
+					const relationEntitySingularName = relationEntity.singular ? relationEntity.singular : Helper.singular(relationEntity.name)
+					// const relationEntity = Helper.singular(relation.entity)
+					switch (relation.type) {
+					case 'oneToMany':
+						lines.push(`\t${relation.name}: ${relationEntitySingularName} & OneToMany<${relationEntitySingularName}> & ${relationEntitySingularName}`)
+						break
+					case 'oneToOne':
+						lines.push(`\t${relation.name}: ${relationEntitySingularName} & OneToOne<${relationEntitySingularName}> & ${relationEntitySingularName}`)
+						break
+					case 'manyToOne':
+						lines.push(`\t${relation.name}: ManyToOne<${relationEntitySingularName}> & ${relationEntitySingularName}[]`)
+						break
+					}
+				}
+				lines.push('}')
+			}
+			for (const p in source.entities) {
+				const entity = source.entities[p]
+				if (!entity.abstract) {
+					const singular = entity.singular ? entity.singular : Helper.singular(entity.name)
+					lines.push(`export let ${entity.name}: Queryable<Qry${singular}>`)
 				}
 			}
-			for (const q in entity.relations) {
-				const relation = entity.relations[q]
-				const relationEntity = source.entities.find(p => p.name === relation.entity) as Entity
-				if (relationEntity === undefined) {
-					throw new Error(`Not exists ${relation.entity} relation in ${entity.name} entity`)
-				}
-				const relationEntitySingularName = relationEntity.singular ? relationEntity.singular : Helper.singular(relationEntity.name)
-				// const relationEntity = Helper.singular(relation.entity)
-				switch (relation.type) {
-				case 'oneToMany':
-				case 'oneToOne':
-					lines.push(`\t${relation.name}?: ${relationEntitySingularName}`)
-					break
-				case 'manyToOne':
-					lines.push(`\t${relation.name}: ${relationEntitySingularName}[]`)
-					break
-				}
-			}
-			lines.push('}')
-
-			// create interface
-			const _extendsInterface = entity.extends ? ' extends Qry' + Helper.singular(entity.extends) + ' ' : ' '
-			lines.push(`export interface Qry${singular}${_extendsInterface}{`)
-			for (const q in entity.properties) {
-				const property = entity.properties[q]
-				const type = Helper.tsType(property.type)
-				lines.push(`\t${property.name}: ${type}`)
-			}
-			for (const q in entity.relations) {
-				const relation = entity.relations[q]
-				const relationEntity = source.entities.find(p => p.name === relation.entity) as Entity
-				const relationEntitySingularName = relationEntity.singular ? relationEntity.singular : Helper.singular(relationEntity.name)
-				// const relationEntity = Helper.singular(relation.entity)
-				switch (relation.type) {
-				case 'oneToMany':
-					lines.push(`\t${relation.name}: ${relationEntitySingularName} & OneToMany<${relationEntitySingularName}> & ${relationEntitySingularName}`)
-					break
-				case 'oneToOne':
-					lines.push(`\t${relation.name}: ${relationEntitySingularName} & OneToOne<${relationEntitySingularName}> & ${relationEntitySingularName}`)
-					break
-				case 'manyToOne':
-					lines.push(`\t${relation.name}: ManyToOne<${relationEntitySingularName}> & ${relationEntitySingularName}[]`)
-					break
-				}
-			}
-			lines.push('}')
-		}
-		for (const p in source.entities) {
-			const entity = source.entities[p]
-			const singular = entity.singular ? entity.singular : Helper.singular(entity.name)
-			lines.push(`export let ${entity.name}: Queryable<Qry${singular}>`)
 		}
 		return lines.join('\n') + '\n'
 	}
