@@ -17,8 +17,8 @@ export enum FileType{
 	audio = 'audio'
 }
 export enum Role{
+	owner = 'owner',
 	admin = 'admin',
-	member = 'member',
 	guest = 'guest'
 }
 export abstract class Basic {
@@ -56,9 +56,10 @@ export class Device extends Product {
 	}
 
 	id?: string
-	type?: DeviceType
+	type?: string
 	name?: string
 	groupId?: string
+	password?: string
 	so?: string
 	imei?: string
 	imei2?: string
@@ -72,9 +73,10 @@ export class Device extends Product {
 }
 export interface QryDevice extends QryProduct {
 	id: string
-	type: DeviceType
+	type: string
 	name: string
 	groupId: string
+	password: string
 	so: string
 	imei: string
 	imei2: string
@@ -95,7 +97,7 @@ export class Component extends Product {
 	id?: string
 	deviceId?: string
 	name?: string
-	type?: ComponentType
+	type?: string
 	device?: Device
 	files: File[]
 }
@@ -103,7 +105,7 @@ export interface QryComponent extends QryProduct {
 	id: string
 	deviceId: string
 	name: string
-	type: ComponentType
+	type: string
 	device: Device & OneToMany<Device> & Device
 	files: ManyToOne<File> & File[]
 }
@@ -160,7 +162,7 @@ export interface QryJourney extends QryBasic {
 }
 export class File extends Basic {
 	id?: string
-	type?: FileType
+	type?: string
 	deviceId?: string
 	componentId?: string
 	startDate?: Date
@@ -170,7 +172,7 @@ export class File extends Basic {
 }
 export interface QryFile extends QryBasic {
 	id: string
-	type: FileType
+	type: string
 	deviceId: string
 	componentId: string
 	startDate: Date
@@ -216,18 +218,18 @@ export interface QryGroup extends QryBasic {
 	devices: ManyToOne<Device> & Device[]
 }
 export class GroupUser {
-	id?: string
+	id?: number
 	username?: string
 	groupId?: string
-	role?: Role
+	rol?: string
 	group?: Group
 	user?: User
 }
 export interface QryGroupUser {
-	id: string
+	id: number
 	username: string
 	groupId: string
-	role: Role
+	rol: string
 	group: Group & OneToMany<Group> & Group
 	user: User & OneToMany<User> & User
 }

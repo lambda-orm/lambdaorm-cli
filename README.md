@@ -18,7 +18,7 @@ npm install lambdaorm-cli -g
 |	init				| Generates lambdaorm project structure.													|[more info](https://github.com/FlavioLionelRita/lambdaorm/wiki/cli-init)				|
 |	update			| update model, packages and project structure.										|[more info](https://github.com/FlavioLionelRita/lambdaorm/wiki/cli-update)			|
 |	sync				|	Syncronize database.																						|[more info](https://github.com/FlavioLionelRita/lambdaorm/wiki/cli-sync)				|
-|	run					| Run an expression lambda or return information									|[more info](https://github.com/FlavioLionelRita/lambdaorm/wiki/cli-run)				|
+|	execute			| Execute an expression lambda or return information							|[more info](https://github.com/FlavioLionelRita/lambdaorm/wiki/cli-execute)		|
 |	export			| Export data from a database 																		|[more info](https://github.com/FlavioLionelRita/lambdaorm/wiki/cli-export)			|
 |	import			| Import data from file to database																|[more info](https://github.com/FlavioLionelRita/lambdaorm/wiki/cli-import)			|
 |	drop				|	Removes all database objects but not the database.							|[more info](https://github.com/FlavioLionelRita/lambdaorm/wiki/cli-drop)				|
