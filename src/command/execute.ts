@@ -66,7 +66,7 @@ export class ExecuteCommand implements CommandModule {
 			if (output) {
 				if (output === 'sentence') {
 					const resullt = await orm.sentence(query, stage.name)
-					console.log(resullt)
+					console.log(JSON.stringify(resullt, null, 2))
 				} else if (output === 'model') {
 					const model = await orm.model(query)
 					console.log(JSON.stringify(model, null, 2))
@@ -78,7 +78,7 @@ export class ExecuteCommand implements CommandModule {
 					console.log(JSON.stringify(metadata, null, 2))
 				} else if (output === 'metadata') {
 					const metadata = await orm.metadata(query)
-					console.log(JSON.stringify(metadata, null, 2))
+					console.log(JSON.stringify(metadata))
 				} else {
 					// output metadata is default
 					const metadata = await orm.metadata(query)

@@ -237,6 +237,46 @@
 			]
 		},
 		{
+			"name": "devicenet get parameters",
+			"type": "node",
+			"request": "launch",
+			"skipFiles": [
+				"<node_internals>/**"
+			],
+			"program": "${workspaceFolder}/src/index.ts",
+			"args": [
+				"execute",
+				"-w",
+				"lab/devicenet",
+				"-e",
+				"lab/devicenet/.env",
+				"-q",
+				"Devices.bulkInsert().include(p => p.components)",
+				"-o",
+				"parameters"
+			]
+		},
+		{
+			"name": "devicenet get model",
+			"type": "node",
+			"request": "launch",
+			"skipFiles": [
+				"<node_internals>/**"
+			],
+			"program": "${workspaceFolder}/src/index.ts",
+			"args": [
+				"execute",
+				"-w",
+				"lab/devicenet",
+				"-e",
+				"lab/devicenet/.env",
+				"-q",
+				"Devices.bulkInsert().include(p => p.components)",
+				"-o",
+				"model"
+			]
+		},
+		{
 			"name": "devicenet get constraints",
 			"type": "node",
 			"request": "launch",
@@ -254,6 +294,26 @@
 				"Devices.bulkInsert().include(p => p.components)",
 				"-o",
 				"constraints"
+			]
+		},
+		{
+			"name": "devicenet get metadata",
+			"type": "node",
+			"request": "launch",
+			"skipFiles": [
+				"<node_internals>/**"
+			],
+			"program": "${workspaceFolder}/src/index.ts",
+			"args": [
+				"execute",
+				"-w",
+				"lab/devicenet",
+				"-e",
+				"lab/devicenet/.env",
+				"-q",
+				"Devices.bulkInsert().include(p => p.components)",
+				"-o",
+				"metadata"
 			]
 		},
 		{
