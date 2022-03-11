@@ -5,9 +5,9 @@ import path from 'path'
 import { Manager } from '../manager'
 import dotenv from 'dotenv'
 
-export class RunCommand implements CommandModule {
-	command = 'run';
-	describe = 'Run an expression lambda or return information';
+export class ExecuteCommand implements CommandModule {
+	command = 'execute';
+	describe = 'Execute an expression lambda or return information';
 
 	builder (args: Argv) {
 		return args
@@ -33,7 +33,7 @@ export class RunCommand implements CommandModule {
 			})
 			.option('o', {
 				alias: 'output',
-				describe: 'Generates an output with the information according to the following possible values [sentence|model|parameters|metadata] but it does not apply'
+				describe: 'Generates an output with the information according to the following possible values [sentence|model|parameters|constraints|metadata] but it does not apply'
 			})
 	}
 
@@ -64,18 +64,21 @@ export class RunCommand implements CommandModule {
 			data = await manager.readData(data)
 			// execute or get metadata
 			if (output) {
-				if (output === 'query') {
+				if (output === 'sentence') {
 					const resullt = await orm.sentence(query, stage.name)
-					console.log(resullt)
+					console.log(JSON.stringify(resullt, null, 2))
 				} else if (output === 'model') {
 					const model = await orm.model(query)
 					console.log(JSON.stringify(model, null, 2))
 				} else if (output === 'parameters') {
 					const metadata = await orm.parameters(query)
 					console.log(JSON.stringify(metadata, null, 2))
+				} else if (output === 'constraints') {
+					const metadata = await orm.constraints(query)
+					console.log(JSON.stringify(metadata, null, 2))
 				} else if (output === 'metadata') {
 					const metadata = await orm.metadata(query)
-					console.log(JSON.stringify(metadata, null, 2))
+					console.log(JSON.stringify(metadata))
 				} else {
 					// output metadata is default
 					const metadata = await orm.metadata(query)

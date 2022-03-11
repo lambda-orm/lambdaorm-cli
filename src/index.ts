@@ -7,7 +7,7 @@ import { DropCommand } from './command/drop'
 import { SyncCommand } from './command/sync'
 import { ImportCommand } from './command/import'
 import { ExportCommand } from './command/export'
-import { RunCommand } from './command/run'
+import { ExecuteCommand } from './command/execute'
 import { UpdateCommand } from './command/update'
 
 // eslint-disable-next-line no-unused-expressions
@@ -19,7 +19,7 @@ yargs
 	.command(new SyncCommand())
 	.command(new ImportCommand())
 	.command(new ExportCommand())
-	.command(new RunCommand())
+	.command(new ExecuteCommand())
 	.command(new UpdateCommand())
 	.recommendCommands()
 	.demandCommand(1)
