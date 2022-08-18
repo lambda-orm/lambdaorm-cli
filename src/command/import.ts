@@ -40,8 +40,8 @@ export class ImportCommand implements CommandModule {
 			return
 		}
 		if (envfile) {
-			const fullpath = path.resolve(process.cwd(), envfile)
-			dotenv.config({ path: fullpath, override: true })
+			const fullPath = path.resolve(process.cwd(), envfile)
+			dotenv.config({ path: fullPath, override: true })
 		}
 		const orm = new Orm(workspace)
 
@@ -60,7 +60,7 @@ export class ImportCommand implements CommandModule {
 			// }
 			// // import data
 			// const data = JSON.parse(content)
-			await orm.stage.import(stage.name).execute(_data)
+			await orm.stage.import({ stage: stage.name }).execute(_data)
 		} catch (error) {
 			console.error(`error: ${error}`)
 		} finally {

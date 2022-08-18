@@ -45,10 +45,10 @@ export class SyncCommand implements CommandModule {
 			const stage = orm.schema.stage.get(stageName)
 
 			if (output) {
-				const sentence = await orm.stage.sync(stage.name).sentence()
+				const sentence = await orm.stage.sync({ stage: stage.name }).sentence()
 				console.log(sentence)
 			} else {
-				await orm.stage.sync(stage.name).execute()
+				await orm.stage.sync({ stage: stage.name }).execute()
 			}
 		} catch (error) {
 			console.error(`error: ${error}`)

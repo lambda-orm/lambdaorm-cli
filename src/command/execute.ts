@@ -46,8 +46,8 @@ export class ExecuteCommand implements CommandModule {
 		const envfile = args.envfile as string
 
 		if (envfile) {
-			const fullpath = path.resolve(process.cwd(), envfile)
-			dotenv.config({ path: fullpath, override: true })
+			const fullPath = path.resolve(process.cwd(), envfile)
+			dotenv.config({ path: fullPath, override: true })
 		}
 
 		const orm = new Orm(workspace)
@@ -65,8 +65,8 @@ export class ExecuteCommand implements CommandModule {
 			// execute or get metadata
 			if (output) {
 				if (output === 'sentence') {
-					const resullt = await orm.sentence(query, stage.name)
-					console.log(JSON.stringify(resullt, null, 2))
+					const result = await orm.sentence(query, { stage: stage.name })
+					console.log(JSON.stringify(result, null, 2))
 				} else if (output === 'model') {
 					const model = await orm.model(query)
 					console.log(JSON.stringify(model, null, 2))
@@ -85,7 +85,7 @@ export class ExecuteCommand implements CommandModule {
 					console.log(JSON.stringify(metadata, null, 2))
 				}
 			} else {
-				const result = await orm.execute(query, data, stage.name)
+				const result = await orm.execute(query, data, { stage: stage.name })
 				console.log(JSON.stringify(result, null, 2))
 			}
 		} catch (error) {

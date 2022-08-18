@@ -45,7 +45,7 @@ export class ExportCommand implements CommandModule {
 			await orm.init(schema)
 			const stage = orm.schema.stage.get(stageName)
 			const exportFile = path.join(target, stage.name + '-export.json')
-			const dataExport = orm.stage.export(stage.name)
+			const dataExport = orm.stage.export({ stage: stage.name })
 			const data = await dataExport.execute()
 			await Helper.writeFile(exportFile, JSON.stringify(data))
 		} catch (error) {

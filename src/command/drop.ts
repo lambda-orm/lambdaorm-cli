@@ -40,8 +40,8 @@ export class DropCommand implements CommandModule {
 		const envfile = args.envfile as string
 
 		if (envfile) {
-			const fullpath = path.resolve(process.cwd(), envfile)
-			dotenv.config({ path: fullpath, override: true })
+			const fullPath = path.resolve(process.cwd(), envfile)
+			dotenv.config({ path: fullPath, override: true })
 		}
 		const orm = new Orm(workspace)
 
@@ -51,10 +51,10 @@ export class DropCommand implements CommandModule {
 			const stage = orm.schema.stage.get(stageName)
 
 			if (output) {
-				const sentences = await orm.stage.clean(stage.name).sentence()
+				const sentences = await orm.stage.clean({ stage: stage.name }).sentence()
 				console.log(sentences)
 			} else {
-				const result = await orm.stage.clean(stage.name).execute(force)
+				const result = await orm.stage.clean({ stage: stage.name, tryAllCan: force }).execute()
 				console.log(JSON.stringify(result, null, 2))
 			}
 		} catch (error) {
