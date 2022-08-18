@@ -6,6 +6,8 @@
 	"editor.tabSize": 2,
 	"editor.insertSpaces": false,
 	"cSpell.words": [
-		"lambdaorm"
+		"Flavio",
+		"lambdaorm",
+		"oracledb"
 	]
 }
