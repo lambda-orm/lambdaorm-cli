@@ -1,3 +1,0 @@
-Lambda ORM
-
-# Lambda ORM
