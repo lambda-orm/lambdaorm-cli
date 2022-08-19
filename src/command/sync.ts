@@ -6,7 +6,7 @@ import dotenv from 'dotenv'
 
 export class SyncCommand implements CommandModule {
 	command = 'sync';
-	describe = 'Synchronize database.';
+	describe = 'Synchronize database/s.';
 
 	builder (args: Argv) {
 		return args

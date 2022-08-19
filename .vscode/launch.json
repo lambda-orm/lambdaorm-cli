@@ -16,6 +16,18 @@
 				"version"
 			]
 		},
+		{
+			"name": "help",
+			"type": "node",
+			"request": "launch",
+			"skipFiles": [
+				"<node_internals>/**"
+			],
+			"program": "${workspaceFolder}/src/index.ts",
+			"args": [
+				"help"
+			]
+		},
 		// counties -------------------------------------------------------------------------------------------------------------------------------------
 		{
 			"name": "countries init",
@@ -166,7 +178,7 @@
 				"-w",
 				"lab/countries",
 				"-q",
-				"Countries.filter( p=> p.iso3 == 'AFG' || p.iso3 == 'ARG'  ).include(p=> p.states)",
+				"Countries.filter(p=>p.iso3=='AFG'||p.iso3=='ARG').include(p=> p.states)",
 				"-e",
 				"lab/countries/.env"
 			]

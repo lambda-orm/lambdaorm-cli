@@ -19,6 +19,7 @@
 		"lastname",
 		"lpad",
 		"ltrim",
+		"northwind",
 		"nullable",
 		"oracledb",
 		"rpad",

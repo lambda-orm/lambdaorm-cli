@@ -35,4 +35,4 @@ npm install lambdaorm-cli -g
 	- [execute](https://github.com/FlavioLionelRita/lambdaorm-orm/wiki/Execute)
 	- [drop](https://github.com/FlavioLionelRita/lambdaorm-orm/wiki/Drop)
 - [lambdaorm](https://github.com/FlavioLionelRita/lambdaorm)
-- Labs
+- [Labs](https://github.com/FlavioLionelRita/lambdaorm-orm/wiki/Labs)
