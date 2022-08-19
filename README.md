@@ -1,6 +1,6 @@
-# Lambda ORM
+# λORM CLI
 
-**IMPORTANT: the library is in an Alpha version!!!**
+λORM CLI is a command line application to use [λORM](https://www.npmjs.com/package/lambdaorm)
 
 ## Installation
 
