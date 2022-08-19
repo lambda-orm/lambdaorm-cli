@@ -1,6 +1,6 @@
 {
 	"name": "lambdaorm-cli",
-	"version": "0.2.1-beta",
+	"version": "0.2.2-beta",
 	"description": "The lambdaorm command line interface",
 	"author": "Flavio Lionel Rita <flaviolrita@hotmail.com>",
 	"license": "Apache-2.0 License",

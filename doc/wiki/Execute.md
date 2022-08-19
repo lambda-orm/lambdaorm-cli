@@ -12,7 +12,7 @@ Execute an expression or return metadata information.
 |data				| -d 		| Data used to execute expression																											|
 |envfile		| -e 		| Read in a file of environment variables.																						|
 |output			| -o 		| Generates an output with the information according to the following possible values |
-|           |       | [sentence|model|parameters|constraints|metadata] but it does not apply 							|
+|           |       | sentence, model, parameters, constraints and metadata but it does not apply					|
 
 ## Examples
 

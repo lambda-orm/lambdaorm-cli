@@ -1,4 +1,4 @@
-# Sync
+# Update
 
 Update workspace.
 
