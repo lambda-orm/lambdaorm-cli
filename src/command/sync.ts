@@ -6,7 +6,7 @@ import dotenv from 'dotenv'
 
 export class SyncCommand implements CommandModule {
 	command = 'sync';
-	describe = 'Syncronize database.';
+	describe = 'Synchronize database.';
 
 	builder (args: Argv) {
 		return args
@@ -33,17 +33,15 @@ export class SyncCommand implements CommandModule {
 		const stageName = args.stage as string
 		const output = args.output as string
 		const envfile = args.envfile as string
-
 		if (envfile) {
-			const fullpath = path.resolve(process.cwd(), envfile)
-			dotenv.config({ path: fullpath, override: true })
+			const fullPath = path.resolve(process.cwd(), envfile)
+			dotenv.config({ path: fullPath, override: true })
 		}
 		const orm = new Orm(workspace)
 		try {
 			const schema = await orm.schema.get(workspace)
 			await orm.init(schema)
 			const stage = orm.schema.stage.get(stageName)
-
 			if (output) {
 				const sentence = await orm.stage.sync({ stage: stage.name }).sentence()
 				console.log(sentence)

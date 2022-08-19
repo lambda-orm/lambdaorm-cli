@@ -40,7 +40,7 @@ export class ExecuteCommand implements CommandModule {
 	async handler (args: Arguments) {
 		const workspace = path.resolve(process.cwd(), args.workspace as string || '.')
 		const query = args.query as string
-		let data = args.data || {}
+		const data = args.data || {}
 		const stageName = args.stage as string
 		const output = args.output as string
 		const envfile = args.envfile as string
@@ -60,32 +60,32 @@ export class ExecuteCommand implements CommandModule {
 			await orm.init(schema)
 			const stage = orm.schema.stage.get(stageName)
 			const manager = new Manager(orm)
-			// read Data
-			data = await manager.readData(data)
 			// execute or get metadata
 			if (output) {
 				if (output === 'sentence') {
-					const result = await orm.sentence(query, { stage: stage.name })
+					const result = orm.sentence(query, { stage: stage.name })
 					console.log(JSON.stringify(result, null, 2))
 				} else if (output === 'model') {
-					const model = await orm.model(query)
+					const model = orm.model(query)
 					console.log(JSON.stringify(model, null, 2))
 				} else if (output === 'parameters') {
-					const metadata = await orm.parameters(query)
+					const metadata = orm.parameters(query)
 					console.log(JSON.stringify(metadata, null, 2))
 				} else if (output === 'constraints') {
-					const metadata = await orm.constraints(query)
+					const metadata = orm.constraints(query)
 					console.log(JSON.stringify(metadata, null, 2))
 				} else if (output === 'metadata') {
-					const metadata = await orm.metadata(query)
+					const metadata = orm.metadata(query)
 					console.log(JSON.stringify(metadata))
 				} else {
 					// output metadata is default
-					const metadata = await orm.metadata(query)
+					const metadata = orm.metadata(query)
 					console.log(JSON.stringify(metadata, null, 2))
 				}
 			} else {
-				const result = await orm.execute(query, data, { stage: stage.name })
+				// read Data
+				const _data = await manager.readData(data)
+				const result = await orm.execute(query, _data, { stage: stage.name })
 				console.log(JSON.stringify(result, null, 2))
 			}
 		} catch (error) {

@@ -37,42 +37,19 @@ entities:
         from: countryCode
         entity: Countries
         to: iso3
-dataSources:
-  - name: mydb
-    dialect: mysql
-    schema: countries
-    connection:
-      host: localhost
-      port: 3306
-      user: test
-      password: test
-      database: test
-      multipleStatements: true
-      waitForConnections: true
-      connectionLimit: 10
-      queueLimit: 0
-  - name: lab-countries
-    dialect: mysql
-    mapping: lab-countries
-    connection:
-      host: localhost
-      port: 3306
-      user: test
-      password: test
-      database: test
-      multipleStatements: true
-      waitForConnections: true
-      connectionLimit: 10
-      queueLimit: 0
+mappings:
+  - name: default
+sources:
+  - name: db1
+    dialect: MySQL
+    mapping: default
+    connection: ${CNN_MySQL}
+stages:
+  - name: default
+    sources:
+      - name: db1
 app:
   src: src
   data: data
   model: model
 enums: []
-mappings:
-  - name: lab-countries
-    entities: []
-stages:
-  - name: default
-    dataSources:
-      - name: lab-countries

@@ -52,14 +52,7 @@ export class ImportCommand implements CommandModule {
 			const manager = new Manager(orm)
 			// read Data
 			const _data = await manager.readData(data)
-
-			// // get content
-			// const content = await Helper.readFile(source)
-			// if (content === null) {
-			// throw new Error(`source: ${source} not found or empty`)
-			// }
-			// // import data
-			// const data = JSON.parse(content)
+ 			// import data
 			await orm.stage.import({ stage: stage.name }).execute(_data)
 		} catch (error) {
 			console.error(`error: ${error}`)

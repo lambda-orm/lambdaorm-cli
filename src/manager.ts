@@ -60,10 +60,10 @@ export class Manager {
 	}
 
 	public async addDialects (schema: Schema) {
-		for (const p in schema.dataSources) {
-			const dataSource = schema.dataSources[p]
+		for (const p in schema.sources) {
+			const source = schema.sources[p]
 			// if the library is not installed locally corresponding to the dialect it will be installed
-			const libs = this.getLibs(dataSource.dialect)
+			const libs = this.getLibs(source.dialect)
 			for (const p in libs) {
 				const lib = libs[p]
 				const localLib = await this.getLocalPackage(lib, this.orm.workspace)
@@ -140,58 +140,67 @@ export class Manager {
 		}
 	}
 
-	public completeSchema (source: Schema, dataSource: string, dialect?: string, connection?: any): Schema {
-		const target:Schema = Helper.clone(source)
-		if (target.entities === undefined) {
-			target.entities = []
+	public completeSchema (_schema: Schema, sourceName?: string, dialect?: string, connection?: any): Schema {
+		const schema:Schema = Helper.clone(_schema)
+		if (schema.entities === undefined) {
+			schema.entities = []
 		}
-		if (target.enums === undefined) {
-			target.enums = []
+		if (schema.enums === undefined) {
+			schema.enums = []
 		}
-		if (target.dataSources === undefined) {
-			target.dataSources = []
+		if (schema.sources === undefined) {
+			schema.sources = []
 		}
-		let ds = target.dataSources.find(p => p.name === dataSource)
-		if (ds === undefined) {
-			// si la base de datos no esta definida la crea
-			if (connection === undefined) {
-				connection = this.defaultConnection(dialect || 'mysql')
+		let source:any
+		if (sourceName !== undefined) {
+			source = schema.sources.find(p => p.name === sourceName)
+			if (source === undefined) {
+				throw Error(`source ${sourceName} not found`)
 			}
-			ds = { name: dataSource, dialect: dialect || 'mysql', mapping: dataSource, connection: connection }
-			target.dataSources.push(ds)
+		} else if (schema.sources.length === 1) {
+			source = schema.sources[0]
 		} else {
-			// if database is defined, update dialect if applicable
-			if ((dialect !== undefined && ds.dialect !== dialect) || (ds.dialect === undefined)) {
-				ds.dialect = dialect || 'mysql'
+			// If the database is not defined, it creates it.
+			if (connection === undefined) {
+				connection = this.defaultConnection(dialect || Dialect.MySQL)
 			}
-			// update the connection if applicable
-			if (connection !== undefined) {
-				ds.connection = connection
-			} else if (ds.connection === undefined) {
-				ds.connection = this.defaultConnection(ds.dialect)
-			}
-			// set the mapping if it was not set
-			if (ds.mapping === undefined) {
-				ds.mapping = ds.name
+			source = { name: 'test', dialect: dialect || Dialect.MySQL, mapping: source, connection: connection }
+			schema.sources.push(source)
+		}
+		// if database is defined, update dialect if applicable
+		if ((dialect !== undefined && source.dialect !== dialect) || (source.dialect === undefined)) {
+			source.dialect = dialect || Dialect.MySQL
+		}
+		// update the connection if applicable
+		if (connection !== undefined) {
+			source.connection = connection
+		} else if (source.connection === undefined) {
+			source.connection = this.defaultConnection(source.dialect)
+		}
+		// set the mapping if it was not set
+		if (schema.mappings === undefined) {
+			schema.mappings = []
+		}
+		if (source.mapping === undefined) {
+			if (schema.mappings.length > 0) {
+				source.mapping = schema.mappings[0].name
+			} else {
+				source.mapping = source.name
 			}
 		}
-		// si no existe el mapping lo crea
-		if (target.mappings === undefined) {
-			target.mappings = []
-		}
-		const mapping = target.mappings.find(p => p.name === ds?.mapping)
+		// if the mapping does not exist it creates it
+		const mapping = schema.mappings.find(p => p.name === source.mapping)
 		if (mapping === undefined) {
-			target.mappings.push({ name: ds?.mapping, entities: [] })
+			schema.mappings.push({ name: source.mapping, entities: [] })
 		}
-
-		// si no existe el mapping lo crea
-		if (target.stages === undefined) {
-			target.stages = []
+		// if the stage does not exist, create it
+		if (schema.stages === undefined) {
+			schema.stages = []
 		}
-		if (target.stages.length === 0) {
-			target.stages.push({ name: 'default', dataSources: [{ name: ds.name }] })
+		if (schema.stages.length === 0) {
+			schema.stages.push({ name: 'default', sources: [{ name: source.name }] })
 		}
-		return target
+		return schema
 	}
 
 	public defaultConnection (dialect: string): any {

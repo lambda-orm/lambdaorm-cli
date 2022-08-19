@@ -331,12 +331,12 @@ entities:
         to: username
 mappings:
   - name: default
-dataSources:
+sources:
   - name: main
     mapping: default
     dialect: postgres
     connection: $$CNN_POSTGRES
 stages:
   - name: default
-    dataSources:
+    sources:
       - name: main

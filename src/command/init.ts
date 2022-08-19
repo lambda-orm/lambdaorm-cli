@@ -15,7 +15,7 @@ export class InitCommand implements CommandModule {
 				describe: 'project path.'
 			})
 			.option('s', {
-				alias: 'datasource',
+				alias: 'source',
 				describe: 'Name of data source.'
 			})
 			.option('d', {
@@ -30,8 +30,8 @@ export class InitCommand implements CommandModule {
 
 	async handler (args: Arguments) {
 		try {
-			const workspace = path.resolve(process.cwd(), args.workspace as string || '.') // args.workspace as string || path.join(process.cwd(), name)
-			const datasource = args.datasource as string || path.basename(workspace) // name of datasource
+			const workspace = path.resolve(process.cwd(), args.workspace as string || '.')
+			const source:string|undefined = args.source as string
 			const dialect: string = args.dialect as string
 			const connection: string = args.connection as string
 			const orm = new Orm(workspace)
@@ -39,18 +39,16 @@ export class InitCommand implements CommandModule {
 			// create workspace
 			await Helper.createIfNotExists(workspace)
 			// create config file if not exists
-			let schema = await orm.schema.get(workspace)
-			// if (config.app.workspace === undefined) {
-			// config.app.workspace = workspace
-			// }
-			schema = manager.completeSchema(schema, datasource, dialect, connection)
+			const sourceSchema = await orm.schema.get(workspace)
+			// complete schema config
+			const targetSchema = manager.completeSchema(sourceSchema, source, dialect, connection)
 			// write lambdaorm config
-			const configPath = path.join(workspace, 'lambdaorm.yaml')
-			await manager.writeSchema(configPath, schema)
+			const configPath = path.join(workspace, 'lambdaORM.yaml')
+			await manager.writeSchema(configPath, targetSchema)
 			// create structure
-			await manager.createStructure(schema)
+			await manager.createStructure(targetSchema)
 			// add libraries for dialect
-			await manager.addDialects(schema)
+			await manager.addDialects(targetSchema)
 		} catch (error) {
 			console.error(`error: ${error}`)
 		}

@@ -53,7 +53,7 @@ entities:
         entity: Countries
         to: iso3
 enums: []
-dataSources:
+sources:
   - name: lab-countries
     dialect: mysql
     mapping: lab-countries
@@ -72,5 +72,5 @@ mappings:
     entities: []
 stages:
   - name: default
-    dataSources:
+    sources:
       - name: lab-countries

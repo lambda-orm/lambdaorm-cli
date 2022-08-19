@@ -18,9 +18,9 @@ npm install lambdaorm-cli -g
 |	init				| Generates lambdaorm project structure.													|
 |	update			| update model, packages and project structure.										|
 |	sync				|	Synchronize database.																						|
-|	execute			| Execute an expression lambda or return information							|
-|	export			| Export data from a database 																		|
 |	import			| Import data from file to database																|
+|	export			| Export data from a database 																		|
+|	execute			| Execute an expression lambda or return information							|
 |	drop				|	Removes all database objects but not the database.							|
 
 ## Documentation
@@ -28,10 +28,11 @@ npm install lambdaorm-cli -g
 - CLI
 	- [version](https://github.com/FlavioLionelRita/lambdaorm-orm/wiki/Version)
 	- [init](https://github.com/FlavioLionelRita/lambdaorm-orm/wiki/Init)
-	- [version](https://github.com/FlavioLionelRita/lambdaorm-orm/wiki/Version)
-	- [version](https://github.com/FlavioLionelRita/lambdaorm-orm/wiki/Version)
-	- [version](https://github.com/FlavioLionelRita/lambdaorm-orm/wiki/Version)
-	- [version](https://github.com/FlavioLionelRita/lambdaorm-orm/wiki/Version)
-	- [version](https://github.com/FlavioLionelRita/lambdaorm-orm/wiki/Version)
+	- [update](https://github.com/FlavioLionelRita/lambdaorm-orm/wiki/Update)
+	- [sync](https://github.com/FlavioLionelRita/lambdaorm-orm/wiki/Sync)
+	- [import](https://github.com/FlavioLionelRita/lambdaorm-orm/wiki/Import)
+	- [export](https://github.com/FlavioLionelRita/lambdaorm-orm/wiki/Export)
+	- [execute](https://github.com/FlavioLionelRita/lambdaorm-orm/wiki/Execute)
+	- [drop](https://github.com/FlavioLionelRita/lambdaorm-orm/wiki/Drop)
 - [lambdaorm](https://github.com/FlavioLionelRita/lambdaorm)
 - Labs

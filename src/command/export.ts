@@ -35,8 +35,8 @@ export class ExportCommand implements CommandModule {
 		const envfile = args.envfile as string
 
 		if (envfile) {
-			const fullpath = path.resolve(process.cwd(), envfile)
-			dotenv.config({ path: fullpath, override: true })
+			const fullPath = path.resolve(process.cwd(), envfile)
+			dotenv.config({ path: fullPath, override: true })
 		}
 		const orm = new Orm(workspace)
 

@@ -6,9 +6,17 @@
 	"editor.tabSize": 2,
 	"editor.insertSpaces": false,
 	"cSpell.words": [
+		"datetime",
+		"Datetime",
 		"envfile",
 		"Flavio",
+		"initcap",
 		"lambdaorm",
-		"oracledb"
+		"lpad",
+		"ltrim",
+		"nullable",
+		"oracledb",
+		"rpad",
+		"rtrim"
 	]
 }

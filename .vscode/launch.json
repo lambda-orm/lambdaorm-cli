@@ -28,7 +28,7 @@
 			"args": [
 				"init",
 				"-w",
-				"lab/countries"
+				"lab/countries"				
 			]
 		},
 		{
@@ -42,7 +42,7 @@
 			"args": [
 				"update",
 				"-w",
-				"lab/countries"
+				"lab/countries"				
 			]
 		},
 		{
@@ -56,7 +56,9 @@
 			"args": [
 				"sync",
 				"-w",
-				"lab/countries"
+				"lab/countries",
+				"-e",
+				"lab/countries/.env"
 			]
 		},
 		{
@@ -74,7 +76,9 @@
 				"-q",
 				"Countries.bulkInsert().include(p => p.states)",
 				"-d",
-				"./lab/countries/countries.json"
+				"./lab/countries/countries.json",
+				"-e",
+				"lab/countries/.env"
 			]
 		},
 		{
@@ -90,7 +94,9 @@
 				"-w",
 				"lab/countries",
 				"-t",
-				"./lab/countries/data"
+				"./lab/countries/data",
+				"-e",
+				"lab/countries/.env"
 			]
 		},
 		{
@@ -106,7 +112,9 @@
 				"-w",
 				"lab/countries",
 				"-q",
-				"States.deleteAll()"
+				"States.deleteAll()",
+				"-e",
+				"lab/countries/.env"
 			]
 		},
 		{
@@ -122,7 +130,9 @@
 				"-w",
 				"lab/countries",
 				"-q",
-				"Countries.deleteAll()"
+				"Countries.deleteAll()",
+				"-e",
+				"lab/countries/.env"
 			]
 		},
 		{
@@ -138,7 +148,9 @@
 				"-w",
 				"lab/countries",
 				"-d",
-				"./lab/countries/data/default-export.json"
+				"./lab/countries/data/default-export.json",
+				"-e",
+				"lab/countries/.env"
 			]
 		},
 		{
@@ -154,7 +166,9 @@
 				"-w",
 				"lab/countries",
 				"-q",
-				"Countries.filter( p=> p.iso3 == 'AFG' || p.iso3 == 'ARG'  ).include(p=> p.states)"
+				"Countries.filter( p=> p.iso3 == 'AFG' || p.iso3 == 'ARG'  ).include(p=> p.states)",
+				"-e",
+				"lab/countries/.env"
 			]
 		},
 		{
@@ -168,7 +182,9 @@
 			"args": [
 				"drop",
 				"-w",
-				"lab/countries"
+				"lab/countries",
+				"-e",
+				"lab/countries/.env"
 			]
 		},
 		// devicenet-----------------------------------------------------------------------------------------------
