@@ -9,6 +9,7 @@ yarn-error.log*
 
 build
 dist
+volume
 
 # Dependency directories
 node_modules/
@@ -34,7 +35,4 @@ typings/
 # Yarn Integrity file
 .yarn-integrity
 
-# dotenv environment variables file
-.env
-.env.test
 

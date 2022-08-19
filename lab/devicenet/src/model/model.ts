@@ -115,10 +115,10 @@ export class DeviceStatus extends Position {
 	journeyId?: number
 	cpu?: number
 	cpuTemperature?: number
-	batery?: number
+	battery?: number
 	wifiSignal?: number
 	time?: Date
-	registred?: Date
+	registered?: Date
 	device?: Device
 	journey?: Journey
 }
@@ -128,10 +128,10 @@ export interface QryDeviceStatus extends QryPosition {
 	journeyId: number
 	cpu: number
 	cpuTemperature: number
-	batery: number
+	battery: number
 	wifiSignal: number
 	time: Date
-	registred: Date
+	registered: Date
 	device: Device & OneToMany<Device> & Device
 	journey: Journey & OneToMany<Journey> & Journey
 }

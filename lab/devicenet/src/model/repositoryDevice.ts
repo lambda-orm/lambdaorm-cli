@@ -1,6 +1,6 @@
-import { Respository, IOrm } from 'lambdaorm'
+import { Repository, IOrm } from 'lambdaorm'
 import { Device, QryDevice } from './model'
-export class DeviceRespository extends Respository<Device, QryDevice> {
+export class DeviceRepository extends Repository<Device, QryDevice> {
 	constructor (stage?: string, Orm?:IOrm) {
 		super('Devices', stage, Orm)
 	}

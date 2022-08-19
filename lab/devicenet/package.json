@@ -1,10 +1,10 @@
 {
+  "devDependencies": {
+    "typescript": "^4.7.4"
+  },
   "dependencies": {
-    "lambdaorm": "^0.1.40-alpha",
+    "lambdaorm": "^0.2.3-beta",
     "mysql2": "^2.3.3",
     "pg": "^8.7.3"
-  },
-  "devDependencies": {
-    "typescript": "^4.6.2"
   }
 }

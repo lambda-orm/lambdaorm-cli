@@ -62,7 +62,7 @@ entities:
     primaryKey: ["id"]
     uniqueKey: ["name"]
     properties:
-      # tipo + identificador (el identificador es de acuerdo al tipo , en un telefono es el imei, en una pc la mac)
+      # tipo + identificador (el identificador es de acuerdo al tipo , en un teléfono es el imei, en una pc la mac)
       - name: id
         length: 32
         nullable: false
@@ -115,7 +115,7 @@ entities:
     primaryKey: ["id"]
     uniqueKey: ["deviceId", "name"]
     properties:
-      # el ID del componente debe ser establecido por el  dispositivo, ejemplo  deviceID + name , ejempo 233943849384483-cam01
+      # el ID del componente debe ser establecido por el  dispositivo, ejemplo  deviceID + name , ejemplo 233943849384483-cam01
       - name: id
         length: 50
         nullable: false
@@ -149,7 +149,7 @@ entities:
       - name: id
         type: integer
         nullable: false
-        autoincrement: true
+        autoIncrement: true
       - name: deviceId
         length: 32
         nullable: false
@@ -159,14 +159,14 @@ entities:
         type: decimal
       - name: cpuTemperature
         type: decimal
-      - name: batery
+      - name: battery
         type: decimal
       - name: wifiSignal
         type: decimal
       - name: time
         type: datetime
         nullable: false
-      - name: registred
+      - name: registered
         type: datetime
         default: now()
     relations:
@@ -189,7 +189,7 @@ entities:
       - name: id
         type: integer
         nullable: false
-        autoincrement: true
+        autoIncrement: true
       - name: deviceId
         length: 32
         nullable: false
@@ -221,7 +221,7 @@ entities:
     extends: Basics
     primaryKey: ["id"]
     properties:
-      #  el id es el fullpath del file, ejemplo: /deviceId/componentId/202202100922.mp3
+      #  el id es el fullPath del file, ejemplo: /deviceId/componentId/202202100922.mp3
       - name: id
         length: 255
         nullable: false
@@ -310,7 +310,7 @@ entities:
       - name: id
         type: integer
         nullable: false
-        autoincrement: true
+        autoIncrement: true
       - name: username
         length: 32
         nullable: false
@@ -334,8 +334,8 @@ mappings:
 sources:
   - name: main
     mapping: default
-    dialect: postgres
-    connection: $$CNN_POSTGRES
+    dialect: PostgreSQL
+    connection: ${CNN_POSTGRES}
 stages:
   - name: default
     sources:

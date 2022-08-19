@@ -1,6 +1,6 @@
-import { Respository, IOrm } from 'lambdaorm'
+import { Repository, IOrm } from 'lambdaorm'
 import { Group, QryGroup } from './model'
-export class GroupRespository extends Respository<Group, QryGroup> {
+export class GroupRepository extends Repository<Group, QryGroup> {
 	constructor (stage?: string, Orm?:IOrm) {
 		super('Groups', stage, Orm)
 	}
