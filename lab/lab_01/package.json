@@ -3,7 +3,7 @@
     "typescript": "^4.7.4"
   },
   "dependencies": {
-    "lambdaorm": "^0.2.4-beta",
+    "lambdaorm": "^0.2.5-beta",
     "mysql2": "^2.3.3"
   }
 }
