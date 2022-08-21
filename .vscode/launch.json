@@ -28,6 +28,21 @@
 				"help"
 			]
 		},
+		// lab10
+		{
+			"name": "lab01 sync",
+			"type": "node",
+			"request": "launch",
+			"skipFiles": [
+				"<node_internals>/**"
+			],
+			"program": "${workspaceFolder}/src/index.ts",
+			"args": [
+				"sync",
+				"-w",
+				"lab/lab_01"
+			]
+		},
 		// counties -------------------------------------------------------------------------------------------------------------------------------------
 		{
 			"name": "countries init",
