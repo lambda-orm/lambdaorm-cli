@@ -21,10 +21,53 @@
 						},
 						{
 							"name": "iso3",
-							"nullable": false,
 							"length": 3,
+							"nullable": false,
 							"type": "string",
 							"mapping": "iso3"
+						},
+						{
+							"name": "iso2",
+							"nullable": false,
+							"length": 2,
+							"type": "string",
+							"mapping": "iso2"
+						},
+						{
+							"name": "capital",
+							"type": "string",
+							"length": 80,
+							"mapping": "capital"
+						},
+						{
+							"name": "currency",
+							"type": "string",
+							"length": 80,
+							"mapping": "currency"
+						},
+						{
+							"name": "region",
+							"type": "string",
+							"length": 80,
+							"mapping": "region"
+						},
+						{
+							"name": "subregion",
+							"type": "string",
+							"length": 80,
+							"mapping": "subregion"
+						},
+						{
+							"name": "latitude",
+							"length": 16,
+							"type": "string",
+							"mapping": "latitude"
+						},
+						{
+							"name": "longitude",
+							"length": 16,
+							"type": "string",
+							"mapping": "longitude"
 						}
 					],
 					"relations": [
@@ -92,6 +135,18 @@
 							"length": 3,
 							"type": "string",
 							"mapping": "countryCode"
+						},
+						{
+							"name": "latitude",
+							"length": 16,
+							"type": "string",
+							"mapping": "latitude"
+						},
+						{
+							"name": "longitude",
+							"length": 16,
+							"type": "string",
+							"mapping": "longitude"
 						}
 					],
 					"relations": [
