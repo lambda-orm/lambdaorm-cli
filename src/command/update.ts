@@ -5,8 +5,8 @@ import { Manager } from '../manager'
 import path from 'path'
 
 export class UpdateCommand implements CommandModule {
-	command = 'update';
-	describe = 'Update workspace.';
+	command = 'update'
+	describe = 'Update workspace.'
 
 	builder (args: Argv) {
 		return args

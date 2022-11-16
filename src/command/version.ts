@@ -4,8 +4,8 @@ import { Orm } from 'lambdaorm'
 import { Manager } from '../manager'
 
 export class VersionCommand implements CommandModule {
-	command = 'version';
-	describe = 'Prints lambdaorm version this project uses.';
+	command = 'version'
+	describe = 'Prints lambdaorm version this project uses.'
 
 	async handler () {
 		const orm = new Orm()

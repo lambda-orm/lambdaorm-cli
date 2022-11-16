@@ -6,8 +6,8 @@ import { Manager } from '../manager'
 import dotenv from 'dotenv'
 
 export class ImportCommand implements CommandModule {
-	command = 'import';
-	describe = 'Import data from file to database';
+	command = 'import'
+	describe = 'Import data from file to database'
 
 	builder (args: Argv) {
 		return args

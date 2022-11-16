@@ -5,8 +5,8 @@ import path from 'path'
 import dotenv from 'dotenv'
 
 export class DropCommand implements CommandModule {
-	command = 'drop';
-	describe = 'Removes all database objects but not the database.';
+	command = 'drop'
+	describe = 'Removes all database objects but not the database.'
 
 	builder (args: Argv) {
 		return args

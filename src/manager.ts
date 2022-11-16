@@ -1,4 +1,5 @@
-import { Dialect, Orm, Helper, Schema, Entity } from 'lambdaorm'
+import { Dialect, Orm, Schema, Entity } from 'lambdaorm'
+import { h3lp } from 'h3lp'
 import path from 'path'
 const yaml = require('js-yaml')
 const Util = require('util')
@@ -15,7 +16,7 @@ export class Manager {
 	}
 
 	private async exec (cmd:string, cwd:string = __dirname) {
-		const { stdout, stderr } = await exec(this.escapeShell(cmd), { cwd: cwd })
+		const { stdout, stderr } = await exec(this.escapeShell(cmd), { cwd })
 		if (stderr && stderr.toLocaleLowerCase().indexOf('error') > -1) {
 			throw new Error(`command: ${cmd}  error: ${stderr}`)
 		}
@@ -24,26 +25,26 @@ export class Manager {
 
 	public async createStructure (schema: Schema) {
 		// create initial structure
-		await Helper.createIfNotExists(path.join(this.orm.workspace, schema.app.src))
-		await Helper.createIfNotExists(path.join(this.orm.workspace, schema.app.data))
+		await h3lp.fs.create(path.join(this.orm.workspace, schema.app.src))
+		await h3lp.fs.create(path.join(this.orm.workspace, schema.app.data))
 
 		// if the sintaxis.d.ts does not exist create it
 		const sintaxisPath = path.join(this.orm.workspace, schema.app.src, 'sintaxis.d.ts')
-		if (!await Helper.existsPath(sintaxisPath)) {
-			await Helper.copyFile(path.join(__dirname, './sintaxis.d.ts'), sintaxisPath)
+		if (!await h3lp.fs.exists(sintaxisPath)) {
+			await h3lp.fs.copy(path.join(__dirname, './sintaxis.d.ts'), sintaxisPath)
 		}
 
 		// if the package.json does not exist create it
 		const packagePath = path.join(this.orm.workspace, 'package.json')
-		if (!await Helper.existsPath(packagePath)) {
-			await Helper.writeFile(packagePath, JSON.stringify({ dependencies: {} }, null, 2))
+		if (!await h3lp.fs.exists(packagePath)) {
+			await h3lp.fs.write(packagePath, JSON.stringify({ dependencies: {} }, null, 2))
 		}
 
 		// if there is no tsconfig.json create it
 		const tsconfigPath = path.join(this.orm.workspace, 'tsconfig.json')
-		if (!await Helper.existsPath(tsconfigPath)) {
+		if (!await h3lp.fs.exists(tsconfigPath)) {
 			const tsconfigContent = this.getTypescriptContent()
-			await Helper.writeFile(tsconfigPath, JSON.stringify(tsconfigContent, null, 2))
+			await h3lp.fs.write(tsconfigPath, JSON.stringify(tsconfigContent, null, 2))
 		}
 
 		// install typescript if not installed.
@@ -141,7 +142,7 @@ export class Manager {
 	}
 
 	public completeSchema (_schema: Schema, sourceName?: string, dialect?: string, connection?: any): Schema {
-		const schema:Schema = Helper.clone(_schema)
+		const schema:Schema = h3lp.obj.clone(_schema)
 		if (schema.entities === undefined) {
 			schema.entities = []
 		}
@@ -164,7 +165,7 @@ export class Manager {
 			if (connection === undefined) {
 				connection = this.defaultConnection(dialect || Dialect.MySQL)
 			}
-			source = { name: 'test', dialect: dialect || Dialect.MySQL, mapping: source, connection: connection }
+			source = { name: 'test', dialect: dialect || Dialect.MySQL, mapping: source, connection }
 			schema.sources.push(source)
 		}
 		// if database is defined, update dialect if applicable
@@ -276,10 +277,10 @@ export class Manager {
 	public async writeSchema (configPath:string, schema: Schema): Promise<void> {
 		if (path.extname(configPath) === '.yaml' || path.extname(configPath) === '.yml') {
 			const content = yaml.dump(schema)
-			await Helper.writeFile(configPath, content)
+			await h3lp.fs.write(configPath, content)
 		} else if (path.extname(configPath) === '.json') {
 			const content = JSON.stringify(schema, null, 2)
-			await Helper.writeFile(configPath, content)
+			await h3lp.fs.write(configPath, content)
 		} else {
 			throw new Error(`Config file: ${configPath} not supported`)
 		}
@@ -294,19 +295,19 @@ export class Manager {
 		const references: string[] = []
 		const content = this.getModelContent(schema)
 		const modelsPath = path.join(this.orm.workspace, schema.app.src, schema.app.model)
-		Helper.createIfNotExists(modelsPath)
+		h3lp.fs.create(modelsPath)
 		const schemaPath = path.join(modelsPath, 'model.ts')
 		references.push('model')
-		await Helper.writeFile(schemaPath, content)
+		await h3lp.fs.write(schemaPath, content)
 		for (const q in schema.entities) {
 			const entity = schema.entities[q]
 			if (entity.abstract) continue
-			const singular = entity.singular ? entity.singular : Helper.singular(entity.name)
+			const singular = entity.singular ? entity.singular : h3lp.str.singular(entity.name)
 			const repositoryPath = path.join(modelsPath, `repository${singular}.ts`)
 			references.push(`repository${singular}`)
-			if (!await Helper.existsPath(repositoryPath)) {
+			if (!await h3lp.fs.exists(repositoryPath)) {
 				const repositoryContent = this.getRepositoryContent(entity)
-				await Helper.writeFile(repositoryPath, repositoryContent)
+				await h3lp.fs.write(repositoryPath, repositoryContent)
 			}
 		}
 		const lines:string[] = []
@@ -314,18 +315,18 @@ export class Manager {
 			const reference = references[p]
 			lines.push(`export * from './${reference}'`)
 		}
-		await Helper.writeFile(path.join(modelsPath, 'index.ts'), lines.join('\n') + '\n')
+		await h3lp.fs.write(path.join(modelsPath, 'index.ts'), lines.join('\n') + '\n')
 	}
 
 	public async readData (data:any):Promise<any> {
 		// read Data
 		if (typeof data === 'string') {
-			const _data = Helper.tryParse(data as string)
+			const _data = h3lp.utils.tryParse(data as string)
 			if (_data !== null) {
 				data = _data
 			} else {
 				try {
-					data = await Helper.readFile(path.join(process.cwd(), data as string))
+					data = await h3lp.fs.read(path.join(process.cwd(), data as string))
 					data = JSON.parse(data as string)
 				} catch (error) {
 					throw new Error(`Error to read context: ${error}`)
@@ -337,7 +338,7 @@ export class Manager {
 
 	private getRepositoryContent (entity: Entity): string {
 		const lines: string[] = []
-		const singular = entity.singular ? entity.singular : Helper.singular(entity.name)
+		const singular = entity.singular ? entity.singular : h3lp.str.singular(entity.name)
 		lines.push('import { Repository, IOrm } from \'lambdaorm\'')
 		lines.push(`import { ${singular}, Qry${singular} } from './model'`)
 		lines.push(`export class ${singular}Repository extends Repository<${singular}, Qry${singular}> {`)
@@ -376,9 +377,9 @@ export class Manager {
 		if (source.entities) {
 			for (const p in source.entities) {
 				const entity = source.entities[p]
-				const singular = entity.singular ? entity.singular : Helper.singular(entity.name)
+				const singular = entity.singular ? entity.singular : h3lp.str.singular(entity.name)
 				const _abstract = entity.abstract ? ' abstract ' : ' '
-				const _extends = entity.extends ? ' extends ' + Helper.singular(entity.extends) + ' ' : ' '
+				const _extends = entity.extends ? ' extends ' + h3lp.str.singular(entity.extends) + ' ' : ' '
 
 				// create class
 				lines.push(`export${_abstract}class ${singular}${_extends}{`)
@@ -399,8 +400,8 @@ export class Manager {
 
 				for (const q in entity.properties) {
 					const property = entity.properties[q]
-					const type = property.enum ? property.enum : Helper.tsType(property.type)
-					if (property.nullable === false && property.default === undefined) {
+					const type = property.enum ? property.enum : property.type
+					if (property.required && property.default === undefined) {
 						lines.push(`\t${property.name}?: ${type}`)
 					} else {
 						lines.push(`\t${property.name}?: ${type}`)
@@ -412,8 +413,8 @@ export class Manager {
 					if (relationEntity === undefined) {
 						throw new Error(`Not exists ${relation.entity} relation in ${entity.name} entity`)
 					}
-					const relationEntitySingularName = relationEntity.singular ? relationEntity.singular : Helper.singular(relationEntity.name)
-					// const relationEntity = Helper.singular(relation.entity)
+					const relationEntitySingularName = relationEntity.singular ? relationEntity.singular : h3lp.str.singular(relationEntity.name)
+					// const relationEntity = h3lp.singular(relation.entity)
 					switch (relation.type) {
 					case 'oneToMany':
 					case 'oneToOne':
@@ -427,18 +428,18 @@ export class Manager {
 				lines.push('}')
 
 				// create interface
-				const _extendsInterface = entity.extends ? ' extends Qry' + Helper.singular(entity.extends) + ' ' : ' '
+				const _extendsInterface = entity.extends ? ' extends Qry' + h3lp.str.singular(entity.extends) + ' ' : ' '
 				lines.push(`export interface Qry${singular}${_extendsInterface}{`)
 				for (const q in entity.properties) {
 					const property = entity.properties[q]
-					const type = property.enum ? property.enum : Helper.tsType(property.type)
+					const type = property.enum ? property.enum : property.type
 					lines.push(`\t${property.name}: ${type}`)
 				}
 				for (const q in entity.relations) {
 					const relation = entity.relations[q]
 					const relationEntity = source.entities.find(p => p.name === relation.entity) as Entity
-					const relationEntitySingularName = relationEntity.singular ? relationEntity.singular : Helper.singular(relationEntity.name)
-					// const relationEntity = Helper.singular(relation.entity)
+					const relationEntitySingularName = relationEntity.singular ? relationEntity.singular : h3lp.str.singular(relationEntity.name)
+					// const relationEntity = h3lp.singular(relation.entity)
 					switch (relation.type) {
 					case 'oneToMany':
 						lines.push(`\t${relation.name}: ${relationEntitySingularName} & OneToMany<${relationEntitySingularName}> & ${relationEntitySingularName}`)
@@ -456,7 +457,7 @@ export class Manager {
 			for (const p in source.entities) {
 				const entity = source.entities[p]
 				if (!entity.abstract) {
-					const singular = entity.singular ? entity.singular : Helper.singular(entity.name)
+					const singular = entity.singular ? entity.singular : h3lp.str.singular(entity.name)
 					lines.push(`export let ${entity.name}: Queryable<Qry${singular}>`)
 				}
 			}

@@ -6,8 +6,8 @@ import { Manager } from '../manager'
 import dotenv from 'dotenv'
 
 export class ExecuteCommand implements CommandModule {
-	command = 'execute';
-	describe = 'Execute an expression or return metadata information';
+	command = 'execute'
+	describe = 'Execute an expression or return metadata information'
 
 	builder (args: Argv) {
 		return args

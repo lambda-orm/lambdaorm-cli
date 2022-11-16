@@ -1,12 +1,13 @@
 /* eslint-disable no-mixed-spaces-and-tabs */
 import { CommandModule, Argv, Arguments } from 'yargs'
-import { Orm, Helper } from 'lambdaorm'
+import { Orm } from 'lambdaorm'
+import { h3lp } from 'h3lp'
 import path from 'path'
 import dotenv from 'dotenv'
 
 export class ExportCommand implements CommandModule {
-	command = 'export';
-	describe = 'Export data from a database';
+	command = 'export'
+	describe = 'Export data from a database'
 
 	builder (args: Argv) {
 		return args
@@ -47,7 +48,7 @@ export class ExportCommand implements CommandModule {
 			const exportFile = path.join(target, stage.name + '-export.json')
 			const dataExport = orm.stage.export({ stage: stage.name })
 			const data = await dataExport.execute()
-			await Helper.writeFile(exportFile, JSON.stringify(data))
+			await h3lp.fs.write(exportFile, JSON.stringify(data))
 		} catch (error) {
 			console.error(`error: ${error}`)
 		} finally {

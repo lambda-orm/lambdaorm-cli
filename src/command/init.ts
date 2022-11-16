@@ -1,11 +1,12 @@
 import { CommandModule, Argv, Arguments } from 'yargs'
 import path from 'path'
-import { Orm, Helper } from 'lambdaorm'
+import { Orm } from 'lambdaorm'
+import { h3lp } from 'h3lp'
 import { Manager } from '../manager'
 
 export class InitCommand implements CommandModule {
-	command = 'init';
-	describe = 'Generates lambdaorm project structure.';
+	command = 'init'
+	describe = 'Generates lambdaorm project structure.'
 
 	builder (args: Argv) {
 		return args
@@ -37,7 +38,7 @@ export class InitCommand implements CommandModule {
 			const orm = new Orm(workspace)
 			const manager = new Manager(orm)
 			// create workspace
-			await Helper.createIfNotExists(workspace)
+			await h3lp.fs.create(workspace)
 			// create config file if not exists
 			const sourceSchema = await orm.schema.get(workspace)
 			// complete schema config
