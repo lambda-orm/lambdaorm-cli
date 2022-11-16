@@ -7,7 +7,9 @@ module.exports = function (grunt) {
 	grunt.initConfig({
 		exec: {
 			lint: { cmd: 'npx eslint src ' },
-			tsc: { cmd: 'npx tsc ' }
+			tsc: { cmd: 'npx tsc ' },
+			release: { cmd: './release.sh' },
+			to_develop: { cmd: './to_develop.sh' }
 		},
 		clean: {
 			build: ['build'],
