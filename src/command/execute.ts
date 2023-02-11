@@ -63,7 +63,7 @@ export class ExecuteCommand implements CommandModule {
 			// execute or get metadata
 			if (output) {
 				if (output === 'sentence') {
-					const result = orm.sentence(query, { stage: stage.name })
+					const result = orm.getInfo(query, { stage: stage.name })
 					console.log(JSON.stringify(result, null, 2))
 				} else if (output === 'model') {
 					const model = orm.model(query)
