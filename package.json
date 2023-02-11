@@ -3,7 +3,7 @@
 	"version": "0.4.0-beta",
 	"description": "The lambdaorm command line interface",
 	"author": "Flavio Lionel Rita <flaviolrita@hotmail.com>",
-	"license": "Apache-2.0 License",
+	"license": "MIT",
 	"private": true,
 	"engines": {
 		"node": ">=10"
