@@ -23,7 +23,6 @@ module.exports = function (grunt) {
 			jest: { expand: true, src: './jest-unit-config.json', dest: 'dist/' }
 		}
 	})
-
 	grunt.registerTask('create-package', 'create package.json for dist', function () {
 		const data = require('./package.json')
 		delete data.devDependencies
