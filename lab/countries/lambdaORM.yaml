@@ -6,9 +6,9 @@ entities:
       - name
     properties:
       - name: name
-        nullable: false
+        required: true
       - name: iso3
-        nullable: false
+        required: true
         length: 3
     relations:
       - name: states
@@ -26,11 +26,11 @@ entities:
     properties:
       - name: id
         type: integer
-        nullable: false
+        required: true
       - name: name
-        nullable: false
+        required: true
       - name: countryCode
-        nullable: false
+        required: true
         length: 3
     relations:
       - name: country

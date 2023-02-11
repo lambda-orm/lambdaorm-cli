@@ -65,13 +65,13 @@ entities:
       # tipo + identificador (el identificador es de acuerdo al tipo , en un teléfono es el imei, en una pc la mac)
       - name: id
         length: 32
-        nullable: false
+        required: true
       - name: type
         length: 16
-        nullable: false
+        required: true
       - name: name
         length: 32
-        nullable: false
+        required: true
       - name: groupId
         length: 32
       - name: password
@@ -118,17 +118,17 @@ entities:
       # el ID del componente debe ser establecido por el  dispositivo, ejemplo  deviceID + name , ejemplo 233943849384483-cam01
       - name: id
         length: 50
-        nullable: false
+        required: true
         default: concat(deviceId,"-",lower(substring(replace(name," ","-"),0,16)))
       - name: deviceId
         length: 32
-        nullable: false
+        required: true
       - name: name
         length: 16
-        nullable: false
+        required: true
       - name: type
         length: 16
-        nullable: false
+        required: true
     relations:
       - name: device
         from: deviceId
@@ -148,11 +148,11 @@ entities:
     properties:
       - name: id
         type: integer
-        nullable: false
+        required: true
         autoIncrement: true
       - name: deviceId
         length: 32
-        nullable: false
+        required: true
       - name: journeyId
         type: integer
       - name: cpu
@@ -165,7 +165,7 @@ entities:
         type: decimal
       - name: time
         type: datetime
-        nullable: false
+        required: true
       - name: registered
         type: datetime
         default: now()
@@ -188,11 +188,11 @@ entities:
     properties:
       - name: id
         type: integer
-        nullable: false
+        required: true
         autoIncrement: true
       - name: deviceId
         length: 32
-        nullable: false
+        required: true
       - name: startId
         type: integer
       - name: endId
@@ -224,22 +224,22 @@ entities:
       #  el id es el fullPath del file, ejemplo: /deviceId/componentId/202202100922.mp3
       - name: id
         length: 255
-        nullable: false
+        required: true
       # el tipo de file, ejemplo: audio|video
       - name: type
         length: 16
-        nullable: false
+        required: true
       - name: deviceId
         length: 32
-        nullable: false
+        required: true
       - name: componentId
         length: 50
       - name: startDate
         type: datetime
-        nullable: false
+        required: true
       - name: endDate
         type: datetime
-        nullable: false
+        required: true
     relations:
       - name: device
         from: deviceId
@@ -259,13 +259,13 @@ entities:
     properties:
       - name: username
         length: 32
-        nullable: false
+        required: true
       - name: firstname
-        nullable: false
+        required: true
       - name: lastname
-        nullable: false
+        required: true
       - name: email
-        nullable: false
+        required: true
         length: 512
         writeValue: encrypt(lower(email),"$$USERS_SECRET_KEY")
         readValue: decrypt(email,"$$USERS_SECRET_KEY")
@@ -286,10 +286,10 @@ entities:
       - name: id
         length: 32
         default: lower(substring(replace(name," ","-"),0,32))
-        nullable: false
+        required: true
       - name: name
         length: 32
-        nullable: false
+        required: true
     relations:
       - name: members
         type: manyToOne
@@ -309,17 +309,17 @@ entities:
     properties:
       - name: id
         type: integer
-        nullable: false
+        required: true
         autoIncrement: true
       - name: username
         length: 32
-        nullable: false
+        required: true
       - name: groupId
         length: 32
-        nullable: false
+        required: true
       - name: rol
         length: 32
-        nullable: false
+        required: true
     relations:
       - name: group
         from: groupId

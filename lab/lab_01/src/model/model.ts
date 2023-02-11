@@ -16,13 +16,13 @@ export interface QryCountry {
 	states: ManyToOne<State> & State[]
 }
 export class State {
-	id?: number
+	id?: integer
 	name?: string
 	countryCode?: string
 	country?: Country
 }
 export interface QryState {
-	id: number
+	id: integer
 	name: string
 	countryCode: string
 	country: Country & OneToMany<Country> & Country

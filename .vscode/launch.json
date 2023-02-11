@@ -28,9 +28,37 @@
 				"help"
 			]
 		},
-		// lab-03 ----------------------------------------------------------------------------------
+		// lab-01 ----------------------------------------------------------------------------------
 		{
-			"name": "lab 03",
+			"name": "lab 01 init",
+			"type": "node",
+			"request": "launch",
+			"skipFiles": [
+				"<node_internals>/**"
+			],
+			"program": "${workspaceFolder}/src/index.ts",
+			"args": [
+				"init",
+				"-w",
+				"lab/lab_01"					
+			]
+		},
+		{
+			"name": "lab 01 update",
+			"type": "node",
+			"request": "launch",
+			"skipFiles": [
+				"<node_internals>/**"
+			],
+			"program": "${workspaceFolder}/src/index.ts",
+			"args": [
+				"update",
+				"-w",
+				"lab/lab_01"					
+			]
+		},
+		{
+			"name": "lab 01 sync",
 			"type": "node",
 			"request": "launch",
 			"skipFiles": [
@@ -40,13 +68,87 @@
 			"args": [
 				"sync",
 				"-w",
-				"lab/lab_03",
-				"-e",
-				"lab/lab_03/.env",				
-				"-s",
-				"stage2"
+				"lab/lab_01"					
 			]
 		},
+		{
+			"name": "lab 01 execute",
+			"type": "node",
+			"request": "launch",
+			"skipFiles": [
+				"<node_internals>/**"
+			],
+			"program": "${workspaceFolder}/src/index.ts",
+			"args": [
+				"execute",
+				"-w",
+				"lab/lab_01",
+				"-q",
+				"Countries.bulkInsert().include(p => p.states)",
+				"-d",
+				"./lab/lab_01/data.json"
+			]
+		},
+		{
+			"name": "lab 01 export",
+			"type": "node",
+			"request": "launch",
+			"skipFiles": [
+				"<node_internals>/**"
+			],
+			"program": "${workspaceFolder}/src/index.ts",
+			"args": [
+				"export",
+				"-w",
+				"lab/lab_01"					
+			]
+		},
+		{
+			"name": "lab 01 delete States",
+			"type": "node",
+			"request": "launch",
+			"skipFiles": [
+				"<node_internals>/**"
+			],
+			"program": "${workspaceFolder}/src/index.ts",
+			"args": [
+				"execute",
+				"-w",
+				"lab/lab_01",
+				"-q",
+				"States.deleteAll()"			
+			]
+		},
+		{
+			"name": "lab 01 delete Countries",
+			"type": "node",
+			"request": "launch",
+			"skipFiles": [
+				"<node_internals>/**"
+			],
+			"program": "${workspaceFolder}/src/index.ts",
+			"args": [
+				"execute",
+				"-w",
+				"lab/lab_01",
+				"-q",
+				"Countries.deleteAll()"			
+			]
+		},
+		{
+			"name": "lab 01 drop",
+			"type": "node",
+			"request": "launch",
+			"skipFiles": [
+				"<node_internals>/**"
+			],
+			"program": "${workspaceFolder}/src/index.ts",
+			"args": [
+				"drop",
+				"-w",
+				"lab/lab_01"		
+			]
+		},	
 		// counties -------------------------------------------------------------------------------------------------------------------------------------
 		{
 			"name": "countries init",
