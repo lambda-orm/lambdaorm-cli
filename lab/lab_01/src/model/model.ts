@@ -13,19 +13,19 @@ export class Country {
 export interface QryCountry {
 	name: string
 	iso3: string
-	states: ManyToOne<State> & State[]
+	states: ManyToOne<QryState> & State[]
 }
 export class State {
-	id?: integer
+	id?: number
 	name?: string
 	countryCode?: string
 	country?: Country
 }
 export interface QryState {
-	id: integer
+	id: number
 	name: string
 	countryCode: string
-	country: Country & OneToMany<Country> & Country
+	country: QryCountry & OneToMany<QryCountry> & Country
 }
 export let Countries: Queryable<QryCountry>
 export let States: Queryable<QryState>

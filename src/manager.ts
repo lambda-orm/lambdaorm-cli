@@ -400,7 +400,7 @@ export class Manager {
 
 				for (const q in entity.properties) {
 					const property = entity.properties[q]
-					const type = property.enum ? property.enum : property.type
+					const type = property.enum ? property.enum : this.getType(property.type)
 					if (property.required && property.default === undefined) {
 						lines.push(`\t${property.name}?: ${type}`)
 					} else {
@@ -432,23 +432,22 @@ export class Manager {
 				lines.push(`export interface Qry${singular}${_extendsInterface}{`)
 				for (const q in entity.properties) {
 					const property = entity.properties[q]
-					const type = property.enum ? property.enum : property.type
+					const type = property.enum ? property.enum : this.getType(property.type)
 					lines.push(`\t${property.name}: ${type}`)
 				}
 				for (const q in entity.relations) {
 					const relation = entity.relations[q]
 					const relationEntity = source.entities.find(p => p.name === relation.entity) as Entity
 					const relationEntitySingularName = relationEntity.singular ? relationEntity.singular : h3lp.str.singular(relationEntity.name)
-					// const relationEntity = h3lp.singular(relation.entity)
 					switch (relation.type) {
 					case 'oneToMany':
-						lines.push(`\t${relation.name}: ${relationEntitySingularName} & OneToMany<${relationEntitySingularName}> & ${relationEntitySingularName}`)
+						lines.push(`\t${relation.name}: Qry${relationEntitySingularName} & OneToMany<Qry${relationEntitySingularName}> & ${relationEntitySingularName}`)
 						break
 					case 'oneToOne':
-						lines.push(`\t${relation.name}: ${relationEntitySingularName} & OneToOne<${relationEntitySingularName}> & ${relationEntitySingularName}`)
+						lines.push(`\t${relation.name}: Qry${relationEntitySingularName} & OneToOne<Qry${relationEntitySingularName}> & ${relationEntitySingularName}`)
 						break
 					case 'manyToOne':
-						lines.push(`\t${relation.name}: ManyToOne<${relationEntitySingularName}> & ${relationEntitySingularName}[]`)
+						lines.push(`\t${relation.name}: ManyToOne<Qry${relationEntitySingularName}> & ${relationEntitySingularName}[]`)
 						break
 					}
 				}
@@ -463,5 +462,16 @@ export class Manager {
 			}
 		}
 		return lines.join('\n') + '\n'
+	}
+
+	private getType (type:string):string {
+		switch (type) {
+		case 'integer': return 'number'
+		case 'decimal': return 'number'
+		case 'dateTime': return 'Date'
+		case 'date': return 'Date'
+		case 'time': return 'Date'
+		default: return type
+		}
 	}
 }
