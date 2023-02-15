@@ -4180,10 +4180,10 @@ kleur@^3.0.3:
   resolved "https://registry.npmjs.org/kleur/-/kleur-3.0.3.tgz"
   integrity sha512-eTIzlVOSUR+JxdDFepEYcBMtZ9Qqdef+rnzWdRZuMbOywu5tO2w2N7rqjoANZ5k9vywhL6Br1VRjUIgTQx4E8w==
 
-lambdaorm@0.4.8-beta:
-  version "0.4.8-beta"
-  resolved "https://registry.npmjs.org/lambdaorm/-/lambdaorm-0.4.8-beta.tgz"
-  integrity sha512-pxgUfB4POxms43XR0LCxYr6k1z4N6oWb0YqnU+a1bCsJMAzWtMVv85xOTl2LxadgpZ1mLJZbvUXithRjQB02Qw==
+lambdaorm@0.4.9-beta:
+  version "0.4.9-beta"
+  resolved "https://registry.npmjs.org/lambdaorm/-/lambdaorm-0.4.9-beta.tgz"
+  integrity sha512-dv1kQfcXha4KPzEQwCvZtwgRlzoL922WyehN6EjIir2WkukaPnJr9dVck+xbWsuiIh7T4Usymrc/j0keLVb9VQ==
   dependencies:
     "3xpr" "1.6.10"
     crypto-js "^4.1.1"
