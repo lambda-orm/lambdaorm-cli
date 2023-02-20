@@ -12,18 +12,22 @@ export class DropCommand implements CommandModule {
 		return args
 			.option('w', {
 				alias: 'workspace',
+				type: 'string',
 				describe: 'project path'
 			})
 			.option('s', {
 				alias: 'stage',
+				type: 'string',
 				describe: 'Name of stage'
 			})
 			.option('e', {
 				alias: 'envfile',
+				type: 'string',
 				describe: 'Read in a file of environment variables'
 			})
 			.option('o', {
 				alias: 'output',
+				type: 'string',
 				describe: 'Generates the queries but does not apply'
 			})
 			.option('f', {

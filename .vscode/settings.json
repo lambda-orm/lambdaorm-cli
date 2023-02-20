@@ -1,8 +1,8 @@
 {
-	"eslint.alwaysShowStatus": true,
-	"editor.formatOnSave": true,
 	"eslint.format.enable": true,
-	"eslint.run": "onSave",
+  "editor.codeActionsOnSave": {
+    "source.fixAll.eslint": true
+  },
 	"editor.tabSize": 2,
 	"editor.insertSpaces": false,
 	"cSpell.words": [

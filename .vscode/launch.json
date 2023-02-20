@@ -58,6 +58,21 @@
 			]
 		},
 		{
+			"name": "lab 01 update only-model",
+			"type": "node",
+			"request": "launch",
+			"skipFiles": [
+				"<node_internals>/**"
+			],
+			"program": "${workspaceFolder}/src/index.ts",
+			"args": [
+				"update",
+				"-w",
+				"lab/lab_01",
+				"--only-model"				
+			]
+		},
+		{
 			"name": "lab 01 sync",
 			"type": "node",
 			"request": "launch",
