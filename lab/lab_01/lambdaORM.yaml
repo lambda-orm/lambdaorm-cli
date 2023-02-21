@@ -1,7 +1,3 @@
-app:
-  src: src
-  data: data
-  model: model
 entities:
   - name: Countries
     primaryKey: ["iso3"]
@@ -58,4 +54,12 @@ stages:
   - name: default
     sources:
       - name: test
-views: [] 
+views: []
+app:
+  paths:
+    src: src
+    data: data
+    model: model
+  start: []
+  end: []
+  listeners: []
