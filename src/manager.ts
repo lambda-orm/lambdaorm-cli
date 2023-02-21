@@ -25,11 +25,11 @@ export class Manager {
 
 	public async createStructure (schema: Schema) {
 		// create initial structure
-		await h3lp.fs.create(path.join(this.orm.workspace, schema.app.src))
-		await h3lp.fs.create(path.join(this.orm.workspace, schema.app.data))
+		await h3lp.fs.create(path.join(this.orm.workspace, schema.app.paths.src))
+		await h3lp.fs.create(path.join(this.orm.workspace, schema.app.paths.data))
 
 		// if the sintaxis.d.ts does not exist create it
-		const sintaxisPath = path.join(this.orm.workspace, schema.app.src, 'sintaxis.d.ts')
+		const sintaxisPath = path.join(this.orm.workspace, schema.app.paths.src, 'sintaxis.d.ts')
 		if (!await h3lp.fs.exists(sintaxisPath)) {
 			await h3lp.fs.copy(path.join(__dirname, './sintaxis.d.ts'), sintaxisPath)
 		}
@@ -294,7 +294,7 @@ export class Manager {
 		// const schema = schemas[p] as Schema
 		const references: string[] = []
 		const content = this.getModelContent(schema)
-		const modelsPath = path.join(this.orm.workspace, schema.app.src, schema.app.model)
+		const modelsPath = path.join(this.orm.workspace, schema.app.paths.src, schema.app.paths.model)
 		h3lp.fs.create(modelsPath)
 		const schemaPath = path.join(modelsPath, 'model.ts')
 		references.push('model')
