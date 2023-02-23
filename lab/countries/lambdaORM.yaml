@@ -1,55 +1,58 @@
-entities:
-  - name: Countries
-    primaryKey:
-      - iso3
-    uniqueKey:
-      - name
-    properties:
-      - name: name
-        required: true
-      - name: iso3
-        required: true
-        length: 3
-    relations:
-      - name: states
-        type: manyToOne
-        composite: true
-        from: iso3
-        entity: States
-        to: countryCode
-  - name: States
-    primaryKey:
-      - id
-    uniqueKey:
-      - countryCode
-      - name
-    properties:
-      - name: id
-        type: integer
-        required: true
-      - name: name
-        required: true
-      - name: countryCode
-        required: true
-        length: 3
-    relations:
-      - name: country
-        from: countryCode
-        entity: Countries
-        to: iso3
-mappings:
-  - name: default
-sources:
-  - name: db1
-    dialect: MySQL
-    mapping: default
-    connection: ${CNN_MySQL}
+model:
+  enums: []
+  entities:
+    - name: Countries
+      primaryKey:
+        - iso3
+      uniqueKey:
+        - name
+      properties:
+        - name: name
+          required: true
+        - name: iso3
+          required: true
+          length: 3
+      relations:
+        - name: states
+          type: manyToOne
+          composite: true
+          from: iso3
+          entity: States
+          to: countryCode
+    - name: States
+      primaryKey:
+        - id
+      uniqueKey:
+        - countryCode
+        - name
+      properties:
+        - name: id
+          type: integer
+          required: true
+        - name: name
+          required: true
+        - name: countryCode
+          required: true
+          length: 3
+      relations:
+        - name: country
+          from: countryCode
+          entity: Countries
+          to: iso3
+data:
+  mappings:
+    - name: default
+  sources:
+    - name: db1
+      dialect: MySQL
+      mapping: default
+      connection: ${CNN_MySQL}
 stages:
   - name: default
     sources:
       - name: db1
 app:
-  src: src
-  data: data
-  model: model
-enums: []
+  paths:
+    src: src
+    data: data
+    model: model

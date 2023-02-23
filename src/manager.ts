@@ -61,8 +61,8 @@ export class Manager {
 	}
 
 	public async addDialects (schema: Schema) {
-		for (const p in schema.sources) {
-			const source = schema.sources[p]
+		for (const p in schema.data.sources) {
+			const source = schema.data.sources[p]
 			// if the library is not installed locally corresponding to the dialect it will be installed
 			const libs = this.getLibs(source.dialect)
 			for (const p in libs) {
@@ -143,30 +143,30 @@ export class Manager {
 
 	public completeSchema (_schema: Schema, sourceName?: string, dialect?: string, connection?: any): Schema {
 		const schema:Schema = h3lp.obj.clone(_schema)
-		if (schema.entities === undefined) {
-			schema.entities = []
+		if (schema.model.entities === undefined) {
+			schema.model.entities = []
 		}
-		if (schema.enums === undefined) {
-			schema.enums = []
+		if (schema.model.enums === undefined) {
+			schema.model.enums = []
 		}
-		if (schema.sources === undefined) {
-			schema.sources = []
+		if (schema.data.sources === undefined) {
+			schema.data.sources = []
 		}
 		let source:any
 		if (sourceName !== undefined) {
-			source = schema.sources.find(p => p.name === sourceName)
+			source = schema.data.sources.find(p => p.name === sourceName)
 			if (source === undefined) {
 				throw Error(`source ${sourceName} not found`)
 			}
-		} else if (schema.sources.length === 1) {
-			source = schema.sources[0]
+		} else if (schema.data.sources.length === 1) {
+			source = schema.data.sources[0]
 		} else {
 			// If the database is not defined, it creates it.
 			if (connection === undefined) {
 				connection = this.defaultConnection(dialect || Dialect.MySQL)
 			}
 			source = { name: 'test', dialect: dialect || Dialect.MySQL, mapping: source, connection }
-			schema.sources.push(source)
+			schema.data.sources.push(source)
 		}
 		// if database is defined, update dialect if applicable
 		if ((dialect !== undefined && source.dialect !== dialect) || (source.dialect === undefined)) {
@@ -179,20 +179,20 @@ export class Manager {
 			source.connection = this.defaultConnection(source.dialect)
 		}
 		// set the mapping if it was not set
-		if (schema.mappings === undefined) {
-			schema.mappings = []
+		if (schema.data.mappings === undefined) {
+			schema.data.mappings = []
 		}
 		if (source.mapping === undefined) {
-			if (schema.mappings.length > 0) {
-				source.mapping = schema.mappings[0].name
+			if (schema.data.mappings.length > 0) {
+				source.mapping = schema.data.mappings[0].name
 			} else {
 				source.mapping = source.name
 			}
 		}
 		// if the mapping does not exist it creates it
-		const mapping = schema.mappings.find(p => p.name === source.mapping)
+		const mapping = schema.data.mappings.find(p => p.name === source.mapping)
 		if (mapping === undefined) {
-			schema.mappings.push({ name: source.mapping, entities: [] })
+			schema.data.mappings.push({ name: source.mapping, entities: [] })
 		}
 		// if the stage does not exist, create it
 		if (schema.stages === undefined) {
@@ -299,8 +299,8 @@ export class Manager {
 		const schemaPath = path.join(modelsPath, 'model.ts')
 		references.push('model')
 		await h3lp.fs.write(schemaPath, content)
-		for (const q in schema.entities) {
-			const entity = schema.entities[q]
+		for (const q in schema.model.entities) {
+			const entity = schema.model.entities[q]
 			if (entity.abstract) continue
 			const singular = entity.singular ? entity.singular : h3lp.str.singular(entity.name)
 			const repositoryPath = path.join(modelsPath, `repository${singular}.ts`)
@@ -356,9 +356,9 @@ export class Manager {
 		lines.push('// THIS FILE IS NOT EDITABLE, IS MANAGED BY LAMBDA ORM')
 		lines.push('import { Queryable } from \'lambdaorm\'')
 
-		if (source.enums) {
-			for (const p in source.enums) {
-				const _enum = source.enums[p]
+		if (source.model.enums) {
+			for (const p in source.model.enums) {
+				const _enum = source.model.enums[p]
 				lines.push(`export enum ${_enum.name}{`)
 
 				for (let j = 0; j < _enum.values.length; j++) {
@@ -374,9 +374,9 @@ export class Manager {
 			}
 		}
 
-		if (source.entities) {
-			for (const p in source.entities) {
-				const entity = source.entities[p]
+		if (source.model.entities) {
+			for (const p in source.model.entities) {
+				const entity = source.model.entities[p]
 				const singular = entity.singular ? entity.singular : h3lp.str.singular(entity.name)
 				const _abstract = entity.abstract ? ' abstract ' : ' '
 				const _extends = entity.extends ? ' extends ' + h3lp.str.singular(entity.extends) + ' ' : ' '
@@ -409,7 +409,7 @@ export class Manager {
 				}
 				for (const q in entity.relations) {
 					const relation = entity.relations[q]
-					const relationEntity = source.entities.find(p => p.name === relation.entity) as Entity
+					const relationEntity = source.model.entities.find(p => p.name === relation.entity) as Entity
 					if (relationEntity === undefined) {
 						throw new Error(`Not exists ${relation.entity} relation in ${entity.name} entity`)
 					}
@@ -437,7 +437,7 @@ export class Manager {
 				}
 				for (const q in entity.relations) {
 					const relation = entity.relations[q]
-					const relationEntity = source.entities.find(p => p.name === relation.entity) as Entity
+					const relationEntity = source.model.entities.find(p => p.name === relation.entity) as Entity
 					const relationEntitySingularName = relationEntity.singular ? relationEntity.singular : h3lp.str.singular(relationEntity.name)
 					switch (relation.type) {
 					case 'oneToMany':
@@ -453,8 +453,8 @@ export class Manager {
 				}
 				lines.push('}')
 			}
-			for (const p in source.entities) {
-				const entity = source.entities[p]
+			for (const p in source.model.entities) {
+				const entity = source.model.entities[p]
 				if (!entity.abstract) {
 					const singular = entity.singular ? entity.singular : h3lp.str.singular(entity.name)
 					lines.push(`export let ${entity.name}: Queryable<Qry${singular}>`)

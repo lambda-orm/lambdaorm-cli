@@ -1,75 +1,71 @@
-app:
-  src: src
-  data: data
-  model: model
-entities:
-  - name: Positions
-    abstract: true
-    properties:
-      - name: latitude
-        length: 16
-      - name: longitude
-        length: 16
-  - name: Countries
-    extends: Positions
-    primaryKey:
-      - iso3
-    uniqueKey:
-      - name
-    properties:
-      - name: name
-        length: 127
-        required: true
-      - name: iso3
-        length: 3
-        required: true
-    relations:
-      - name: states
-        type: manyToOne
-        composite: true
-        from: iso3
-        entity: States
-        to: countryCode
-  - name: States
-    extends: Positions
-    primaryKey:
-      - id
-    uniqueKey:
-      - countryCode
-      - name
-    properties:
-      - name: id
-        type: integer
-        required: true
-      - name: name
-        length: 127
-        required: true
-      - name: countryCode
-        required: true
-        length: 3
-    relations:
-      - name: country
-        from: countryCode
-        entity: Countries
-        to: iso3
-enums: []
-sources:
-  - name: lab-countries
-    dialect: mysql
-    mapping: lab-countries
-    connection:
-      host: localhost
-      port: 3306
-      user: test
-      password: test
-      database: test
-      multipleStatements: true
-      waitForConnections: true
-      connectionLimit: 10
-      queueLimit: 0
-mappings:
-  - name: lab-countries
-    entities: []
+model:
+  entities:
+    - name: Positions
+      abstract: true
+      properties:
+        - name: latitude
+          length: 16
+        - name: longitude
+          length: 16
+    - name: Countries
+      extends: Positions
+      primaryKey:
+        - iso3
+      uniqueKey:
+        - name
+      properties:
+        - name: name
+          length: 127
+          required: true
+        - name: iso3
+          length: 3
+          required: true
+      relations:
+        - name: states
+          type: manyToOne
+          composite: true
+          from: iso3
+          entity: States
+          to: countryCode
+    - name: States
+      extends: Positions
+      primaryKey:
+        - id
+      uniqueKey:
+        - countryCode
+        - name
+      properties:
+        - name: id
+          type: integer
+          required: true
+        - name: name
+          length: 127
+          required: true
+        - name: countryCode
+          required: true
+          length: 3
+      relations:
+        - name: country
+          from: countryCode
+          entity: Countries
+          to: iso3
+data:
+  mappings:
+    - name: lab-countries
+  sources:
+    - name: lab-countries
+      dialect: MySQL
+      mapping: lab-countries
+      connection:
+        host: localhost
+        port: 3306
+        user: test
+        password: test
+        database: test
+        multipleStatements: true
+        waitForConnections: true
+        connectionLimit: 10
+        queueLimit: 0
 stages:
   - name: default
     sources:

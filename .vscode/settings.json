@@ -19,10 +19,12 @@
 		"lastname",
 		"lpad",
 		"ltrim",
+		"MYSQL",
 		"northwind",
 		"nullable",
 		"oracledb",
 		"rpad",
-		"rtrim"
+		"rtrim",
+		"sqlite"
 	]
 }
