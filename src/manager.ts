@@ -143,15 +143,7 @@ export class Manager {
 
 	public completeSchema (_schema: Schema, sourceName?: string, dialect?: string, connection?: any): Schema {
 		const schema:Schema = h3lp.obj.clone(_schema)
-		if (schema.model.entities === undefined) {
-			schema.model.entities = []
-		}
-		if (schema.model.enums === undefined) {
-			schema.model.enums = []
-		}
-		if (schema.data.sources === undefined) {
-			schema.data.sources = []
-		}
+		this.orm.schema.complete(schema)
 		let source:any
 		if (sourceName !== undefined) {
 			source = schema.data.sources.find(p => p.name === sourceName)

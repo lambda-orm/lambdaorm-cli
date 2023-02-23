@@ -151,6 +151,38 @@
 			]
 		},
 		{
+			"name": "lab 01 execute Query",
+			"type": "node",
+			"request": "launch",
+			"skipFiles": [
+				"<node_internals>/**"
+			],
+			"program": "${workspaceFolder}/src/index.ts",
+			"args": [
+				"execute",
+				"-w",
+				"lab/lab_01",
+				"-q",
+				"Countries.page(1,10).include(p=>p.states)"			
+			]
+		},
+		{
+			"name": "lab 01 import",
+			"type": "node",
+			"request": "launch",
+			"skipFiles": [
+				"<node_internals>/**"
+			],
+			"program": "${workspaceFolder}/src/index.ts",
+			"args": [
+				"import",
+				"-w",
+				"lab/lab_01",
+				"-d",
+				"./default-export.json"			
+			]
+		},
+		{
 			"name": "lab 01 drop",
 			"type": "node",
 			"request": "launch",
