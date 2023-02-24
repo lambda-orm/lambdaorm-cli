@@ -63,10 +63,10 @@ data:
       dialect: PostgreSQL
       mapping: mapping2
       connection: ${CNN_POSTGRES}
-stages:
-  - name: stage1
-    sources:
-      - name: source1
-  - name: stage2
-    sources:
-      - name: source2
+  stages:
+    - name: stage1
+      sources:
+        - name: source1
+    - name: stage2
+      sources:
+        - name: source2

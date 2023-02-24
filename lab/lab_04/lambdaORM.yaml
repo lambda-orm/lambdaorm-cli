@@ -45,10 +45,10 @@ data:
       dialect: PostgreSQL
       mapping: default
       connection: ${CNN_POSTGRES}
-stages:
-  - name: default
-    sources:
-      - name: source1
-        condition: entity == "Countries"
-      - name: source2
-        condition: entity == "States"
+  stages:
+    - name: default
+      sources:
+        - name: source1
+          condition: entity == "Countries"
+        - name: source2
+          condition: entity == "States"

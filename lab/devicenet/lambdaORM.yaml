@@ -338,7 +338,8 @@ data:
       mapping: default
       dialect: PostgreSQL
       connection: ${CNN_POSTGRES}
-stages:
+  stages:
   - name: default
     sources:
       - name: main
+

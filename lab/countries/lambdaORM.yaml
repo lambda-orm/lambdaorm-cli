@@ -47,7 +47,7 @@ data:
       dialect: MySQL
       mapping: default
       connection: ${CNN_MySQL}
-stages:
+  stages:
   - name: default
     sources:
       - name: db1

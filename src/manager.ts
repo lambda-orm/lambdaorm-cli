@@ -187,11 +187,11 @@ export class Manager {
 			schema.data.mappings.push({ name: source.mapping, entities: [] })
 		}
 		// if the stage does not exist, create it
-		if (schema.stages === undefined) {
-			schema.stages = []
+		if (schema.data.stages === undefined) {
+			schema.data.stages = []
 		}
-		if (schema.stages.length === 0) {
-			schema.stages.push({ name: 'default', sources: [{ name: source.name }] })
+		if (schema.data.stages.length === 0) {
+			schema.data.stages.push({ name: 'default', sources: [{ name: source.name }] })
 		}
 		return schema
 	}

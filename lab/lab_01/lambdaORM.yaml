@@ -51,7 +51,7 @@ data:
         waitForConnections: true
         connectionLimit: 10
         queueLimit: 0
-stages:
+  stages:
   - name: default
     sources:
       - name: test

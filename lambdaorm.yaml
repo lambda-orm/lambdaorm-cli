@@ -66,7 +66,7 @@ data:
         waitForConnections: true
         connectionLimit: 10
         queueLimit: 0
-stages:
-  - name: default
-    sources:
-      - name: lab-countries
+  stages:
+    - name: default
+      sources:
+        - name: lab-countries

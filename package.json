@@ -28,7 +28,7 @@
 	"dependencies": {
 		"h3lp": "1.2.4",
 		"js-yaml": "^4.1.0",
-		"lambdaorm": "0.4.18-beta",
+		"lambdaorm": "0.4.19-beta",
 		"yargs": "^17.6.2",
 		"dotenv": "^16.0.3",
 		"mongodb": "^4.13.0",
