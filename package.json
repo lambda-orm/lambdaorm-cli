@@ -1,6 +1,6 @@
 {
 	"name": "lambdaorm-cli",
-	"version": "0.4.16-beta",
+	"version": "0.4.18-beta",
 	"description": "The lambdaorm command line interface",
 	"author": "Flavio Lionel Rita <flaviolrita@hotmail.com>",
 	"license": "MIT",
@@ -26,9 +26,9 @@
 		"release": "grunt release"
 	},
 	"dependencies": {
-		"h3lp": "1.2.3",
+		"h3lp": "1.2.4",
 		"js-yaml": "^4.1.0",
-		"lambdaorm": "0.4.16-beta",
+		"lambdaorm": "0.4.18-beta",
 		"yargs": "^17.6.2",
 		"dotenv": "^16.0.3",
 		"mongodb": "^4.13.0",
