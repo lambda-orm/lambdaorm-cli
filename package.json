@@ -1,6 +1,6 @@
 {
 	"name": "lambdaorm-cli",
-	"version": "0.4.21-beta",
+	"version": "0.4.22-beta",
 	"description": "The lambdaorm command line interface",
 	"author": "Flavio Lionel Rita <flaviolrita@hotmail.com>",
 	"license": "MIT",
@@ -26,17 +26,17 @@
 		"release": "grunt release"
 	},
 	"dependencies": {
+		"dotenv": "^16.0.3",
 		"h3lp": "1.2.4",
 		"js-yaml": "^4.1.0",
-		"lambdaorm": "0.4.21-beta",
-		"yargs": "^17.6.2",
-		"dotenv": "^16.0.3",
+		"lambdaorm": "0.4.22-beta",
 		"mongodb": "^4.13.0",
 		"mysql2": "^3.0.1",
 		"oracledb": "^5.5.0",
 		"pg": "^8.8.0",
 		"sql.js": "^1.8.0",
-		"tedious": "^15.1.2"
+		"tedious": "^15.1.2",
+		"yargs": "^17.6.2"
 	},
 	"devDependencies": {
 		"@types/jest": "^29.4.0",
@@ -48,6 +48,7 @@
 		"eslint": "^8.32.0",
 		"eslint-config-standard": "^17.0.0",
 		"eslint-plugin-import": "^2.27.5",
+		"eslint-plugin-n": "^15.6.1",
 		"eslint-plugin-node": "^11.1.0",
 		"eslint-plugin-promise": "^6.1.1",
 		"grunt": "^1.5.3",
