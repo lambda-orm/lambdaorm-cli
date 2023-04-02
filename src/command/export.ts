@@ -26,6 +26,9 @@ export class ExportCommand implements CommandModule {
 			.option('t', {
 				alias: 'target',
 				describe: 'Destination file with export data.'
+			}).option('f', {
+				alias: 'force',
+				describe: 'If there is an error in a statement, continue executing the next statements'
 			})
 	}
 
@@ -34,6 +37,7 @@ export class ExportCommand implements CommandModule {
 		const stageName = args.stage as string
 		const target = path.resolve(process.cwd(), args.target as string || '.')
 		const envfile = args.envfile as string
+		const force = args.force !== undefined
 
 		if (envfile) {
 			const fullPath = path.resolve(process.cwd(), envfile)
@@ -46,7 +50,7 @@ export class ExportCommand implements CommandModule {
 			await orm.init(schema)
 			const stage = orm.schema.stage.get(stageName)
 			const exportFile = path.join(target, stage.name + '-export.json')
-			const dataExport = orm.stage.export({ stage: stage.name })
+			const dataExport = orm.stage.export({ stage: stage.name, tryAllCan: force })
 			const data = await dataExport.execute()
 			await h3lp.fs.write(exportFile, JSON.stringify(data))
 		} catch (error) {

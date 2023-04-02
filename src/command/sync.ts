@@ -27,9 +27,7 @@ export class SyncCommand implements CommandModule {
 				describe: 'Generates the queries but does not apply'
 			}).option('f', {
 				alias: 'force',
-				describe: 'force to try to run all scripts',
-				type: 'boolean',
-				default: false
+				describe: 'If there is an error in a statement, continue executing the next statements'
 			})
 	}
 
@@ -38,7 +36,7 @@ export class SyncCommand implements CommandModule {
 		const stageName = args.stage as string
 		const output = args.output as string
 		const envfile = args.envfile as string
-		const force = args.force as boolean
+		const force = args.force !== undefined
 		if (envfile) {
 			const fullPath = path.resolve(process.cwd(), envfile)
 			dotenv.config({ path: fullPath, override: true })
@@ -49,10 +47,10 @@ export class SyncCommand implements CommandModule {
 			await orm.init(schema)
 			const stage = orm.schema.stage.get(stageName)
 			if (output) {
-				const sentence = await orm.stage.sync({ stage: stage.name, tryAllCan: force }).sentence()
+				const sentence = await orm.stage.sync({ stage: stage.name }).sentence()
 				console.log(sentence)
 			} else {
-				await orm.stage.sync({ stage: stage.name }).execute()
+				await orm.stage.sync({ stage: stage.name, tryAllCan: force }).execute()
 			}
 		} catch (error) {
 			console.error(`error: ${error}`)

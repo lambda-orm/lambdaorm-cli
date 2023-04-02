@@ -367,6 +367,45 @@
 				"lab/countries/.env"
 			]
 		},
+		// collections ----------------------------------------------------------------------------------
+		{
+			"name": "collections sync",
+			"type": "node",
+			"request": "launch",
+			"skipFiles": [
+				"<node_internals>/**"
+			],
+			"program": "${workspaceFolder}/src/index.ts",
+			"args": [
+				"sync",
+				"-w",
+				"lab/collections",
+				"-e",
+				"lab/collections/.env",
+				"-s",
+				"default",
+				"-f"					
+			]
+		},
+		{
+			"name": "collections drop",
+			"type": "node",
+			"request": "launch",
+			"skipFiles": [
+				"<node_internals>/**"
+			],
+			"program": "${workspaceFolder}/src/index.ts",
+			"args": [
+				"drop",
+				"-w",
+				"lab/collections",
+				"-e",
+				"lab/collections/.env",
+				"-s",
+				"default",
+				"-f"	
+			]
+		},
 		// devicenet-----------------------------------------------------------------------------------------------
 		{
 			"name": "devicenet init",
