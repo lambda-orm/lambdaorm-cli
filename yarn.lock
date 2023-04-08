@@ -1776,12 +1776,13 @@
     "@typescript-eslint/types" "5.51.0"
     "eslint-visitor-keys" "^3.3.0"
 
-"3xpr@1.7.10":
-  "integrity" "sha512-4LUh10csty2w9JUBr1mn69mWIwaR7KzARsIH+P608FYO6CMjZCGoIn1ScVeBVRJGm3+NOcdT1SIXlYmh1cYWsw=="
-  "resolved" "https://registry.npmjs.org/3xpr/-/3xpr-1.7.10.tgz"
-  "version" "1.7.10"
+"3xpr@1.8.0":
+  "integrity" "sha512-3bC6+7R3WE158SNPs9HyiJv4+MPJwIUedQhXss4OUithQ4ntpQg6SqEFOlKXrfDNKS6W8hjVrBe3wH05ux3osw=="
+  "resolved" "https://registry.npmjs.org/3xpr/-/3xpr-1.8.0.tgz"
+  "version" "1.8.0"
   dependencies:
-    "h3lp" "1.2.4"
+    "h3lp" "1.2.8"
+    "json-light" "0.1.0"
 
 "abbrev@1":
   "integrity" "sha512-nne9/IiQ/hzIhY6pdDnbBtz7DjPTKrY00P/zvPSm5pOFkl6xuGrGnXn/VtTNNfNtAfZ9/1RtehkszU9qcTii0Q=="
@@ -3287,11 +3288,6 @@
   dependencies:
     "duplexer" "^0.1.1"
 
-"h3lp@1.2.4":
-  "integrity" "sha512-9B3T4nRNmoQxs1piGXdqWEUxl4h0q8LHnx65Cn9bmMxcIdD8OWiO5eDV+6mt85Yz6gkl3IOxcdSpf1a2ZPjIxg=="
-  "resolved" "https://registry.npmjs.org/h3lp/-/h3lp-1.2.4.tgz"
-  "version" "1.2.4"
-
 "h3lp@1.2.8":
   "integrity" "sha512-zwEK25WRVNft6aTe7dkmZryGVYP/Ezz5FOuS8TIw83rZqdxvAlVfva8naA/wIyd8pPLeTKIEJzbqhSVh57TFWg=="
   "resolved" "https://registry.npmjs.org/h3lp/-/h3lp-1.2.8.tgz"
@@ -4114,6 +4110,13 @@
   "resolved" "https://registry.npmjs.org/jsesc/-/jsesc-2.5.2.tgz"
   "version" "2.5.2"
 
+"json-light@0.1.0":
+  "integrity" "sha512-5M5iyyG1Cp2GP7HMPfdZ5Lc0BJ8LUw6cWlZidH9PF89hJTaU2VfTs/9sQXhHeKfwubhfTvGrRTr+fgb8Nu7Xhw=="
+  "resolved" "https://registry.npmjs.org/json-light/-/json-light-0.1.0.tgz"
+  "version" "0.1.0"
+  dependencies:
+    "minimist" "^1.2.6"
+
 "json-parse-even-better-errors@^2.3.0":
   "integrity" "sha512-xyFwyhro/JEof6Ghe2iz2NcXoj2sloNsWr/XsERDK/oiPCfaNhl5ONfp+jQdAZRQQ0IJWNzH9zIZF7li91kh2w=="
   "resolved" "https://registry.npmjs.org/json-parse-even-better-errors/-/json-parse-even-better-errors-2.3.1.tgz"
@@ -4205,15 +4208,16 @@
   "resolved" "https://registry.npmjs.org/kleur/-/kleur-3.0.3.tgz"
   "version" "3.0.3"
 
-"lambdaorm@0.4.35-beta":
-  "integrity" "sha512-WcyhlBjX7Qul2FbNTUostIwOwT1MoRYXfqReK8i2E3axBVbhnLRW4I0cTWgRMKKzz/KvwNvRHa6dpMsIyQ/ZrA=="
-  "resolved" "https://registry.npmjs.org/lambdaorm/-/lambdaorm-0.4.35-beta.tgz"
-  "version" "0.4.35-beta"
+"lambdaorm@0.4.36-beta":
+  "integrity" "sha512-0LHmMItCn+dthCh/3wCN8VpKkrv8VTaKRltyUCoknRfwHdNfyIlcK5lPS3AR3Zo5V7LAn5X4mMBJyuQmKpXpPQ=="
+  "resolved" "https://registry.npmjs.org/lambdaorm/-/lambdaorm-0.4.36-beta.tgz"
+  "version" "0.4.36-beta"
   dependencies:
-    "3xpr" "1.7.10"
+    "3xpr" "1.8.0"
     "crypto-js" "^4.1.1"
     "h3lp" "1.2.8"
     "js-yaml" "^4.1.0"
+    "json-light" "0.1.0"
     "luxon" "^3.2.1"
     "sqlstring" "^2.3.3"
 
