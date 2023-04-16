@@ -1,76 +1,80 @@
 import { Dialect, Schema, Entity } from 'lambdaorm'
-import { helper } from '../helper'
+import { helper } from '../../application'
+import { LanguagePort } from '../../domain'
 import path from 'path'
-export class LanguageService {
-	// eslint-disable-next-line no-useless-constructor
-	constructor (private readonly workspace:string) {}
 
-	public async createStructure (schema: Schema) {
+export class NodeLanguageAdapter implements LanguagePort {
+	public get name (): string {
+		return 'node'
+	}
+	// eslint-disable-next-line no-useless-constructor
+
+	public async createStructure (workspace:string, schema: Schema): Promise<void> {
 		// create initial structure
-		await helper.fs.create(path.join(this.workspace, schema.app.paths.src))
-		await helper.fs.create(path.join(this.workspace, schema.app.paths.data))
+		await helper.fs.create(path.join(workspace, schema.app.paths.src))
+		await helper.fs.create(path.join(workspace, schema.app.paths.data))
 
 		// if the sintaxis.d.ts does not exist create it
-		const sintaxisPath = path.join(this.workspace, schema.app.paths.src, 'sintaxis.d.ts')
+		const sintaxisPath = path.join(workspace, schema.app.paths.src, 'sintaxis.d.ts')
 		if (!await helper.fs.exists(sintaxisPath)) {
 			await helper.fs.copy(path.join(__dirname, './../domain/sintaxis.d.ts'), sintaxisPath)
 		}
 
 		// if the package.json does not exist create it
-		const packagePath = path.join(this.workspace, 'package.json')
+		const packagePath = path.join(workspace, 'package.json')
 		if (!await helper.fs.exists(packagePath)) {
 			await helper.fs.write(packagePath, JSON.stringify({ dependencies: {} }, null, 2))
 		}
 
 		// if there is no tsconfig.json create it
-		const tsconfigPath = path.join(this.workspace, 'tsconfig.json')
+		const tsconfigPath = path.join(workspace, 'tsconfig.json')
 		if (!await helper.fs.exists(tsconfigPath)) {
 			const tsconfigContent = this.getTypescriptContent()
 			await helper.fs.write(tsconfigPath, JSON.stringify(tsconfigContent, null, 2))
 		}
 
 		// install typescript if not installed.
-		const typescriptLib = await this.getLocalPackage('typescript', this.workspace)
+		const typescriptLib = await this.getLocalPackage('typescript', workspace)
 		if (typescriptLib === '') {
-			await helper.cli.exec('npm install typescript -D', this.workspace)
+			await helper.cli.exec('npm install typescript -D', workspace)
 		}
 
 		// install lambdaorm if it is not installed.
-		const lambdaormLib = await this.getLocalPackage('lambdaorm', this.workspace)
+		const lambdaormLib = await this.getLocalPackage('lambdaorm', workspace)
 		if (lambdaormLib === '') {
-			await helper.cli.exec('npm install lambdaorm', this.workspace)
+			await helper.cli.exec('npm install lambdaorm', workspace)
 		}
 	}
 
-	public async addDialects (schema: Schema) {
+	public async addDialects (workspace:string, schema: Schema) : Promise<void> {
 		for (const p in schema.data.sources) {
 			const source = schema.data.sources[p]
 			// if the library is not installed locally corresponding to the dialect it will be installed
 			const libs = this.getLibs(source.dialect)
 			for (const p in libs) {
 				const lib = libs[p]
-				const localLib = await this.getLocalPackage(lib, this.workspace)
+				const localLib = await this.getLocalPackage(lib, workspace)
 				if (localLib === '') {
-					await helper.cli.exec(`npm install ${lib}`, this.workspace)
+					await helper.cli.exec(`npm install ${lib}`, workspace)
 				}
 			}
 		}
 	}
 
-	public async localVersion (): Promise<string> {
-		return await this.getLocalPackage('lambdaorm', process.cwd())
+	public async localVersion (workspace:string): Promise<string> {
+		return await this.getLocalPackage('lambdaorm', workspace)
 	}
 
-	public async buildModel (schema: Schema) {
+	public async buildModel (workspace:string, schema: Schema) : Promise<void> {
 		const content = this.getModelContent(schema)
-		const modelsPath = path.join(this.workspace, schema.app.paths.src, schema.app.paths.model)
+		const modelsPath = path.join(workspace, schema.app.paths.src, schema.app.paths.model)
 		helper.fs.create(modelsPath)
 		const schemaPath = path.join(modelsPath, 'model.ts')
 		await helper.fs.write(schemaPath, content)
 	}
 
-	public async buildRepositories (schema: Schema) {
-		const modelsPath = path.join(this.workspace, schema.app.paths.src, schema.app.paths.model)
+	public async buildRepositories (workspace:string, schema: Schema): Promise<void> {
+		const modelsPath = path.join(workspace, schema.app.paths.src, schema.app.paths.model)
 		helper.fs.create(modelsPath)
 		for (const q in schema.model.entities) {
 			const entity = schema.model.entities[q]

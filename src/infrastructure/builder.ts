@@ -1,3 +1,9 @@
 import { ApplicationService } from '../application'
-
-export const application = new ApplicationService()
+import { NodeLanguageAdapter } from './languages'
+export class ApplicationBuilder {
+	public build ():ApplicationService {
+		const application = new ApplicationService()
+		application.addLanguage(new NodeLanguageAdapter())
+		return application
+	}
+}
