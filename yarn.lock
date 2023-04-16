@@ -1776,13 +1776,13 @@
     "@typescript-eslint/types" "5.51.0"
     "eslint-visitor-keys" "^3.3.0"
 
-"3xpr@1.8.0":
-  "integrity" "sha512-3bC6+7R3WE158SNPs9HyiJv4+MPJwIUedQhXss4OUithQ4ntpQg6SqEFOlKXrfDNKS6W8hjVrBe3wH05ux3osw=="
-  "resolved" "https://registry.npmjs.org/3xpr/-/3xpr-1.8.0.tgz"
-  "version" "1.8.0"
+"3xpr@1.9.9":
+  "integrity" "sha512-pPtbxGCfb4myMR1TPdiu1WDfia4Lj4wzg8CnLRxsSR33t+bm9FU6H81a5yFSHc/49JWOryOSIy2j12zluc5+qQ=="
+  "resolved" "https://registry.npmjs.org/3xpr/-/3xpr-1.9.9.tgz"
+  "version" "1.9.9"
   dependencies:
     "h3lp" "1.2.8"
-    "json-light" "0.1.0"
+    "json-light" "0.2.0"
 
 "abbrev@1":
   "integrity" "sha512-nne9/IiQ/hzIhY6pdDnbBtz7DjPTKrY00P/zvPSm5pOFkl6xuGrGnXn/VtTNNfNtAfZ9/1RtehkszU9qcTii0Q=="
@@ -4110,10 +4110,10 @@
   "resolved" "https://registry.npmjs.org/jsesc/-/jsesc-2.5.2.tgz"
   "version" "2.5.2"
 
-"json-light@0.1.0":
-  "integrity" "sha512-5M5iyyG1Cp2GP7HMPfdZ5Lc0BJ8LUw6cWlZidH9PF89hJTaU2VfTs/9sQXhHeKfwubhfTvGrRTr+fgb8Nu7Xhw=="
-  "resolved" "https://registry.npmjs.org/json-light/-/json-light-0.1.0.tgz"
-  "version" "0.1.0"
+"json-light@0.2.0":
+  "integrity" "sha512-NUfK3BBntYXIUpdVZLLFNYGeGUklguUjYVusjMOJ3W3ACPh8Bne6SAFpTVuchC+FZk98xVq5WfhWAI1JYXEl2g=="
+  "resolved" "https://registry.npmjs.org/json-light/-/json-light-0.2.0.tgz"
+  "version" "0.2.0"
   dependencies:
     "minimist" "^1.2.6"
 
@@ -4208,16 +4208,16 @@
   "resolved" "https://registry.npmjs.org/kleur/-/kleur-3.0.3.tgz"
   "version" "3.0.3"
 
-"lambdaorm@0.4.36-beta":
-  "integrity" "sha512-0LHmMItCn+dthCh/3wCN8VpKkrv8VTaKRltyUCoknRfwHdNfyIlcK5lPS3AR3Zo5V7LAn5X4mMBJyuQmKpXpPQ=="
-  "resolved" "https://registry.npmjs.org/lambdaorm/-/lambdaorm-0.4.36-beta.tgz"
-  "version" "0.4.36-beta"
+"lambdaorm@0.5.0-beta":
+  "integrity" "sha512-ryK1cit5dARbDPVeJcZDnaquKHub5lFiKSc5iSiRAbLxXMUjE0ZClZuUAqzNnZ1p2P+qvvK+8K/7fo7zd/IsGQ=="
+  "resolved" "https://registry.npmjs.org/lambdaorm/-/lambdaorm-0.5.0-beta.tgz"
+  "version" "0.5.0-beta"
   dependencies:
-    "3xpr" "1.8.0"
+    "3xpr" "1.9.9"
     "crypto-js" "^4.1.1"
     "h3lp" "1.2.8"
     "js-yaml" "^4.1.0"
-    "json-light" "0.1.0"
+    "json-light" "0.2.0"
     "luxon" "^3.2.1"
     "sqlstring" "^2.3.3"
 

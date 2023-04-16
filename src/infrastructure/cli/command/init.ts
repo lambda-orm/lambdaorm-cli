@@ -1,8 +1,6 @@
 import { CommandModule, Argv, Arguments } from 'yargs'
 import path from 'path'
-import { Orm } from 'lambdaorm'
-import { h3lp } from 'h3lp'
-import { Manager } from '../manager'
+import { application } from '../../index'
 
 export class InitCommand implements CommandModule {
 	command = 'init'
@@ -35,21 +33,8 @@ export class InitCommand implements CommandModule {
 			const source:string|undefined = args.source as string
 			const dialect: string = args.dialect as string
 			const connection: string = args.connection as string
-			const orm = new Orm(workspace)
-			const manager = new Manager(orm)
-			// create workspace
-			await h3lp.fs.create(workspace)
-			// create config file if not exists
-			const sourceSchema = await orm.schema.get(workspace)
-			// complete schema config
-			const targetSchema = manager.completeSchema(sourceSchema, source, dialect, connection)
-			// write lambdaorm config
-			const configPath = path.join(workspace, 'lambdaORM.yaml')
-			await manager.writeSchema(configPath, targetSchema)
-			// create structure
-			await manager.createStructure(targetSchema)
-			// add libraries for dialect
-			await manager.addDialects(targetSchema)
+
+			await application.create(workspace, source, dialect, connection)
 		} catch (error) {
 			console.error(`error: ${error}`)
 		}

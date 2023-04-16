@@ -1,8 +1,7 @@
 /* eslint-disable no-mixed-spaces-and-tabs */
 import { CommandModule, Argv, Arguments } from 'yargs'
-import { Orm } from 'lambdaorm'
 import path from 'path'
-import { Manager } from '../manager'
+import { ormCli } from '../../ormCli'
 import dotenv from 'dotenv'
 
 export class ImportCommand implements CommandModule {
@@ -31,33 +30,14 @@ export class ImportCommand implements CommandModule {
 
 	async handler (args: Arguments) {
 		const workspace = path.resolve(process.cwd(), args.workspace as string || '.')
-		const stageName = args.stage as string
+		const stage = args.stage as string
 		const data = args.data || {}
 		const envfile = args.envfile as string
 
-		if (data === undefined) {
-			console.error('the data argument is required')
-			return
-		}
 		if (envfile) {
 			const fullPath = path.resolve(process.cwd(), envfile)
 			dotenv.config({ path: fullPath, override: true })
 		}
-		const orm = new Orm(workspace)
-
-		try {
-			const schema = await orm.schema.get(workspace)
-			await orm.init(schema)
-			const stage = orm.schema.stage.get(stageName)
-			const manager = new Manager(orm)
-			// read Data
-			const _data = await manager.readData(data)
- 			// import data
-			await orm.stage.import({ stage: stage.name }).execute(_data)
-		} catch (error) {
-			console.error(`error: ${error}`)
-		} finally {
-			await orm.end()
-		}
+		await ormCli.import(workspace, data, stage)
 	}
 }
