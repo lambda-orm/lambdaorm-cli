@@ -12,14 +12,17 @@ export class VersionCommand implements CommandModule {
 				alias: 'workspace',
 				type: 'string',
 				describe: 'project path.'
+			}).option('l', {
+				alias: 'language',
+				describe: 'develop language'
 			})
 	}
 
 	async handler (args: Arguments) {
 		const workspace = path.resolve(process.cwd(), args.workspace as string || '.')
-
+		const language = args.language as string || 'node'
 		const lambdaormCliVersion = await application.globalVersion()
-		const lambdaormVersion = await application.localVersion(workspace)
+		const lambdaormVersion = await application.localVersion(workspace, language)
 
 		if (lambdaormCliVersion) {
 			console.log(`Global lambdaorm cli version: ${lambdaormCliVersion}`)

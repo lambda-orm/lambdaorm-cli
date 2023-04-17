@@ -21,10 +21,10 @@ export class ApplicationService {
 		return languagePort
 	}
 
-	public async create (workspace:string, source?:string, dialect?:string, connection?:string): Promise<void> {
+	public async create (workspace:string, language:string, source?:string, dialect?:string, connection?:string): Promise<void> {
 		const orm = new Orm(workspace)
 		const schemaService = new SchemaService(orm)
-		const languageService = this.getLanguage()
+		const languageService = this.getLanguage(language)
 		// const manager = new Manager(orm)
 		// create workspace
 		await helper.fs.create(workspace)
@@ -41,9 +41,9 @@ export class ApplicationService {
 		await languageService.addDialects(workspace, targetSchema)
 	}
 
-	public async update (workspace:string, onlyModel:boolean): Promise<void> {
+	public async update (workspace:string, language:string, onlyModel:boolean): Promise<void> {
 		const orm = new Orm(workspace)
-		const languageService = this.getLanguage()
+		const languageService = this.getLanguage(language)
 		const schema = await orm.schema.get(workspace)
 		if (!onlyModel) {
 			// create structure
@@ -57,6 +57,20 @@ export class ApplicationService {
 		await languageService.buildModel(workspace, schema)
 		// write repositories
 		await languageService.buildRepositories(workspace, schema)
+	}
+
+	public async build (workspace:string, language:string, options:string[]): Promise<void> {
+		const orm = new Orm(workspace)
+		const languageService = this.getLanguage(language)
+		const schema = await orm.schema.get(workspace)
+		if (options.includes('model')) {
+			// write model
+			await languageService.buildModel(workspace, schema)
+		}
+		if (options.includes('repositories')) {
+			// write repositories
+			await languageService.buildRepositories(workspace, schema)
+		}
 	}
 
 	public async synchronize (workspace:string, stage?:string, output?:string, force = false): Promise<void> {
@@ -82,8 +96,8 @@ export class ApplicationService {
 		return this.getGlobalPackage('lambdaorm-cli')
 	}
 
-	public async localVersion (workspace:string): Promise<string> {
-		const languageService = this.getLanguage()
+	public async localVersion (workspace:string, language:string): Promise<string> {
+		const languageService = this.getLanguage(language)
 		return languageService.localVersion(workspace)
 	}
 

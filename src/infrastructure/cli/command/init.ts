@@ -13,6 +13,10 @@ export class InitCommand implements CommandModule {
 				default: 'my-project',
 				describe: 'project path.'
 			})
+			.option('l', {
+				alias: 'language',
+				describe: 'develop language'
+			})
 			.option('s', {
 				alias: 'source',
 				describe: 'Name of data source.'
@@ -30,11 +34,12 @@ export class InitCommand implements CommandModule {
 	async handler (args: Arguments) {
 		try {
 			const workspace = path.resolve(process.cwd(), args.workspace as string || '.')
+			const language = args.language as string || 'node'
 			const source:string|undefined = args.source as string
 			const dialect: string = args.dialect as string
 			const connection: string = args.connection as string
 
-			await application.create(workspace, source, dialect, connection)
+			await application.create(workspace, language, source, dialect, connection)
 		} catch (error) {
 			console.error(`error: ${error}`)
 		}

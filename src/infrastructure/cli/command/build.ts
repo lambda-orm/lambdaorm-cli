@@ -4,8 +4,8 @@ import { application } from '../../index'
 import path from 'path'
 
 export class UpdateCommand implements CommandModule {
-	command = 'update'
-	describe = 'Update workspace.'
+	command = 'build'
+	describe = 'build model, repositories'
 
 	builder (args: Argv) {
 		return args
@@ -13,23 +13,38 @@ export class UpdateCommand implements CommandModule {
 				alias: 'workspace',
 				type: 'string',
 				describe: 'project path.'
-			})
-			.option('l', {
+			}).option('l', {
 				alias: 'language',
 				describe: 'develop language'
-			})
-			.option('only-model', {
-				alias: 'onlyModel',
-				describe: 'update only model'
+			}).option('m', {
+				alias: 'model',
+				describe: 'build model'
+			}).option('r', {
+				alias: 'repositories',
+				describe: 'build repositories'
+			}).option('a', {
+				alias: 'all',
+				describe: 'build all'
 			})
 	}
 
 	async handler (args: Arguments) {
 		const workspace = path.resolve(process.cwd(), args.workspace as string || '.')
 		const language = args.language as string || 'node'
-		const onlyModel = args.onlyModel !== undefined
+		const model = args.model !== undefined
+		const repositories = args.repositories !== undefined
+		const all = args.all !== undefined
+
+		const options:string[] = []
+		if (model || all) {
+			options.push('model')
+		}
+		if (repositories || all) {
+			options.push('repositories')
+		}
+
 		try {
-			await application.update(workspace, language, onlyModel)
+			await application.build(workspace, language, options)
 		} catch (error) {
 			console.error(`error: ${error}`)
 		}
