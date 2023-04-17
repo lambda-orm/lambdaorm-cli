@@ -1776,13 +1776,13 @@
     "@typescript-eslint/types" "5.51.0"
     "eslint-visitor-keys" "^3.3.0"
 
-"3xpr@1.9.9":
-  "integrity" "sha512-pPtbxGCfb4myMR1TPdiu1WDfia4Lj4wzg8CnLRxsSR33t+bm9FU6H81a5yFSHc/49JWOryOSIy2j12zluc5+qQ=="
-  "resolved" "https://registry.npmjs.org/3xpr/-/3xpr-1.9.9.tgz"
-  "version" "1.9.9"
+"3xpr@1.9.10":
+  "integrity" "sha512-UoI+WpyAfKHdt7g4nX6uLjNrWsbwMJ7LfhygfGn7z7rIj7SDJK8b/G7O4o4cMC10LAnWISATz/fHCPXcRReqMA=="
+  "resolved" "https://registry.npmjs.org/3xpr/-/3xpr-1.9.10.tgz"
+  "version" "1.9.10"
   dependencies:
     "h3lp" "1.2.8"
-    "json-light" "0.2.0"
+    "typ3s" "0.0.2"
 
 "abbrev@1":
   "integrity" "sha512-nne9/IiQ/hzIhY6pdDnbBtz7DjPTKrY00P/zvPSm5pOFkl6xuGrGnXn/VtTNNfNtAfZ9/1RtehkszU9qcTii0Q=="
@@ -4110,13 +4110,6 @@
   "resolved" "https://registry.npmjs.org/jsesc/-/jsesc-2.5.2.tgz"
   "version" "2.5.2"
 
-"json-light@0.2.0":
-  "integrity" "sha512-NUfK3BBntYXIUpdVZLLFNYGeGUklguUjYVusjMOJ3W3ACPh8Bne6SAFpTVuchC+FZk98xVq5WfhWAI1JYXEl2g=="
-  "resolved" "https://registry.npmjs.org/json-light/-/json-light-0.2.0.tgz"
-  "version" "0.2.0"
-  dependencies:
-    "minimist" "^1.2.6"
-
 "json-parse-even-better-errors@^2.3.0":
   "integrity" "sha512-xyFwyhro/JEof6Ghe2iz2NcXoj2sloNsWr/XsERDK/oiPCfaNhl5ONfp+jQdAZRQQ0IJWNzH9zIZF7li91kh2w=="
   "resolved" "https://registry.npmjs.org/json-parse-even-better-errors/-/json-parse-even-better-errors-2.3.1.tgz"
@@ -4208,18 +4201,18 @@
   "resolved" "https://registry.npmjs.org/kleur/-/kleur-3.0.3.tgz"
   "version" "3.0.3"
 
-"lambdaorm@0.5.0-beta":
-  "integrity" "sha512-ryK1cit5dARbDPVeJcZDnaquKHub5lFiKSc5iSiRAbLxXMUjE0ZClZuUAqzNnZ1p2P+qvvK+8K/7fo7zd/IsGQ=="
-  "resolved" "https://registry.npmjs.org/lambdaorm/-/lambdaorm-0.5.0-beta.tgz"
-  "version" "0.5.0-beta"
+"lambdaorm@0.5.1-beta":
+  "integrity" "sha512-cAzzHTVgG6Z9UUHV+kXEjVCZsT9jPodj/QtzzfaBgTPx8D6iehTpQx52zl7Nxh2Npk6cKKwA+GlUJF7vjS68XA=="
+  "resolved" "https://registry.npmjs.org/lambdaorm/-/lambdaorm-0.5.1-beta.tgz"
+  "version" "0.5.1-beta"
   dependencies:
-    "3xpr" "1.9.9"
+    "3xpr" "1.9.10"
     "crypto-js" "^4.1.1"
     "h3lp" "1.2.8"
     "js-yaml" "^4.1.0"
-    "json-light" "0.2.0"
     "luxon" "^3.2.1"
     "sqlstring" "^2.3.3"
+    "typ3s" "0.0.2"
 
 "leven@^3.1.0":
   "integrity" "sha512-qsda+H8jTaUaN/x5vzW2rzc+8Rw4TAQ/4KjB46IwK5VH+IlVeeeje/EoZRpiXvIqjFgK84QffqPztGI3VBLG1A=="
@@ -5485,6 +5478,11 @@
   "version" "3.21.0"
   dependencies:
     "tslib" "^1.8.1"
+
+"typ3s@0.0.2":
+  "integrity" "sha512-AucwcRknwo3PQeQz8KRvh1IcbvFKTg+Cbu58T56zZY2xqeIbOOo7Fns7hBEnpY4ieCY0EgJogohvwT+xId2DNA=="
+  "resolved" "https://registry.npmjs.org/typ3s/-/typ3s-0.0.2.tgz"
+  "version" "0.0.2"
 
 "type-check@^0.4.0", "type-check@~0.4.0":
   "integrity" "sha512-XleUoc9uwGXqjWwXaUTZAmzMcFZ5858QA2vvx1Ur5xIcixXIP+8LnFDgRplU30us6teqdlskFfu+ae4K79Ooew=="
