@@ -1,3 +1,3 @@
 export * from './services/application'
-export * from '../infrastructure/ormCli'
+export * from './services/OrmCli'
 export * from './helper'

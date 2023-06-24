@@ -1,14 +1,14 @@
 import { Dialect, Orm, Schema } from 'lambdaorm'
-import { helper } from '../helper'
+import { Helper } from '../helper'
 import path from 'path'
 const yaml = require('js-yaml')
 
 export class SchemaService {
 	// eslint-disable-next-line no-useless-constructor
-	constructor (private readonly orm:Orm) {}
+	constructor (private readonly orm:Orm, private readonly helper:Helper) {}
 
 	public completeSchema (_schema: Schema, sourceName?: string, dialect?: string, connection?: any): Schema {
-		const schema:Schema = helper.obj.clone(_schema)
+		const schema:Schema = this.helper.obj.clone(_schema)
 		this.orm.schema.complete(schema)
 		let source:any
 		if (sourceName !== undefined) {
@@ -135,10 +135,10 @@ export class SchemaService {
 	public async writeSchema (configPath:string, schema: Schema): Promise<void> {
 		if (path.extname(configPath) === '.yaml' || path.extname(configPath) === '.yml') {
 			const content = yaml.dump(schema)
-			await helper.fs.write(configPath, content)
+			await this.helper.fs.write(configPath, content)
 		} else if (path.extname(configPath) === '.json') {
 			const content = JSON.stringify(schema, null, 2)
-			await helper.fs.write(configPath, content)
+			await this.helper.fs.write(configPath, content)
 		} else {
 			throw new Error(`Config file: ${configPath} not supported`)
 		}

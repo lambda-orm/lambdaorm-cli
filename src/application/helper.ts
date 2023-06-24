@@ -1,9 +1,12 @@
-import { H3lp } from 'h3lp'
+import { H3lp, IUtils, IFsHelper } from 'h3lp'
 import path from 'path'
 const Util = require('util')
 const exec = Util.promisify(require('child_process').exec)
 
 class CliHelper {
+	// eslint-disable-next-line no-useless-constructor
+	constructor (private readonly utils:IUtils, private readonly fs:IFsHelper) {}
+
 	public escapeShell (cmd:string) {
 		return cmd.replace(/(["'$`\\])/g, '\\$1')
 	}
@@ -19,12 +22,12 @@ class CliHelper {
 	public async readData (data:any):Promise<any> {
 		// read Data
 		if (typeof data === 'string') {
-			const _data = helper.utils.tryParse(data as string)
+			const _data = this.utils.tryParse(data as string)
 			if (_data !== null) {
 				data = _data
 			} else {
 				try {
-					data = await helper.fs.read(path.join(process.cwd(), data as string))
+					data = await this.fs.read(path.join(process.cwd(), data as string))
 					data = JSON.parse(data as string)
 				} catch (error) {
 					throw new Error(`Error to read context: ${error}`)
@@ -35,12 +38,10 @@ class CliHelper {
 	}
 }
 
-class Helper extends H3lp {
+export class Helper extends H3lp {
 	public cli:CliHelper
-
-	constructor () {
-		super()
-		this.cli = new CliHelper()
+	constructor (h3lp: H3lp) {
+		super(h3lp.utils, h3lp.val, h3lp.fs, h3lp.http, h3lp.obj, h3lp.str, h3lp.test, h3lp.array)
+		this.cli = new CliHelper(h3lp.utils, h3lp.fs)
 	}
 }
-export const helper = new Helper()

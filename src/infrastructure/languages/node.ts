@@ -1,9 +1,12 @@
 import { Dialect, Schema, Entity } from 'lambdaorm'
-import { helper } from '../../application'
+import { Helper } from '../../application'
 import { LanguagePort } from '../../domain'
 import path from 'path'
 
 export class NodeLanguageAdapter implements LanguagePort {
+	// eslint-disable-next-line no-useless-constructor
+	constructor (private readonly helper:Helper) {}
+
 	public get name (): string {
 		return 'node'
 	}
@@ -11,38 +14,38 @@ export class NodeLanguageAdapter implements LanguagePort {
 
 	public async createStructure (workspace:string, schema: Schema): Promise<void> {
 		// create initial structure
-		await helper.fs.create(path.join(workspace, schema.app.paths.src))
-		await helper.fs.create(path.join(workspace, schema.app.paths.data))
+		await this.helper.fs.create(path.join(workspace, schema.app.paths.src))
+		await this.helper.fs.create(path.join(workspace, schema.app.paths.data))
 
 		// if the sintaxis.d.ts does not exist create it
 		const sintaxisPath = path.join(workspace, schema.app.paths.src, 'sintaxis.d.ts')
-		if (!await helper.fs.exists(sintaxisPath)) {
-			await helper.fs.copy(path.join(__dirname, './../domain/sintaxis.d.ts'), sintaxisPath)
+		if (!await this.helper.fs.exists(sintaxisPath)) {
+			await this.helper.fs.copy(path.join(__dirname, './../domain/sintaxis.d.ts'), sintaxisPath)
 		}
 
 		// if the package.json does not exist create it
 		const packagePath = path.join(workspace, 'package.json')
-		if (!await helper.fs.exists(packagePath)) {
-			await helper.fs.write(packagePath, JSON.stringify({ dependencies: {} }, null, 2))
+		if (!await this.helper.fs.exists(packagePath)) {
+			await this.helper.fs.write(packagePath, JSON.stringify({ dependencies: {} }, null, 2))
 		}
 
 		// if there is no tsconfig.json create it
 		const tsconfigPath = path.join(workspace, 'tsconfig.json')
-		if (!await helper.fs.exists(tsconfigPath)) {
+		if (!await this.helper.fs.exists(tsconfigPath)) {
 			const tsconfigContent = this.getTypescriptContent()
-			await helper.fs.write(tsconfigPath, JSON.stringify(tsconfigContent, null, 2))
+			await this.helper.fs.write(tsconfigPath, JSON.stringify(tsconfigContent, null, 2))
 		}
 
 		// install typescript if not installed.
 		const typescriptLib = await this.getLocalPackage('typescript', workspace)
 		if (typescriptLib === '') {
-			await helper.cli.exec('npm install typescript -D', workspace)
+			await this.helper.cli.exec('npm install typescript -D', workspace)
 		}
 
 		// install lambdaorm if it is not installed.
 		const lambdaormLib = await this.getLocalPackage('lambdaorm', workspace)
 		if (lambdaormLib === '') {
-			await helper.cli.exec('npm install lambdaorm', workspace)
+			await this.helper.cli.exec('npm install lambdaorm', workspace)
 		}
 	}
 
@@ -55,7 +58,7 @@ export class NodeLanguageAdapter implements LanguagePort {
 				const lib = libs[p]
 				const localLib = await this.getLocalPackage(lib, workspace)
 				if (localLib === '') {
-					await helper.cli.exec(`npm install ${lib}`, workspace)
+					await this.helper.cli.exec(`npm install ${lib}`, workspace)
 				}
 			}
 		}
@@ -68,30 +71,30 @@ export class NodeLanguageAdapter implements LanguagePort {
 	public async buildModel (workspace:string, schema: Schema) : Promise<void> {
 		const content = this.getModelContent(schema)
 		const modelsPath = path.join(workspace, schema.app.paths.src, schema.app.paths.model)
-		helper.fs.create(modelsPath)
+		this.helper.fs.create(modelsPath)
 		const schemaPath = path.join(modelsPath, 'model.ts')
-		await helper.fs.write(schemaPath, content)
+		await this.helper.fs.write(schemaPath, content)
 	}
 
 	public async buildRepositories (workspace:string, schema: Schema): Promise<void> {
 		const modelsPath = path.join(workspace, schema.app.paths.src, schema.app.paths.model)
-		helper.fs.create(modelsPath)
+		this.helper.fs.create(modelsPath)
 		for (const q in schema.model.entities) {
 			const entity = schema.model.entities[q]
 			if (entity.abstract) continue
-			const singular = entity.singular ? entity.singular : helper.str.singular(entity.name)
+			const singular = entity.singular ? entity.singular : this.helper.str.singular(entity.name)
 			const repositoryPath = path.join(modelsPath, `repository${singular}.ts`)
 
-			if (!await helper.fs.exists(repositoryPath)) {
+			if (!await this.helper.fs.exists(repositoryPath)) {
 				const repositoryContent = this.getRepositoryContent(entity)
-				await helper.fs.write(repositoryPath, repositoryContent)
+				await this.helper.fs.write(repositoryPath, repositoryContent)
 			}
 		}
 	}
 
 	private async getLocalPackage (name:string, workspace:string): Promise<string> {
 		const exp = new RegExp(`${name}@(.*)\n`)
-		const localNpmList = await helper.cli.exec('npm list --depth=0', workspace)
+		const localNpmList = await this.helper.cli.exec('npm list --depth=0', workspace)
 		const localMatches = localNpmList.match(exp)
 		return (localMatches && localMatches[1] ? localMatches[1] : '').replace(/"invalid"/gi, '').trim()
 	}
@@ -150,7 +153,7 @@ export class NodeLanguageAdapter implements LanguagePort {
 
 	private getRepositoryContent (entity: Entity): string {
 		const lines: string[] = []
-		const singular = entity.singular ? entity.singular : helper.str.singular(entity.name)
+		const singular = entity.singular ? entity.singular : this.helper.str.singular(entity.name)
 		lines.push('import { Repository, IOrm } from \'lambdaorm\'')
 		lines.push(`import { ${singular}, Qry${singular} } from './model'`)
 		lines.push(`export class ${singular}Repository extends Repository<${singular}, Qry${singular}> {`)
@@ -189,9 +192,9 @@ export class NodeLanguageAdapter implements LanguagePort {
 		if (source.model.entities) {
 			for (const p in source.model.entities) {
 				const entity = source.model.entities[p]
-				const singular = entity.singular ? entity.singular : helper.str.singular(entity.name)
+				const singular = entity.singular ? entity.singular : this.helper.str.singular(entity.name)
 				const _abstract = entity.abstract ? ' abstract ' : ' '
-				const _extends = entity.extends ? ' extends ' + helper.str.singular(entity.extends) + ' ' : ' '
+				const _extends = entity.extends ? ' extends ' + this.helper.str.singular(entity.extends) + ' ' : ' '
 
 				// create class
 				lines.push(`export${_abstract}class ${singular}${_extends}{`)
@@ -225,7 +228,7 @@ export class NodeLanguageAdapter implements LanguagePort {
 					if (relationEntity === undefined) {
 						throw new Error(`Not exists ${relation.entity} relation in ${entity.name} entity`)
 					}
-					const relationEntitySingularName = relationEntity.singular ? relationEntity.singular : helper.str.singular(relationEntity.name)
+					const relationEntitySingularName = relationEntity.singular ? relationEntity.singular : this.helper.str.singular(relationEntity.name)
 					// const relationEntity = helper.singular(relation.entity)
 					switch (relation.type) {
 					case 'oneToMany':
@@ -240,7 +243,7 @@ export class NodeLanguageAdapter implements LanguagePort {
 				lines.push('}')
 
 				// create interface
-				const _extendsInterface = entity.extends ? ' extends Qry' + helper.str.singular(entity.extends) + ' ' : ' '
+				const _extendsInterface = entity.extends ? ' extends Qry' + this.helper.str.singular(entity.extends) + ' ' : ' '
 				lines.push(`export interface Qry${singular}${_extendsInterface}{`)
 				for (const q in entity.properties) {
 					const property = entity.properties[q]
@@ -250,7 +253,7 @@ export class NodeLanguageAdapter implements LanguagePort {
 				for (const q in entity.relations) {
 					const relation = entity.relations[q]
 					const relationEntity = source.model.entities.find(p => p.name === relation.entity) as Entity
-					const relationEntitySingularName = relationEntity.singular ? relationEntity.singular : helper.str.singular(relationEntity.name)
+					const relationEntitySingularName = relationEntity.singular ? relationEntity.singular : this.helper.str.singular(relationEntity.name)
 					switch (relation.type) {
 					case 'oneToMany':
 						lines.push(`\t${relation.name}: Qry${relationEntitySingularName} & OneToMany<Qry${relationEntitySingularName}> & ${relationEntitySingularName}`)
@@ -268,7 +271,7 @@ export class NodeLanguageAdapter implements LanguagePort {
 			for (const p in source.model.entities) {
 				const entity = source.model.entities[p]
 				if (!entity.abstract) {
-					const singular = entity.singular ? entity.singular : helper.str.singular(entity.name)
+					const singular = entity.singular ? entity.singular : this.helper.str.singular(entity.name)
 					lines.push(`export let ${entity.name}: Queryable<Qry${singular}>`)
 				}
 			}

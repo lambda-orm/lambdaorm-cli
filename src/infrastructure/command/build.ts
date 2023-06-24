@@ -1,6 +1,6 @@
 /* eslint-disable no-mixed-spaces-and-tabs */
 import { CommandModule, Argv, Arguments } from 'yargs'
-import { application } from '../../index'
+import { application } from '../index'
 import path from 'path'
 
 export class UpdateCommand implements CommandModule {

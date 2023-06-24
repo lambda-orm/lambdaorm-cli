@@ -1,12 +1,14 @@
 /* eslint-disable no-mixed-spaces-and-tabs */
 import { CommandModule, Argv, Arguments } from 'yargs'
-import { ormCli } from '../../ormCli'
 import path from 'path'
+import { OrmCliService } from '../../application'
 import dotenv from 'dotenv'
 
-export class ExportCommand implements CommandModule {
-	command = 'export'
-	describe = 'Export data from a database'
+export class ImportCommand implements CommandModule {
+	// eslint-disable-next-line no-useless-constructor
+	constructor (private readonly ormCli:OrmCliService) {}
+	command = 'import'
+	describe = 'Import data from file to database'
 
 	builder (args: Argv) {
 		return args
@@ -18,30 +20,26 @@ export class ExportCommand implements CommandModule {
 				alias: 'stage',
 				describe: 'Name of stage'
 			})
+			.option('d', {
+				alias: 'data',
+				describe: 'Data file to import.'
+			})
 			.option('e', {
 				alias: 'envfile',
 				describe: 'Read in a file of environment variables'
-			})
-			.option('t', {
-				alias: 'target',
-				describe: 'Destination file with export data.'
-			}).option('f', {
-				alias: 'force',
-				describe: 'If there is an error in a statement, continue executing the next statements'
 			})
 	}
 
 	async handler (args: Arguments) {
 		const workspace = path.resolve(process.cwd(), args.workspace as string || '.')
 		const stage = args.stage as string
-		const target = path.resolve(process.cwd(), args.target as string || '.')
+		const data = args.data || {}
 		const envfile = args.envfile as string
-		const force = args.force !== undefined
 
 		if (envfile) {
 			const fullPath = path.resolve(process.cwd(), envfile)
 			dotenv.config({ path: fullPath, override: true })
 		}
-		ormCli.export(workspace, target, stage, force)
+		await this.ormCli.import(workspace, data, stage)
 	}
 }

@@ -1,14 +1,14 @@
-import { Orm } from 'lambdaorm'
-import { helper } from '../application/helper'
+import { Orm, Stage } from 'lambdaorm'
+import { Helper } from '../helper'
 import path from 'path'
 export class OrmCliService {
+	// eslint-disable-next-line no-useless-constructor
+	constructor (private readonly helper:Helper) {}
+
 	public async drop (workspace:string, stage:string, output:string, force = false): Promise<void> {
 		const orm = new Orm(workspace)
 		try {
-			const schema = await orm.schema.get(workspace)
-			await orm.init(schema)
-			const _stage = orm.schema.stage.get(stage)
-
+			const _stage = await this.getStage(orm, workspace, stage)
 			// TODO: en vez de output debería ser generar sentences
 			if (output) {
 				const sentences = await orm.stage.clean({ stage: _stage.name }).sentence()
@@ -31,9 +31,7 @@ export class OrmCliService {
 		}
 		const orm = new Orm(workspace)
 		try {
-			const schema = await orm.schema.get(workspace)
-			await orm.init(schema)
-			const _stage = orm.schema.stage.get(stage)
+			const _stage = await this.getStage(orm, workspace, stage)
 			// execute or get metadata
 			if (output) {
 				if (output === 'sentence') {
@@ -58,7 +56,7 @@ export class OrmCliService {
 				}
 			} else {
 				// read Data
-				const _data = await helper.cli.readData(data)
+				const _data = await this.helper.cli.readData(data)
 				const result = await orm.execute(query, _data, { stage: _stage.name })
 				console.log(JSON.stringify(result, null, 2))
 			}
@@ -72,13 +70,11 @@ export class OrmCliService {
 	public async export (workspace:string, target:string, stage?:string, force = false): Promise<void> {
 		const orm = new Orm(workspace)
 		try {
-			const schema = await orm.schema.get(workspace)
-			await orm.init(schema)
-			const _stage = orm.schema.stage.get(stage)
+			const _stage = await this.getStage(orm, workspace, stage)
 			const exportFile = path.join(target, _stage.name + '-export.json')
 			const dataExport = orm.stage.export({ stage: _stage.name, tryAllCan: force })
 			const data = await dataExport.execute()
-			await helper.fs.write(exportFile, JSON.stringify(data))
+			await this.helper.fs.write(exportFile, JSON.stringify(data))
 		} catch (error) {
 			console.error(`error: ${error}`)
 		} finally {
@@ -93,11 +89,9 @@ export class OrmCliService {
 		}
 		const orm = new Orm(workspace)
 		try {
-			const schema = await orm.schema.get(workspace)
-			await orm.init(schema)
-			const _stage = orm.schema.stage.get(stage)
+			const _stage = await this.getStage(orm, workspace, stage)
 			// read Data
-			const _data = await helper.cli.readData(data)
+			const _data = await this.helper.cli.readData(data)
 			// import data
 			await orm.stage.import({ stage: _stage.name }).execute(_data)
 		} catch (error) {
@@ -106,5 +100,13 @@ export class OrmCliService {
 			await orm.end()
 		}
 	}
+
+	private async getStage (orm:Orm, workspace:string, stage?:string):Promise<Stage> {
+		const schema = await orm.schema.get(workspace)
+		if (schema === null) {
+			throw new Error(`Can't found schema in ${workspace}`)
+		}
+		await orm.init(schema)
+		return orm.schema.stage.get(stage)
+	}
 }
-export const ormCli = new OrmCliService()

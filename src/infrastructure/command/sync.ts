@@ -1,12 +1,14 @@
 /* eslint-disable no-mixed-spaces-and-tabs */
 import { CommandModule, Argv, Arguments } from 'yargs'
 import path from 'path'
-import { ormCli } from '../../ormCli'
 import dotenv from 'dotenv'
+import { ApplicationService } from '../../application'
 
-export class ImportCommand implements CommandModule {
-	command = 'import'
-	describe = 'Import data from file to database'
+export class SyncCommand implements CommandModule {
+	// eslint-disable-next-line no-useless-constructor
+	constructor (private readonly application:ApplicationService) {}
+	command = 'sync'
+	describe = 'Synchronize database/s.'
 
 	builder (args: Argv) {
 		return args
@@ -18,26 +20,29 @@ export class ImportCommand implements CommandModule {
 				alias: 'stage',
 				describe: 'Name of stage'
 			})
-			.option('d', {
-				alias: 'data',
-				describe: 'Data file to import.'
-			})
 			.option('e', {
 				alias: 'envfile',
 				describe: 'Read in a file of environment variables'
+			})
+			.option('o', {
+				alias: 'output',
+				describe: 'Generates the queries but does not apply'
+			}).option('f', {
+				alias: 'force',
+				describe: 'If there is an error in a statement, continue executing the next statements'
 			})
 	}
 
 	async handler (args: Arguments) {
 		const workspace = path.resolve(process.cwd(), args.workspace as string || '.')
 		const stage = args.stage as string
-		const data = args.data || {}
+		const output = args.output as string
 		const envfile = args.envfile as string
-
+		const force = args.force !== undefined
 		if (envfile) {
 			const fullPath = path.resolve(process.cwd(), envfile)
 			dotenv.config({ path: fullPath, override: true })
 		}
-		await ormCli.import(workspace, data, stage)
+		await this.application.synchronize(workspace, stage, output, force)
 	}
 }

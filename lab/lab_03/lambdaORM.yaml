@@ -1,4 +1,4 @@
-model:
+domain:
   entities:
     - name: Countries
       primaryKey: ["iso3"]
@@ -33,7 +33,7 @@ model:
           from: countryCode
           entity: Countries
           to: iso3
-data:
+infrastructure:
   mappings:
     - name: mapping1
     - name: mapping2

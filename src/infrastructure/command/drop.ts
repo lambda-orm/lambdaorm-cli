@@ -1,10 +1,13 @@
 /* eslint-disable no-mixed-spaces-and-tabs */
 import { CommandModule, Argv, Arguments } from 'yargs'
-import { ormCli } from '../../ormCli'
+import { OrmCliService } from '../../application'
 import path from 'path'
 import dotenv from 'dotenv'
 
 export class DropCommand implements CommandModule {
+	// eslint-disable-next-line no-useless-constructor
+	constructor (private readonly ormCli:OrmCliService) {}
+
 	command = 'drop'
 	describe = 'Removes all database objects but not the database.'
 
@@ -48,7 +51,7 @@ export class DropCommand implements CommandModule {
 			dotenv.config({ path: fullPath, override: true })
 		}
 		try {
-			await ormCli.drop(workspace, stage, output, force)
+			await this.ormCli.drop(workspace, stage, output, force)
 		} catch (error) {
 			console.error(`error: ${error}`)
 		}

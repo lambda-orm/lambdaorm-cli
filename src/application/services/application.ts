@@ -1,13 +1,12 @@
 import { Orm } from 'lambdaorm'
-import { helper } from '../helper'
+import { Helper } from '../helper'
 import path from 'path'
 import { SchemaService } from './schema'
-// import { LanguageService } from './language'
 import { LanguagePort } from '../../domain'
 
 export class ApplicationService {
 	// eslint-disable-next-line no-useless-constructor
-	constructor (private readonly languages:LanguagePort[] = []) {}
+	constructor (private readonly helper:Helper, private readonly languages:LanguagePort[] = []) {}
 
 	public addLanguage (value:LanguagePort):void {
 		this.languages.push(value)
@@ -23,13 +22,16 @@ export class ApplicationService {
 
 	public async create (workspace:string, language:string, source?:string, dialect?:string, connection?:string): Promise<void> {
 		const orm = new Orm(workspace)
-		const schemaService = new SchemaService(orm)
+		const schemaService = new SchemaService(orm, this.helper)
 		const languageService = this.getLanguage(language)
 		// const manager = new Manager(orm)
 		// create workspace
-		await helper.fs.create(workspace)
+		await this.helper.fs.create(workspace)
 		// create config file if not exists
 		const sourceSchema = await orm.schema.get(workspace)
+		if (sourceSchema === null) {
+			throw new Error(`Can't found source schema in ${workspace}`)
+		}
 		// complete schema config
 		const targetSchema = schemaService.completeSchema(sourceSchema, source, dialect, connection)
 		// write lambdaorm config
@@ -45,6 +47,9 @@ export class ApplicationService {
 		const orm = new Orm(workspace)
 		const languageService = this.getLanguage(language)
 		const schema = await orm.schema.get(workspace)
+		if (schema === null) {
+			throw new Error(`Can't found schema in ${workspace}`)
+		}
 		if (!onlyModel) {
 			// create structure
 			await languageService.createStructure(workspace, schema)
@@ -63,6 +68,9 @@ export class ApplicationService {
 		const orm = new Orm(workspace)
 		const languageService = this.getLanguage(language)
 		const schema = await orm.schema.get(workspace)
+		if (schema === null) {
+			throw new Error(`Can't found schema in ${workspace}`)
+		}
 		if (options.includes('model')) {
 			// write model
 			await languageService.buildModel(workspace, schema)
@@ -77,6 +85,9 @@ export class ApplicationService {
 		const orm = new Orm(workspace)
 		try {
 			const schema = await orm.schema.get(workspace)
+			if (schema === null) {
+				throw new Error(`Can't found schema in ${workspace}`)
+			}
 			await orm.init(schema)
 			const _stage = orm.schema.stage.get(stage)
 			if (output) {
@@ -103,7 +114,7 @@ export class ApplicationService {
 
 	public async getGlobalPackage (name:string): Promise<string> {
 		const exp = new RegExp(`${name}@(.*)\n`)
-		const globalNpmList = await helper.cli.exec('npm list -g --depth=0')
+		const globalNpmList = await this.helper.cli.exec('npm list -g --depth=0')
 		const globalMatches = globalNpmList.match(exp)
 		return (globalMatches && globalMatches[1] ? globalMatches[1] : '').replace(/"invalid"/gi, '').trim()
 	}
