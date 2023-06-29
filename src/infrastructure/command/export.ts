@@ -1,12 +1,12 @@
 /* eslint-disable no-mixed-spaces-and-tabs */
 import { CommandModule, Argv, Arguments } from 'yargs'
-import { OrmCliService } from '../../application'
+import { Export } from '../../application'
 import path from 'path'
 import dotenv from 'dotenv'
 
 export class ExportCommand implements CommandModule {
 	// eslint-disable-next-line no-useless-constructor
-	constructor (private readonly ormCli:OrmCliService) {}
+	constructor (private readonly _export:Export) {}
 
 	command = 'export'
 	describe = 'Export data from a database'
@@ -45,6 +45,6 @@ export class ExportCommand implements CommandModule {
 			const fullPath = path.resolve(process.cwd(), envfile)
 			dotenv.config({ path: fullPath, override: true })
 		}
-		this.ormCli.export(workspace, target, stage, force)
+		this._export.execute(workspace, target, stage, force)
 	}
 }

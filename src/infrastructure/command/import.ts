@@ -1,12 +1,12 @@
 /* eslint-disable no-mixed-spaces-and-tabs */
 import { CommandModule, Argv, Arguments } from 'yargs'
 import path from 'path'
-import { OrmCliService } from '../../application'
+import { Import } from '../../application'
 import dotenv from 'dotenv'
 
 export class ImportCommand implements CommandModule {
 	// eslint-disable-next-line no-useless-constructor
-	constructor (private readonly ormCli:OrmCliService) {}
+	constructor (private readonly _import:Import) {}
 	command = 'import'
 	describe = 'Import data from file to database'
 
@@ -40,6 +40,6 @@ export class ImportCommand implements CommandModule {
 			const fullPath = path.resolve(process.cwd(), envfile)
 			dotenv.config({ path: fullPath, override: true })
 		}
-		await this.ormCli.import(workspace, data, stage)
+		await this._import.execute(workspace, data, stage)
 	}
 }

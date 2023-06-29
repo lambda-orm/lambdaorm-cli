@@ -1,12 +1,12 @@
 /* eslint-disable no-mixed-spaces-and-tabs */
 import { CommandModule, Argv, Arguments } from 'yargs'
 import path from 'path'
-import { OrmCliService } from '../../application'
+import { Execute } from '../../application'
 import dotenv from 'dotenv'
 
 export class ExecuteCommand implements CommandModule {
 	// eslint-disable-next-line no-useless-constructor
-	constructor (private readonly ormCli:OrmCliService) {}
+	constructor (private readonly execute:Execute) {}
 
 	command = 'execute'
 	describe = 'Execute an expression or return metadata information'
@@ -52,7 +52,7 @@ export class ExecuteCommand implements CommandModule {
 			dotenv.config({ path: fullPath, override: true })
 		}
 		try {
-			await this.ormCli.execute(workspace, query, data, stage, output)
+			await this.execute.execute(workspace, query, data, stage, output)
 		} catch (error) {
 			console.error(`error: ${error}`)
 		}

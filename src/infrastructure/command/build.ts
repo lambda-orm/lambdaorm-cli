@@ -1,11 +1,13 @@
 /* eslint-disable no-mixed-spaces-and-tabs */
 import { CommandModule, Argv, Arguments } from 'yargs'
-import { application } from '../index'
+import { Build } from '../../application'
 import path from 'path'
 
-export class UpdateCommand implements CommandModule {
+export class BuildCommand implements CommandModule {
 	command = 'build'
 	describe = 'build model, repositories'
+	// eslint-disable-next-line no-useless-constructor
+	constructor (private readonly build:Build) {}
 
 	builder (args: Argv) {
 		return args
@@ -44,7 +46,7 @@ export class UpdateCommand implements CommandModule {
 		}
 
 		try {
-			await application.build(workspace, language, options)
+			await this.build.execute(workspace, language, options)
 		} catch (error) {
 			console.error(`error: ${error}`)
 		}

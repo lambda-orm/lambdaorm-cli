@@ -1,11 +1,11 @@
 /* eslint-disable no-mixed-spaces-and-tabs */
 import { CommandModule, Argv, Arguments } from 'yargs'
-import { ApplicationService } from '../../application'
+import { Version, VersionGlobal } from '../../application'
 import path from 'path'
 
 export class VersionCommand implements CommandModule {
 	// eslint-disable-next-line no-useless-constructor
-	constructor (private readonly application:ApplicationService) {}
+	constructor (private readonly version:Version, private readonly versionGlobal:VersionGlobal) {}
 	command = 'version'
 	describe = 'Prints lambdaorm version this project uses.'
 	builder (args: Argv) {
@@ -23,8 +23,8 @@ export class VersionCommand implements CommandModule {
 	async handler (args: Arguments) {
 		const workspace = path.resolve(process.cwd(), args.workspace as string || '.')
 		const language = args.language as string || 'node'
-		const lambdaormCliVersion = await this.application.globalVersion()
-		const lambdaormVersion = await this.application.localVersion(workspace, language)
+		const lambdaormCliVersion = await this.versionGlobal.execute()
+		const lambdaormVersion = await this.version.execute(workspace, language)
 
 		if (lambdaormCliVersion) {
 			console.log(`Global lambdaorm cli version: ${lambdaormCliVersion}`)
