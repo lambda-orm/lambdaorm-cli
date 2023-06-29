@@ -2,11 +2,9 @@
 import { CommandModule, Argv, Arguments } from 'yargs'
 import path from 'path'
 import dotenv from 'dotenv'
-import { Synchronize } from '../../application'
+import { synchronize } from '../builders/usesCases'
 
 export class SyncCommand implements CommandModule {
-	// eslint-disable-next-line no-useless-constructor
-	constructor (private readonly synchronize:Synchronize) {}
 	command = 'sync'
 	describe = 'Synchronize database/s.'
 
@@ -43,6 +41,6 @@ export class SyncCommand implements CommandModule {
 			const fullPath = path.resolve(process.cwd(), envfile)
 			dotenv.config({ path: fullPath, override: true })
 		}
-		await this.synchronize.execute(workspace, stage, output, force)
+		await synchronize.execute(workspace, stage, output, force)
 	}
 }

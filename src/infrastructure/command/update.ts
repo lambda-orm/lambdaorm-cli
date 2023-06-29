@@ -1,11 +1,8 @@
 /* eslint-disable no-mixed-spaces-and-tabs */
 import { CommandModule, Argv, Arguments } from 'yargs'
-import { Update } from '../../application'
 import path from 'path'
-
+import { update } from '../builders/usesCases'
 export class UpdateCommand implements CommandModule {
-	// eslint-disable-next-line no-useless-constructor
-	constructor (private readonly update:Update) {}
 	command = 'update'
 	describe = 'Update workspace.'
 
@@ -31,7 +28,7 @@ export class UpdateCommand implements CommandModule {
 		const language = args.language as string || 'node'
 		const onlyModel = args.onlyModel !== undefined
 		try {
-			await this.update.execute(workspace, language, onlyModel)
+			await update.execute(workspace, language, onlyModel)
 		} catch (error) {
 			console.error(`error: ${error}`)
 		}

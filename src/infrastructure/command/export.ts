@@ -1,13 +1,10 @@
 /* eslint-disable no-mixed-spaces-and-tabs */
 import { CommandModule, Argv, Arguments } from 'yargs'
-import { Export } from '../../application'
+import { _export } from '../builders/usesCases'
 import path from 'path'
 import dotenv from 'dotenv'
 
 export class ExportCommand implements CommandModule {
-	// eslint-disable-next-line no-useless-constructor
-	constructor (private readonly _export:Export) {}
-
 	command = 'export'
 	describe = 'Export data from a database'
 
@@ -45,6 +42,6 @@ export class ExportCommand implements CommandModule {
 			const fullPath = path.resolve(process.cwd(), envfile)
 			dotenv.config({ path: fullPath, override: true })
 		}
-		this._export.execute(workspace, target, stage, force)
+		_export.execute(workspace, target, stage, force)
 	}
 }

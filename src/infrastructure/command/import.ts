@@ -1,12 +1,10 @@
 /* eslint-disable no-mixed-spaces-and-tabs */
 import { CommandModule, Argv, Arguments } from 'yargs'
 import path from 'path'
-import { Import } from '../../application'
+import { _import } from '../builders/usesCases'
 import dotenv from 'dotenv'
 
 export class ImportCommand implements CommandModule {
-	// eslint-disable-next-line no-useless-constructor
-	constructor (private readonly _import:Import) {}
 	command = 'import'
 	describe = 'Import data from file to database'
 
@@ -40,6 +38,6 @@ export class ImportCommand implements CommandModule {
 			const fullPath = path.resolve(process.cwd(), envfile)
 			dotenv.config({ path: fullPath, override: true })
 		}
-		await this._import.execute(workspace, data, stage)
+		await _import.execute(workspace, data, stage)
 	}
 }

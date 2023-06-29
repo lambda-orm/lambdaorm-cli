@@ -1,9 +1,7 @@
 import { CommandModule, Argv, Arguments } from 'yargs'
 import path from 'path'
-import { Create } from '../../application'
+import { create } from '../builders/usesCases'
 export class InitCommand implements CommandModule {
-	// eslint-disable-next-line no-useless-constructor
-	constructor (private readonly create:Create) {}
 	command = 'init'
 	describe = 'Generates lambdaorm project structure.'
 
@@ -40,7 +38,7 @@ export class InitCommand implements CommandModule {
 			const dialect: string = args.dialect as string
 			const connection: string = args.connection as string
 
-			await this.create.execute(workspace, language, source, dialect, connection)
+			await create.execute(workspace, language, source, dialect, connection)
 		} catch (error) {
 			console.error(`error: ${error}`)
 		}
