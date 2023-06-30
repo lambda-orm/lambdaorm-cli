@@ -15,10 +15,10 @@ export class Create {
 		// const manager = new Manager(orm)
 		// create workspace
 		await this.helper.fs.create(workspace)
-		// create config file if not exists
-		const sourceSchema = await orm.schema.get(workspace)
+		// get or create config file
+		let sourceSchema = await orm.schema.get(workspace)
 		if (sourceSchema === null) {
-			throw new Error(`Can't found source schema in ${workspace}`)
+			sourceSchema = await orm.schema.create()
 		}
 		// complete schema config
 		const targetSchema = schemaService.completeSchema(sourceSchema, source, dialect, connection)

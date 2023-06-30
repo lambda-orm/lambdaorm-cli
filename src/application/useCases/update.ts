@@ -8,10 +8,11 @@ export class Update {
 	public async execute (workspace:string, language:string, onlyModel:boolean): Promise<void> {
 		const orm = new Orm(workspace)
 		const languageService = this.service.getLanguage(language)
-		const schema = await orm.schema.get(workspace)
+		let schema = await orm.schema.get(workspace)
 		if (schema === null) {
 			throw new Error(`Can't found schema in ${workspace}`)
 		}
+		schema = await orm.schema.initialize(schema)
 		if (!onlyModel) {
 			// create structure
 			await languageService.createStructure(workspace, schema)

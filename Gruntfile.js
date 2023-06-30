@@ -16,7 +16,7 @@ module.exports = function (grunt) {
 			dist: ['dist']
 		},
 		copy: {
-			sintaxis: { expand: true, cwd: './src', src: './sintaxis.d.ts', dest: 'build/' },
+			sintaxis: { expand: true, cwd: './src/domain', src: './sintaxis.d.ts', dest: 'build/domain' },
 			build: { expand: true, cwd: 'build/', src: '**', dest: 'dist/' },
 			readme: { expand: true, src: './README.md', dest: 'dist/' },
 			license: { expand: true, src: './LICENSE', dest: 'dist/' },

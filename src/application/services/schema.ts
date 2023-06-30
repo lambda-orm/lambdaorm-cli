@@ -12,19 +12,19 @@ export class SchemaService {
 		this.orm.schema.complete(schema)
 		let source:any
 		if (sourceName !== undefined) {
-			source = schema.data.sources.find(p => p.name === sourceName)
+			source = schema.infrastructure.sources.find(p => p.name === sourceName)
 			if (source === undefined) {
 				throw Error(`source ${sourceName} not found`)
 			}
-		} else if (schema.data.sources.length === 1) {
-			source = schema.data.sources[0]
+		} else if (schema.infrastructure.sources.length === 1) {
+			source = schema.infrastructure.sources[0]
 		} else {
 			// If the database is not defined, it creates it.
 			if (connection === undefined) {
 				connection = this.defaultConnection(dialect || Dialect.MySQL)
 			}
 			source = { name: 'test', dialect: dialect || Dialect.MySQL, mapping: source, connection }
-			schema.data.sources.push(source)
+			schema.infrastructure.sources.push(source)
 		}
 		// if database is defined, update dialect if applicable
 		if ((dialect !== undefined && source.dialect !== dialect) || (source.dialect === undefined)) {
@@ -37,27 +37,27 @@ export class SchemaService {
 			source.connection = this.defaultConnection(source.dialect)
 		}
 		// set the mapping if it was not set
-		if (schema.data.mappings === undefined) {
-			schema.data.mappings = []
+		if (schema.infrastructure.mappings === undefined) {
+			schema.infrastructure.mappings = []
 		}
 		if (source.mapping === undefined) {
-			if (schema.data.mappings.length > 0) {
-				source.mapping = schema.data.mappings[0].name
+			if (schema.infrastructure.mappings.length > 0) {
+				source.mapping = schema.infrastructure.mappings[0].name
 			} else {
 				source.mapping = source.name
 			}
 		}
 		// if the mapping does not exist it creates it
-		const mapping = schema.data.mappings.find(p => p.name === source.mapping)
+		const mapping = schema.infrastructure.mappings.find(p => p.name === source.mapping)
 		if (mapping === undefined) {
-			schema.data.mappings.push({ name: source.mapping, entities: [] })
+			schema.infrastructure.mappings.push({ name: source.mapping, entities: [] })
 		}
 		// if the stage does not exist, create it
-		if (schema.data.stages === undefined) {
-			schema.data.stages = []
+		if (schema.infrastructure.stages === undefined) {
+			schema.infrastructure.stages = []
 		}
-		if (schema.data.stages.length === 0) {
-			schema.data.stages.push({ name: 'default', sources: [{ name: source.name }] })
+		if (schema.infrastructure.stages.length === 0) {
+			schema.infrastructure.stages.push({ name: 'default', sources: [{ name: source.name }] })
 		}
 		return schema
 	}

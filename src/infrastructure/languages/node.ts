@@ -14,13 +14,13 @@ export class NodeLanguageAdapter implements LanguagePort {
 
 	public async createStructure (workspace:string, schema: Schema): Promise<void> {
 		// create initial structure
-		await this.helper.fs.create(path.join(workspace, schema.app.paths.src))
-		await this.helper.fs.create(path.join(workspace, schema.app.paths.data))
+		await this.helper.fs.create(path.join(workspace, schema.infrastructure.paths.src))
+		await this.helper.fs.create(path.join(workspace, schema.infrastructure.paths.data))
 
 		// if the sintaxis.d.ts does not exist create it
-		const sintaxisPath = path.join(workspace, schema.app.paths.src, 'sintaxis.d.ts')
+		const sintaxisPath = path.join(workspace, schema.infrastructure.paths.src, 'sintaxis.d.ts')
 		if (!await this.helper.fs.exists(sintaxisPath)) {
-			await this.helper.fs.copy(path.join(__dirname, './../domain/sintaxis.d.ts'), sintaxisPath)
+			await this.helper.fs.copy(path.join(__dirname, './../../domain/sintaxis.d.ts'), sintaxisPath)
 		}
 
 		// if the package.json does not exist create it
@@ -50,8 +50,8 @@ export class NodeLanguageAdapter implements LanguagePort {
 	}
 
 	public async addDialects (workspace:string, schema: Schema) : Promise<void> {
-		for (const p in schema.data.sources) {
-			const source = schema.data.sources[p]
+		for (const p in schema.infrastructure.sources) {
+			const source = schema.infrastructure.sources[p]
 			// if the library is not installed locally corresponding to the dialect it will be installed
 			const libs = this.getLibs(source.dialect)
 			for (const p in libs) {
@@ -70,17 +70,17 @@ export class NodeLanguageAdapter implements LanguagePort {
 
 	public async buildModel (workspace:string, schema: Schema) : Promise<void> {
 		const content = this.getModelContent(schema)
-		const modelsPath = path.join(workspace, schema.app.paths.src, schema.app.paths.model)
+		const modelsPath = path.join(workspace, schema.infrastructure.paths.src, schema.infrastructure.paths.domain)
 		this.helper.fs.create(modelsPath)
 		const schemaPath = path.join(modelsPath, 'model.ts')
 		await this.helper.fs.write(schemaPath, content)
 	}
 
 	public async buildRepositories (workspace:string, schema: Schema): Promise<void> {
-		const modelsPath = path.join(workspace, schema.app.paths.src, schema.app.paths.model)
+		const modelsPath = path.join(workspace, schema.infrastructure.paths.src, schema.infrastructure.paths.domain)
 		this.helper.fs.create(modelsPath)
-		for (const q in schema.model.entities) {
-			const entity = schema.model.entities[q]
+		for (const q in schema.domain.entities) {
+			const entity = schema.domain.entities[q]
 			if (entity.abstract) continue
 			const singular = entity.singular ? entity.singular : this.helper.str.singular(entity.name)
 			const repositoryPath = path.join(modelsPath, `repository${singular}.ts`)
@@ -171,9 +171,9 @@ export class NodeLanguageAdapter implements LanguagePort {
 		lines.push('// THIS FILE IS NOT EDITABLE, IS MANAGED BY LAMBDA ORM')
 		lines.push('import { Queryable } from \'lambdaorm\'')
 
-		if (source.model.enums) {
-			for (const p in source.model.enums) {
-				const _enum = source.model.enums[p]
+		if (source.domain.enums) {
+			for (const p in source.domain.enums) {
+				const _enum = source.domain.enums[p]
 				lines.push(`export enum ${_enum.name}{`)
 
 				for (let j = 0; j < _enum.values.length; j++) {
@@ -189,9 +189,9 @@ export class NodeLanguageAdapter implements LanguagePort {
 			}
 		}
 
-		if (source.model.entities) {
-			for (const p in source.model.entities) {
-				const entity = source.model.entities[p]
+		if (source.domain.entities) {
+			for (const p in source.domain.entities) {
+				const entity = source.domain.entities[p]
 				const singular = entity.singular ? entity.singular : this.helper.str.singular(entity.name)
 				const _abstract = entity.abstract ? ' abstract ' : ' '
 				const _extends = entity.extends ? ' extends ' + this.helper.str.singular(entity.extends) + ' ' : ' '
@@ -224,7 +224,7 @@ export class NodeLanguageAdapter implements LanguagePort {
 				}
 				for (const q in entity.relations) {
 					const relation = entity.relations[q]
-					const relationEntity = source.model.entities.find(p => p.name === relation.entity) as Entity
+					const relationEntity = source.domain.entities.find(p => p.name === relation.entity) as Entity
 					if (relationEntity === undefined) {
 						throw new Error(`Not exists ${relation.entity} relation in ${entity.name} entity`)
 					}
@@ -252,7 +252,7 @@ export class NodeLanguageAdapter implements LanguagePort {
 				}
 				for (const q in entity.relations) {
 					const relation = entity.relations[q]
-					const relationEntity = source.model.entities.find(p => p.name === relation.entity) as Entity
+					const relationEntity = source.domain.entities.find(p => p.name === relation.entity) as Entity
 					const relationEntitySingularName = relationEntity.singular ? relationEntity.singular : this.helper.str.singular(relationEntity.name)
 					switch (relation.type) {
 					case 'oneToMany':
@@ -268,8 +268,8 @@ export class NodeLanguageAdapter implements LanguagePort {
 				}
 				lines.push('}')
 			}
-			for (const p in source.model.entities) {
-				const entity = source.model.entities[p]
+			for (const p in source.domain.entities) {
+				const entity = source.domain.entities[p]
 				if (!entity.abstract) {
 					const singular = entity.singular ? entity.singular : this.helper.str.singular(entity.name)
 					lines.push(`export let ${entity.name}: Queryable<Qry${singular}>`)

@@ -115,6 +115,8 @@
 			"args": [
 				"export",
 				"-w",
+				"lab/lab_01",
+				"-t",
 				"lab/lab_01"					
 			]
 		},
