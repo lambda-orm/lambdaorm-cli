@@ -4248,10 +4248,10 @@
   "resolved" "https://registry.npmjs.org/kleur/-/kleur-3.0.3.tgz"
   "version" "3.0.3"
 
-"lambdaorm@0.6.7-beta":
-  "integrity" "sha512-y7RNboOlMnBbqBqYjYYv/v/lkyEPBYw8+zDoAxkvi/kimubdOvqYzFssHfJx/7VxZITa6AJJQV5bw9kpBHbAsw=="
-  "resolved" "https://registry.npmjs.org/lambdaorm/-/lambdaorm-0.6.7-beta.tgz"
-  "version" "0.6.7-beta"
+"lambdaorm@0.6.10-beta":
+  "integrity" "sha512-9JW914mqBbcuotRadZPW0XydZ8gTrTZCCv1Zc7d/qA+m6vO1xelxOu7ObgForLKBNhHfxsnIt4iQbLLXcp35Gw=="
+  "resolved" "https://registry.npmjs.org/lambdaorm/-/lambdaorm-0.6.10-beta.tgz"
+  "version" "0.6.10-beta"
   dependencies:
     "3xpr" "1.12.10"
     "crypto-js" "^4.1.1"
