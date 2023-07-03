@@ -1,4 +1,4 @@
-model:
+domain:
   enums:
     - name: DeviceType
       values:
@@ -330,7 +330,7 @@ model:
           from: username
           entity: Users
           to: username
-data:
+infrastructure:
   mappings:
     - name: default
   sources:
@@ -342,4 +342,7 @@ data:
   - name: default
     sources:
       - name: main
+  paths:    
+    src: src
+    domain: devicenet/domain    
 
