@@ -1,34 +1,24 @@
 #!/usr/bin/env bash
 SOURCE_BRANCH=$(git branch | sed -n -e 's/^\* \(.*\)/\1/p')
-VERSION=$(jq -r '.version' ./package.json )
-APP=cli
-
 # Only execute release from develop branch
 if [ $SOURCE_BRANCH == 'develop' ]; then
-    # push to current branch
+    # tag and push to develop
+    standard-version
+    VERSION=$(jq -r '.version' ./package.json )
     git add .
-    git commit -m "${APP}-${VERSION}"
-    git tag "${APP}-${VERSION}" -m "${APP}-${VERSION}"
-    git push
-    # create branch release and publish from branch
-    git checkout -b release
-    npm install
-    npm run dist
-    cd ./dist && npm publish
-    git push --set-upstream origin release
-    # merge main branch
+    git commit -m "ci(release): release ${VERSION} 
+    
+    #0"
+    git push --follow-tags origin develop
+    # create branch release
+    git checkout -b release/${VERSION}
+    git push --set-upstream origin release/${VERSION}
     git checkout main
-    git pull
-    git merge release
-    git push
-    # merge source branch
-    git checkout ${SOURCE_BRANCH}
-    git pull
-    git merge release
-    git push
-    # remove branch release local and remote
-    git branch -d release
-    git push origin --delete release
+    git merge release/${VERSION} -m "chore(release): release ${VERSION}"
+    git push origin main
+    git checkout develop
+    git merge release/${VERSION} -m "chore(release): release ${VERSION}"
+    git push --set-upstream origin release/${VERSION}
 else
     echo "Error: The release must be executed from the develop branch and not from the ${SOURCE_BRANCH} branch."
     exit -1

@@ -39,7 +39,6 @@ module.exports = function (grunt) {
 	grunt.registerTask('test', ['build', 'exec:test'])
 	grunt.registerTask('doc', ['exec:doc'])
 	grunt.registerTask('dist', ['test', 'clean:dist', 'copy:lib', 'copy:jest', 'copy:readme', 'copy:license', 'create-package'])
-	grunt.registerTask('to_develop', ['test', 'exec:to_develop'])
 	grunt.registerTask('release', ['dist', 'doc', 'exec:release'])
 	grunt.registerTask('default', [])
 }

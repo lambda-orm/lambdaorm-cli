@@ -24,7 +24,6 @@
 		"integration-test": "grunt --base . --gruntfile task/Gruntfile.js integration-test",
 		"doc": "grunt --base . --gruntfile task/Gruntfile.js doc ",	
 		"dist": "grunt --base . --gruntfile task/Gruntfile.js dist",
-		"to-develop": "grunt --base . --gruntfile task/Gruntfile.js to-develop",
 		"release": "grunt --base . --gruntfile task/Gruntfile.js release"
 	},
 	"dependencies": {
