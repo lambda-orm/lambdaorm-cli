@@ -9,13 +9,13 @@
 		"node": ">=10"
 	},
 	"main": "src/index.js",
-	"homepage": "https://github.com/FlavioLionelRita/lambdaorm#/cli/readme",
+	"homepage": "https://github.com/FlavioLionelRita/lambdaorm-cli/readme",
 	"bugs": {
 		"url": "https://github.com/FlavioLionelRita/lambdaorm/issues"
 	},
 	"repository": {
 		"type": "git",
-		"url": "https://github.com/FlavioLionelRita/lambdaorm.git"
+		"url": "https://github.com/FlavioLionelRita/lambdaorm-cli.git"
 	},
 	"scripts": {
 		"lint": "grunt --base . --gruntfile task/Gruntfile.js lint",
