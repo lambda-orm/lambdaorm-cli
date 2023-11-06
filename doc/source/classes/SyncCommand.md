@@ -40,7 +40,7 @@ CommandModule.command
 
 #### Defined in
 
-[src/lib/infrastructure/command/sync.ts:8](https://github.com/FlavioLionelRita/lambdaorm-cli/blob/4e0ef38/src/lib/infrastructure/command/sync.ts#L8)
+[src/lib/infrastructure/command/sync.ts:8](https://github.com/FlavioLionelRita/lambdaorm-cli/blob/d3940ab/src/lib/infrastructure/command/sync.ts#L8)
 
 ___
 
@@ -54,7 +54,7 @@ CommandModule.describe
 
 #### Defined in
 
-[src/lib/infrastructure/command/sync.ts:9](https://github.com/FlavioLionelRita/lambdaorm-cli/blob/4e0ef38/src/lib/infrastructure/command/sync.ts#L9)
+[src/lib/infrastructure/command/sync.ts:9](https://github.com/FlavioLionelRita/lambdaorm-cli/blob/d3940ab/src/lib/infrastructure/command/sync.ts#L9)
 
 ## Methods
 
@@ -78,7 +78,7 @@ CommandModule.builder
 
 #### Defined in
 
-[src/lib/infrastructure/command/sync.ts:11](https://github.com/FlavioLionelRita/lambdaorm-cli/blob/4e0ef38/src/lib/infrastructure/command/sync.ts#L11)
+[src/lib/infrastructure/command/sync.ts:11](https://github.com/FlavioLionelRita/lambdaorm-cli/blob/d3940ab/src/lib/infrastructure/command/sync.ts#L11)
 
 ___
 
@@ -104,4 +104,4 @@ CommandModule.handler
 
 #### Defined in
 
-[src/lib/infrastructure/command/sync.ts:34](https://github.com/FlavioLionelRita/lambdaorm-cli/blob/4e0ef38/src/lib/infrastructure/command/sync.ts#L34)
+[src/lib/infrastructure/command/sync.ts:34](https://github.com/FlavioLionelRita/lambdaorm-cli/blob/d3940ab/src/lib/infrastructure/command/sync.ts#L34)
