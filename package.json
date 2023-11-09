@@ -17,6 +17,9 @@
 		"type": "git",
 		"url": "https://github.com/FlavioLionelRita/lambdaorm-cli.git"
 	},
+	"standard-version": {
+		"header": "# Changelog\n\nAll notable changes to this project will be documented in this file.\n\n## Versions\n"
+	},
 	"scripts": {
 		"lint": "grunt --base . --gruntfile task/Gruntfile.js lint",
 		"build": "grunt --base . --gruntfile task/Gruntfile.js build",
