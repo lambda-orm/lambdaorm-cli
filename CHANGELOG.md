@@ -1,6 +1,16 @@
 # Changelog
 
-All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
+All notable changes to this project will be documented in this file.
+
+## Versions
+
+### [0.7.9](https://github.com/FlavioLionelRita/lambdaorm-cli/compare/v0.7.8...v0.7.9) (2023-11-09)
+
+
+### Features
+
+* **changelog:** define header changelog ([7fd4333](https://github.com/FlavioLionelRita/lambdaorm-cli/commit/7fd433369c788d9985ca74b01094481a032468ad)), closes [#176](https://github.com/FlavioLionelRita/lambdaorm-cli/issues/176)
+* **release:** refactorize github workflow ([2789d9c](https://github.com/FlavioLionelRita/lambdaorm-cli/commit/2789d9c5ce71a69a152039ec6ee788cf15191715)), closes [#176](https://github.com/FlavioLionelRita/lambdaorm-cli/issues/176)
 
 ### [0.7.8](https://github.com/FlavioLionelRita/lambdaorm-cli/compare/v0.7.7...v0.7.8) (2023-11-06)
 
