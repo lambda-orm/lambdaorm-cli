@@ -40,7 +40,7 @@ CommandModule.command
 
 #### Defined in
 
-[src/lib/infrastructure/command/version.ts:7](https://github.com/FlavioLionelRita/lambdaorm-cli/blob/7fd4333/src/lib/infrastructure/command/version.ts#L7)
+[src/lib/infrastructure/command/version.ts:7](https://github.com/FlavioLionelRita/lambdaorm-cli/blob/4f68120/src/lib/infrastructure/command/version.ts#L7)
 
 ___
 
@@ -54,7 +54,7 @@ CommandModule.describe
 
 #### Defined in
 
-[src/lib/infrastructure/command/version.ts:8](https://github.com/FlavioLionelRita/lambdaorm-cli/blob/7fd4333/src/lib/infrastructure/command/version.ts#L8)
+[src/lib/infrastructure/command/version.ts:8](https://github.com/FlavioLionelRita/lambdaorm-cli/blob/4f68120/src/lib/infrastructure/command/version.ts#L8)
 
 ## Methods
 
@@ -78,7 +78,7 @@ CommandModule.builder
 
 #### Defined in
 
-[src/lib/infrastructure/command/version.ts:9](https://github.com/FlavioLionelRita/lambdaorm-cli/blob/7fd4333/src/lib/infrastructure/command/version.ts#L9)
+[src/lib/infrastructure/command/version.ts:9](https://github.com/FlavioLionelRita/lambdaorm-cli/blob/4f68120/src/lib/infrastructure/command/version.ts#L9)
 
 ___
 
@@ -104,4 +104,4 @@ CommandModule.handler
 
 #### Defined in
 
-[src/lib/infrastructure/command/version.ts:21](https://github.com/FlavioLionelRita/lambdaorm-cli/blob/7fd4333/src/lib/infrastructure/command/version.ts#L21)
+[src/lib/infrastructure/command/version.ts:21](https://github.com/FlavioLionelRita/lambdaorm-cli/blob/4f68120/src/lib/infrastructure/command/version.ts#L21)
