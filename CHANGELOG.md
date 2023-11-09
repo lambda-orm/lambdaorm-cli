@@ -4,6 +4,13 @@ All notable changes to this project will be documented in this file.
 
 ## Versions
 
+### [0.7.10](https://github.com/FlavioLionelRita/lambdaorm-cli/compare/v0.7.9...v0.7.10) (2023-11-09)
+
+
+### Features
+
+* **dependencies:** add dependabot ([4f68120](https://github.com/FlavioLionelRita/lambdaorm-cli/commit/4f6812006a8444610a9ab3fd5d7b982de32ef094)), closes [#176](https://github.com/FlavioLionelRita/lambdaorm-cli/issues/176)
+
 ### [0.7.9](https://github.com/FlavioLionelRita/lambdaorm-cli/compare/v0.7.8...v0.7.9) (2023-11-09)
 
 
