@@ -49,6 +49,11 @@ module.exports = function (grunt) {
 		}
 	})
 
+	grunt.registerTask('get-version', 'get version from package.json', function () {
+		const version = grunt.file.readJSON('./package.json').version
+		grunt.config.set('version', version)
+	})
+
 	grunt.registerTask('create-package', 'create package.json for dist', function () {
 		const fs = require('fs')
 		const data = require('./package.json')
