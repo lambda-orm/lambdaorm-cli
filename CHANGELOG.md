@@ -4,6 +4,13 @@ All notable changes to this project will be documented in this file.
 
 ## Versions
 
+### [0.8.1](https://github.com/FlavioLionelRita/lambdaorm-cli/compare/v0.7.10...v0.8.1) (2023-11-15)
+
+
+### Features
+
+* **syntax:** remove creation of syntax and update model ([4c4c6a8](https://github.com/FlavioLionelRita/lambdaorm-cli/commit/4c4c6a8b6a073601007c193c76dfe1d63e0fe169)), closes [#189](https://github.com/FlavioLionelRita/lambdaorm-cli/issues/189)
+
 ### [0.7.10](https://github.com/FlavioLionelRita/lambdaorm-cli/compare/v0.7.9...v0.7.10) (2023-11-09)
 
 
