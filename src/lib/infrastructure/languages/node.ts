@@ -17,12 +17,6 @@ export class NodeLanguageAdapter implements LanguagePort {
 		await this.helper.fs.create(path.join(workspace, schema.infrastructure.paths.src))
 		await this.helper.fs.create(path.join(workspace, schema.infrastructure.paths.data))
 
-		// if the sintaxis.d.ts does not exist create it
-		const sintaxisPath = path.join(workspace, schema.infrastructure.paths.src, 'sintaxis.d.ts')
-		if (!await this.helper.fs.exists(sintaxisPath)) {
-			await this.helper.fs.copy(path.join(__dirname, './../../domain/sintaxis.d.ts'), sintaxisPath)
-		}
-
 		// if the package.json does not exist create it
 		const packagePath = path.join(workspace, 'package.json')
 		if (!await this.helper.fs.exists(packagePath)) {
@@ -169,7 +163,7 @@ export class NodeLanguageAdapter implements LanguagePort {
 		const lines: string[] = []
 		lines.push('/* eslint-disable no-use-before-define */')
 		lines.push('// THIS FILE IS NOT EDITABLE, IS MANAGED BY LAMBDA ORM')
-		lines.push('import { Queryable } from \'lambdaorm\'')
+		lines.push('import { Queryable, OneToMany, ManyToOne, OneToOne } from \'lambdaorm\'')
 
 		if (source.domain.enums) {
 			for (const p in source.domain.enums) {

@@ -1,6 +1,6 @@
 /* eslint-disable no-use-before-define */
 // THIS FILE IS NOT EDITABLE, IS MANAGED BY LAMBDA ORM
-import { Queryable } from 'lambdaorm'
+import { Queryable, OneToMany, ManyToOne } from 'lambdaorm'
 export enum DeviceType{
 	phone = 'phone',
 	computer = 'computer',
