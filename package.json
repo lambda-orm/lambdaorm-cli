@@ -21,13 +21,12 @@
 		"header": "# Changelog\n\nAll notable changes to this project will be documented in this file.\n\n## Versions\n"
 	},
 	"scripts": {
-		"lint": "grunt --base . --gruntfile task/Gruntfile.js lint",
-		"build": "grunt --base . --gruntfile task/Gruntfile.js build",
-		"test": "grunt --base . --gruntfile task/Gruntfile.js test",
-		"integration-test": "grunt --base . --gruntfile task/Gruntfile.js integration-test",
-		"doc": "grunt --base . --gruntfile task/Gruntfile.js doc ",
-		"dist": "grunt --base . --gruntfile task/Gruntfile.js dist",
-		"release": "grunt --base . --gruntfile task/Gruntfile.js release"
+		"lint": "grunt lint",
+		"build": "grunt build",
+		"test": "grunt test",
+		"doc": "grunt doc ",
+		"dist": "grunt dist",
+		"release": "grunt release"
 	},
 	"dependencies": {
 		"dotenv": "^16.3.1",
