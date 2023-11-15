@@ -6,6 +6,16 @@ module.exports = function (grunt) {
 			lint: { cmd: 'npx eslint src ' },
 			test: { cmd: 'npx jest --config jest-config.json' },
 			doc: { cmd: 'npx typedoc --plugin typedoc-plugin-markdown --out doc/source src/lib/doc.index.ts' },
+			getOriginalBranch: {
+				cmd: 'git branch | sed -n -e \'s/^\\* \\(.*\\)/\\1/p\'',
+				callback: function (error, stdout, stderr) {
+					if (error) {
+						grunt.log.error(stderr)
+					} else {
+						grunt.config.set('originalBranch', stdout.trim())
+					}
+				}
+			},
 			standardVersion: {
 				cmd: 'standard-version'
 			},
