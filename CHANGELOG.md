@@ -4,6 +4,13 @@ All notable changes to this project will be documented in this file.
 
 ## Versions
 
+### [0.8.9](https://github.com/FlavioLionelRita/lambdaorm-cli/compare/v0.8.8...v0.8.9) (2023-11-21)
+
+
+### Bug Fixes
+
+* **lab:** remove client-node lab ([a160a7d](https://github.com/FlavioLionelRita/lambdaorm-cli/commit/a160a7de42f4806c2713471221f2b35a9b4d2e34)), closes [#202](https://github.com/FlavioLionelRita/lambdaorm-cli/issues/202)
+
 ### [0.8.8](https://github.com/FlavioLionelRita/lambdaorm-cli/compare/v0.8.7...v0.8.8) (2023-11-21)
 
 ### [0.8.7](https://github.com/FlavioLionelRita/lambdaorm-cli/compare/v0.8.6...v0.8.7) (2023-11-21)
