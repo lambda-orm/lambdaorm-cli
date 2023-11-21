@@ -16,6 +16,7 @@
 	"plugins": [
 		"@typescript-eslint"
 	],
+	"ignorePatterns": ["src/labs/client-node/"],
 	"rules": {
 		"@typescript-eslint/no-explicit-any": "off",
 		"@typescript-eslint/explicit-module-boundary-types": "off",
@@ -30,10 +31,6 @@
 				"allowIndentationTabs": true
 			}
 		],
-		// "linebreak-style": [
-		// 	"error",
-		// 	"unix"
-		// ],
 		"quotes": [
 			"error",
 			"single"
