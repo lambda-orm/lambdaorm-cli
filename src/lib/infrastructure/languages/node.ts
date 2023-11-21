@@ -187,6 +187,7 @@ export class NodeLanguageAdapter implements LanguagePort {
 		const lines: string[] = []
 		lines.push('/* eslint-disable no-use-before-define */')
 		lines.push('// THIS FILE IS NOT EDITABLE, IS MANAGED BY LAMBDA ORM')
+		lines.push('// eslint-disable-next-line @typescript-eslint/no-unused-vars')
 		lines.push(`import { Queryable, OneToMany, ManyToOne, OneToOne } from '${this.library}'`)
 
 		if (source.enums) {

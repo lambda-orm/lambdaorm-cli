@@ -1,6 +1,6 @@
 /* eslint-disable no-use-before-define */
 // THIS FILE IS NOT EDITABLE, IS MANAGED BY LAMBDA ORM
-import { Queryable, OneToMany, ManyToOne, OneToOne } from 'lambdaorm'
+import { Queryable, OneToMany, ManyToOne } from 'lambdaorm'
 export class Country {
 	constructor () {
 		this.states = []
