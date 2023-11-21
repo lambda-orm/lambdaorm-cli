@@ -40,7 +40,7 @@ CommandModule.command
 
 #### Defined in
 
-[src/lib/infrastructure/command/update.ts:6](https://github.com/FlavioLionelRita/lambdaorm-cli/blob/d2b5ea8/src/lib/infrastructure/command/update.ts#L6)
+[src/lib/infrastructure/command/update.ts:6](https://github.com/FlavioLionelRita/lambdaorm-cli/blob/77e2297/src/lib/infrastructure/command/update.ts#L6)
 
 ___
 
@@ -54,13 +54,13 @@ CommandModule.describe
 
 #### Defined in
 
-[src/lib/infrastructure/command/update.ts:7](https://github.com/FlavioLionelRita/lambdaorm-cli/blob/d2b5ea8/src/lib/infrastructure/command/update.ts#L7)
+[src/lib/infrastructure/command/update.ts:7](https://github.com/FlavioLionelRita/lambdaorm-cli/blob/77e2297/src/lib/infrastructure/command/update.ts#L7)
 
 ## Methods
 
 ### builder
 
-▸ **builder**(`args`): `Argv`<{ `w`: `undefined` \| `string`  } & { `l`: `unknown`  } & { `only-model`: `unknown`  }\>
+▸ **builder**(`args`): `Argv`<{ `w`: `undefined` \| `string`  } & { `l`: `unknown`  } & { `only-model`: `unknown`  } & { `src-path`: `unknown`  } & { `data-path`: `unknown`  }\>
 
 #### Parameters
 
@@ -70,7 +70,7 @@ CommandModule.describe
 
 #### Returns
 
-`Argv`<{ `w`: `undefined` \| `string`  } & { `l`: `unknown`  } & { `only-model`: `unknown`  }\>
+`Argv`<{ `w`: `undefined` \| `string`  } & { `l`: `unknown`  } & { `only-model`: `unknown`  } & { `src-path`: `unknown`  } & { `data-path`: `unknown`  }\>
 
 #### Implementation of
 
@@ -78,7 +78,7 @@ CommandModule.builder
 
 #### Defined in
 
-[src/lib/infrastructure/command/update.ts:9](https://github.com/FlavioLionelRita/lambdaorm-cli/blob/d2b5ea8/src/lib/infrastructure/command/update.ts#L9)
+[src/lib/infrastructure/command/update.ts:9](https://github.com/FlavioLionelRita/lambdaorm-cli/blob/77e2297/src/lib/infrastructure/command/update.ts#L9)
 
 ___
 
@@ -104,4 +104,4 @@ CommandModule.handler
 
 #### Defined in
 
-[src/lib/infrastructure/command/update.ts:26](https://github.com/FlavioLionelRita/lambdaorm-cli/blob/d2b5ea8/src/lib/infrastructure/command/update.ts#L26)
+[src/lib/infrastructure/command/update.ts:34](https://github.com/FlavioLionelRita/lambdaorm-cli/blob/77e2297/src/lib/infrastructure/command/update.ts#L34)
