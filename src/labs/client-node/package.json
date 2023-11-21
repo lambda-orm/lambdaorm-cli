@@ -3,6 +3,6 @@
     "typescript": "^5.2.2"
   },
   "dependencies": {
-    "lambdaorm-client-node": "^0.7.22"
+    "lambdaorm-client-node": "0.7.23"
   }
 }
