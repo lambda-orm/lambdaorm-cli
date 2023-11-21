@@ -21,14 +21,24 @@ export class UpdateCommand implements CommandModule {
 				alias: 'onlyModel',
 				describe: 'update only model'
 			})
+			.option('src-path', {
+				alias: 'srcPath',
+				describe: 'update only model'
+			})
+			.option('data-path', {
+				alias: 'dataPath',
+				describe: 'update only model'
+			})
 	}
 
 	async handler (args: Arguments) {
 		const workspace = path.resolve(process.cwd(), args.workspace as string || '.')
 		const language = args.language as string || 'node'
 		const onlyModel = args.onlyModel !== undefined
+		const srcPath = args.srcPath as string|undefined
+		const dataPath = args.dataPath as string|undefined
 		try {
-			await update.execute(workspace, language, onlyModel)
+			await update.execute(workspace, language, onlyModel, srcPath, dataPath)
 		} catch (error) {
 			console.error(`error: ${error}`)
 		}

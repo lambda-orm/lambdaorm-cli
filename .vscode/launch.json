@@ -11,7 +11,7 @@
 			"skipFiles": [
 				"<node_internals>/**"
 			],
-			"program": "${workspaceFolder}/src/index.ts",
+			"program": "${workspaceFolder}/src/lib/index.ts",
 			"args": [
 				"version"
 			]
@@ -23,7 +23,7 @@
 			"skipFiles": [
 				"<node_internals>/**"
 			],
-			"program": "${workspaceFolder}/src/index.ts",
+			"program": "${workspaceFolder}/src/lib/index.ts",
 			"args": [
 				"help"
 			]
@@ -36,11 +36,11 @@
 			"skipFiles": [
 				"<node_internals>/**"
 			],
-			"program": "${workspaceFolder}/src/index.ts",
+			"program": "${workspaceFolder}/src/lib/index.ts",
 			"args": [
 				"init",
 				"-w",
-				"lab/lab_01"					
+				"src/labs/lab_01"					
 			]
 		},
 		{
@@ -50,11 +50,11 @@
 			"skipFiles": [
 				"<node_internals>/**"
 			],
-			"program": "${workspaceFolder}/src/index.ts",
+			"program": "${workspaceFolder}/src/lib/index.ts",
 			"args": [
 				"update",
 				"-w",
-				"lab/lab_01"					
+				"src/labs/lab_01"					
 			]
 		},
 		{
@@ -64,11 +64,11 @@
 			"skipFiles": [
 				"<node_internals>/**"
 			],
-			"program": "${workspaceFolder}/src/index.ts",
+			"program": "${workspaceFolder}/src/lib/index.ts",
 			"args": [
 				"update",
 				"-w",
-				"lab/lab_01",
+				"src/labs/lab_01",
 				"--only-model"				
 			]
 		},
@@ -79,11 +79,11 @@
 			"skipFiles": [
 				"<node_internals>/**"
 			],
-			"program": "${workspaceFolder}/src/index.ts",
+			"program": "${workspaceFolder}/src/lib/index.ts",
 			"args": [
 				"sync",
 				"-w",
-				"lab/lab_01"					
+				"src/labs/lab_01"					
 			]
 		},
 		{
@@ -93,11 +93,11 @@
 			"skipFiles": [
 				"<node_internals>/**"
 			],
-			"program": "${workspaceFolder}/src/index.ts",
+			"program": "${workspaceFolder}/src/lib/index.ts",
 			"args": [
 				"execute",
 				"-w",
-				"lab/lab_01",
+				"src/labs/lab_01",
 				"-q",
 				"Countries.bulkInsert().include(p => p.states)",
 				"-d",
@@ -111,13 +111,13 @@
 			"skipFiles": [
 				"<node_internals>/**"
 			],
-			"program": "${workspaceFolder}/src/index.ts",
+			"program": "${workspaceFolder}/src/lib/index.ts",
 			"args": [
 				"export",
 				"-w",
-				"lab/lab_01",
+				"src/labs/lab_01",
 				"-t",
-				"lab/lab_01"					
+				"src/labs/lab_01"					
 			]
 		},
 		{
@@ -127,11 +127,11 @@
 			"skipFiles": [
 				"<node_internals>/**"
 			],
-			"program": "${workspaceFolder}/src/index.ts",
+			"program": "${workspaceFolder}/src/lib/index.ts",
 			"args": [
 				"execute",
 				"-w",
-				"lab/lab_01",
+				"src/labs/lab_01",
 				"-q",
 				"States.deleteAll()"			
 			]
@@ -143,11 +143,11 @@
 			"skipFiles": [
 				"<node_internals>/**"
 			],
-			"program": "${workspaceFolder}/src/index.ts",
+			"program": "${workspaceFolder}/src/lib/index.ts",
 			"args": [
 				"execute",
 				"-w",
-				"lab/lab_01",
+				"src/labs/lab_01",
 				"-q",
 				"Countries.deleteAll()"			
 			]
@@ -159,11 +159,11 @@
 			"skipFiles": [
 				"<node_internals>/**"
 			],
-			"program": "${workspaceFolder}/src/index.ts",
+			"program": "${workspaceFolder}/src/lib/index.ts",
 			"args": [
 				"execute",
 				"-w",
-				"lab/lab_01",
+				"src/labs/lab_01",
 				"-q",
 				"Countries.page(1,10).include(p=>p.states)"			
 			]
@@ -175,11 +175,11 @@
 			"skipFiles": [
 				"<node_internals>/**"
 			],
-			"program": "${workspaceFolder}/src/index.ts",
+			"program": "${workspaceFolder}/src/lib/index.ts",
 			"args": [
 				"import",
 				"-w",
-				"lab/lab_01",
+				"src/labs/lab_01",
 				"-d",
 				"./default-export.json"			
 			]
@@ -191,11 +191,44 @@
 			"skipFiles": [
 				"<node_internals>/**"
 			],
-			"program": "${workspaceFolder}/src/index.ts",
+			"program": "${workspaceFolder}/src/lib/index.ts",
 			"args": [
 				"drop",
 				"-w",
-				"lab/lab_01"		
+				"src/labs/lab_01"		
+			]
+		},
+		// lab-client-node ----------------------------------------------------------------------------------
+		{
+			"name": "client-node init",
+			"type": "node",
+			"request": "launch",
+			"skipFiles": [
+				"<node_internals>/**"
+			],
+			"program": "${workspaceFolder}/src/lib/index.ts",
+			"args": [
+				"init",
+				"-w",
+				"src/labs/client-node",
+				"-l",
+				"client-node"					
+			]
+		},
+		{
+			"name": "client-node update",
+			"type": "node",
+			"request": "launch",
+			"skipFiles": [
+				"<node_internals>/**"
+			],
+			"program": "${workspaceFolder}/src/lib/index.ts",
+			"args": [
+				"update",
+				"-w",
+				"src/labs/client-node",
+				"-l",
+				"client-node"						
 			]
 		},	
 		// counties -------------------------------------------------------------------------------------------------------------------------------------
@@ -206,11 +239,11 @@
 			"skipFiles": [
 				"<node_internals>/**"
 			],
-			"program": "${workspaceFolder}/src/index.ts",
+			"program": "${workspaceFolder}/src/lib/index.ts",
 			"args": [
 				"init",
 				"-w",
-				"lab/countries"				
+				"src/labs/countries"				
 			]
 		},
 		{
@@ -220,11 +253,11 @@
 			"skipFiles": [
 				"<node_internals>/**"
 			],
-			"program": "${workspaceFolder}/src/index.ts",
+			"program": "${workspaceFolder}/src/lib/index.ts",
 			"args": [
 				"update",
 				"-w",
-				"lab/countries"				
+				"src/labs/countries"				
 			]
 		},
 		{
@@ -234,13 +267,13 @@
 			"skipFiles": [
 				"<node_internals>/**"
 			],
-			"program": "${workspaceFolder}/src/index.ts",
+			"program": "${workspaceFolder}/src/lib/index.ts",
 			"args": [
 				"sync",
 				"-w",
-				"lab/countries",
+				"src/labs/countries",
 				"-e",
-				"lab/countries/.env"
+				"src/labs/countries/.env"
 			]
 		},
 		{
@@ -250,17 +283,17 @@
 			"skipFiles": [
 				"<node_internals>/**"
 			],
-			"program": "${workspaceFolder}/src/index.ts",
+			"program": "${workspaceFolder}/src/lib/index.ts",
 			"args": [
 				"execute",
 				"-w",
-				"lab/countries",
+				"src/labs/countries",
 				"-q",
 				"Countries.bulkInsert().include(p => p.states)",
 				"-d",
 				"./lab/countries/countries.json",
 				"-e",
-				"lab/countries/.env"
+				"src/labs/countries/.env"
 			]
 		},
 		{
@@ -270,15 +303,15 @@
 			"skipFiles": [
 				"<node_internals>/**"
 			],
-			"program": "${workspaceFolder}/src/index.ts",
+			"program": "${workspaceFolder}/src/lib/index.ts",
 			"args": [
 				"export",
 				"-w",
-				"lab/countries",
+				"src/labs/countries",
 				"-t",
 				"./lab/countries/data",
 				"-e",
-				"lab/countries/.env"
+				"src/labs/countries/.env"
 			]
 		},
 		{
@@ -288,15 +321,15 @@
 			"skipFiles": [
 				"<node_internals>/**"
 			],
-			"program": "${workspaceFolder}/src/index.ts",
+			"program": "${workspaceFolder}/src/lib/index.ts",
 			"args": [
 				"execute",
 				"-w",
-				"lab/countries",
+				"src/labs/countries",
 				"-q",
 				"States.deleteAll()",
 				"-e",
-				"lab/countries/.env"
+				"src/labs/countries/.env"
 			]
 		},
 		{
@@ -306,15 +339,15 @@
 			"skipFiles": [
 				"<node_internals>/**"
 			],
-			"program": "${workspaceFolder}/src/index.ts",
+			"program": "${workspaceFolder}/src/lib/index.ts",
 			"args": [
 				"execute",
 				"-w",
-				"lab/countries",
+				"src/labs/countries",
 				"-q",
 				"Countries.deleteAll()",
 				"-e",
-				"lab/countries/.env"
+				"src/labs/countries/.env"
 			]
 		},
 		{
@@ -324,15 +357,15 @@
 			"skipFiles": [
 				"<node_internals>/**"
 			],
-			"program": "${workspaceFolder}/src/index.ts",
+			"program": "${workspaceFolder}/src/lib/index.ts",
 			"args": [
 				"import",
 				"-w",
-				"lab/countries",
+				"src/labs/countries",
 				"-d",
 				"./lab/countries/data/default-export.json",
 				"-e",
-				"lab/countries/.env"
+				"src/labs/countries/.env"
 			]
 		},
 		{
@@ -342,15 +375,15 @@
 			"skipFiles": [
 				"<node_internals>/**"
 			],
-			"program": "${workspaceFolder}/src/index.ts",
+			"program": "${workspaceFolder}/src/lib/index.ts",
 			"args": [
 				"execute",
 				"-w",
-				"lab/countries",
+				"src/labs/countries",
 				"-q",
 				"Countries.filter(p=>p.iso3=='AFG'||p.iso3=='ARG').include(p=> p.states)",
 				"-e",
-				"lab/countries/.env"
+				"src/labs/countries/.env"
 			]
 		},
 		{
@@ -360,13 +393,13 @@
 			"skipFiles": [
 				"<node_internals>/**"
 			],
-			"program": "${workspaceFolder}/src/index.ts",
+			"program": "${workspaceFolder}/src/lib/index.ts",
 			"args": [
 				"drop",
 				"-w",
-				"lab/countries",
+				"src/labs/countries",
 				"-e",
-				"lab/countries/.env"
+				"src/labs/countries/.env"
 			]
 		},
 		// collections ----------------------------------------------------------------------------------
@@ -377,13 +410,13 @@
 			"skipFiles": [
 				"<node_internals>/**"
 			],
-			"program": "${workspaceFolder}/src/index.ts",
+			"program": "${workspaceFolder}/src/lib/index.ts",
 			"args": [
 				"sync",
 				"-w",
-				"lab/collections",
+				"src/labs/collections",
 				"-e",
-				"lab/collections/.env",
+				"src/labs/collections/.env",
 				"-s",
 				"default",
 				"-f"					
@@ -396,13 +429,13 @@
 			"skipFiles": [
 				"<node_internals>/**"
 			],
-			"program": "${workspaceFolder}/src/index.ts",
+			"program": "${workspaceFolder}/src/lib/index.ts",
 			"args": [
 				"drop",
 				"-w",
-				"lab/collections",
+				"src/labs/collections",
 				"-e",
-				"lab/collections/.env",
+				"src/labs/collections/.env",
 				"-s",
 				"default",
 				"-f"	
@@ -416,11 +449,11 @@
 			"skipFiles": [
 				"<node_internals>/**"
 			],
-			"program": "${workspaceFolder}/src/index.ts",
+			"program": "${workspaceFolder}/src/lib/index.ts",
 			"args": [
 				"init",
 				"-w",
-				"lab/devicenet"
+				"src/labs/devicenet"
 			]
 		},
 		{
@@ -430,11 +463,11 @@
 			"skipFiles": [
 				"<node_internals>/**"
 			],
-			"program": "${workspaceFolder}/src/index.ts",
+			"program": "${workspaceFolder}/src/lib/index.ts",
 			"args": [
 				"update",
 				"-w",
-				"lab/devicenet"
+				"src/labs/devicenet"
 			]
 		},
 		{
@@ -444,13 +477,13 @@
 			"skipFiles": [
 				"<node_internals>/**"
 			],
-			"program": "${workspaceFolder}/src/index.ts",
+			"program": "${workspaceFolder}/src/lib/index.ts",
 			"args": [
 				"sync",
 				"-w",
-				"lab/devicenet",
+				"src/labs/devicenet",
 				"-e",
-				"lab/devicenet/.env"
+				"src/labs/devicenet/.env"
 			]
 		},
 		{
@@ -460,13 +493,13 @@
 			"skipFiles": [
 				"<node_internals>/**"
 			],
-			"program": "${workspaceFolder}/src/index.ts",
+			"program": "${workspaceFolder}/src/lib/index.ts",
 			"args": [
 				"execute",
 				"-w",
-				"lab/devicenet",
+				"src/labs/devicenet",
 				"-e",
-				"lab/devicenet/.env",
+				"src/labs/devicenet/.env",
 				"-q",
 				"Devices.bulkInsert().include(p => p.components)",
 				"-o",
@@ -480,13 +513,13 @@
 			"skipFiles": [
 				"<node_internals>/**"
 			],
-			"program": "${workspaceFolder}/src/index.ts",
+			"program": "${workspaceFolder}/src/lib/index.ts",
 			"args": [
 				"execute",
 				"-w",
-				"lab/devicenet",
+				"src/labs/devicenet",
 				"-e",
-				"lab/devicenet/.env",
+				"src/labs/devicenet/.env",
 				"-q",
 				"Devices.bulkInsert().include(p => p.components)",
 				"-o",
@@ -500,13 +533,13 @@
 			"skipFiles": [
 				"<node_internals>/**"
 			],
-			"program": "${workspaceFolder}/src/index.ts",
+			"program": "${workspaceFolder}/src/lib/index.ts",
 			"args": [
 				"execute",
 				"-w",
-				"lab/devicenet",
+				"src/labs/devicenet",
 				"-e",
-				"lab/devicenet/.env",
+				"src/labs/devicenet/.env",
 				"-q",
 				"Devices.bulkInsert().include(p => p.components)",
 				"-o",
@@ -520,13 +553,13 @@
 			"skipFiles": [
 				"<node_internals>/**"
 			],
-			"program": "${workspaceFolder}/src/index.ts",
+			"program": "${workspaceFolder}/src/lib/index.ts",
 			"args": [
 				"execute",
 				"-w",
-				"lab/devicenet",
+				"src/labs/devicenet",
 				"-e",
-				"lab/devicenet/.env",
+				"src/labs/devicenet/.env",
 				"-q",
 				"Devices.bulkInsert().include(p => p.components)",
 				"-o",
@@ -540,13 +573,13 @@
 			"skipFiles": [
 				"<node_internals>/**"
 			],
-			"program": "${workspaceFolder}/src/index.ts",
+			"program": "${workspaceFolder}/src/lib/index.ts",
 			"args": [
 				"execute",
 				"-w",
-				"lab/devicenet",
+				"src/labs/devicenet",
 				"-e",
-				"lab/devicenet/.env",
+				"src/labs/devicenet/.env",
 				"-q",
 				"Devices.bulkInsert().include(p => p.components)",
 				"-o",
@@ -560,13 +593,13 @@
 			"skipFiles": [
 				"<node_internals>/**"
 			],
-			"program": "${workspaceFolder}/src/index.ts",
+			"program": "${workspaceFolder}/src/lib/index.ts",
 			"args": [
 				"drop",
 				"-w",
-				"lab/devicenet",
+				"src/labs/devicenet",
 				"-e",
-				"lab/devicenet/.env"
+				"src/labs/devicenet/.env"
 			]
 		}
 	]

@@ -1,4 +1,4 @@
-model:
+domain:
   entities:
     - name: Countries
       primaryKey: [iso3]
@@ -33,7 +33,7 @@ model:
           from: countryCode
           entity: Countries
           to: iso3
-data:
+infrastructure:
   mappings:
     - name: default
   sources:
@@ -41,7 +41,10 @@ data:
       dialect: MySQL
       mapping: default
       connection: ${CNN_MySQL}
-stages:
-  - name: default
-    sources:
-      - name: db1
+  stages:
+    - name: default
+      sources:
+        - name: db1
+  paths:    
+    src: src
+    domain: countries/domain      

@@ -1,58 +1,84 @@
-import { Dialect, Schema, Entity } from 'lambdaorm'
+import { Dialect, Entity, DomainSchema, InfrastructureSchema } from 'lambdaorm'
 import { Helper } from '../../application'
 import { LanguagePort } from '../../domain'
 import path from 'path'
 
 export class NodeLanguageAdapter implements LanguagePort {
-	// eslint-disable-next-line no-useless-constructor
-	constructor (private readonly helper:Helper) {}
+	protected library: string
+	protected helper:Helper
+	public constructor (helper:Helper) {
+		this.helper = helper
+		this.library = 'lambdaorm'
+	}
 
 	public get name (): string {
 		return 'node'
 	}
 	// eslint-disable-next-line no-useless-constructor
 
-	public async createStructure (workspace:string, schema: Schema): Promise<void> {
-		// create initial structure
-		await this.helper.fs.create(path.join(workspace, schema.infrastructure.paths.src))
-		await this.helper.fs.create(path.join(workspace, schema.infrastructure.paths.data))
-
-		// if the package.json does not exist create it
+	/**
+	* if the package.json does not exist create it
+	*/
+	protected async createPackage (workspace:string): Promise<void> {
 		const packagePath = path.join(workspace, 'package.json')
 		if (!await this.helper.fs.exists(packagePath)) {
 			await this.helper.fs.write(packagePath, JSON.stringify({ dependencies: {} }, null, 2))
 		}
+	}
 
-		// if there is no tsconfig.json create it
+	/**
+	* if the tsconfig.json does not exist create it
+	*/
+	protected async createTsconfig (workspace:string): Promise<void> {
 		const tsconfigPath = path.join(workspace, 'tsconfig.json')
 		if (!await this.helper.fs.exists(tsconfigPath)) {
 			const tsconfigContent = this.getTypescriptContent()
 			await this.helper.fs.write(tsconfigPath, JSON.stringify(tsconfigContent, null, 2))
 		}
+	}
 
-		// install typescript if not installed.
+	/**
+	* if the typescript is not installed locally it will be installed
+	*/
+	protected async installTypescript (workspace:string): Promise<void> {
 		const typescriptLib = await this.getLocalPackage('typescript', workspace)
 		if (typescriptLib === '') {
 			await this.helper.cli.exec('npm install typescript -D', workspace)
 		}
+	}
 
-		// install lambdaorm if it is not installed.
-		const lambdaormLib = await this.getLocalPackage('lambdaorm', workspace)
+	/**
+	* if the lambdaorm is not installed locally it will be installed
+	*/
+	protected async installLibrary (workspace:string): Promise<void> {
+		const lambdaormLib = await this.getLocalPackage(this.library, workspace)
 		if (lambdaormLib === '') {
-			await this.helper.cli.exec('npm install lambdaorm', workspace)
+			await this.helper.cli.exec(`npm install ${this.library}`, workspace)
 		}
 	}
 
-	public async addDialects (workspace:string, schema: Schema) : Promise<void> {
-		for (const p in schema.infrastructure.sources) {
-			const source = schema.infrastructure.sources[p]
+	public async createStructure (workspace:string, srcPath:string, dataPath?:string): Promise<void> {
+		// create initial structure
+		await this.helper.fs.create(path.join(workspace, srcPath))
+		if (dataPath) {
+			await this.helper.fs.create(path.join(workspace, dataPath))
+		}
+		await this.createPackage(workspace)
+		await this.createTsconfig(workspace)
+		await this.installTypescript(workspace)
+		await this.installLibrary(workspace)
+	}
+
+	public async addDialects (path:string, infrastructure: InfrastructureSchema) : Promise<void> {
+		for (const p in infrastructure.sources) {
+			const source = infrastructure.sources[p]
 			// if the library is not installed locally corresponding to the dialect it will be installed
 			const libs = this.getLibs(source.dialect)
 			for (const p in libs) {
 				const lib = libs[p]
-				const localLib = await this.getLocalPackage(lib, workspace)
+				const localLib = await this.getLocalPackage(lib, path)
 				if (localLib === '') {
-					await this.helper.cli.exec(`npm install ${lib}`, workspace)
+					await this.helper.cli.exec(`npm install ${lib}`, path)
 				}
 			}
 		}
@@ -62,22 +88,20 @@ export class NodeLanguageAdapter implements LanguagePort {
 		return await this.getLocalPackage('lambdaorm', workspace)
 	}
 
-	public async buildModel (workspace:string, schema: Schema) : Promise<void> {
-		const content = this.getModelContent(schema)
-		const modelsPath = path.join(workspace, schema.infrastructure.paths.src, schema.infrastructure.paths.domain)
-		this.helper.fs.create(modelsPath)
-		const schemaPath = path.join(modelsPath, 'model.ts')
+	public async buildModel (modelPath:string, domain: DomainSchema) : Promise<void> {
+		const content = this.getModelContent(domain)
+		this.helper.fs.create(modelPath)
+		const schemaPath = path.join(modelPath, 'model.ts')
 		await this.helper.fs.write(schemaPath, content)
 	}
 
-	public async buildRepositories (workspace:string, schema: Schema): Promise<void> {
-		const modelsPath = path.join(workspace, schema.infrastructure.paths.src, schema.infrastructure.paths.domain)
-		this.helper.fs.create(modelsPath)
-		for (const q in schema.domain.entities) {
-			const entity = schema.domain.entities[q]
+	public async buildRepositories (modelPath:string, domain: DomainSchema): Promise<void> {
+		this.helper.fs.create(modelPath)
+		for (const q in domain.entities) {
+			const entity = domain.entities[q]
 			if (entity.abstract) continue
 			const singular = entity.singular ? entity.singular : this.helper.str.singular(entity.name)
-			const repositoryPath = path.join(modelsPath, `repository${singular}.ts`)
+			const repositoryPath = path.join(modelPath, `repository${singular}.ts`)
 
 			if (!await this.helper.fs.exists(repositoryPath)) {
 				const repositoryContent = this.getRepositoryContent(entity)
@@ -86,14 +110,14 @@ export class NodeLanguageAdapter implements LanguagePort {
 		}
 	}
 
-	private async getLocalPackage (name:string, workspace:string): Promise<string> {
+	protected async getLocalPackage (name:string, workspace:string): Promise<string> {
 		const exp = new RegExp(`${name}@(.*)\n`)
 		const localNpmList = await this.helper.cli.exec('npm list --depth=0', workspace)
 		const localMatches = localNpmList.match(exp)
 		return (localMatches && localMatches[1] ? localMatches[1] : '').replace(/"invalid"/gi, '').trim()
 	}
 
-	private getLibs (dialect: string): string[] {
+	protected getLibs (dialect: string): string[] {
 		switch (dialect) {
 		case Dialect.MySQL:
 		case Dialect.MariaDB:
@@ -117,7 +141,7 @@ export class NodeLanguageAdapter implements LanguagePort {
 		}
 	}
 
-	private getTypescriptContent () {
+	protected getTypescriptContent () {
 		return {
 			compilerOptions: {
 				experimentalDecorators: true,
@@ -145,29 +169,29 @@ export class NodeLanguageAdapter implements LanguagePort {
 		}
 	}
 
-	private getRepositoryContent (entity: Entity): string {
+	protected getRepositoryContent (entity: Entity): string {
 		const lines: string[] = []
 		const singular = entity.singular ? entity.singular : this.helper.str.singular(entity.name)
-		lines.push('import { Repository, IOrm } from \'lambdaorm\'')
+		lines.push(`import { Repository, IOrm } from '${this.library}'`)
 		lines.push(`import { ${singular}, Qry${singular} } from './model'`)
 		lines.push(`export class ${singular}Repository extends Repository<${singular}, Qry${singular}> {`)
-		lines.push('\tconstructor (stage?: string, Orm?:IOrm) {')
-		lines.push(`\t\tsuper('${entity.name}', stage, Orm)`)
+		lines.push('\tconstructor (stage?: string, orm?:IOrm) {')
+		lines.push(`\t\tsuper('${entity.name}', stage, orm)`)
 		lines.push('\t}')
 		lines.push('\t// Add your code here')
 		lines.push('}')
 		return lines.join('\n') + '\n'
 	}
 
-	private getModelContent (source:Schema):string {
+	protected getModelContent (source:DomainSchema):string {
 		const lines: string[] = []
 		lines.push('/* eslint-disable no-use-before-define */')
 		lines.push('// THIS FILE IS NOT EDITABLE, IS MANAGED BY LAMBDA ORM')
-		lines.push('import { Queryable, OneToMany, ManyToOne, OneToOne } from \'lambdaorm\'')
+		lines.push(`import { Queryable, OneToMany, ManyToOne, OneToOne } from '${this.library}'`)
 
-		if (source.domain.enums) {
-			for (const p in source.domain.enums) {
-				const _enum = source.domain.enums[p]
+		if (source.enums) {
+			for (const p in source.enums) {
+				const _enum = source.enums[p]
 				lines.push(`export enum ${_enum.name}{`)
 
 				for (let j = 0; j < _enum.values.length; j++) {
@@ -183,9 +207,9 @@ export class NodeLanguageAdapter implements LanguagePort {
 			}
 		}
 
-		if (source.domain.entities) {
-			for (const p in source.domain.entities) {
-				const entity = source.domain.entities[p]
+		if (source.entities) {
+			for (const p in source.entities) {
+				const entity = source.entities[p]
 				const singular = entity.singular ? entity.singular : this.helper.str.singular(entity.name)
 				const _abstract = entity.abstract ? ' abstract ' : ' '
 				const _extends = entity.extends ? ' extends ' + this.helper.str.singular(entity.extends) + ' ' : ' '
@@ -218,7 +242,7 @@ export class NodeLanguageAdapter implements LanguagePort {
 				}
 				for (const q in entity.relations) {
 					const relation = entity.relations[q]
-					const relationEntity = source.domain.entities.find(p => p.name === relation.entity) as Entity
+					const relationEntity = source.entities.find(p => p.name === relation.entity) as Entity
 					if (relationEntity === undefined) {
 						throw new Error(`Not exists ${relation.entity} relation in ${entity.name} entity`)
 					}
@@ -246,7 +270,7 @@ export class NodeLanguageAdapter implements LanguagePort {
 				}
 				for (const q in entity.relations) {
 					const relation = entity.relations[q]
-					const relationEntity = source.domain.entities.find(p => p.name === relation.entity) as Entity
+					const relationEntity = source.entities.find(p => p.name === relation.entity) as Entity
 					const relationEntitySingularName = relationEntity.singular ? relationEntity.singular : this.helper.str.singular(relationEntity.name)
 					switch (relation.type) {
 					case 'oneToMany':
@@ -262,8 +286,8 @@ export class NodeLanguageAdapter implements LanguagePort {
 				}
 				lines.push('}')
 			}
-			for (const p in source.domain.entities) {
-				const entity = source.domain.entities[p]
+			for (const p in source.entities) {
+				const entity = source.entities[p]
 				if (!entity.abstract) {
 					const singular = entity.singular ? entity.singular : this.helper.str.singular(entity.name)
 					lines.push(`export let ${entity.name}: Queryable<Qry${singular}>`)
@@ -273,7 +297,7 @@ export class NodeLanguageAdapter implements LanguagePort {
 		return lines.join('\n') + '\n'
 	}
 
-	private getType (type:string):string {
+	protected getType (type:string):string {
 		switch (type) {
 		case 'integer': return 'number'
 		case 'decimal': return 'number'

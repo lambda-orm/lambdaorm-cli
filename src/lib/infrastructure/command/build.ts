@@ -26,6 +26,14 @@ export class BuildCommand implements CommandModule {
 				alias: 'all',
 				describe: 'build all'
 			})
+			.option('src-path', {
+				alias: 'srcPath',
+				describe: 'update only model'
+			})
+			.option('data-path', {
+				alias: 'dataPath',
+				describe: 'update only model'
+			})
 	}
 
 	async handler (args: Arguments) {
@@ -34,6 +42,8 @@ export class BuildCommand implements CommandModule {
 		const model = args.model !== undefined
 		const repositories = args.repositories !== undefined
 		const all = args.all !== undefined
+		const srcPath = args.srcPath as string|undefined
+		const dataPath = args.dataPath as string|undefined
 
 		const options:string[] = []
 		if (model || all) {
@@ -44,7 +54,7 @@ export class BuildCommand implements CommandModule {
 		}
 
 		try {
-			await build.execute(workspace, language, options)
+			await build.execute(workspace, language, options, srcPath, dataPath)
 		} catch (error) {
 			console.error(`error: ${error}`)
 		}
