@@ -61,7 +61,7 @@ export class NodeLanguageAdapter implements LanguagePort {
 		// create initial structure
 		await this.helper.fs.create(path.join(workspace, srcPath))
 		if (dataPath) {
-			await this.helper.fs.create(path.join(workspace, srcPath, dataPath))
+			await this.helper.fs.create(path.join(workspace, dataPath))
 		}
 		await this.createPackage(workspace)
 		await this.createTsconfig(workspace)

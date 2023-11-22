@@ -52,5 +52,6 @@ infrastructure:
       sources:
         - name: test
   paths:
-    src: src
+    data: data
+    src: src    
     domain: countries/domain
