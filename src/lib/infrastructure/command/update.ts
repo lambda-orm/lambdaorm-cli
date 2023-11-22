@@ -23,11 +23,15 @@ export class UpdateCommand implements CommandModule {
 			})
 			.option('src-path', {
 				alias: 'srcPath',
-				describe: 'update only model'
+				describe: 'relative source code path in workspace'
 			})
 			.option('data-path', {
 				alias: 'dataPath',
-				describe: 'update only model'
+				describe: 'relative data path in workspace'
+			})
+			.option('domain-path', {
+				alias: 'domainPath',
+				describe: 'relative domain path in source code path'
 			})
 	}
 
@@ -36,9 +40,10 @@ export class UpdateCommand implements CommandModule {
 		const language = args.language as string || 'node'
 		const onlyModel = args.onlyModel !== undefined
 		const srcPath = args.srcPath as string|undefined
+		const domainPath = args.domainPath as string|undefined
 		const dataPath = args.dataPath as string|undefined
 		try {
-			await update.execute(workspace, language, onlyModel, srcPath, dataPath)
+			await update.execute(workspace, language, onlyModel, srcPath, dataPath, domainPath)
 		} catch (error) {
 			console.error(`error: ${error}`)
 		}

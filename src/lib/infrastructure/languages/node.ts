@@ -61,7 +61,7 @@ export class NodeLanguageAdapter implements LanguagePort {
 		// create initial structure
 		await this.helper.fs.create(path.join(workspace, srcPath))
 		if (dataPath) {
-			await this.helper.fs.create(path.join(workspace, dataPath))
+			await this.helper.fs.create(path.join(workspace, srcPath, dataPath))
 		}
 		await this.createPackage(workspace)
 		await this.createTsconfig(workspace)
@@ -88,20 +88,20 @@ export class NodeLanguageAdapter implements LanguagePort {
 		return await this.getLocalPackage('lambdaorm', workspace)
 	}
 
-	public async buildModel (modelPath:string, domain: DomainSchema) : Promise<void> {
+	public async buildModel (domainPath:string, domain: DomainSchema) : Promise<void> {
 		const content = this.getModelContent(domain)
-		this.helper.fs.create(modelPath)
-		const schemaPath = path.join(modelPath, 'model.ts')
+		this.helper.fs.create(domainPath)
+		const schemaPath = path.join(domainPath, 'model.ts')
 		await this.helper.fs.write(schemaPath, content)
 	}
 
-	public async buildRepositories (modelPath:string, domain: DomainSchema): Promise<void> {
-		this.helper.fs.create(modelPath)
+	public async buildRepositories (domainPath:string, domain: DomainSchema): Promise<void> {
+		this.helper.fs.create(domainPath)
 		for (const q in domain.entities) {
 			const entity = domain.entities[q]
 			if (entity.abstract) continue
 			const singular = entity.singular ? entity.singular : this.helper.str.singular(entity.name)
-			const repositoryPath = path.join(modelPath, `repository${singular}.ts`)
+			const repositoryPath = path.join(domainPath, `repository${singular}.ts`)
 
 			if (!await this.helper.fs.exists(repositoryPath)) {
 				const repositoryContent = this.getRepositoryContent(entity)

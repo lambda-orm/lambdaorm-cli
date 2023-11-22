@@ -6,7 +6,7 @@ export class Update {
 	// eslint-disable-next-line no-useless-constructor
 	constructor (private readonly service:OrmCliService) {}
 
-	public async execute (workspace:string, language:string, onlyModel:boolean, srcPath?:string, dataPath?:string): Promise<void> {
+	public async execute (workspace:string, language:string, onlyModel:boolean, srcPath?:string, dataPath?: string, domainPath?:string): Promise<void> {
 		const orm = new Orm(workspace)
 		const languageService = this.service.getLanguage(language)
 		let schema = await orm.schema.get(workspace)
@@ -16,6 +16,7 @@ export class Update {
 		schema = await orm.schema.initialize(schema)
 		const _srcPath = srcPath || schema.infrastructure.paths.src
 		const _dataPath = dataPath || schema.infrastructure.paths.data
+		const _domainPath = domainPath || schema.infrastructure.paths.domain
 		if (!onlyModel) {
 			// create structure
 
@@ -28,8 +29,8 @@ export class Update {
 		// TODO cambiar por complete dado que el modelo se debe escribir sin extenderlo
 		orm.schema.complete(schema)
 		// write model and repositories
-		const modelPath = path.join(workspace, _srcPath, _dataPath)
-		await languageService.buildModel(modelPath, schema.domain)
-		await languageService.buildRepositories(modelPath, schema.domain)
+		const __domainPath = path.join(workspace, _srcPath, _domainPath)
+		await languageService.buildModel(__domainPath, schema.domain)
+		await languageService.buildRepositories(__domainPath, schema.domain)
 	}
 }

@@ -28,11 +28,11 @@ export class BuildCommand implements CommandModule {
 			})
 			.option('src-path', {
 				alias: 'srcPath',
-				describe: 'update only model'
+				describe: 'relative source code path in workspace'
 			})
-			.option('data-path', {
-				alias: 'dataPath',
-				describe: 'update only model'
+			.option('domain-path', {
+				alias: 'domainPath',
+				describe: 'relative domain path in source code path'
 			})
 	}
 
@@ -43,7 +43,7 @@ export class BuildCommand implements CommandModule {
 		const repositories = args.repositories !== undefined
 		const all = args.all !== undefined
 		const srcPath = args.srcPath as string|undefined
-		const dataPath = args.dataPath as string|undefined
+		const domainPath = args.domainPath as string|undefined
 
 		const options:string[] = []
 		if (model || all) {
@@ -54,7 +54,7 @@ export class BuildCommand implements CommandModule {
 		}
 
 		try {
-			await build.execute(workspace, language, options, srcPath, dataPath)
+			await build.execute(workspace, language, options, srcPath, domainPath)
 		} catch (error) {
 			console.error(`error: ${error}`)
 		}

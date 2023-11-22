@@ -28,6 +28,14 @@ export class InitCommand implements CommandModule {
 				alias: 'connection',
 				describe: 'string connection to database'
 			})
+			.option('src-path', {
+				alias: 'srcPath',
+				describe: 'relative source code path in workspace'
+			})
+			.option('data-path', {
+				alias: 'dataPath',
+				describe: 'relative data path in workspace'
+			})
 	}
 
 	async handler (args: Arguments) {
@@ -37,8 +45,10 @@ export class InitCommand implements CommandModule {
 			const source:string|undefined = args.source as string
 			const dialect: string = args.dialect as string
 			const connection: string = args.connection as string
+			const srcPath = args.srcPath as string|undefined
+			const dataPath = args.dataPath as string|undefined
 
-			await create.execute(workspace, language, source, dialect, connection)
+			await create.execute(workspace, language, source, dialect, connection, srcPath, dataPath)
 		} catch (error) {
 			console.error(`error: ${error}`)
 		}
