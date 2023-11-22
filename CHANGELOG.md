@@ -4,6 +4,13 @@ All notable changes to this project will be documented in this file.
 
 ## Versions
 
+### [0.9.3](https://github.com/FlavioLionelRita/lambdaorm-cli/compare/v0.9.2...v0.9.3) (2023-11-22)
+
+
+### Bug Fixes
+
+* solve domain path ([767930c](https://github.com/FlavioLionelRita/lambdaorm-cli/commit/767930c7d03d13dab8ce05e6fa43b9bc073cc7a7)), closes [#201](https://github.com/FlavioLionelRita/lambdaorm-cli/issues/201)
+
 ### [0.9.2](https://github.com/FlavioLionelRita/lambdaorm-cli/compare/v0.9.1...v0.9.2) (2023-11-22)
 
 ### [0.9.1](https://github.com/FlavioLionelRita/lambdaorm-cli/compare/v0.8.12...v0.9.1) (2023-11-22)
