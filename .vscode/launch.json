@@ -28,21 +28,7 @@
 				"help"
 			]
 		},
-		// lab-01 ----------------------------------------------------------------------------------
-		{
-			"name": "lab 01 init",
-			"type": "node",
-			"request": "launch",
-			"skipFiles": [
-				"<node_internals>/**"
-			],
-			"program": "${workspaceFolder}/src/lib/index.ts",
-			"args": [
-				"init",
-				"-w",
-				"src/labs/lab_01"					
-			]
-		},
+		// lab-01 ----------------------------------------------------------------------------------		
 		{
 			"name": "lab 01 update",
 			"type": "node",
@@ -53,6 +39,20 @@
 			"program": "${workspaceFolder}/src/lib/index.ts",
 			"args": [
 				"update",
+				"-w",
+				"src/labs/lab_01"					
+			]
+		},
+		{
+			"name": "lab 01 version",
+			"type": "node",
+			"request": "launch",
+			"skipFiles": [
+				"<node_internals>/**"
+			],
+			"program": "${workspaceFolder}/src/lib/index.ts",
+			"args": [
+				"version",
 				"-w",
 				"src/labs/lab_01"					
 			]

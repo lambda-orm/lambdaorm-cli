@@ -1,8 +1,8 @@
 domain:
   entities:
     - name: Countries
-      primaryKey: [iso3]
-      uniqueKey: [name]
+      primaryKey: ["iso3"]
+      uniqueKey: ["name"]
       properties:
         - name: name
           required: true
@@ -17,8 +17,8 @@ domain:
           entity: States
           to: countryCode
     - name: States
-      primaryKey: [id]
-      uniqueKey: [countryCode,name]
+      primaryKey: ["id"]
+      uniqueKey: ["countryCode", "name"]
       properties:
         - name: id
           type: integer
@@ -35,16 +35,22 @@ domain:
           to: iso3
 infrastructure:
   mappings:
-    - name: default
+    - name: test
+      entities: []
   sources:
-    - name: db1
+    - name: test
       dialect: MySQL
-      mapping: default
-      connection: ${CNN_MySQL}
+      mapping: test
+      connection:
+        host: localhost
+        port: 3306
+        user: test
+        password: test
+        database: test
   stages:
     - name: default
       sources:
-        - name: db1
-  paths:    
+        - name: test
+  paths:
     src: src
-    domain: domain      
+    domain: countries/domain
