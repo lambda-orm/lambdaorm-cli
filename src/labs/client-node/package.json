@@ -1,9 +1,0 @@
-{
-  "devDependencies": {
-    "typescript": "^5.3.2"
-  },
-  "dependencies": {
-    "lambdaorm-client-node": "^0.7.25",
-    "mysql2": "^3.6.5"
-  }
-}
