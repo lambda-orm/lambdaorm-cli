@@ -40,7 +40,6 @@ module.exports = function (grunt) {
 			dist: ['dist']
 		},
 		copy: {
-			sintaxis: { expand: true, cwd: './src/lib/domain', src: './sintaxis.d.ts', dest: 'build/domain' },
 			lib: { expand: true, cwd: 'build/lib', src: '**', dest: 'dist/' },
 			readme: { expand: true, src: './README.md', dest: 'dist/' },
 			changeLog: { expand: true, src: './CHANGELOG.md', dest: 'dist/' },
@@ -78,7 +77,7 @@ module.exports = function (grunt) {
 		}
 	})
 	grunt.registerTask('lint', ['exec:lint'])
-	grunt.registerTask('build', ['lint', 'clean:build', 'exec:tsc', 'copy:sintaxis'])
+	grunt.registerTask('build', ['lint', 'clean:build', 'exec:tsc'])
 	grunt.registerTask('test', ['build', 'exec:test'])
 	grunt.registerTask('doc', ['exec:doc'])
 	grunt.registerTask('dist', ['test', 'clean:dist', 'copy:lib', 'copy:jest', 'copy:readme', 'copy:license', 'create-package'])
