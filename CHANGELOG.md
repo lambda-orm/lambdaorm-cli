@@ -4,6 +4,13 @@ All notable changes to this project will be documented in this file.
 
 ## Versions
 
+### [0.9.5](https://github.com/FlavioLionelRita/lambdaorm-cli/compare/v0.9.4...v0.9.5) (2023-11-23)
+
+
+### Features
+
+* refactorize init and build command and remove update command ([d682324](https://github.com/FlavioLionelRita/lambdaorm-cli/commit/d68232410435d93f395073a60df42dd2e3d03494)), closes [#201](https://github.com/FlavioLionelRita/lambdaorm-cli/issues/201)
+
 ### [0.9.4](https://github.com/FlavioLionelRita/lambdaorm-cli/compare/v0.9.3...v0.9.4) (2023-11-22)
 
 
