@@ -12,27 +12,27 @@ npm install lambdaorm-cli -g
 
 ## CLI
 
-| Command    	| Description                                  									  |
-|:------------|:----------------------------------------------------------------|
-|	version	 		| Prints lambdaorm version this project uses.											|
-|	init				| Generates lambdaorm project structure.													|
-|	update			| update model, packages and project structure.										|
-|	sync				|	Synchronize database.																						|
-|	import			| Import data from file to database																|
-|	export			| Export data from a database 																		|
-|	execute			| Execute an expression lambda or return information							|
-|	drop				|	Removes all database objects but not the database.							|
+| Command    	| Description                                  									  		|
+|:------------|:--------------------------------------------------------------------|
+|	version	 		| Prints lambdaorm version this project uses.													|
+|	init				| Generates lambdaorm project structure.															|
+|	sync				|	Synchronize database.																								|
+|	import			| Import data from file to database.																	|
+|	export			| Export data from a database. 																				|
+|	execute			| Execute an expression lambda or return information.									|
+|	build				| add configuration, model and repositories according to the language.|
+|	drop				|	Removes all database objects but not the database.									|
 
 ## Documentation
 
 - CLI
 	- [version](https://github.com/FlavioLionelRita/lambdaorm-cli/wiki/Version)
 	- [init](https://github.com/FlavioLionelRita/lambdaorm-cli/wiki/Init)
-	- [update](https://github.com/FlavioLionelRita/lambdaorm-cli/wiki/Update)
 	- [sync](https://github.com/FlavioLionelRita/lambdaorm-cli/wiki/Sync)
 	- [import](https://github.com/FlavioLionelRita/lambdaorm-cli/wiki/Import)
 	- [export](https://github.com/FlavioLionelRita/lambdaorm-cli/wiki/Export)
 	- [execute](https://github.com/FlavioLionelRita/lambdaorm-cli/wiki/Execute)
+	- [build](https://github.com/FlavioLionelRita/lambdaorm-cli/wiki/Build)
 	- [drop](https://github.com/FlavioLionelRita/lambdaorm-cli/wiki/Drop)
 - [lambdaorm](https://github.com/FlavioLionelRita/lambdaorm)
 - [lambdaorm service](https://github.com/FlavioLionelRita/lambdaorm-svc)

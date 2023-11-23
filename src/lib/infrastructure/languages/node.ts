@@ -57,7 +57,7 @@ export class NodeLanguageAdapter implements LanguagePort {
 		}
 	}
 
-	public async createStructure (workspace:string, srcPath:string, dataPath?:string): Promise<void> {
+	public async updateStructure (workspace:string, srcPath:string, dataPath?:string): Promise<void> {
 		// create initial structure
 		await this.helper.fs.create(path.join(workspace, srcPath))
 		if (dataPath) {

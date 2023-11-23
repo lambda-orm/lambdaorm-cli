@@ -30,7 +30,7 @@
 		},
 		// lab-01 ----------------------------------------------------------------------------------		
 		{
-			"name": "lab 01 update",
+			"name": "lab 01 init",
 			"type": "node",
 			"request": "launch",
 			"skipFiles": [
@@ -38,7 +38,7 @@
 			],
 			"program": "${workspaceFolder}/src/lib/index.ts",
 			"args": [
-				"update",
+				"init",
 				"-w",
 				"src/labs/lab_01"					
 			]
@@ -58,7 +58,7 @@
 			]
 		},
 		{
-			"name": "lab 01 update only-model",
+			"name": "lab 01 build",
 			"type": "node",
 			"request": "launch",
 			"skipFiles": [
@@ -66,10 +66,10 @@
 			],
 			"program": "${workspaceFolder}/src/lib/index.ts",
 			"args": [
-				"update",
+				"build",
 				"-w",
 				"src/labs/lab_01",
-				"--only-model"				
+				"--all"				
 			]
 		},
 		{
@@ -101,7 +101,7 @@
 				"-q",
 				"Countries.bulkInsert().include(p => p.states)",
 				"-d",
-				"./lab/lab_01/data.json"
+				"./src/labs/lab_01/data.json"
 			]
 		},
 		{

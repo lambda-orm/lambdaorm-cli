@@ -30,6 +30,10 @@ export class BuildCommand implements CommandModule {
 				alias: 'srcPath',
 				describe: 'relative source code path in workspace'
 			})
+			.option('data-path', {
+				alias: 'dataPath',
+				describe: 'relative data path in workspace'
+			})
 			.option('domain-path', {
 				alias: 'domainPath',
 				describe: 'relative domain path in source code path'
@@ -44,6 +48,7 @@ export class BuildCommand implements CommandModule {
 		const all = args.all !== undefined
 		const srcPath = args.srcPath as string|undefined
 		const domainPath = args.domainPath as string|undefined
+		const dataPath = args.dataPath as string|undefined
 
 		const options:string[] = []
 		if (model || all) {
@@ -52,9 +57,8 @@ export class BuildCommand implements CommandModule {
 		if (repositories || all) {
 			options.push('repositories')
 		}
-
 		try {
-			await build.execute(workspace, language, options, srcPath, domainPath)
+			await build.execute(workspace, language, options, srcPath, dataPath, domainPath)
 		} catch (error) {
 			console.error(`error: ${error}`)
 		}

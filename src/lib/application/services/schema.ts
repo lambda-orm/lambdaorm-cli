@@ -143,4 +143,11 @@ export class SchemaService {
 			throw new Error(`Config file: ${configPath} not supported`)
 		}
 	}
+
+	public async createStructure (workspace:string, dataPath?:string): Promise<void> {
+		// create initial structure
+		if (dataPath) {
+			await this.helper.fs.create(path.join(workspace, dataPath))
+		}
+	}
 }
