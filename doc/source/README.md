@@ -13,5 +13,4 @@ Lambda ORM
 - [ImportCommand](classes/ImportCommand.md)
 - [InitCommand](classes/InitCommand.md)
 - [SyncCommand](classes/SyncCommand.md)
-- [UpdateCommand](classes/UpdateCommand.md)
 - [VersionCommand](classes/VersionCommand.md)
