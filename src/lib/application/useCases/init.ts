@@ -23,7 +23,7 @@ export class Init {
 		const targetSchema = schemaService.completeSchema(sourceSchema, source, dialect, connection)
 		// write lambdaorm config
 		const configPath = path.join(workspace, 'lambdaORM.yaml')
-		const _dataPath = dataPath || targetSchema.infrastructure.paths.data
+		const _dataPath = dataPath || targetSchema.infrastructure?.paths.data
 		await schemaService.writeSchema(configPath, targetSchema)
 		// create structure
 		await schemaService.createStructure(workspace, _dataPath)

@@ -24,7 +24,7 @@ export class BuildCommand implements CommandModule {
 				describe: 'build repositories'
 			}).option('a', {
 				alias: 'all',
-				describe: 'build all'
+				describe: 'build model and repositories'
 			})
 			.option('src-path', {
 				alias: 'srcPath',

@@ -31,5 +31,6 @@
 		"rpad",
 		"rtrim",
 		"sqlite"
-	]
+	],
+	"editor.inlineSuggest.showToolbar": "onHover"
 }
