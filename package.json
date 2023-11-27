@@ -38,7 +38,7 @@
 		"oracledb": "^6.0.1",
 		"pg": "^8.11.3",
 		"sql.js": "^1.8.0",
-		"tedious": "^16.6.0",
+		"tedious": "^16.6.1",
 		"yargs": "^17.7.2"
 	},
 	"devDependencies": {
