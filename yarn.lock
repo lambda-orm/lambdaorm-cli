@@ -3999,10 +3999,10 @@ optionator@^0.9.3:
     prelude-ls "^1.2.1"
     type-check "^0.4.0"
 
-oracledb@^6.0.1:
-  version "6.0.1"
-  resolved "https://registry.npmjs.org/oracledb/-/oracledb-6.0.1.tgz"
-  integrity sha512-N5/Y4IkCFQCumqjEXi3snrclDKjDMMeawq/z/5Ydm5+BxjV3kg9wCaTAp++JTLlCWASb4JMXqK70PctmAkZh3g==
+oracledb@^6.2.0:
+  version "6.2.0"
+  resolved "https://registry.yarnpkg.com/oracledb/-/oracledb-6.2.0.tgz#7a9d66d923fa1fcc391ff4cb6189e33fd47528b7"
+  integrity sha512-NP6Q3pukVhmowFszQhDfqaiC4RngcuSQ9Vj79quRw9f9s+R1Awo+I1Oexj+qYGFONRJz+Nl7TpkTUiXICbblGg==
 
 os-homedir@^1.0.0:
   version "1.0.2"

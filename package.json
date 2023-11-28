@@ -35,7 +35,7 @@
 		"lambdaorm": "0.8.82",
 		"mongodb": "^6.3.0",
 		"mysql2": "^3.4.0",
-		"oracledb": "^6.0.1",
+		"oracledb": "^6.2.0",
 		"pg": "^8.11.3",
 		"sql.js": "^1.8.0",
 		"tedious": "^16.6.0",
