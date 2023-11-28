@@ -4,6 +4,14 @@ All notable changes to this project will be documented in this file.
 
 ## Versions
 
+### [0.9.11](https://github.com/FlavioLionelRita/lambdaorm-cli/compare/v0.9.10...v0.9.11) (2023-11-28)
+
+
+### Bug Fixes
+
+* **build:** ignore build composite entity ([e3b402f](https://github.com/FlavioLionelRita/lambdaorm-cli/commit/e3b402ff345d564b80234e19da21622f37259a06)), closes [#201](https://github.com/FlavioLionelRita/lambdaorm-cli/issues/201)
+* **build:** solve entities name with dot ([9933620](https://github.com/FlavioLionelRita/lambdaorm-cli/commit/9933620495595bb61e400030d8ea907290c8958f)), closes [#201](https://github.com/FlavioLionelRita/lambdaorm-cli/issues/201)
+
 ### [0.9.10](https://github.com/FlavioLionelRita/lambdaorm-cli/compare/v0.9.9...v0.9.10) (2023-11-28)
 
 **Features:**
