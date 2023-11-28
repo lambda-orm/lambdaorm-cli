@@ -40,7 +40,7 @@ CommandModule.command
 
 #### Defined in
 
-[src/lib/infrastructure/command/drop.ts:8](https://github.com/FlavioLionelRita/lambdaorm-cli/blob/0f48305/src/lib/infrastructure/command/drop.ts#L8)
+[src/lib/infrastructure/command/drop.ts:8](https://github.com/FlavioLionelRita/lambdaorm-cli/blob/9933620/src/lib/infrastructure/command/drop.ts#L8)
 
 ___
 
@@ -54,7 +54,7 @@ CommandModule.describe
 
 #### Defined in
 
-[src/lib/infrastructure/command/drop.ts:9](https://github.com/FlavioLionelRita/lambdaorm-cli/blob/0f48305/src/lib/infrastructure/command/drop.ts#L9)
+[src/lib/infrastructure/command/drop.ts:9](https://github.com/FlavioLionelRita/lambdaorm-cli/blob/9933620/src/lib/infrastructure/command/drop.ts#L9)
 
 ## Methods
 
@@ -78,7 +78,7 @@ CommandModule.builder
 
 #### Defined in
 
-[src/lib/infrastructure/command/drop.ts:11](https://github.com/FlavioLionelRita/lambdaorm-cli/blob/0f48305/src/lib/infrastructure/command/drop.ts#L11)
+[src/lib/infrastructure/command/drop.ts:11](https://github.com/FlavioLionelRita/lambdaorm-cli/blob/9933620/src/lib/infrastructure/command/drop.ts#L11)
 
 ___
 
@@ -104,4 +104,4 @@ CommandModule.handler
 
 #### Defined in
 
-[src/lib/infrastructure/command/drop.ts:39](https://github.com/FlavioLionelRita/lambdaorm-cli/blob/0f48305/src/lib/infrastructure/command/drop.ts#L39)
+[src/lib/infrastructure/command/drop.ts:39](https://github.com/FlavioLionelRita/lambdaorm-cli/blob/9933620/src/lib/infrastructure/command/drop.ts#L39)
