@@ -143,7 +143,7 @@ export class Product {
 	discontinued?: boolean
 	supplier?: Supplier
 	category?: Category
-	orderDetails: Orders.detail[]
+	orderDetails: OrdersDetail[]
 }
 export interface QryProduct {
 	id: number
@@ -158,7 +158,7 @@ export interface QryProduct {
 	discontinued: boolean
 	supplier: QrySupplier & OneToMany<QrySupplier> & Supplier
 	category: QryCategory & OneToMany<QryCategory> & Category
-	orderDetails: ManyToOne<QryOrders.detail> & Orders.detail[]
+	orderDetails: ManyToOne<QryOrdersDetail> & OrdersDetail[]
 }
 export class Order {
 	constructor () {
@@ -181,7 +181,7 @@ export class Order {
 	country?: string
 	customer?: Customer
 	employee?: Employee
-	details: Orders.detail[]
+	details: OrdersDetail[]
 }
 export interface QryOrder {
 	id: number
@@ -200,9 +200,9 @@ export interface QryOrder {
 	country: string
 	customer: QryCustomer & OneToMany<QryCustomer> & Customer
 	employee: QryEmployee & OneToMany<QryEmployee> & Employee
-	details: ManyToOne<QryOrders.detail> & Orders.detail[]
+	details: ManyToOne<QryOrdersDetail> & OrdersDetail[]
 }
-export class Orders.detail {
+export class OrdersDetail {
 	orderId?: number
 	productId?: number
 	unitPrice?: number
@@ -211,7 +211,7 @@ export class Orders.detail {
 	order?: Order
 	product?: Product
 }
-export interface QryOrders.detail {
+export interface QryOrdersDetail {
 	orderId: number
 	productId: number
 	unitPrice: number
@@ -227,4 +227,4 @@ export let Shippers: Queryable<QryShipper>
 export let Suppliers: Queryable<QrySupplier>
 export let Products: Queryable<QryProduct>
 export let Orders: Queryable<QryOrder>
-export let Orders.details: Queryable<QryOrders.detail>
+export let OrdersDetails: Queryable<QryOrdersDetail>

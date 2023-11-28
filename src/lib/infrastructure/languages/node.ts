@@ -98,8 +98,8 @@ export class NodeLanguageAdapter implements LanguagePort {
 	public async buildRepositories (domainPath:string, domain: DomainSchema): Promise<void> {
 		this.helper.fs.create(domainPath)
 		for (const entity of domain.entities) {
-			if (entity.abstract || entity.composite) continue
-			const singular = entity.singular ? entity.singular : this.helper.str.singular(entity.name)
+			if (entity.abstract) continue
+			const singular = this.helper.str.notation(entity.singular ? entity.singular : this.helper.str.singular(entity.name), 'pascal')
 			const repositoryPath = path.join(domainPath, `repository${singular}.ts`)
 
 			if (!await this.helper.fs.exists(repositoryPath)) {
@@ -170,7 +170,7 @@ export class NodeLanguageAdapter implements LanguagePort {
 
 	protected getRepositoryContent (entity: Entity): string {
 		const lines: string[] = []
-		const singular = entity.singular ? entity.singular : this.helper.str.singular(entity.name)
+		const singular = this.helper.str.notation(entity.singular ? entity.singular : this.helper.str.singular(entity.name), 'pascal')
 		lines.push(`import { Repository, IOrm } from '${this.library}'`)
 		lines.push(`import { ${singular}, Qry${singular} } from './model'`)
 		lines.push(`export class ${singular}Repository extends Repository<${singular}, Qry${singular}> {`)
@@ -208,9 +208,8 @@ export class NodeLanguageAdapter implements LanguagePort {
 		}
 
 		if (source.entities) {
-			for (const p in source.entities) {
-				const entity = source.entities[p]
-				const singular = entity.singular ? entity.singular : this.helper.str.singular(entity.name)
+			for (const entity of source.entities) {
+				const singular = this.helper.str.notation(entity.singular ? entity.singular : this.helper.str.singular(entity.name), 'pascal')
 				const _abstract = entity.abstract ? ' abstract ' : ' '
 				const _extends = entity.extends ? ' extends ' + this.helper.str.singular(entity.extends) + ' ' : ' '
 
@@ -246,8 +245,7 @@ export class NodeLanguageAdapter implements LanguagePort {
 					if (relationEntity === undefined) {
 						throw new Error(`Not exists ${relation.entity} relation in ${entity.name} entity`)
 					}
-					const relationEntitySingularName = relationEntity.singular ? relationEntity.singular : this.helper.str.singular(relationEntity.name)
-					// const relationEntity = helper.singular(relation.entity)
+					const relationEntitySingularName = this.helper.str.notation(relationEntity.singular ? relationEntity.singular : this.helper.str.singular(relationEntity.name), 'pascal')
 					switch (relation.type) {
 					case 'oneToMany':
 					case 'oneToOne':
@@ -271,7 +269,7 @@ export class NodeLanguageAdapter implements LanguagePort {
 				for (const q in entity.relations) {
 					const relation = entity.relations[q]
 					const relationEntity = source.entities.find(p => p.name === relation.entity) as Entity
-					const relationEntitySingularName = relationEntity.singular ? relationEntity.singular : this.helper.str.singular(relationEntity.name)
+					const relationEntitySingularName = this.helper.str.notation(relationEntity.singular ? relationEntity.singular : this.helper.str.singular(relationEntity.name), 'pascal')
 					switch (relation.type) {
 					case 'oneToMany':
 						lines.push(`\t${relation.name}: Qry${relationEntitySingularName} & OneToMany<Qry${relationEntitySingularName}> & ${relationEntitySingularName}`)
@@ -289,8 +287,9 @@ export class NodeLanguageAdapter implements LanguagePort {
 			for (const p in source.entities) {
 				const entity = source.entities[p]
 				if (!entity.abstract) {
-					const singular = entity.singular ? entity.singular : this.helper.str.singular(entity.name)
-					lines.push(`export let ${entity.name}: Queryable<Qry${singular}>`)
+					const singular = this.helper.str.notation(entity.singular ? entity.singular : this.helper.str.singular(entity.name), 'pascal')
+					const entityName = this.helper.str.notation(entity.name, 'pascal')
+					lines.push(`export let ${entityName}: Queryable<Qry${singular}>`)
 				}
 			}
 		}
