@@ -51,11 +51,16 @@ export class BuildCommand implements CommandModule {
 		const dataPath = args.dataPath as string|undefined
 
 		const options:string[] = []
-		if (model || all) {
+		if (!model && !repositories && !all) {
 			options.push('model')
-		}
-		if (repositories || all) {
 			options.push('repositories')
+		} else {
+			if (model || all) {
+				options.push('model')
+			}
+			if (repositories || all) {
+				options.push('repositories')
+			}
 		}
 		try {
 			await build.execute(workspace, language, options, srcPath, dataPath, domainPath)

@@ -1,0 +1,11 @@
+{
+  "devDependencies": {
+    "typescript": "^5.3.2"
+  },
+  "dependencies": {
+    "lambdaorm": "^0.8.84",
+    "mongodb": "^6.3.0",
+    "mysql2": "^3.6.5",
+    "pg": "^8.11.3"
+  }
+}

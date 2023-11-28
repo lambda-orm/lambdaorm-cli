@@ -28,6 +28,22 @@
 				"help"
 			]
 		},
+		// lab-06 ----------------------------------------------------------------------------------		
+		{
+			"name": "lab 06 build",
+			"type": "node",
+			"request": "launch",
+			"skipFiles": [
+				"<node_internals>/**"
+			],
+			"program": "${workspaceFolder}/src/lib/index.ts",
+			"args": [
+				"build",
+				"-w",
+				"src/labs/06-ci-northwind-multiples-datasources/lab",
+				"--all"					
+			]
+		},
 		// lab-01 ----------------------------------------------------------------------------------		
 		{
 			"name": "lab 01 init",

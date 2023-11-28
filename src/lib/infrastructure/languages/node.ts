@@ -97,9 +97,8 @@ export class NodeLanguageAdapter implements LanguagePort {
 
 	public async buildRepositories (domainPath:string, domain: DomainSchema): Promise<void> {
 		this.helper.fs.create(domainPath)
-		for (const q in domain.entities) {
-			const entity = domain.entities[q]
-			if (entity.abstract) continue
+		for (const entity of domain.entities) {
+			if (entity.abstract || entity.composite) continue
 			const singular = entity.singular ? entity.singular : this.helper.str.singular(entity.name)
 			const repositoryPath = path.join(domainPath, `repository${singular}.ts`)
 

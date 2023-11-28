@@ -6,8 +6,10 @@
 	"editor.tabSize": 2,
 	"editor.insertSpaces": false,
 	"cSpell.words": [
+		"autonumeric",
 		"commitlint",
 		"concat",
+		"datasources",
 		"datetime",
 		"Datetime",
 		"devicenet",
