@@ -58,7 +58,7 @@
 		"grunt-contrib-clean": "^2.0.1",
 		"grunt-contrib-concat": "^2.0.1",
 		"grunt-contrib-copy": "^1.0.0",
-		"grunt-contrib-uglify": "^5.0.1",
+		"grunt-contrib-uglify": "^5.2.2",
 		"grunt-exec": "^3.0.0",
 		"load-grunt-tasks": "^5.1.0",
 		"jest": "^29.7.0",
