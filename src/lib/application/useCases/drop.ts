@@ -11,10 +11,10 @@ export class Drop {
 			const _stage = await this.service.getStage(orm, workspace, stage)
 			// TODO: en vez de output debería ser generar sentences
 			if (output) {
-				const sentences = await orm.stage.clean({ stage: _stage.name }).sentence()
+				const sentences = await orm.stage.drop({ stage: _stage.name }).sentence()
 				console.log(sentences)
 			} else {
-				const result = await orm.stage.clean({ stage: _stage.name, tryAllCan: force }).execute()
+				const result = await orm.stage.drop({ stage: _stage.name, tryAllCan: force }).execute()
 				console.log(JSON.stringify(result, null, 2))
 			}
 		} catch (error) {

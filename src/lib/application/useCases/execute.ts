@@ -16,8 +16,8 @@ export class Execute {
 			const _stage = await this.service.getStage(orm, workspace, stage)
 			// execute or get metadata
 			if (output) {
-				if (output === 'sentence') {
-					const result = orm.getInfo(query, { stage: _stage.name })
+				if (output === 'plan') {
+					const result = orm.plan(query, { stage: _stage.name })
 					console.log(JSON.stringify(result, null, 2))
 				} else if (output === 'model') {
 					const model = orm.model(query)

@@ -32,7 +32,7 @@ export class ExecuteCommand implements CommandModule {
 			})
 			.option('o', {
 				alias: 'output',
-				describe: 'Generates an output with the information according to the following possible values [sentence|model|parameters|constraints|metadata] but it does not apply'
+				describe: 'Generates an output with the information according to the following possible values [plan|model|parameters|constraints|metadata] but it does not apply'
 			})
 	}
 
