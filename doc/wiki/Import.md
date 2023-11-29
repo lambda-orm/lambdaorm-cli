@@ -2,7 +2,7 @@
 
 Import data from file to database.
 
-## Parameters
+## Params
 
 | parameter	| short | describe 																	|
 |-----------|-------|-------------------------------------------|

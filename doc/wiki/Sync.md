@@ -2,7 +2,7 @@
 
 Synchronize database/s.
 
-## Parameters
+## Params
 
 | parameter	| short | describe 																	|
 |-----------|-------|-------------------------------------------|

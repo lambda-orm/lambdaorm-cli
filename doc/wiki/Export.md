@@ -2,7 +2,7 @@
 
 Export data from a database.
 
-## Parameters
+## Params
 
 | parameter	| short | describe 																	|
 |-----------|-------|-------------------------------------------|

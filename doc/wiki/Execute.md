@@ -1,59 +1,47 @@
 # Execute
 
-Execute an expression or return metadata information.
+Execute an query expression.
 
-## Parameters
+## Params
 
-| parameter	| short | describe 																																						|
-|-----------|-------|-------------------------------------------------------------------------------------|
-|workspace	| -w 		| project path.																																				|
-|stage			| -s 		| Name of stage																																				|
-|query			| -q 		| Query expression																																		|
-|data				| -d 		| Data used to execute expression																											|
-|envfile		| -e 		| Read in a file of environment variables.																						|
-|output			| -o 		| Generates an output with the information according to the following possible values |
-|           |       | sentence, model, parameters, constraints and metadata but it does not apply					|
+| parameter	| short | describe 																																									|
+|-----------|-------|-------------------------------------------------------------------------------------------|
+|workspace	| -w 		| project path.																																							|
+|stage			| -s 		| Name of stage																																							|
+|query			| -q 		| Query expression																																					|
+|data				| -d 		| Data used to execute expression																														|
+|envfile		| -e 		| Read in a file of environment variables.																									|
+|output			| -o 		| Generates an output according to the following possible values [json|beautiful|light|yaml]|
 
 ## Examples
 
-execute bulkInsert
+### BulkInsert
 
 ```sh
 lambdaorm execute -w lab/countries -e lab/countries/.env -q Countries.bulkInsert().include(p => p.states) -d ./lab/countries/countries.json
 ```
 
-execute query
+### Query
 
 ```sh
-lambdaorm execute -w lab/countries -e lab/countries/.env -q "Countries.filter(p=>p.iso3=='AFG'||p.iso3=='ARG').include(p=> p.states)"
+lambdaorm execute -e ".env" -o beautiful -q "Products.distinct(p => ({ quantity: p.quantity, category: p.category.name })).sort(p => p.category).page(1,3)"
 ```
 
-get sentence
+Result:
 
-```sh
-lambdaorm execute -w lab/countries -e lab/countries/.env -q "Countries.filter(p=>p.iso3=='ARG').include(p=> p.states)" -o sentence
-```
-
-get parameters
-
-```sh
-lambdaorm execute -w lab/countries -e lab/countries/.env -q "Countries.filter(p=>p.iso3=='ARG').include(p=> p.states)" -o parameters
-```
-
-get model
-
-```sh
-lambdaorm execute -w lab/countries -e lab/countries/.env -q "Countries.filter(p=>p.iso3=='ARG').include(p=> p.states)" -o model
-```
-
-get constraints
-
-```sh
-lambdaorm execute -w lab/countries -e lab/countries/.env -q "Countries.bulkInsert().include(p=>p.states)" -o constraints
-```
-
-get all metadata
-
-```sh
-lambdaorm execute -w lab/countries -e lab/countries/.env -q "Countries.bulkInsert().include(p=>p.states)" -o metadata
+```json
+[
+  {
+    "quantity": "10 boxes x 20 bags",
+    "category": "Beverages"
+  },
+  {
+    "quantity": "24 - 12 oz bottles",
+    "category": "Beverages"
+  },
+  {
+    "quantity": "12 - 355 ml cans",
+    "category": "Beverages"
+  }
+]
 ```

@@ -2,7 +2,7 @@
 
 Generates lambdaorm project structure.
 
-## Parameters
+## Params
 
 | parameter	| short | describe 																		|
 |-----------|-------|---------------------------------------------|

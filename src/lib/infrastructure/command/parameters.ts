@@ -1,12 +1,12 @@
 /* eslint-disable no-mixed-spaces-and-tabs */
 import { CommandModule, Argv, Arguments } from 'yargs'
 import path from 'path'
-import { execute } from '../builders/usesCases'
+import { parameters } from '../builders/usesCases'
 import dotenv from 'dotenv'
 
-export class ExecuteCommand implements CommandModule {
+export class ParametersCommand implements CommandModule {
 	command = 'execute'
-	describe = 'Execute an query expression'
+	describe = 'Return parameters associated with the query expression'
 
 	builder (args: Argv) {
 		return args
@@ -14,21 +14,9 @@ export class ExecuteCommand implements CommandModule {
 				alias: 'workspace',
 				describe: 'project path'
 			})
-			.option('s', {
-				alias: 'stage',
-				describe: 'Name of stage'
-			})
 			.option('q', {
 				alias: 'query',
 				describe: 'Query expression'
-			})
-			.option('d', {
-				alias: 'data',
-				describe: 'Data used to execute expression'
-			})
-			.option('e', {
-				alias: 'envfile',
-				describe: 'Read in a file of environment variables'
 			})
 			.option('o', {
 				alias: 'output',
@@ -39,8 +27,6 @@ export class ExecuteCommand implements CommandModule {
 	async handler (args: Arguments) {
 		const workspace = path.resolve(process.cwd(), args.workspace as string || '.')
 		const query = args.query as string
-		const data = args.data || {}
-		const stage = args.stage as string
 		const output = args.output as string
 		const envfile = args.envfile as string
 
@@ -49,7 +35,7 @@ export class ExecuteCommand implements CommandModule {
 			dotenv.config({ path: fullPath, override: true })
 		}
 		try {
-			await execute.execute(workspace, query, data, stage, output)
+			await parameters.execute(workspace, query, output)
 		} catch (error) {
 			console.error(`error: ${error}`)
 		}

@@ -2,7 +2,7 @@
 
 Removes all database objects but not the database.
 
-## Parameters
+## Params
 
 | parameter	| short | describe 																																		|
 |-----------|-------|-----------------------------------------------------------------------------|

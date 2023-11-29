@@ -1,7 +1,7 @@
 #!/usr/bin/env node
 import {
 	InitCommand, VersionCommand, DropCommand, SyncCommand,
-	ImportCommand, ExportCommand, ExecuteCommand, BuildCommand
+	ImportCommand, ExportCommand, ExecuteCommand, BuildCommand, PlanCommand, MetadataCommand, ParametersCommand, ModelCommand, ConstraintsCommand
 } from './infrastructure'
 import yargs from 'yargs'
 
@@ -15,7 +15,11 @@ yargs
 	.command(new ImportCommand())
 	.command(new ExportCommand())
 	.command(new ExecuteCommand())
-	// .command(new UpdateCommand())
+	.command(new PlanCommand())
+	.command(new MetadataCommand())
+	.command(new ParametersCommand())
+	.command(new ModelCommand())
+	.command(new ConstraintsCommand())
 	.command(new BuildCommand())
 	.recommendCommands()
 	.demandCommand(1)
