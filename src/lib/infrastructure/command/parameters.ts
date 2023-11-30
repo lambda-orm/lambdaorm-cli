@@ -5,7 +5,7 @@ import { parameters } from '../builders/usesCases'
 import dotenv from 'dotenv'
 
 export class ParametersCommand implements CommandModule {
-	command = 'execute'
+	command = 'parameters'
 	describe = 'Return parameters associated with the query expression'
 
 	builder (args: Argv) {

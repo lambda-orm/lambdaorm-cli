@@ -5,7 +5,7 @@ import { plan } from '../builders/usesCases'
 import dotenv from 'dotenv'
 
 export class PlanCommand implements CommandModule {
-	command = 'execute'
+	command = 'plan'
 	describe = 'Return plan execution of query expression'
 
 	builder (args: Argv) {

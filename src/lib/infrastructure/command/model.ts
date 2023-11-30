@@ -5,7 +5,7 @@ import { model } from '../builders/usesCases'
 import dotenv from 'dotenv'
 
 export class ModelCommand implements CommandModule {
-	command = 'execute'
+	command = 'model'
 	describe = 'Return model that will be returned in the query execution'
 
 	builder (args: Argv) {

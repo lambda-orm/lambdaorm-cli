@@ -5,7 +5,7 @@ import { metadata } from '../builders/usesCases'
 import dotenv from 'dotenv'
 
 export class MetadataCommand implements CommandModule {
-	command = 'execute'
+	command = 'metadata'
 	describe = 'Return metadata associated with the query expression'
 
 	builder (args: Argv) {
