@@ -40,7 +40,7 @@ CommandModule.command
 
 #### Defined in
 
-[src/lib/infrastructure/command/parameters.ts:8](https://github.com/FlavioLionelRita/lambdaorm-cli/blob/abfd6c6/src/lib/infrastructure/command/parameters.ts#L8)
+[src/lib/infrastructure/command/parameters.ts:8](https://github.com/FlavioLionelRita/lambdaorm-cli/blob/770da35/src/lib/infrastructure/command/parameters.ts#L8)
 
 ___
 
@@ -54,13 +54,13 @@ CommandModule.describe
 
 #### Defined in
 
-[src/lib/infrastructure/command/parameters.ts:9](https://github.com/FlavioLionelRita/lambdaorm-cli/blob/abfd6c6/src/lib/infrastructure/command/parameters.ts#L9)
+[src/lib/infrastructure/command/parameters.ts:9](https://github.com/FlavioLionelRita/lambdaorm-cli/blob/770da35/src/lib/infrastructure/command/parameters.ts#L9)
 
 ## Methods
 
 ### builder
 
-▸ **builder**(`args`): `Argv`<{ `w`: `unknown`  } & { `q`: `unknown`  } & { `o`: `unknown`  }\>
+▸ **builder**(`args`): `Argv`<{ `w`: `unknown`  } & { `q`: `unknown`  } & { `e`: `unknown`  } & { `o`: `unknown`  }\>
 
 #### Parameters
 
@@ -70,7 +70,7 @@ CommandModule.describe
 
 #### Returns
 
-`Argv`<{ `w`: `unknown`  } & { `q`: `unknown`  } & { `o`: `unknown`  }\>
+`Argv`<{ `w`: `unknown`  } & { `q`: `unknown`  } & { `e`: `unknown`  } & { `o`: `unknown`  }\>
 
 #### Implementation of
 
@@ -78,7 +78,7 @@ CommandModule.builder
 
 #### Defined in
 
-[src/lib/infrastructure/command/parameters.ts:11](https://github.com/FlavioLionelRita/lambdaorm-cli/blob/abfd6c6/src/lib/infrastructure/command/parameters.ts#L11)
+[src/lib/infrastructure/command/parameters.ts:11](https://github.com/FlavioLionelRita/lambdaorm-cli/blob/770da35/src/lib/infrastructure/command/parameters.ts#L11)
 
 ___
 
@@ -104,4 +104,4 @@ CommandModule.handler
 
 #### Defined in
 
-[src/lib/infrastructure/command/parameters.ts:27](https://github.com/FlavioLionelRita/lambdaorm-cli/blob/abfd6c6/src/lib/infrastructure/command/parameters.ts#L27)
+[src/lib/infrastructure/command/parameters.ts:31](https://github.com/FlavioLionelRita/lambdaorm-cli/blob/770da35/src/lib/infrastructure/command/parameters.ts#L31)

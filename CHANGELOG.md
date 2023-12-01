@@ -6,10 +6,9 @@ All notable changes to this project will be documented in this file.
 
 ### [0.9.16](https://github.com/FlavioLionelRita/lambdaorm-cli/compare/v0.9.15...v0.9.16) (2023-12-01)
 
+**Bug Fixes:**
 
-### Bug Fixes
-
-* solve plan command ([770da35](https://github.com/FlavioLionelRita/lambdaorm-cli/commit/770da35fe694142ca506c4cea9f4418cacaaea57)), closes [#201](https://github.com/FlavioLionelRita/lambdaorm-cli/issues/201)
+* solve plan command ([770da35](https://github.com/FlavioLionelRita/lambdaorm-cli/commit/770da35fe694142ca506c4cea9f4418cacaaea57)), closes [#201](https://github.com/FlavioLionelRita/lambdaorm/issues/201)
 
 ### [0.9.15](https://github.com/FlavioLionelRita/lambdaorm-cli/compare/v0.9.14...v0.9.15) (2023-11-30)
 
