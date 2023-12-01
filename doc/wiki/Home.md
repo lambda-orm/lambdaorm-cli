@@ -33,10 +33,10 @@ Full documentation is available in the [Wiki](https://github.com/FlavioLionelRit
 
 ## Related projects
 
-- [Lambda ORM](https://github.com/FlavioLionelRita/lambdaorm)
-- [Lambda ORM Service](https://github.com/FlavioLionelRita/lambdaorm-cvs)
-- [Node Client](https://github.com/FlavioLionelRita/lambdaorm-client-node)
-- [Kotlin Client](https://github.com/FlavioLionelRita/lambdaorm-client-kotlin)
+- [Lambda ORM](https://www.npmjs.com/package/lambdaorm)
+- [Lambda ORM Service](https://github.com/FlavioLionelRita/lambdaorm-svc)
+- [Client Node](https://www.npmjs.com/package/lambdaorm-client-node)
+- [Client Kotlin](https://github.com/FlavioLionelRita/lambdaorm-client-kotlin)
 
 ## Labs
 
