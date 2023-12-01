@@ -26,6 +26,7 @@
 		"lastname",
 		"lpad",
 		"ltrim",
+		"MONGODB",
 		"MYSQL",
 		"northwind",
 		"npmjs",

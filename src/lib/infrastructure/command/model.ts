@@ -18,6 +18,10 @@ export class ModelCommand implements CommandModule {
 				alias: 'query',
 				describe: 'Query expression'
 			})
+			.option('e', {
+				alias: 'envfile',
+				describe: 'Read in a file of environment variables'
+			})
 			.option('o', {
 				alias: 'output',
 				describe: 'Generates an output according to the following possible values [json|beautiful|light|yaml]'
