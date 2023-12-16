@@ -26,7 +26,11 @@
 
 ### constructor
 
-• **new InitCommand**()
+• **new InitCommand**(): [`InitCommand`](InitCommand.md)
+
+#### Returns
+
+[`InitCommand`](InitCommand.md)
 
 ## Properties
 
@@ -40,7 +44,7 @@ CommandModule.command
 
 #### Defined in
 
-[src/lib/infrastructure/command/init.ts:5](https://github.com/FlavioLionelRita/lambdaorm-cli/blob/e1a2e0a/src/lib/infrastructure/command/init.ts#L5)
+[src/lib/infrastructure/command/init.ts:5](https://github.com/FlavioLionelRita/lambdaorm-cli/blob/657a7b7/src/lib/infrastructure/command/init.ts#L5)
 
 ___
 
@@ -54,23 +58,23 @@ CommandModule.describe
 
 #### Defined in
 
-[src/lib/infrastructure/command/init.ts:6](https://github.com/FlavioLionelRita/lambdaorm-cli/blob/e1a2e0a/src/lib/infrastructure/command/init.ts#L6)
+[src/lib/infrastructure/command/init.ts:6](https://github.com/FlavioLionelRita/lambdaorm-cli/blob/657a7b7/src/lib/infrastructure/command/init.ts#L6)
 
 ## Methods
 
 ### builder
 
-▸ **builder**(`args`): `Argv`<{ `w`: `string`  } & { `s`: `unknown`  } & { `d`: `unknown`  } & { `c`: `unknown`  } & { `data-path`: `unknown`  }\>
+▸ **builder**(`args`): `Argv`\<\{ `w`: `string`  } & \{ `s`: `unknown`  } & \{ `d`: `unknown`  } & \{ `c`: `unknown`  } & \{ `data-path`: `unknown`  }\>
 
 #### Parameters
 
 | Name | Type |
 | :------ | :------ |
-| `args` | `Argv`<{}\> |
+| `args` | `Argv`\<{}\> |
 
 #### Returns
 
-`Argv`<{ `w`: `string`  } & { `s`: `unknown`  } & { `d`: `unknown`  } & { `c`: `unknown`  } & { `data-path`: `unknown`  }\>
+`Argv`\<\{ `w`: `string`  } & \{ `s`: `unknown`  } & \{ `d`: `unknown`  } & \{ `c`: `unknown`  } & \{ `data-path`: `unknown`  }\>
 
 #### Implementation of
 
@@ -78,13 +82,13 @@ CommandModule.builder
 
 #### Defined in
 
-[src/lib/infrastructure/command/init.ts:8](https://github.com/FlavioLionelRita/lambdaorm-cli/blob/e1a2e0a/src/lib/infrastructure/command/init.ts#L8)
+[src/lib/infrastructure/command/init.ts:8](https://github.com/FlavioLionelRita/lambdaorm-cli/blob/657a7b7/src/lib/infrastructure/command/init.ts#L8)
 
 ___
 
 ### handler
 
-▸ **handler**(`args`): `Promise`<`void`\>
+▸ **handler**(`args`): `Promise`\<`void`\>
 
 #### Parameters
 
@@ -96,7 +100,7 @@ ___
 
 #### Returns
 
-`Promise`<`void`\>
+`Promise`\<`void`\>
 
 #### Implementation of
 
@@ -104,4 +108,4 @@ CommandModule.handler
 
 #### Defined in
 
-[src/lib/infrastructure/command/init.ts:33](https://github.com/FlavioLionelRita/lambdaorm-cli/blob/e1a2e0a/src/lib/infrastructure/command/init.ts#L33)
+[src/lib/infrastructure/command/init.ts:33](https://github.com/FlavioLionelRita/lambdaorm-cli/blob/657a7b7/src/lib/infrastructure/command/init.ts#L33)

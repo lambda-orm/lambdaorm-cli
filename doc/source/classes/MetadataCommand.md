@@ -26,7 +26,11 @@
 
 ### constructor
 
-• **new MetadataCommand**()
+• **new MetadataCommand**(): [`MetadataCommand`](MetadataCommand.md)
+
+#### Returns
+
+[`MetadataCommand`](MetadataCommand.md)
 
 ## Properties
 
@@ -40,7 +44,7 @@ CommandModule.command
 
 #### Defined in
 
-[src/lib/infrastructure/command/metadata.ts:8](https://github.com/FlavioLionelRita/lambdaorm-cli/blob/e1a2e0a/src/lib/infrastructure/command/metadata.ts#L8)
+[src/lib/infrastructure/command/metadata.ts:8](https://github.com/FlavioLionelRita/lambdaorm-cli/blob/657a7b7/src/lib/infrastructure/command/metadata.ts#L8)
 
 ___
 
@@ -54,23 +58,23 @@ CommandModule.describe
 
 #### Defined in
 
-[src/lib/infrastructure/command/metadata.ts:9](https://github.com/FlavioLionelRita/lambdaorm-cli/blob/e1a2e0a/src/lib/infrastructure/command/metadata.ts#L9)
+[src/lib/infrastructure/command/metadata.ts:9](https://github.com/FlavioLionelRita/lambdaorm-cli/blob/657a7b7/src/lib/infrastructure/command/metadata.ts#L9)
 
 ## Methods
 
 ### builder
 
-▸ **builder**(`args`): `Argv`<{ `w`: `unknown`  } & { `q`: `unknown`  } & { `e`: `unknown`  } & { `o`: `unknown`  }\>
+▸ **builder**(`args`): `Argv`\<\{ `w`: `unknown`  } & \{ `q`: `unknown`  } & \{ `e`: `unknown`  } & \{ `o`: `unknown`  }\>
 
 #### Parameters
 
 | Name | Type |
 | :------ | :------ |
-| `args` | `Argv`<{}\> |
+| `args` | `Argv`\<{}\> |
 
 #### Returns
 
-`Argv`<{ `w`: `unknown`  } & { `q`: `unknown`  } & { `e`: `unknown`  } & { `o`: `unknown`  }\>
+`Argv`\<\{ `w`: `unknown`  } & \{ `q`: `unknown`  } & \{ `e`: `unknown`  } & \{ `o`: `unknown`  }\>
 
 #### Implementation of
 
@@ -78,13 +82,13 @@ CommandModule.builder
 
 #### Defined in
 
-[src/lib/infrastructure/command/metadata.ts:11](https://github.com/FlavioLionelRita/lambdaorm-cli/blob/e1a2e0a/src/lib/infrastructure/command/metadata.ts#L11)
+[src/lib/infrastructure/command/metadata.ts:11](https://github.com/FlavioLionelRita/lambdaorm-cli/blob/657a7b7/src/lib/infrastructure/command/metadata.ts#L11)
 
 ___
 
 ### handler
 
-▸ **handler**(`args`): `Promise`<`void`\>
+▸ **handler**(`args`): `Promise`\<`void`\>
 
 #### Parameters
 
@@ -96,7 +100,7 @@ ___
 
 #### Returns
 
-`Promise`<`void`\>
+`Promise`\<`void`\>
 
 #### Implementation of
 
@@ -104,4 +108,4 @@ CommandModule.handler
 
 #### Defined in
 
-[src/lib/infrastructure/command/metadata.ts:31](https://github.com/FlavioLionelRita/lambdaorm-cli/blob/e1a2e0a/src/lib/infrastructure/command/metadata.ts#L31)
+[src/lib/infrastructure/command/metadata.ts:31](https://github.com/FlavioLionelRita/lambdaorm-cli/blob/657a7b7/src/lib/infrastructure/command/metadata.ts#L31)

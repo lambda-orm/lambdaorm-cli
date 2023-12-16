@@ -26,7 +26,11 @@
 
 ### constructor
 
-• **new BuildCommand**()
+• **new BuildCommand**(): [`BuildCommand`](BuildCommand.md)
+
+#### Returns
+
+[`BuildCommand`](BuildCommand.md)
 
 ## Properties
 
@@ -40,7 +44,7 @@ CommandModule.command
 
 #### Defined in
 
-[src/lib/infrastructure/command/build.ts:7](https://github.com/FlavioLionelRita/lambdaorm-cli/blob/e1a2e0a/src/lib/infrastructure/command/build.ts#L7)
+[src/lib/infrastructure/command/build.ts:7](https://github.com/FlavioLionelRita/lambdaorm-cli/blob/657a7b7/src/lib/infrastructure/command/build.ts#L7)
 
 ___
 
@@ -54,23 +58,23 @@ CommandModule.describe
 
 #### Defined in
 
-[src/lib/infrastructure/command/build.ts:8](https://github.com/FlavioLionelRita/lambdaorm-cli/blob/e1a2e0a/src/lib/infrastructure/command/build.ts#L8)
+[src/lib/infrastructure/command/build.ts:8](https://github.com/FlavioLionelRita/lambdaorm-cli/blob/657a7b7/src/lib/infrastructure/command/build.ts#L8)
 
 ## Methods
 
 ### builder
 
-▸ **builder**(`args`): `Argv`<{ `w`: `undefined` \| `string`  } & { `l`: `unknown`  } & { `m`: `unknown`  } & { `r`: `unknown`  } & { `a`: `unknown`  } & { `src-path`: `unknown`  } & { `data-path`: `unknown`  } & { `domain-path`: `unknown`  }\>
+▸ **builder**(`args`): `Argv`\<\{ `w`: `undefined` \| `string`  } & \{ `l`: `unknown`  } & \{ `m`: `unknown`  } & \{ `r`: `unknown`  } & \{ `a`: `unknown`  } & \{ `src-path`: `unknown`  } & \{ `data-path`: `unknown`  } & \{ `domain-path`: `unknown`  }\>
 
 #### Parameters
 
 | Name | Type |
 | :------ | :------ |
-| `args` | `Argv`<{}\> |
+| `args` | `Argv`\<{}\> |
 
 #### Returns
 
-`Argv`<{ `w`: `undefined` \| `string`  } & { `l`: `unknown`  } & { `m`: `unknown`  } & { `r`: `unknown`  } & { `a`: `unknown`  } & { `src-path`: `unknown`  } & { `data-path`: `unknown`  } & { `domain-path`: `unknown`  }\>
+`Argv`\<\{ `w`: `undefined` \| `string`  } & \{ `l`: `unknown`  } & \{ `m`: `unknown`  } & \{ `r`: `unknown`  } & \{ `a`: `unknown`  } & \{ `src-path`: `unknown`  } & \{ `data-path`: `unknown`  } & \{ `domain-path`: `unknown`  }\>
 
 #### Implementation of
 
@@ -78,13 +82,13 @@ CommandModule.builder
 
 #### Defined in
 
-[src/lib/infrastructure/command/build.ts:10](https://github.com/FlavioLionelRita/lambdaorm-cli/blob/e1a2e0a/src/lib/infrastructure/command/build.ts#L10)
+[src/lib/infrastructure/command/build.ts:10](https://github.com/FlavioLionelRita/lambdaorm-cli/blob/657a7b7/src/lib/infrastructure/command/build.ts#L10)
 
 ___
 
 ### handler
 
-▸ **handler**(`args`): `Promise`<`void`\>
+▸ **handler**(`args`): `Promise`\<`void`\>
 
 #### Parameters
 
@@ -96,7 +100,7 @@ ___
 
 #### Returns
 
-`Promise`<`void`\>
+`Promise`\<`void`\>
 
 #### Implementation of
 
@@ -104,4 +108,4 @@ CommandModule.handler
 
 #### Defined in
 
-[src/lib/infrastructure/command/build.ts:43](https://github.com/FlavioLionelRita/lambdaorm-cli/blob/e1a2e0a/src/lib/infrastructure/command/build.ts#L43)
+[src/lib/infrastructure/command/build.ts:43](https://github.com/FlavioLionelRita/lambdaorm-cli/blob/657a7b7/src/lib/infrastructure/command/build.ts#L43)
