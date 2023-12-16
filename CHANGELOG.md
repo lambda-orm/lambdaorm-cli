@@ -4,6 +4,8 @@ All notable changes to this project will be documented in this file.
 
 ## Versions
 
+### [0.9.19](https://github.com/FlavioLionelRita/lambdaorm-cli/compare/v0.9.18...v0.9.19) (2023-12-16)
+
 ### [0.9.18](https://github.com/FlavioLionelRita/lambdaorm-cli/compare/v0.9.17...v0.9.18) (2023-12-02)
 
 ### [0.9.17](https://github.com/FlavioLionelRita/lambdaorm-cli/compare/v0.9.16...v0.9.17) (2023-12-01)
