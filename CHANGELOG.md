@@ -6,10 +6,9 @@ All notable changes to this project will be documented in this file.
 
 ### [0.9.20](https://github.com/FlavioLionelRita/lambdaorm-cli/compare/v0.9.19...v0.9.20) (2023-12-16)
 
+**Features:**
 
-### Features
-
-* update dependencies ([84fc365](https://github.com/FlavioLionelRita/lambdaorm-cli/commit/84fc36529f4d958215b83290372f9be892e7a311)), closes [#201](https://github.com/FlavioLionelRita/lambdaorm-cli/issues/201)
+* update dependencies ([84fc365](https://github.com/FlavioLionelRita/lambdaorm-cli/commit/84fc36529f4d958215b83290372f9be892e7a311)), closes [#201](https://github.com/FlavioLionelRita/lambdaorm/issues/201)
 
 ### [0.9.19](https://github.com/FlavioLionelRita/lambdaorm-cli/compare/v0.9.18...v0.9.19) (2023-12-16)
 
