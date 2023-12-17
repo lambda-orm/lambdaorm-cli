@@ -10,6 +10,7 @@
 		"classtype",
 		"commitlint",
 		"concat",
+		"datasource",
 		"datasources",
 		"datetime",
 		"Datetime",
