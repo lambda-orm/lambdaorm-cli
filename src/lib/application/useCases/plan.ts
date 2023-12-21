@@ -1,4 +1,3 @@
-import { Orm } from 'lambdaorm'
 import { OrmCliService } from '../services/ormCli'
 import { OutputService } from '../services/outputService'
 
@@ -11,10 +10,11 @@ export class Plan {
 			console.error('the query expression argument is required')
 			return
 		}
-		const orm = new Orm(workspace)
+		const orm = this.service.createOrm({ workspace })
 		try {
-			const _stage = await this.service.getStage(orm, workspace, stage)
-			const result = orm.plan(query, { stage: _stage.name })
+			await orm.init()
+			const stageName = await orm.getStageName(stage)
+			const result = orm.plan(query, { stage: stageName })
 			this.outputService.execute(result, output)
 		} catch (error) {
 			console.error(`error: ${error}`)

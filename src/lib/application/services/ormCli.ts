@@ -2,9 +2,10 @@ import { Orm, Stage } from 'lambdaorm'
 import { Helper } from '../helper'
 
 import { LanguagePort } from '../../domain'
+import { CliOrm, OrmFactory, OrmFactoryArgs } from '../orm/orm'
 export class OrmCliService {
 	// eslint-disable-next-line no-useless-constructor
-	constructor (private readonly helper:Helper, private readonly languages:LanguagePort[] = []) {}
+	constructor (private readonly ormFactory:OrmFactory, private readonly helper:Helper, private readonly languages:LanguagePort[] = []) {}
 
 	public addLanguage (value:LanguagePort):void {
 		this.languages.push(value)
@@ -16,6 +17,10 @@ export class OrmCliService {
 			throw new Error(`Language ${name} not found`)
 		}
 		return languagePort
+	}
+
+	public createOrm (args: OrmFactoryArgs):CliOrm {
+		return this.ormFactory.create(args)
 	}
 
 	public async getGlobalPackage (name:string): Promise<string> {

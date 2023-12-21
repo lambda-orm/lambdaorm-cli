@@ -1,4 +1,3 @@
-import { Orm } from 'lambdaorm'
 import { Helper } from '../helper'
 import { OrmCliService } from '../services/ormCli'
 import path from 'path'
@@ -8,12 +7,12 @@ export class Export {
 	constructor (private readonly service:OrmCliService, private readonly helper:Helper) {}
 
 	public async execute (workspace:string, target:string, stage?:string, force = false): Promise<void> {
-		const orm = new Orm(workspace)
+		const orm = this.service.createOrm({ workspace })
 		try {
-			const _stage = await this.service.getStage(orm, workspace, stage)
-			const exportFile = path.join(target, _stage.name + '-export.json')
-			const dataExport = orm.stage.export({ stage: _stage.name, tryAllCan: force })
-			const data = await dataExport.execute()
+			await orm.init()
+			const stageName = await orm.getStageName(stage)
+			const exportFile = path.join(target, stageName + '-export.json')
+			const data = await orm.stage.export(stageName, force)
 			await this.helper.fs.write(exportFile, JSON.stringify(data))
 		} catch (error) {
 			console.error(`error: ${error}`)

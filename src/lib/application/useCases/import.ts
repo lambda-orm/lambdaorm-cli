@@ -1,4 +1,3 @@
-import { Orm } from 'lambdaorm'
 import { Helper } from '../helper'
 import { OrmCliService } from '../services/ormCli'
 
@@ -11,13 +10,12 @@ export class Import {
 			console.error('the data argument is required')
 			return
 		}
-		const orm = new Orm(workspace)
+		const orm = this.service.createOrm({ workspace })
 		try {
-			const _stage = await this.service.getStage(orm, workspace, stage)
-			// read Data
+			await orm.init()
+			const stageName = await orm.getStageName(stage)
 			const _data = await this.helper.cli.readData(data)
-			// import data
-			await orm.stage.import({ stage: _stage.name }).execute(_data)
+			await orm.stage.import(stageName, _data)
 		} catch (error) {
 			console.error(`error: ${error}`)
 		} finally {

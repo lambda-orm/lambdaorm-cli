@@ -1,4 +1,3 @@
-import { Orm } from 'lambdaorm'
 import { OrmCliService } from '../services/ormCli'
 
 export class Drop {
@@ -6,17 +5,13 @@ export class Drop {
 	constructor (private readonly service:OrmCliService) {}
 
 	public async execute (workspace:string, stage:string, output:string, force = false): Promise<void> {
-		const orm = new Orm(workspace)
+		const orm = this.service.createOrm({ workspace })
+		const _output = output !== undefined
 		try {
-			const _stage = await this.service.getStage(orm, workspace, stage)
-			// TODO: en vez de output debería ser generar sentences
-			if (output) {
-				const sentences = await orm.stage.drop({ stage: _stage.name }).sentence()
-				console.log(sentences)
-			} else {
-				const result = await orm.stage.drop({ stage: _stage.name, tryAllCan: force }).execute()
-				console.log(JSON.stringify(result, null, 2))
-			}
+			await orm.init()
+			const stageName = await orm.getStageName(stage)
+			const result = await orm.stage.drop(stageName, _output, force)
+			console.log(JSON.stringify(result, null, 2))
 		} catch (error) {
 			console.error(`error: ${error}`)
 		} finally {

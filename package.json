@@ -34,6 +34,7 @@
 		"js-yaml": "^4.1.0",
 		"json-light": "^1.0.0",
 		"lambdaorm": "^0.8.98",
+		"lambdaorm-client-node": "^0.7.28",
 		"mongodb": "^6.3.0",
 		"mysql2": "^3.4.0",
 		"oracledb": "^6.2.0",
