@@ -1,20 +1,46 @@
-import { Dialect, Entity, DomainSchema, InfrastructureSchema } from 'lambdaorm'
-import { Helper } from '../../application'
-import { LanguagePort } from '../../domain'
+import { Dialect, Entity, DomainSchema, InfrastructureSchema, SchemaFacade } from 'lambdaorm'
 import path from 'path'
+import { BuildArgs, Helper, LanguageService } from '../../application'
 
-export class NodeLanguageAdapter implements LanguagePort {
+export class NodeLanguageService implements LanguageService {
 	protected library: string
-	protected helper:Helper
-	public constructor (helper:Helper) {
-		this.helper = helper
+	public constructor (protected readonly schemaFacade:SchemaFacade, protected readonly helper:Helper) {
 		this.library = 'lambdaorm'
 	}
 
 	public get name (): string {
 		return 'node'
 	}
-	// eslint-disable-next-line no-useless-constructor
+
+	public async build (args:BuildArgs): Promise<void> {
+		let schema = await this.schemaFacade.get(args.workspace)
+		if (schema === null) {
+			throw new Error(`Can't found schema in ${args.workspace}`)
+		}
+		const _srcPath = args.srcPath || schema.infrastructure?.paths.src || 'src'
+		const _dataPath = args.dataPath || schema.infrastructure?.paths.data
+		const _domainPath = args.domainPath || schema.infrastructure?.paths.domain
+		schema = await this.schemaFacade.initialize(schema)
+		await this.updateStructure(args.workspace, _srcPath, _dataPath)
+		// add libraries for dialect
+		if (schema.infrastructure && schema.infrastructure.sources && schema.infrastructure.sources.length > 0) {
+			await this.addDialects(args.workspace, schema.infrastructure)
+		}
+		this.schemaFacade.complete(schema)
+		if (_domainPath) {
+			const __domainPath = path.join(args.workspace, _srcPath, _domainPath)
+			if (args.options.includes('model')) {
+				await this.buildModel(__domainPath, schema.domain)
+			}
+			if (args.options.includes('repositories')) {
+				await this.buildRepositories(__domainPath, schema.domain)
+			}
+		}
+	}
+
+	public async localVersion (workspace:string): Promise<string> {
+		return await this.getLocalPackage('lambdaorm', workspace)
+	}
 
 	/**
 	* if the package.json does not exist create it
@@ -57,7 +83,7 @@ export class NodeLanguageAdapter implements LanguagePort {
 		}
 	}
 
-	public async updateStructure (workspace:string, srcPath:string, dataPath?:string): Promise<void> {
+	protected async updateStructure (workspace:string, srcPath:string, dataPath?:string): Promise<void> {
 		// create initial structure
 		await this.helper.fs.create(path.join(workspace, srcPath))
 		if (dataPath) {
@@ -69,7 +95,7 @@ export class NodeLanguageAdapter implements LanguagePort {
 		await this.installLibrary(workspace)
 	}
 
-	public async addDialects (path:string, infrastructure: InfrastructureSchema) : Promise<void> {
+	protected async addDialects (path:string, infrastructure: InfrastructureSchema) : Promise<void> {
 		for (const p in infrastructure.sources) {
 			const source = infrastructure.sources[p]
 			// if the library is not installed locally corresponding to the dialect it will be installed
@@ -84,18 +110,14 @@ export class NodeLanguageAdapter implements LanguagePort {
 		}
 	}
 
-	public async localVersion (workspace:string): Promise<string> {
-		return await this.getLocalPackage('lambdaorm', workspace)
-	}
-
-	public async buildModel (domainPath:string, domain: DomainSchema) : Promise<void> {
+	protected async buildModel (domainPath:string, domain: DomainSchema) : Promise<void> {
 		const content = this.getModelContent(domain)
 		this.helper.fs.create(domainPath)
 		const schemaPath = path.join(domainPath, 'model.ts')
 		await this.helper.fs.write(schemaPath, content)
 	}
 
-	public async buildRepositories (domainPath:string, domain: DomainSchema): Promise<void> {
+	protected async buildRepositories (domainPath:string, domain: DomainSchema): Promise<void> {
 		this.helper.fs.create(domainPath)
 		for (const entity of domain.entities) {
 			if (entity.abstract) continue

@@ -1,15 +1,40 @@
-import { Dialect, Orm, Schema } from 'lambdaorm'
-import { Helper } from '../helper'
+import { Dialect, Schema, SchemaFacade } from 'lambdaorm'
+import { Helper, InitArgs, WorkspaceService } from '../../../application'
+import * as client from 'lambdaorm-client-node'
 import path from 'path'
 const yaml = require('js-yaml')
 
-export class SchemaService {
-	// eslint-disable-next-line no-useless-constructor
-	constructor (private readonly orm:Orm, private readonly helper:Helper) {}
+export class ClientWorkspaceService implements WorkspaceService {
+	private orm: client.Orm
+	constructor (private readonly workspace:string,
+		private readonly host:string,
+		private readonly schemaFacade:SchemaFacade,
+		private readonly helper:Helper
+	) {
+		this.orm = new client.Orm(this.host)
+	}
+
+	public async init (args: InitArgs): Promise<void> {
+		// create workspace
+		await this.helper.fs.create(this.workspace)
+		// get or create config file
+		let sourceSchema = await this.schemaFacade.get(this.workspace)
+		if (sourceSchema === null) {
+			sourceSchema = await this.schemaFacade.create()
+		}
+		// complete schema config
+		const targetSchema = this.completeSchema(sourceSchema, args.source, args.dialect, args.connection)
+		// write lambdaorm config
+		const configPath = path.join(this.workspace, 'lambdaORM.yaml')
+		const _dataPath = args.dataPath || targetSchema.infrastructure?.paths.data
+		await this.writeSchema(configPath, targetSchema)
+		// create structure
+		await this.createStructure(this.workspace, _dataPath)
+	}
 
 	public completeSchema (_schema: Schema, sourceName?: string, dialect?: string, connection?: any): Schema {
 		const schema:Schema = this.helper.obj.clone(_schema)
-		this.orm.schema.complete(schema)
+		this.schemaFacade.complete(schema)
 		let source:any
 		if (sourceName !== undefined) {
 			source = schema.infrastructure?.sources.find(p => p.name === sourceName)

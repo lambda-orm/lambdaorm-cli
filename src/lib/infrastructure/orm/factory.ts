@@ -1,17 +1,16 @@
-import { Languages } from '../../application/services/languages'
-import { CliOrm, OrmFactory, OrmFactoryArgs } from '../../application/orm/orm'
-import { OrmClientWrapper } from './adapters/client'
-import { OrmWrapper } from './adapters/lib'
+import { OrmFactory, OrmFactoryArgs, OrmService } from '../../application'
+import { RestOrmService } from './adapters/rest'
+import { LibOrmService } from './adapters/lib'
 
 export class OrmFactoryImp implements OrmFactory {
 	// eslint-disable-next-line no-useless-constructor
-	public constructor (private readonly languages: Languages) {}
+	public constructor () {}
 
-	public create (args: OrmFactoryArgs): CliOrm {
+	public create (args: OrmFactoryArgs): OrmService {
 		const workspace = args.workspace || process.cwd()
 		if (args.host) {
-			return new OrmClientWrapper(this.languages, workspace, args.host)
+			return new RestOrmService(workspace, args.host)
 		}
-		return new OrmWrapper(this.languages, workspace)
+		return new LibOrmService(workspace)
 	}
 }

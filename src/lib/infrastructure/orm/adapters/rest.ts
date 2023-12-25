@@ -2,11 +2,11 @@
 import {
 	MetadataModel, MetadataParameter, MetadataConstraint, Metadata, QueryOptions, QueryPlan, DomainSchema, Entity, Enum, Mapping, Relation, Dependent, SchemaConfig
 } from 'lambdaorm'
-import { BuildArgs, CliOrm, CliSchemaFacade, CliStageFacade } from '../../../application/orm/orm'
+import { BuildArgs, OrmService, SchemaService, StageService } from '../../../application/ports/orm'
 import * as client from 'lambdaorm-client-node'
 import { Languages } from '../../../application/services/languages'
 
-export class ClientSchemaFacadeWrapper implements CliSchemaFacade {
+export class ClientSchemaService implements SchemaService {
 	// eslint-disable-next-line no-useless-constructor
 	public constructor (private readonly schemaService: client.SchemaService) {}
 
@@ -131,7 +131,7 @@ export class ClientSchemaFacadeWrapper implements CliSchemaFacade {
 	}
 }
 
-export class ClientStageFacadeWrapper implements CliStageFacade {
+export class ClientStageService implements StageService {
 	// eslint-disable-next-line no-useless-constructor
 	public constructor (private readonly stageService: client.StageService) {}
 
@@ -156,19 +156,14 @@ export class ClientStageFacadeWrapper implements CliStageFacade {
 	}
 }
 
-export class OrmClientWrapper implements CliOrm {
-	private schemaFacade: CliSchemaFacade
-	private stageFacade: CliStageFacade
+export class RestOrmService implements OrmService {
+	public schema: SchemaService
+	public stage: StageService
 	private orm: client.Orm
-	public constructor (private readonly languages: Languages, private readonly workspace:string, private readonly host:string) {
+	public constructor (private readonly workspace:string, private readonly host:string) {
 		this.orm = new client.Orm(host)
-		this.schemaFacade = new ClientSchemaFacadeWrapper(this.orm.schema)
-		this.stageFacade = new ClientStageFacadeWrapper(this.orm.stage)
-	}
-
-	build (args: BuildArgs): Promise<void> {
-		// TODO: Implement build
-		throw new Error('Method not implemented.')
+		this.schema = new ClientSchemaService(this.orm.schema)
+		this.stage = new ClientStageService(this.orm.stage)
 	}
 
 	public async init (): Promise<any> {
@@ -192,14 +187,6 @@ export class OrmClientWrapper implements CliOrm {
 			throw new Error(`Can't found stage ${stage} in ${this.host}`)
 		}
 		return _stage.name
-	}
-
-	public get schema (): CliSchemaFacade {
-		return this.schemaFacade
-	}
-
-	public get stage (): CliStageFacade {
-		return this.stageFacade
 	}
 
 	public async model (expression: string): Promise<MetadataModel[]> {

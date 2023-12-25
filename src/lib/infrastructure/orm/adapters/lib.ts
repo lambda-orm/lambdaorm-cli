@@ -2,11 +2,9 @@ import {
 	MetadataModel, MetadataParameter, MetadataConstraint, Metadata, QueryOptions, QueryPlan, IOrm, DomainSchema, Entity, EntityMapping
 	, Enum, Mapping, Schema, Stage, SchemaFacade, SchemaConfig, Orm
 } from 'lambdaorm'
-import { BuildArgs, CliOrm, CliSchemaFacade, CliStageFacade } from '../../../application/orm/orm'
-import { Languages } from '../../../application/services/languages'
-import path from 'path'
+import { OrmService, SchemaService, StageService } from '../../../application'
 
-export class SchemaFacadeWrapper implements CliSchemaFacade {
+export class LibSchemaService implements SchemaService {
 	// eslint-disable-next-line no-useless-constructor
 	public constructor (private readonly schemaFacade: SchemaFacade) {}
 
@@ -79,7 +77,7 @@ export class SchemaFacadeWrapper implements CliSchemaFacade {
 	}
 }
 
-export class StageFacadeWrapper implements CliStageFacade {
+export class LibStageService implements StageService {
 	// eslint-disable-next-line no-useless-constructor
 	public constructor (private readonly orm:IOrm, private readonly workspace:string) {}
 	public async exists (stage: string): Promise<boolean> {
@@ -117,14 +115,14 @@ export class StageFacadeWrapper implements CliStageFacade {
 	}
 }
 
-export class OrmWrapper implements CliOrm {
-	private schemaFacade: CliSchemaFacade
-	private stageFacade: CliStageFacade
+export class LibOrmService implements OrmService {
+	public schema: SchemaService
+	public stage: StageService
 	private readonly orm: IOrm
-	public constructor (private readonly languages: Languages, private readonly workspace:string) {
+	public constructor (private readonly workspace:string) {
 		this.orm = new Orm(workspace)
-		this.schemaFacade = new SchemaFacadeWrapper(this.orm.schema)
-		this.stageFacade = new StageFacadeWrapper(this.orm, workspace)
+		this.schema = new LibSchemaService(this.orm.schema)
+		this.stage = new LibStageService(this.orm, workspace)
 	}
 
 	public async init (): Promise<any> {
@@ -142,14 +140,6 @@ export class OrmWrapper implements CliOrm {
 
 	public async end (): Promise<void> {
 		return this.orm.end()
-	}
-
-	public get schema (): CliSchemaFacade {
-		return this.schemaFacade
-	}
-
-	public get stage (): CliStageFacade {
-		return this.stageFacade
 	}
 
 	public async model (expression: string): Promise<MetadataModel[]> {
@@ -174,33 +164,5 @@ export class OrmWrapper implements CliOrm {
 
 	public async execute (expression: string, data?: any, options?: QueryOptions | undefined): Promise<any> {
 		return this.orm.execute(expression, data, options)
-	}
-
-	public async build (args:BuildArgs): Promise<void> {
-		const languageService = this.languages.get(args.language)
-		let schema = await this.orm.schema.get(this.workspace)
-		if (schema === null) {
-			throw new Error(`Can't found schema in ${this.workspace}`)
-		}
-		const _srcPath = args.srcPath || schema.infrastructure?.paths.src || 'src'
-		const _dataPath = args.dataPath || schema.infrastructure?.paths.data
-		const _domainPath = args.domainPath || schema.infrastructure?.paths.domain
-		schema = await this.orm.schema.initialize(schema)
-		await languageService.updateStructure(this.workspace, _srcPath, _dataPath)
-		// add libraries for dialect
-		if (schema.infrastructure && schema.infrastructure.sources && schema.infrastructure.sources.length > 0) {
-			await languageService.addDialects(this.workspace, schema.infrastructure)
-		}
-		// TODO cambiar por complete dado que el modelo se debe escribir sin extenderlo
-		this.orm.schema.complete(schema)
-		if (_domainPath) {
-			const __domainPath = path.join(this.workspace, _srcPath, _domainPath)
-			if (args.options.includes('model')) {
-				await languageService.buildModel(__domainPath, schema.domain)
-			}
-			if (args.options.includes('repositories')) {
-				await languageService.buildRepositories(__domainPath, schema.domain)
-			}
-		}
 	}
 }

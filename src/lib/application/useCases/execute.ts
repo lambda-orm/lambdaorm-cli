@@ -1,23 +1,20 @@
-import { Helper } from '../helper'
-import { OrmCliService } from '../services/ormCli'
-import { OutputService } from '../services/outputService'
-
+import { CliFacade } from '../cli'
 export class Execute {
 	// eslint-disable-next-line no-useless-constructor
-	constructor (private readonly service:OrmCliService, private readonly helper:Helper, private readonly outputService:OutputService) {}
+	constructor (private readonly service:CliFacade) {}
 
 	public async execute (workspace:string, query:string, data:any, stage?:string, output?:string): Promise<void> {
 		if (query === undefined) {
 			console.error('the query expression argument is required')
 			return
 		}
-		const orm = this.service.createOrm({ workspace })
+		const orm = this.service.orm.create({ workspace })
 		try {
 			await orm.init()
 			const stageName = await orm.getStageName(stage)
-			const _data = await this.helper.cli.readData(data)
+			const _data = await this.service.helper.cli.readData(data)
 			const result = await orm.execute(query, _data, { stage: stageName })
-			this.outputService.execute(result, output)
+			this.service.output.execute(result, output)
 		} catch (error) {
 			console.error(`error: ${error}`)
 		} finally {

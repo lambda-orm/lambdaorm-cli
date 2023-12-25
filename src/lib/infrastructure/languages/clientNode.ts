@@ -1,9 +1,10 @@
+import { SchemaFacade } from 'lambdaorm'
 import { Helper } from '../../application'
-import { NodeLanguageAdapter } from './node'
+import { NodeLanguageService } from './node'
 
-export class ClientNodeLanguageAdapter extends NodeLanguageAdapter {
-	public constructor (helper:Helper) {
-		super(helper)
+export class ClientNodeLanguageService extends NodeLanguageService {
+	public constructor (schemaFacade:SchemaFacade, helper:Helper) {
+		super(schemaFacade, helper)
 		this.library = 'lambdaorm-client-node'
 	}
 

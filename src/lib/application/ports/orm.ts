@@ -4,7 +4,7 @@ import {
 	, DomainSchema, SchemaConfig, Entity, Enum
 } from 'lambdaorm'
 
-export interface CliSchemaFacade {
+export interface SchemaService {
 	version ():Promise<{version:string}>
 	// schema (): Promise<Schema>
 	domain (): Promise<DomainSchema>
@@ -21,7 +21,7 @@ export interface CliSchemaFacade {
 	// views (): Promise<string[]>
 }
 
-export interface CliStageFacade {
+export interface StageService {
 	exists (stage:string): Promise<boolean>
 	export (stage:string, force: boolean): Promise<SchemaConfig>
 	import (stage:string, schemaData:any): Promise<void>
@@ -30,6 +30,7 @@ export interface CliStageFacade {
 }
 
 export interface BuildArgs {
+	workspace:string
 	language:string
 	options:string[]
 	srcPath?:string
@@ -37,15 +38,15 @@ export interface BuildArgs {
 	domainPath?:string
 }
 
-export interface CliOrm
+export interface OrmService
 {
 	init ():Promise<any>
 	end ():Promise<void>
-	build (args:BuildArgs): Promise<void>
+	// build (args:BuildArgs): Promise<void>
 	getStageName (stage?:string):Promise<string>
 
-	get schema (): CliSchemaFacade
-	get stage (): CliStageFacade
+	schema : SchemaService
+	stage : StageService
 	/**
 		* Get model of expression
 		* @returns Model of expression
@@ -93,5 +94,5 @@ export interface OrmFactoryArgs {
 }
 
 export interface OrmFactory {
-	create (args: OrmFactoryArgs): CliOrm
+	create (args: OrmFactoryArgs): OrmService
 }

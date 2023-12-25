@@ -28,13 +28,14 @@
 		"dist": "grunt dist",
 		"release": "grunt release"
 	},
-	"dependencies": {
-		"dotenv": "^16.3.1",
+	"dependencies": {		
 		"h3lp": "^1.5.1",
-		"js-yaml": "^4.1.0",
+		"3xpr": "^1.15.0",		
 		"json-light": "^1.0.0",
-		"lambdaorm": "^0.8.98",
+		"lambdaorm": "^1.1.0",
 		"lambdaorm-client-node": "^0.7.28",
+		"dotenv": "^16.3.1",
+		"js-yaml": "^4.1.0",
 		"mongodb": "^6.3.0",
 		"mysql2": "^3.4.0",
 		"oracledb": "^6.2.0",
