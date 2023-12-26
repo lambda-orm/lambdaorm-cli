@@ -8,8 +8,8 @@ export class OrmFactoryImp implements OrmFactory {
 
 	public create (args: OrmFactoryArgs): OrmService {
 		const workspace = args.workspace || process.cwd()
-		if (args.host) {
-			return new RestOrmService(workspace, args.host)
+		if (args.url) {
+			return new RestOrmService(args.url)
 		}
 		return new LibOrmService(workspace)
 	}

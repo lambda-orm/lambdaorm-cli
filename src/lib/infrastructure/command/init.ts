@@ -1,6 +1,7 @@
 import { CommandModule, Argv, Arguments } from 'yargs'
 import path from 'path'
 import { init } from '../builders/usesCases'
+import { Dialect } from 'lambdaorm'
 export class InitCommand implements CommandModule {
 	command = 'init'
 	describe = 'Generates lambdaorm project structure.'
@@ -28,6 +29,10 @@ export class InitCommand implements CommandModule {
 				alias: 'dataPath',
 				describe: 'relative data path in workspace'
 			})
+			.option('u', {
+				alias: 'url',
+				describe: 'Url of service.'
+			})
 	}
 
 	async handler (args: Arguments) {
@@ -37,8 +42,9 @@ export class InitCommand implements CommandModule {
 			const dialect: string = args.dialect as string
 			const connection: string = args.connection as string
 			const dataPath = args.dataPath as string|undefined
+			const url = args.url as string|undefined
 
-			await init.execute(workspace, source, dialect, connection, dataPath)
+			await init.execute({ workspace, source, dialect: (dialect as Dialect), connection, dataPath, url })
 		} catch (error) {
 			console.error(`error: ${error}`)
 		}

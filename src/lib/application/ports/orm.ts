@@ -31,6 +31,7 @@ export interface StageService {
 
 export interface BuildArgs {
 	workspace:string
+	url?:string
 	language:string
 	options:string[]
 	srcPath?:string
@@ -90,7 +91,7 @@ export interface OrmService
 
 export interface OrmFactoryArgs {
 	workspace?: string
-	host?: string
+	url?: string
 }
 
 export interface OrmFactory {

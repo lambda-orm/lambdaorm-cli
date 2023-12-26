@@ -1,6 +1,10 @@
+import { Dialect } from 'lambdaorm'
+
 export interface InitArgs {
+	workspace:string
+	url?:string
 	source?:string
-	dialect?:string
+	dialect?:Dialect
 	connection?:string
 	dataPath?:string
 }
@@ -10,5 +14,5 @@ export interface WorkspaceService {
 }
 
 export interface WorkspaceFactory {
-	create (workspace:string, hots?:string): WorkspaceService
+	create (workspace:string, url?:string): WorkspaceService
 }

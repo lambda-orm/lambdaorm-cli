@@ -38,6 +38,10 @@ export class BuildCommand implements CommandModule {
 				alias: 'domainPath',
 				describe: 'relative domain path in source code path'
 			})
+			.option('u', {
+				alias: 'url',
+				describe: 'Url of service.'
+			})
 	}
 
 	async handler (args: Arguments) {
@@ -49,6 +53,7 @@ export class BuildCommand implements CommandModule {
 		const srcPath = args.srcPath as string|undefined
 		const domainPath = args.domainPath as string|undefined
 		const dataPath = args.dataPath as string|undefined
+		const url = args.url as string|undefined
 
 		const options:string[] = []
 		if (!model && !repositories && !all) {
@@ -63,7 +68,7 @@ export class BuildCommand implements CommandModule {
 			}
 		}
 		try {
-			await build.execute(workspace, language, options, srcPath, dataPath, domainPath)
+			await build.execute({ workspace, language, options, srcPath, dataPath, domainPath, url })
 		} catch (error) {
 			console.error(`error: ${error}`)
 		}

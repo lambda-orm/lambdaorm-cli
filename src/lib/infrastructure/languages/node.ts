@@ -17,9 +17,12 @@ export class NodeLanguageService implements LanguageService {
 		if (schema === null) {
 			throw new Error(`Can't found schema in ${args.workspace}`)
 		}
-		const _srcPath = args.srcPath || schema.infrastructure?.paths.src || 'src'
-		const _dataPath = args.dataPath || schema.infrastructure?.paths.data
-		const _domainPath = args.domainPath || schema.infrastructure?.paths.domain
+		if (!schema.infrastructure) {
+			schema.infrastructure = { paths: this.schemaFacade.createService.newPathsApp() }
+		}
+		const _srcPath = args.srcPath || schema.infrastructure?.paths?.src || 'src'
+		const _dataPath = args.dataPath || schema.infrastructure?.paths?.data || 'data'
+		const _domainPath = args.domainPath || schema.infrastructure?.paths?.domain || 'domain'
 		schema = await this.schemaFacade.initialize(schema)
 		await this.updateStructure(args.workspace, _srcPath, _dataPath)
 		// add libraries for dialect
@@ -39,7 +42,7 @@ export class NodeLanguageService implements LanguageService {
 	}
 
 	public async localVersion (workspace:string): Promise<string> {
-		return await this.getLocalPackage('lambdaorm', workspace)
+		return await this.helper.cli.getPackage('lambdaorm', workspace)
 	}
 
 	/**
@@ -67,7 +70,7 @@ export class NodeLanguageService implements LanguageService {
 	* if the typescript is not installed locally it will be installed
 	*/
 	protected async installTypescript (workspace:string): Promise<void> {
-		const typescriptLib = await this.getLocalPackage('typescript', workspace)
+		const typescriptLib = await this.helper.cli.getPackage('typescript', workspace)
 		if (typescriptLib === '') {
 			await this.helper.cli.exec('npm install typescript -D', workspace)
 		}
@@ -77,7 +80,7 @@ export class NodeLanguageService implements LanguageService {
 	* if the lambdaorm is not installed locally it will be installed
 	*/
 	protected async installLibrary (workspace:string): Promise<void> {
-		const lambdaormLib = await this.getLocalPackage(this.library, workspace)
+		const lambdaormLib = await this.helper.cli.getPackage(this.library, workspace)
 		if (lambdaormLib === '') {
 			await this.helper.cli.exec(`npm install ${this.library}`, workspace)
 		}
@@ -102,7 +105,7 @@ export class NodeLanguageService implements LanguageService {
 			const libs = this.getLibs(source.dialect)
 			for (const p in libs) {
 				const lib = libs[p]
-				const localLib = await this.getLocalPackage(lib, path)
+				const localLib = await this.helper.cli.getPackage(lib, path)
 				if (localLib === '') {
 					await this.helper.cli.exec(`npm install ${lib}`, path)
 				}
@@ -129,13 +132,6 @@ export class NodeLanguageService implements LanguageService {
 				await this.helper.fs.write(repositoryPath, repositoryContent)
 			}
 		}
-	}
-
-	protected async getLocalPackage (name:string, workspace:string): Promise<string> {
-		const exp = new RegExp(`${name}@(.*)\n`)
-		const localNpmList = await this.helper.cli.exec('npm list --depth=0', workspace)
-		const localMatches = localNpmList.match(exp)
-		return (localMatches && localMatches[1] ? localMatches[1] : '').replace(/"invalid"/gi, '').trim()
 	}
 
 	protected getLibs (dialect: string): string[] {

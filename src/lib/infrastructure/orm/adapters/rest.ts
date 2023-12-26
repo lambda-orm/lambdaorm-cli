@@ -95,14 +95,14 @@ export class RestOrmService implements OrmService {
 	public schema: SchemaService
 	public stage: StageService
 	private orm: client.Orm
-	public constructor (private readonly workspace:string, private readonly host:string) {
-		this.orm = new client.Orm(host)
+	public constructor (private readonly url:string) {
+		this.orm = new client.Orm(url)
 		this.schema = new ClientSchemaService(this.orm.schema)
 		this.stage = new ClientStageService(this.orm.stage)
 	}
 
 	public async init (): Promise<any> {
-		return this.orm.init(this.host)
+		return this.orm.init(this.url)
 	}
 
 	public async end (): Promise<void> {
@@ -112,14 +112,14 @@ export class RestOrmService implements OrmService {
 	public async getStageName (stage?:string):Promise<string> {
 		const stages = await this.orm.schema.stages()
 		if (stages.length === 0) {
-			throw new Error(`Can't found stages in ${this.host}`)
+			throw new Error(`Can't found stages in ${this.url}`)
 		}
 		if (stage === undefined) {
 			return stages[0].name
 		}
 		const _stage = stages.find(s => s.name === stage)
 		if (_stage === undefined) {
-			throw new Error(`Can't found stage ${stage} in ${this.host}`)
+			throw new Error(`Can't found stage ${stage} in ${this.url}`)
 		}
 		return _stage.name
 	}

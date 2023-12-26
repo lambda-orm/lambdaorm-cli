@@ -8,7 +8,7 @@ export class LibSchemaService implements SchemaService {
 	// eslint-disable-next-line no-useless-constructor
 	public constructor (private readonly schemaFacade: SchemaFacade) {}
 	public async sources (): Promise<{ name: string; dialect: string }[]> {
-		return Promise.resolve(this.schemaFacade.schema.infrastructure?.sources.map(s => ({ name: s.name, dialect: s.dialect })) || [])
+		return Promise.resolve(this.schemaFacade.schema.infrastructure?.sources?.map(s => ({ name: s.name, dialect: s.dialect })) || [])
 	}
 
 	public async version (): Promise<{ version: string }> {
@@ -24,7 +24,7 @@ export class LibSchemaService implements SchemaService {
 	}
 
 	public async dataSources (): Promise<{ name: string; dialect: string }[]> {
-		if (this.schemaFacade.schema.infrastructure === undefined) {
+		if (this.schemaFacade.schema.infrastructure === undefined || this.schemaFacade.schema.infrastructure.sources === undefined) {
 			return Promise.resolve([])
 		}
 		return Promise.resolve(this.schemaFacade.schema.infrastructure.sources.map(s => ({ name: s.name, dialect: s.dialect })))
@@ -51,14 +51,14 @@ export class LibSchemaService implements SchemaService {
 	}
 
 	public async mapping (mapping: string): Promise<Mapping | undefined> {
-		if (this.schemaFacade.schema.infrastructure === undefined) {
+		if (this.schemaFacade.schema.infrastructure === undefined || this.schemaFacade.schema.infrastructure.mappings === undefined) {
 			return Promise.resolve(undefined)
 		}
 		return Promise.resolve(this.schemaFacade.schema.infrastructure.mappings.find(m => m.name === mapping))
 	}
 
 	public async entityMapping (mapping: string, entity: string): Promise<EntityMapping | undefined> {
-		if (this.schemaFacade.schema.infrastructure === undefined) {
+		if (this.schemaFacade.schema.infrastructure === undefined || this.schemaFacade.schema.infrastructure.mappings === undefined) {
 			return Promise.resolve(undefined)
 		}
 		return Promise.resolve(this.schemaFacade.schema.infrastructure.mappings.find(m => m.name === mapping)?.entities.find(e => e.name === entity))
@@ -69,14 +69,14 @@ export class LibSchemaService implements SchemaService {
 	}
 
 	public async stage (stage: string): Promise<Stage | undefined> {
-		if (this.schemaFacade.schema.infrastructure === undefined) {
+		if (this.schemaFacade.schema.infrastructure === undefined || this.schemaFacade.schema.infrastructure.stages === undefined) {
 			return Promise.resolve(undefined)
 		}
 		return Promise.resolve(this.schemaFacade.schema.infrastructure?.stages.find(s => s.name === stage))
 	}
 
 	public async views (): Promise<string[]> {
-		return Promise.resolve(this.schemaFacade.schema.infrastructure?.views.map(p => p.name) || [])
+		return Promise.resolve(this.schemaFacade.schema.infrastructure?.views?.map(p => p.name) || [])
 	}
 }
 

@@ -2,6 +2,7 @@ import { H3lp, IUtils, IFsHelper } from 'h3lp'
 import path from 'path'
 const Util = require('util')
 const exec = Util.promisify(require('child_process').exec)
+const yaml = require('js-yaml')
 
 class CliHelper {
 	// eslint-disable-next-line no-useless-constructor
@@ -35,6 +36,25 @@ class CliHelper {
 			}
 		}
 		return data
+	}
+
+	public async getPackage (name:string, workspace:string): Promise<string> {
+		const exp = new RegExp(`${name}@(.*)\n`)
+		const localNpmList = await this.exec('npm list --depth=0', workspace)
+		const localMatches = localNpmList.match(exp)
+		return (localMatches && localMatches[1] ? localMatches[1] : '').replace(/"invalid"/gi, '').trim()
+	}
+
+	public async writeSchema (configPath:string, schema: any): Promise<void> {
+		if (path.extname(configPath) === '.yaml' || path.extname(configPath) === '.yml') {
+			const content = yaml.dump(schema)
+			await this.fs.write(configPath, content)
+		} else if (path.extname(configPath) === '.json') {
+			const content = JSON.stringify(schema, null, 2)
+			await this.fs.write(configPath, content)
+		} else {
+			throw new Error(`Config file: ${configPath} not supported`)
+		}
 	}
 }
 

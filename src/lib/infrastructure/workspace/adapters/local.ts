@@ -1,7 +1,6 @@
-import { Dialect, Schema, SchemaFacade } from 'lambdaorm'
+import { Dialect, Mapping, Schema, SchemaFacade, Source } from 'lambdaorm'
 import { Helper, InitArgs, WorkspaceService } from '../../../application'
 import path from 'path'
-const yaml = require('js-yaml')
 
 export class LocalWorkspaceService implements WorkspaceService {
 	// eslint-disable-next-line no-useless-constructor
@@ -22,65 +21,66 @@ export class LocalWorkspaceService implements WorkspaceService {
 		const targetSchema = this.completeSchema(sourceSchema, args.source, args.dialect, args.connection)
 		// write lambdaorm config
 		const configPath = path.join(this.workspace, 'lambdaORM.yaml')
-		const _dataPath = args.dataPath || targetSchema.infrastructure?.paths.data
-		await this.writeSchema(configPath, targetSchema)
+		const _dataPath = args.dataPath || targetSchema.infrastructure?.paths?.data || 'data'
+		await this.helper.cli.writeSchema(configPath, targetSchema)
 		// create structure
 		await this.createStructure(this.workspace, _dataPath)
 	}
 
-	private completeSchema (_schema: Schema, sourceName?: string, dialect?: string, connection?: any): Schema {
+	private completeSchema (_schema: Schema, sourceName?: string, dialect?: Dialect, connection?: any): Schema {
 		const schema:Schema = this.helper.obj.clone(_schema)
 		this.schemaFacade.complete(schema)
-		let source:any
-		if (sourceName !== undefined) {
-			source = schema.infrastructure?.sources.find(p => p.name === sourceName)
-			if (source === undefined) {
-				throw Error(`source ${sourceName} not found`)
-			}
-		} else if (schema.infrastructure?.sources.length === 1) {
-			source = schema.infrastructure.sources[0]
+		let source:Source|undefined
+		let mapping:Mapping|undefined
+		if (schema.infrastructure === undefined) {
+			mapping = { name: 'default', entities: [] }
+			source = { name: 'default', dialect: dialect || Dialect.MySQL, mapping: mapping.name, connection }
+			schema.infrastructure = { sources: [source], mappings: [{ name: 'default', entities: [] }], stages: [] }
 		} else {
-			// If the database is not defined, it creates it.
-			if (connection === undefined) {
-				connection = this.defaultConnection(dialect || Dialect.MySQL)
-			}
-			source = { name: 'test', dialect: dialect || Dialect.MySQL, mapping: source, connection }
-			schema.infrastructure?.sources.push(source)
-		}
-		// if database is defined, update dialect if applicable
-		if ((dialect !== undefined && source.dialect !== dialect) || (source.dialect === undefined)) {
-			source.dialect = dialect || Dialect.MySQL
-		}
-		// update the connection if applicable
-		if (connection !== undefined) {
-			source.connection = connection
-		} else if (source.connection === undefined) {
-			source.connection = this.defaultConnection(source.dialect)
-		}
-		// set the mapping if it was not set
-		if (schema.infrastructure && schema.infrastructure.mappings === undefined) {
-			schema.infrastructure.mappings = []
-		}
-		if (source.mapping === undefined) {
-			if (schema.infrastructure && schema.infrastructure.mappings.length > 0) {
-				source.mapping = schema.infrastructure.mappings[0].name
+			if (!schema.infrastructure.mappings || schema.infrastructure.mappings.length === 0) {
+				mapping = { name: 'default', entities: [] }
+				schema.infrastructure.mappings = [mapping]
 			} else {
-				source.mapping = source.name
+				mapping = schema.infrastructure.mappings[0]
+			}
+			if (!schema.infrastructure.sources) {
+				source = { name: 'default', dialect: dialect || Dialect.MySQL, mapping: schema.infrastructure.mappings[0].name, connection }
+				schema.infrastructure.sources = []
+			}
+			if (sourceName && schema.infrastructure.sources && schema.infrastructure.sources.length > 1) {
+				source = schema.infrastructure?.sources.find(p => p.name === sourceName)
+				if (source === undefined) {
+					throw Error(`source ${sourceName} not found`)
+				}
+			} else if (schema.infrastructure?.sources.length === 1) {
+				source = schema.infrastructure.sources[0]
 			}
 		}
 		// if the mapping does not exist it creates it
-		if (schema.infrastructure) {
-			const mapping = schema.infrastructure.mappings.find(p => p.name === source.mapping)
-			if (mapping === undefined) {
-				schema.infrastructure.mappings.push({ name: source.mapping, entities: [] })
+		if (source && mapping && schema.infrastructure.mappings) {
+			if (source.mapping === undefined) {
+				if (schema.infrastructure && schema.infrastructure.mappings.length > 0) {
+					source.mapping = schema.infrastructure.mappings[0].name
+				} else {
+					source.mapping = mapping.name
+				}
 			}
-			// if the stage does not exist, create it
-			if (schema.infrastructure.stages === undefined) {
-				schema.infrastructure.stages = []
+		}
+		// update the connection if applicable
+		if (source) {
+			if (!connection) {
+				source.connection = connection
+			} else if (!source.connection) {
+				source.connection = this.defaultConnection(source.dialect)
 			}
-			if (schema.infrastructure.stages.length === 0) {
-				schema.infrastructure.stages.push({ name: 'default', sources: [{ name: source.name }] })
-			}
+		}
+
+		// if the stage does not exist, create it
+		if (schema.infrastructure.stages === undefined) {
+			schema.infrastructure.stages = []
+		}
+		if (source && schema.infrastructure.stages.length === 0) {
+			schema.infrastructure.stages.push({ name: 'default', sources: [{ name: source.name }] })
 		}
 		return schema
 	}
@@ -152,18 +152,6 @@ export class LocalWorkspaceService implements WorkspaceService {
 			}
 		default:
 			throw new Error(`dialect: ${dialect} not supported`)
-		}
-	}
-
-	private async writeSchema (configPath:string, schema: Schema): Promise<void> {
-		if (path.extname(configPath) === '.yaml' || path.extname(configPath) === '.yml') {
-			const content = yaml.dump(schema)
-			await this.helper.fs.write(configPath, content)
-		} else if (path.extname(configPath) === '.json') {
-			const content = JSON.stringify(schema, null, 2)
-			await this.helper.fs.write(configPath, content)
-		} else {
-			throw new Error(`Config file: ${configPath} not supported`)
 		}
 	}
 
