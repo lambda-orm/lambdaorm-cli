@@ -236,6 +236,22 @@
 		},
 		// lab-client-node ----------------------------------------------------------------------------------
 		{
+			"name": "client-node init",
+			"type": "node",
+			"request": "launch",
+			"skipFiles": [
+				"<node_internals>/**"
+			],
+			"program": "${workspaceFolder}/src/lib/index.ts",
+			"args": [
+				"init",
+				"-w",
+				"src/labs/client-node/client",
+				"-u",
+				"http://localhost:9291"
+			]
+		},
+		{
 			"name": "client-node build",
 			"type": "node",
 			"request": "launch",
@@ -246,10 +262,12 @@
 			"args": [
 				"build",
 				"-w",
-				"src/labs/client-node",
+				"src/labs/client-node/client",
 				"-l",
 				"client-node",
-				"--all"					
+				"--all",
+				"-u",
+				"http://localhost:9291"					
 			]
 		},
 		// counties -------------------------------------------------------------------------------------------------------------------------------------

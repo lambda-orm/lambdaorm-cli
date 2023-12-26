@@ -14,13 +14,20 @@ export class ClientWorkspaceService implements WorkspaceService {
 
 	// eslint-disable-next-line @typescript-eslint/no-unused-vars
 	public async init (args: InitArgs): Promise<void> {
-		// create workspace
-		await this.helper.fs.create(this.workspace)
-		// create initial structure
-		const domainSchema = await this.orm.schema.domain()
-		const schema = { domain: domainSchema, infrastructure: { service: { url: this.url }, paths: this.schemaFacade.createService.newPathsApp() } }
-		// write lambdaorm config
-		const configPath = path.join(this.workspace, 'lambdaORM.yaml')
-		await this.helper.cli.writeSchema(configPath, schema)
+		try {
+			// create workspace
+			await this.helper.fs.create(this.workspace)
+			// init orm
+			await this.orm.init(args.url)
+			// create initial structure
+			const domainSchema = await this.orm.schema.domain()
+			const schema = { domain: domainSchema, infrastructure: { service: { url: this.url }, paths: this.schemaFacade.createService.newPathsApp() } }
+			// write lambdaorm config
+			const configPath = path.join(this.workspace, 'lambdaORM.yaml')
+			await this.helper.cli.writeSchema(configPath, schema)
+		} catch (error) {
+			await this.orm.end()
+			throw error
+		}
 	}
 }
