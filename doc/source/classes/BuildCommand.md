@@ -44,7 +44,7 @@ CommandModule.command
 
 #### Defined in
 
-[src/lib/infrastructure/command/build.ts:7](https://github.com/FlavioLionelRita/lambdaorm-cli/blob/0fbf2e6/src/lib/infrastructure/command/build.ts#L7)
+[src/lib/infrastructure/command/build.ts:7](https://github.com/FlavioLionelRita/lambdaorm-cli/blob/b66ae97/src/lib/infrastructure/command/build.ts#L7)
 
 ___
 
@@ -58,13 +58,13 @@ CommandModule.describe
 
 #### Defined in
 
-[src/lib/infrastructure/command/build.ts:8](https://github.com/FlavioLionelRita/lambdaorm-cli/blob/0fbf2e6/src/lib/infrastructure/command/build.ts#L8)
+[src/lib/infrastructure/command/build.ts:8](https://github.com/FlavioLionelRita/lambdaorm-cli/blob/b66ae97/src/lib/infrastructure/command/build.ts#L8)
 
 ## Methods
 
 ### builder
 
-▸ **builder**(`args`): `Argv`\<\{ `w`: `undefined` \| `string`  } & \{ `l`: `unknown`  } & \{ `m`: `unknown`  } & \{ `r`: `unknown`  } & \{ `a`: `unknown`  } & \{ `src-path`: `unknown`  } & \{ `data-path`: `unknown`  } & \{ `domain-path`: `unknown`  }\>
+▸ **builder**(`args`): `Argv`\<\{ `w`: `undefined` \| `string`  } & \{ `l`: `unknown`  } & \{ `m`: `unknown`  } & \{ `r`: `unknown`  } & \{ `a`: `unknown`  } & \{ `src-path`: `unknown`  } & \{ `data-path`: `unknown`  } & \{ `domain-path`: `unknown`  } & \{ `u`: `unknown`  }\>
 
 #### Parameters
 
@@ -74,7 +74,7 @@ CommandModule.describe
 
 #### Returns
 
-`Argv`\<\{ `w`: `undefined` \| `string`  } & \{ `l`: `unknown`  } & \{ `m`: `unknown`  } & \{ `r`: `unknown`  } & \{ `a`: `unknown`  } & \{ `src-path`: `unknown`  } & \{ `data-path`: `unknown`  } & \{ `domain-path`: `unknown`  }\>
+`Argv`\<\{ `w`: `undefined` \| `string`  } & \{ `l`: `unknown`  } & \{ `m`: `unknown`  } & \{ `r`: `unknown`  } & \{ `a`: `unknown`  } & \{ `src-path`: `unknown`  } & \{ `data-path`: `unknown`  } & \{ `domain-path`: `unknown`  } & \{ `u`: `unknown`  }\>
 
 #### Implementation of
 
@@ -82,7 +82,7 @@ CommandModule.builder
 
 #### Defined in
 
-[src/lib/infrastructure/command/build.ts:10](https://github.com/FlavioLionelRita/lambdaorm-cli/blob/0fbf2e6/src/lib/infrastructure/command/build.ts#L10)
+[src/lib/infrastructure/command/build.ts:10](https://github.com/FlavioLionelRita/lambdaorm-cli/blob/b66ae97/src/lib/infrastructure/command/build.ts#L10)
 
 ___
 
@@ -108,4 +108,4 @@ CommandModule.handler
 
 #### Defined in
 
-[src/lib/infrastructure/command/build.ts:43](https://github.com/FlavioLionelRita/lambdaorm-cli/blob/0fbf2e6/src/lib/infrastructure/command/build.ts#L43)
+[src/lib/infrastructure/command/build.ts:47](https://github.com/FlavioLionelRita/lambdaorm-cli/blob/b66ae97/src/lib/infrastructure/command/build.ts#L47)

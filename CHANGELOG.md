@@ -6,11 +6,10 @@ All notable changes to this project will be documented in this file.
 
 ### [0.9.23](https://github.com/FlavioLionelRita/lambdaorm-cli/compare/v0.9.22...v0.9.23) (2023-12-26)
 
+**Features:**
 
-### Features
-
-* refactoring cli ([c3b9b54](https://github.com/FlavioLionelRita/lambdaorm-cli/commit/c3b9b54d2d24220297be6fdc5948ea256300aaf3)), closes [#224](https://github.com/FlavioLionelRita/lambdaorm-cli/issues/224)
-* reorganize ([660ef5f](https://github.com/FlavioLionelRita/lambdaorm-cli/commit/660ef5f3d9ffaea4e25a1a6d8073481a6a388c08)), closes [#223](https://github.com/FlavioLionelRita/lambdaorm-cli/issues/223)
+* refactoring cli ([c3b9b54](https://github.com/FlavioLionelRita/lambdaorm-cli/commit/c3b9b54d2d24220297be6fdc5948ea256300aaf3)), closes [#224](https://github.com/FlavioLionelRita/lambdaorm/issues/224)
+* reorganize ([660ef5f](https://github.com/FlavioLionelRita/lambdaorm-cli/commit/660ef5f3d9ffaea4e25a1a6d8073481a6a388c08)), closes [#223](https://github.com/FlavioLionelRita/lambdaorm/issues/223)
 
 ### [0.9.22](https://github.com/FlavioLionelRita/lambdaorm-cli/compare/v0.9.21...v0.9.22) (2023-12-17)
 

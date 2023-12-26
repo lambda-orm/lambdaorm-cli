@@ -44,7 +44,7 @@ CommandModule.command
 
 #### Defined in
 
-[src/lib/infrastructure/command/init.ts:5](https://github.com/FlavioLionelRita/lambdaorm-cli/blob/0fbf2e6/src/lib/infrastructure/command/init.ts#L5)
+[src/lib/infrastructure/command/init.ts:6](https://github.com/FlavioLionelRita/lambdaorm-cli/blob/b66ae97/src/lib/infrastructure/command/init.ts#L6)
 
 ___
 
@@ -58,13 +58,13 @@ CommandModule.describe
 
 #### Defined in
 
-[src/lib/infrastructure/command/init.ts:6](https://github.com/FlavioLionelRita/lambdaorm-cli/blob/0fbf2e6/src/lib/infrastructure/command/init.ts#L6)
+[src/lib/infrastructure/command/init.ts:7](https://github.com/FlavioLionelRita/lambdaorm-cli/blob/b66ae97/src/lib/infrastructure/command/init.ts#L7)
 
 ## Methods
 
 ### builder
 
-▸ **builder**(`args`): `Argv`\<\{ `w`: `string`  } & \{ `s`: `unknown`  } & \{ `d`: `unknown`  } & \{ `c`: `unknown`  } & \{ `data-path`: `unknown`  }\>
+▸ **builder**(`args`): `Argv`\<\{ `w`: `string`  } & \{ `s`: `unknown`  } & \{ `d`: `unknown`  } & \{ `c`: `unknown`  } & \{ `data-path`: `unknown`  } & \{ `u`: `unknown`  }\>
 
 #### Parameters
 
@@ -74,7 +74,7 @@ CommandModule.describe
 
 #### Returns
 
-`Argv`\<\{ `w`: `string`  } & \{ `s`: `unknown`  } & \{ `d`: `unknown`  } & \{ `c`: `unknown`  } & \{ `data-path`: `unknown`  }\>
+`Argv`\<\{ `w`: `string`  } & \{ `s`: `unknown`  } & \{ `d`: `unknown`  } & \{ `c`: `unknown`  } & \{ `data-path`: `unknown`  } & \{ `u`: `unknown`  }\>
 
 #### Implementation of
 
@@ -82,7 +82,7 @@ CommandModule.builder
 
 #### Defined in
 
-[src/lib/infrastructure/command/init.ts:8](https://github.com/FlavioLionelRita/lambdaorm-cli/blob/0fbf2e6/src/lib/infrastructure/command/init.ts#L8)
+[src/lib/infrastructure/command/init.ts:9](https://github.com/FlavioLionelRita/lambdaorm-cli/blob/b66ae97/src/lib/infrastructure/command/init.ts#L9)
 
 ___
 
@@ -108,4 +108,4 @@ CommandModule.handler
 
 #### Defined in
 
-[src/lib/infrastructure/command/init.ts:33](https://github.com/FlavioLionelRita/lambdaorm-cli/blob/0fbf2e6/src/lib/infrastructure/command/init.ts#L33)
+[src/lib/infrastructure/command/init.ts:38](https://github.com/FlavioLionelRita/lambdaorm-cli/blob/b66ae97/src/lib/infrastructure/command/init.ts#L38)
