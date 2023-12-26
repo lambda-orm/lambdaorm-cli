@@ -1,4 +1,4 @@
-import { Languages } from 'lib/application/services/languages'
+import { Languages } from '../../application/services/languages'
 import { CliFacade, Helper, OutputService } from '../../application'
 import { NodeLanguageService, ClientNodeLanguageService } from '../languages'
 import { OrmFactoryImp } from '../orm/factory'
