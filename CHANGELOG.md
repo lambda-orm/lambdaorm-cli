@@ -4,6 +4,13 @@ All notable changes to this project will be documented in this file.
 
 ## Versions
 
+### [0.9.25](https://github.com/FlavioLionelRita/lambdaorm-cli/compare/v0.9.24...v0.9.25) (2023-12-26)
+
+
+### Bug Fixes
+
+* solve init and build commands with client ([0ad94fd](https://github.com/FlavioLionelRita/lambdaorm-cli/commit/0ad94fd559a9a7e7ab906e510b409c5aaee4b809)), closes [#224](https://github.com/FlavioLionelRita/lambdaorm-cli/issues/224)
+
 ### [0.9.24](https://github.com/FlavioLionelRita/lambdaorm-cli/compare/v0.9.23...v0.9.24) (2023-12-26)
 
 **Bug Fixes:**
