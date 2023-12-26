@@ -7,6 +7,9 @@ import { OrmService, SchemaService, StageService } from '../../../application'
 export class LibSchemaService implements SchemaService {
 	// eslint-disable-next-line no-useless-constructor
 	public constructor (private readonly schemaFacade: SchemaFacade) {}
+	public async sources (): Promise<{ name: string; dialect: string }[]> {
+		return Promise.resolve(this.schemaFacade.schema.infrastructure?.sources.map(s => ({ name: s.name, dialect: s.dialect })) || [])
+	}
 
 	public async version (): Promise<{ version: string }> {
 		return Promise.resolve({ version: this.schemaFacade.schema.version })

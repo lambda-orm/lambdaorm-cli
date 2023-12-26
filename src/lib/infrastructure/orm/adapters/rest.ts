@@ -1,10 +1,9 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 import {
-	MetadataModel, MetadataParameter, MetadataConstraint, Metadata, QueryOptions, QueryPlan, DomainSchema, Entity, Enum, Mapping, Relation, Dependent, SchemaConfig
+	MetadataModel, MetadataParameter, MetadataConstraint, Metadata, QueryOptions, QueryPlan, DomainSchema, Entity, Enum, Mapping, Relation, Dependent, SchemaConfig, Schema, EntityMapping, Stage
 } from 'lambdaorm'
-import { BuildArgs, OrmService, SchemaService, StageService } from '../../../application/ports/orm'
+import { OrmService, SchemaService, StageService } from '../../../application/ports/orm'
 import * as client from 'lambdaorm-client-node'
-import { Languages } from '../../../application/services/languages'
 
 export class ClientSchemaService implements SchemaService {
 	// eslint-disable-next-line no-useless-constructor
@@ -15,119 +14,55 @@ export class ClientSchemaService implements SchemaService {
 	}
 
 	public async domain (): Promise<DomainSchema> {
-		const domain = await this.schemaService.domain()
-		return this.toDomainSchema(domain)
+		return this.schemaService.domain()
 	}
 
-	public async dataSources (): Promise<{ name: string; dialect: string }[]> {
-		return this.schemaService.dataSources()
+	public async sources (): Promise<{ name: string; dialect: string }[]> {
+		return this.schemaService.sources()
 	}
 
 	public async entities (): Promise<Entity[]> {
-		const entities = await this.schemaService.entities()
-		return entities.map(e => this.toEntity(e))
+		return this.schemaService.entities()
 	}
 
 	public async entity (entity: string): Promise<Entity | undefined> {
-		const _entity = await this.schemaService.entity(entity)
-		return _entity ? this.toEntity(_entity) : undefined
+		return this.schemaService.entity(entity)
 	}
 
 	public async enums (): Promise<Enum[]> {
-		const enums = await this.schemaService.enums()
-		return enums.map(e => this.toEnum(e))
+		return this.schemaService.enums()
 	}
 
 	public async enum (_enum: string): Promise<Enum | undefined> {
-		const _enum_ = await this.schemaService.enum(_enum)
-		return _enum_ ? this.toEnum(_enum_) : undefined
+		return await this.schemaService.enum(_enum)
 	}
 
 	public async mappings (): Promise<Mapping[]> {
 		throw new Error('Method not implemented.')
 	}
 
-	// public async schema (): Promise<Schema> {
-	// return this.schemaService.schema()
-	// }
-	// public async mapping (mapping: string): Promise<Mapping | undefined> {
-	// throw new Error('Method not implemented.')
-	// }
-	// public async entityMapping (mapping: string, entity: string): Promise<EntityMapping | undefined> {
-	// throw new Error('Method not implemented.')
-	// }
-	// public async stages (): Promise<Stage[]> {
-	// throw new Error('Method not implemented.')
-	// }
-	// public async stage (stage: string): Promise<Stage | undefined> {
-	// throw new Error('Method not implemented.')
-	// }
-	// public async views (): Promise<string[]> {
-	// throw new Error('Method not implemented.')
-	// }
-
-	private toDomainSchema (source: client.SchemaDomain): DomainSchema {
-		const target: DomainSchema = {
-			version: source.version,
-			entities: source.entities ? source.entities.map((e: client.Entity) => this.toEntity(e)) : [],
-			enums: source.enums ? source.enums.map((e: client.Enum) => this.toEnum(e)) : []
-		}
-		return target
+	public async schema (): Promise<Schema> {
+		return this.schemaService.schema()
 	}
 
-	private toEntity (source: client.Entity): Entity {
-		const target: Entity = {
-			name: source.name,
-			extends: source.extends,
-			abstract: source.abstract,
-			singular: source.singular,
-			// view: source.view,
-			primaryKey: source.primaryKey,
-			uniqueKey: source.uniqueKey,
-			required: [], // source.required,
-			indexes: source.indexes,
-			properties: source.properties,
-			relations: source.relations ? source.relations.map(r => this.toRelation(r)) : [],
-			dependents: source.dependents ? source.dependents.map(d => this.toDependent(d)) : [],
-			constraints: source.constraints
-			// hadReadExps: source.hadReadExps,
-			// hadWriteExps: source.hadWriteExps,
-			// hadReadValues: source.hadReadValues,
-			// hadWriteValues: source.hadWriteValues,
-			// hadDefaults: source.hadDefaults,
-			// hadViewReadExp: source.hadViewReadExp,
-			// composite: source.composite
-		}
-		return target
+	public async mapping (mapping: string): Promise<Mapping | undefined> {
+		return this.schemaService.mapping(mapping)
 	}
 
-	private toRelation (source: client.Relation): Relation {
-		const target: Relation = {
-			name: source.name,
-			entity: source.entity,
-			from: source.from,
-			to: source.to,
-			weak: source.weak,
-			target: source.target,
-			type: source.type as Relation['type']
-		}
-		return target
+	public async entityMapping (mapping: string, entity: string): Promise<EntityMapping | undefined> {
+		return this.schemaService.entityMapping(mapping, entity)
 	}
 
-	private toDependent (source: client.Dependent): Dependent {
-		const target: Dependent = {
-			entity: source.entity,
-			relation: this.toRelation(source.relation)
-		}
-		return target
+	public async stages (): Promise<Stage[]> {
+		return this.schemaService.stages()
 	}
 
-	private toEnum (source: client.Enum): Enum {
-		const target: Enum = {
-			name: source.name,
-			values: source.values
-		}
-		return target
+	public async stage (stage: string): Promise<Stage | undefined> {
+		return this.schemaService.stage(stage)
+	}
+
+	public async views (): Promise<string[]> {
+		return this.schemaService.views()
 	}
 }
 
@@ -206,27 +141,10 @@ export class RestOrmService implements OrmService {
 	}
 
 	public async plan (expression: string, options?: QueryOptions | undefined): Promise<QueryPlan> {
-		const metadataPlan = await this.orm.plan(expression, options)
-		return this.toQueryPlan(metadataPlan)
+		return this.orm.plan(expression, options)
 	}
 
 	public async execute (expression: string, data?: any, options?: QueryOptions | undefined): Promise<any> {
 		return this.orm.execute(expression, data, options)
-	}
-
-	private toQueryPlan (source: client.MetadataPlan): QueryPlan {
-		const target: QueryPlan = {
-			entity: source.entity,
-			dialect: source.dialect,
-			source: source.dataSource,
-			sentence: source.sentence,
-			children: []
-		}
-		if (source.children) {
-			for (const child of source.children) {
-				target.children?.push(this.toQueryPlan(child))
-			}
-		}
-		return target
 	}
 }

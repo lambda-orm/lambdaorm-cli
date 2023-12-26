@@ -1,24 +1,24 @@
 /* eslint-disable @typescript-eslint/ban-types */
 import {
 	QueryPlan, QueryOptions, Metadata, MetadataModel, MetadataConstraint, MetadataParameter
-	, DomainSchema, SchemaConfig, Entity, Enum
+	, DomainSchema, SchemaConfig, Entity, Enum, Schema, Mapping, EntityMapping, Stage
 } from 'lambdaorm'
 
 export interface SchemaService {
 	version ():Promise<{version:string}>
-	// schema (): Promise<Schema>
+	schema (): Promise<Schema>
 	domain (): Promise<DomainSchema>
-	// dataSources ():Promise<{name:string, dialect:string}[]>
+	sources ():Promise<{name:string, dialect:string}[]>
 	entities (): Promise<Entity[]>
 	entity (entity:string): Promise<Entity|undefined>
 	enums (): Promise<Enum[]>
 	enum (_enum:string): Promise<Enum|undefined>
-	// mappings (): Promise<Mapping[]>
-	// mapping (mapping:string): Promise<Mapping|undefined>
-	// entityMapping (mapping:string, entity:string): Promise<EntityMapping|undefined>
-	// stages (): Promise<Stage[]>
-	// stage (stage:string): Promise<Stage|undefined>
-	// views (): Promise<string[]>
+	mappings (): Promise<Mapping[]>
+	mapping (mapping:string): Promise<Mapping|undefined>
+	entityMapping (mapping:string, entity:string): Promise<EntityMapping|undefined>
+	stages (): Promise<Stage[]>
+	stage (stage:string): Promise<Stage|undefined>
+	views (): Promise<string[]>
 }
 
 export interface StageService {

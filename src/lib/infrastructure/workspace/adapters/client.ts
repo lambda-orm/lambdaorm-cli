@@ -17,6 +17,8 @@ export class ClientWorkspaceService implements WorkspaceService {
 	public async init (args: InitArgs): Promise<void> {
 		// create workspace
 		await this.helper.fs.create(this.workspace)
+
+		// const domainSchema = await this.orm.schema.domain()
 		// get or create config file
 		let sourceSchema = await this.schemaFacade.get(this.workspace)
 		if (sourceSchema === null) {
