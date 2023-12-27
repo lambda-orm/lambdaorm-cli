@@ -6,10 +6,9 @@ All notable changes to this project will be documented in this file.
 
 ### [0.9.29](https://github.com/FlavioLionelRita/lambdaorm-cli/compare/v0.9.28...v0.9.29) (2023-12-27)
 
+**Bug Fixes:**
 
-### Bug Fixes
-
-* **plan:** method without await ([ab0e697](https://github.com/FlavioLionelRita/lambdaorm-cli/commit/ab0e697c46bbdc599134bb98905f58df9c9e4eea)), closes [#223](https://github.com/FlavioLionelRita/lambdaorm-cli/issues/223)
+* **plan:** method without await ([ab0e697](https://github.com/FlavioLionelRita/lambdaorm-cli/commit/ab0e697c46bbdc599134bb98905f58df9c9e4eea)), closes [#223](https://github.com/FlavioLionelRita/lambdaorm/issues/223)
 
 ### [0.9.28](https://github.com/FlavioLionelRita/lambdaorm-cli/compare/v0.9.27...v0.9.28) (2023-12-27)
 
