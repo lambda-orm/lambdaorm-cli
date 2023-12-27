@@ -286,6 +286,22 @@
 				"Products.first(p => ({ category: p.category.name, name: p.name, quantity: p.quantity }))"
 			]
 		},
+		{
+			"name": "cli client plan",
+			"type": "node",
+			"request": "launch",
+			"skipFiles": [
+				"<node_internals>/**"
+			],
+			"program": "${workspaceFolder}/src/lib/index.ts",
+			"args": [
+				"plan",
+				"-u",
+				"http://localhost:9291",
+				"-q",
+				"Products.first(p => ({ category: p.category.name, name: p.name, quantity: p.quantity }))"
+			]
+		},
 		// counties -------------------------------------------------------------------------------------------------------------------------------------
 		{
 			"name": "countries init",

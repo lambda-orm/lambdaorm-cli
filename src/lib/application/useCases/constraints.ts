@@ -12,7 +12,7 @@ export class Constraints {
 		const orm = this.service.orm.create({ workspace, url })
 		try {
 			await orm.init()
-			const result = orm.constraints(query)
+			const result = await orm.constraints(query)
 			this.service.output.execute(result, output)
 		} catch (error) {
 			console.error(`error: ${error}`)

@@ -13,7 +13,7 @@ export class Plan {
 		try {
 			await orm.init()
 			const stageName = await orm.getStageName(stage)
-			const result = orm.plan(query, { stage: stageName })
+			const result = await orm.plan(query, { stage: stageName })
 			this.service.output.execute(result, output)
 		} catch (error) {
 			console.error(`error: ${error}`)
