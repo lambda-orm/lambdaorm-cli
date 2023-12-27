@@ -11,6 +11,7 @@ export class Parameters {
 		}
 		const orm = this.service.orm.create({ workspace, url })
 		try {
+			await orm.init()
 			const result = await orm.parameters(query)
 			this.service.output.execute(result, output)
 		} catch (error) {

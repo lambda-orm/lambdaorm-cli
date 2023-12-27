@@ -287,7 +287,7 @@
 			]
 		},
 		{
-			"name": "cli client plan",
+			"name": "cli client constraints",
 			"type": "node",
 			"request": "launch",
 			"skipFiles": [
@@ -295,11 +295,11 @@
 			],
 			"program": "${workspaceFolder}/src/lib/index.ts",
 			"args": [
-				"plan",
+				"constraints",
 				"-u",
 				"http://localhost:9291",
 				"-q",
-				"Products.first(p => ({ category: p.category.name, name: p.name, quantity: p.quantity }))"
+				"Orders.bulkInsert.include(p => p.details)"
 			]
 		},
 		// counties -------------------------------------------------------------------------------------------------------------------------------------
