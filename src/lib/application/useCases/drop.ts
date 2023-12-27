@@ -4,8 +4,8 @@ export class Drop {
 	// eslint-disable-next-line no-useless-constructor
 	constructor (private readonly service:CliFacade) {}
 
-	public async execute (workspace:string, stage:string, output:string, force = false): Promise<void> {
-		const orm = this.service.orm.create({ workspace })
+	public async execute (workspace:string, stage:string, output:string, url?:string, force = false): Promise<void> {
+		const orm = this.service.orm.create({ workspace, url })
 		const _output = output !== undefined
 		try {
 			await orm.init()

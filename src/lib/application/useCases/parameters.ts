@@ -4,12 +4,12 @@ export class Parameters {
 	// eslint-disable-next-line no-useless-constructor
 	constructor (private readonly service:CliFacade) {}
 
-	public async execute (workspace:string, query:string, output?:string): Promise<void> {
+	public async execute (workspace:string, query:string, output?:string, url?:string): Promise<void> {
 		if (query === undefined) {
 			console.error('the query expression argument is required')
 			return
 		}
-		const orm = this.service.orm.create({ workspace })
+		const orm = this.service.orm.create({ workspace, url })
 		try {
 			const result = await orm.parameters(query)
 			this.service.output.execute(result, output)

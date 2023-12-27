@@ -26,6 +26,10 @@ export class ImportCommand implements CommandModule {
 				alias: 'envfile',
 				describe: 'Read in a file of environment variables'
 			})
+			.option('u', {
+				alias: 'url',
+				describe: 'Url of service.'
+			})
 	}
 
 	async handler (args: Arguments) {
@@ -33,11 +37,12 @@ export class ImportCommand implements CommandModule {
 		const stage = args.stage as string
 		const data = args.data || {}
 		const envfile = args.envfile as string
+		const url = args.url as string|undefined
 
 		if (envfile) {
 			const fullPath = path.resolve(process.cwd(), envfile)
 			dotenv.config({ path: fullPath, override: true })
 		}
-		await _import.execute(workspace, data, stage)
+		await _import.execute(workspace, data, stage, url)
 	}
 }

@@ -34,6 +34,10 @@ export class DropCommand implements CommandModule {
 				alias: 'force',
 				describe: 'If there is an error in a statement, continue executing the next statements'
 			})
+			.option('u', {
+				alias: 'url',
+				describe: 'Url of service.'
+			})
 	}
 
 	async handler (args: Arguments) {
@@ -42,13 +46,14 @@ export class DropCommand implements CommandModule {
 		const output = args.output as string
 		const force = args.force !== undefined
 		const envfile = args.envfile as string
+		const url = args.url as string|undefined
 
 		if (envfile) {
 			const fullPath = path.resolve(process.cwd(), envfile)
 			dotenv.config({ path: fullPath, override: true })
 		}
 		try {
-			await drop.execute(workspace, stage, output, force)
+			await drop.execute(workspace, stage, output, url, force)
 		} catch (error) {
 			console.error(`error: ${error}`)
 		}

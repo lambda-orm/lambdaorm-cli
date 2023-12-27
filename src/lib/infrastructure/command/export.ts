@@ -29,6 +29,10 @@ export class ExportCommand implements CommandModule {
 				alias: 'force',
 				describe: 'If there is an error in a statement, continue executing the next statements'
 			})
+			.option('u', {
+				alias: 'url',
+				describe: 'Url of service.'
+			})
 	}
 
 	async handler (args: Arguments) {
@@ -37,11 +41,12 @@ export class ExportCommand implements CommandModule {
 		const target = path.resolve(process.cwd(), args.target as string || '.')
 		const envfile = args.envfile as string
 		const force = args.force !== undefined
+		const url = args.url as string|undefined
 
 		if (envfile) {
 			const fullPath = path.resolve(process.cwd(), envfile)
 			dotenv.config({ path: fullPath, override: true })
 		}
-		_export.execute(workspace, target, stage, force)
+		_export.execute(workspace, target, stage, url, force)
 	}
 }

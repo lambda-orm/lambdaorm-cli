@@ -4,12 +4,12 @@ export class Import {
 	// eslint-disable-next-line no-useless-constructor
 	constructor (private readonly service:CliFacade) {}
 
-	public async execute (workspace:string, data:any, stage?:string): Promise<void> {
+	public async execute (workspace:string, data:any, stage?:string, url?:string): Promise<void> {
 		if (data === undefined) {
 			console.error('the data argument is required')
 			return
 		}
-		const orm = this.service.orm.create({ workspace })
+		const orm = this.service.orm.create({ workspace, url })
 		try {
 			await orm.init()
 			const stageName = await orm.getStageName(stage)

@@ -34,6 +34,10 @@ export class ExecuteCommand implements CommandModule {
 				alias: 'output',
 				describe: 'Generates an output according to the following possible values [json|beautiful|light|yaml]'
 			})
+			.option('u', {
+				alias: 'url',
+				describe: 'Url of service.'
+			})
 	}
 
 	async handler (args: Arguments) {
@@ -43,13 +47,14 @@ export class ExecuteCommand implements CommandModule {
 		const stage = args.stage as string
 		const output = args.output as string
 		const envfile = args.envfile as string
+		const url = args.url as string|undefined
 
 		if (envfile) {
 			const fullPath = path.resolve(process.cwd(), envfile)
 			dotenv.config({ path: fullPath, override: true })
 		}
 		try {
-			await execute.execute(workspace, query, data, stage, output)
+			await execute.execute(workspace, query, data, stage, output, url)
 		} catch (error) {
 			console.error(`error: ${error}`)
 		}

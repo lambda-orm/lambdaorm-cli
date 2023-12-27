@@ -5,8 +5,8 @@ export class Export {
 	// eslint-disable-next-line no-useless-constructor
 	constructor (private readonly service:CliFacade) {}
 
-	public async execute (workspace:string, target:string, stage?:string, force = false): Promise<void> {
-		const orm = this.service.orm.create({ workspace })
+	public async execute (workspace:string, target:string, stage?:string, url?:string, force = false): Promise<void> {
+		const orm = this.service.orm.create({ workspace, url })
 		try {
 			await orm.init()
 			const stageName = await orm.getStageName(stage)
