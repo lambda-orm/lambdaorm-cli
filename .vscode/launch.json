@@ -270,6 +270,22 @@
 				"http://localhost:9291"					
 			]
 		},
+		{
+			"name": "cli client execute",
+			"type": "node",
+			"request": "launch",
+			"skipFiles": [
+				"<node_internals>/**"
+			],
+			"program": "${workspaceFolder}/src/lib/index.ts",
+			"args": [
+				"execute",
+				"-u",
+				"http://localhost:9291",
+				"-q",
+				"Products.first(p => ({ category: p.category.name, name: p.name, quantity: p.quantity }))"
+			]
+		},
 		// counties -------------------------------------------------------------------------------------------------------------------------------------
 		{
 			"name": "countries init",

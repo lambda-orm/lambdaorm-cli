@@ -92,17 +92,32 @@ export class ClientStageService implements StageService {
 }
 
 export class RestOrmService implements OrmService {
-	public schema: SchemaService
-	public stage: StageService
+	private _schema?: SchemaService
+	private _stage?: StageService
 	private orm: client.Orm
 	public constructor (private readonly url:string) {
 		this.orm = new client.Orm(url)
-		this.schema = new ClientSchemaService(this.orm.schema)
-		this.stage = new ClientStageService(this.orm.stage)
 	}
 
 	public async init (): Promise<any> {
-		return this.orm.init(this.url)
+		await this.orm.init(this.url)
+		this._schema = new ClientSchemaService(this.orm.schema)
+		this._stage = new ClientStageService(this.orm.stage)
+		return null
+	}
+
+	public get schema (): SchemaService {
+		if (!this._schema) {
+			throw new Error('Schema not initialized')
+		}
+		return this._schema
+	}
+
+	get stage (): StageService {
+		if (!this._stage) {
+			throw new Error('Stage not initialized')
+		}
+		return this._stage
 	}
 
 	public async end (): Promise<void> {

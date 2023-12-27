@@ -46,8 +46,8 @@ export interface OrmService
 	// build (args:BuildArgs): Promise<void>
 	getStageName (stage?:string):Promise<string>
 
-	schema : SchemaService
-	stage : StageService
+	get schema() : SchemaService
+	get stage() : StageService
 	/**
 		* Get model of expression
 		* @returns Model of expression

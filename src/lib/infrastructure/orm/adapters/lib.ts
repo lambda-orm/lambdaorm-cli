@@ -119,17 +119,31 @@ export class LibStageService implements StageService {
 }
 
 export class LibOrmService implements OrmService {
-	public schema: SchemaService
-	public stage: StageService
+	private _schema?: SchemaService
+	private _stage?: StageService
 	private readonly orm: IOrm
 	public constructor (private readonly workspace:string) {
 		this.orm = new Orm(workspace)
-		this.schema = new LibSchemaService(this.orm.schema)
-		this.stage = new LibStageService(this.orm, workspace)
+		this._schema = new LibSchemaService(this.orm.schema)
+		this._stage = new LibStageService(this.orm, workspace)
 	}
 
 	public async init (): Promise<any> {
 		return this.orm.init(this.workspace)
+	}
+
+	public get schema (): SchemaService {
+		if (!this._schema) {
+			throw new Error('Schema not initialized')
+		}
+		return this._schema
+	}
+
+	get stage (): StageService {
+		if (!this._stage) {
+			throw new Error('Stage not initialized')
+		}
+		return this._stage
 	}
 
 	public async getStageName (stage?:string):Promise<string> {
