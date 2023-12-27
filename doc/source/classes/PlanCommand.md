@@ -44,7 +44,7 @@ CommandModule.command
 
 #### Defined in
 
-[src/lib/infrastructure/command/plan.ts:8](https://github.com/FlavioLionelRita/lambdaorm-cli/blob/0ad94fd/src/lib/infrastructure/command/plan.ts#L8)
+[src/lib/infrastructure/command/plan.ts:8](https://github.com/FlavioLionelRita/lambdaorm-cli/blob/10110f1/src/lib/infrastructure/command/plan.ts#L8)
 
 ___
 
@@ -58,13 +58,13 @@ CommandModule.describe
 
 #### Defined in
 
-[src/lib/infrastructure/command/plan.ts:9](https://github.com/FlavioLionelRita/lambdaorm-cli/blob/0ad94fd/src/lib/infrastructure/command/plan.ts#L9)
+[src/lib/infrastructure/command/plan.ts:9](https://github.com/FlavioLionelRita/lambdaorm-cli/blob/10110f1/src/lib/infrastructure/command/plan.ts#L9)
 
 ## Methods
 
 ### builder
 
-▸ **builder**(`args`): `Argv`\<\{ `w`: `unknown`  } & \{ `s`: `unknown`  } & \{ `q`: `unknown`  } & \{ `e`: `unknown`  } & \{ `o`: `unknown`  }\>
+▸ **builder**(`args`): `Argv`\<\{ `w`: `unknown`  } & \{ `s`: `unknown`  } & \{ `q`: `unknown`  } & \{ `e`: `unknown`  } & \{ `o`: `unknown`  } & \{ `u`: `unknown`  }\>
 
 #### Parameters
 
@@ -74,7 +74,7 @@ CommandModule.describe
 
 #### Returns
 
-`Argv`\<\{ `w`: `unknown`  } & \{ `s`: `unknown`  } & \{ `q`: `unknown`  } & \{ `e`: `unknown`  } & \{ `o`: `unknown`  }\>
+`Argv`\<\{ `w`: `unknown`  } & \{ `s`: `unknown`  } & \{ `q`: `unknown`  } & \{ `e`: `unknown`  } & \{ `o`: `unknown`  } & \{ `u`: `unknown`  }\>
 
 #### Implementation of
 
@@ -82,7 +82,7 @@ CommandModule.builder
 
 #### Defined in
 
-[src/lib/infrastructure/command/plan.ts:11](https://github.com/FlavioLionelRita/lambdaorm-cli/blob/0ad94fd/src/lib/infrastructure/command/plan.ts#L11)
+[src/lib/infrastructure/command/plan.ts:11](https://github.com/FlavioLionelRita/lambdaorm-cli/blob/10110f1/src/lib/infrastructure/command/plan.ts#L11)
 
 ___
 
@@ -108,4 +108,4 @@ CommandModule.handler
 
 #### Defined in
 
-[src/lib/infrastructure/command/plan.ts:35](https://github.com/FlavioLionelRita/lambdaorm-cli/blob/0ad94fd/src/lib/infrastructure/command/plan.ts#L35)
+[src/lib/infrastructure/command/plan.ts:39](https://github.com/FlavioLionelRita/lambdaorm-cli/blob/10110f1/src/lib/infrastructure/command/plan.ts#L39)
