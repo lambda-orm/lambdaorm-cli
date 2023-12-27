@@ -4,12 +4,13 @@ Import data from file to database.
 
 ## Params
 
-| parameter	| short | describe 																	|
-|-----------|-------|-------------------------------------------|
-|workspace	| -w 		| project path.															|
-|stage			| -s 		| Name of stage															|
-|envfile		| -e 		| Read in a file of environment variables.	|
-|data				| -d 		| Data file to import.											|
+| parameter	| short | describe 																												|
+|-----------|-------|-----------------------------------------------------------------|
+|workspace	| -w 		| project path.																										|
+|stage			| -s 		| Name of stage																										|
+|envfile		| -e 		| Read in a file of environment variables.												|
+|data				| -d 		| Data file to import.																						|
+|url				| -u 		| When working with a client you must pass the url of the service	|
 
 ## Example
 

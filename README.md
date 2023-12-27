@@ -59,6 +59,21 @@ It will generate:
 └── lambdaORM.yaml
 ```
 
+### init client node
+
+will create the project folder with the basic structure.
+
+```sh
+lambdaorm init -w client-lab -u http://localhost:9291
+```
+
+It will generate:
+
+```sh
+├── data
+└── lambdaORM.yaml
+```
+
 ### sync
 
 Synchronize Stage configured in lambdaORM schema with database/s.
@@ -248,7 +263,7 @@ Result:
 #### Build Client Node example
 
 ```sh
-lambdaorm build -l client-node --all
+lambdaorm build -l client-node --all -u http://localhost:9291
 ```
 
 Result:

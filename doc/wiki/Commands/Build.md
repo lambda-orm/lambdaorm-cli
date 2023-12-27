@@ -4,16 +4,17 @@ build model, repositories.
 
 ## Params
 
-| parameter		| short | describe 																	|
-|-------------|-------|-------------------------------------------|
-|workspace		| -w 		| project path.															|
-|language			| -l 		| develop language.													|
-|model				| -m 		| build model.															|
-|repositories	| -r 		| build repositories.												|
-|all					| -a 		| build model and repositories.							|
-|src-path			| -s 		| relative source code path in workspace.		|
-|data-path		| -d 		| relative data path in workspace.					|
-|domain-path	| -o 		| relative domain path in source code path.	|
+| parameter		| short | describe 																												|
+|-------------|-------|-----------------------------------------------------------------|
+|workspace		| -w 		| Project path.																										|
+|url					| -u 		| When working with a client you must pass the url of the service	|
+|language			| -l 		| Develop language.																								|
+|model				| -m 		| Build model.																										|
+|repositories	| -r 		| Build repositories.																							|
+|all					| -a 		| Build model and repositories.																		|
+|src-path			| -s 		| Relative source code path in workspace.													|
+|data-path		| -d 		| Relative data path in workspace.																|
+|domain-path	| -o 		| Relative domain path in source code path.												|
 
 ## Example
 

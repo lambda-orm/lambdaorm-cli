@@ -12,6 +12,7 @@ Execute an query expression.
 |data				| -d 		| Data used to execute expression																														|
 |envfile		| -e 		| Read in a file of environment variables.																									|
 |output			| -o 		| Generates an output according to the following possible values [json|beautiful|light|yaml]|
+|url				| -u 		| When working with a client you must pass the url of the service	                          |
 
 ## Examples
 
