@@ -4,6 +4,13 @@ All notable changes to this project will be documented in this file.
 
 ## Versions
 
+### [0.9.28](https://github.com/FlavioLionelRita/lambdaorm-cli/compare/v0.9.27...v0.9.28) (2023-12-27)
+
+
+### Bug Fixes
+
+* **orm:** solve rest adapter ([38fc82c](https://github.com/FlavioLionelRita/lambdaorm-cli/commit/38fc82c78bf99a604a02c4eb1026c905c1ed807f)), closes [#223](https://github.com/FlavioLionelRita/lambdaorm-cli/issues/223)
+
 ### [0.9.27](https://github.com/FlavioLionelRita/lambdaorm-cli/compare/v0.9.26...v0.9.27) (2023-12-27)
 
 ### [0.9.26](https://github.com/FlavioLionelRita/lambdaorm-cli/compare/v0.9.25...v0.9.26) (2023-12-27)
