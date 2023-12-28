@@ -1,4 +1,4 @@
 
 # Labs
 
-- [lab 01](https://github.com/FlavioLionelRita/lambdaorm-lab01)
+- [lab 01](https://github.com/lambda-orm/lambdaorm-lab01)

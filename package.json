@@ -9,13 +9,13 @@
 		"node": ">=10"
 	},
 	"main": "src/index.js",
-	"homepage": "https://github.com/FlavioLionelRita/lambdaorm-cli/readme",
+	"homepage": "https://github.com/lambda-orm/lambdaorm-cli/readme",
 	"bugs": {
-		"url": "https://github.com/FlavioLionelRita/lambdaorm/issues"
+		"url": "https://github.com/lambda-orm/lambdaorm/issues"
 	},
 	"repository": {
 		"type": "git",
-		"url": "https://github.com/FlavioLionelRita/lambdaorm-cli.git"
+		"url": "https://github.com/lambda-orm/lambdaorm-cli.git"
 	},
 	"standard-version": {
 		"header": "# Changelog\n\nAll notable changes to this project will be documented in this file.\n\n## Versions\n"

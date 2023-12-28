@@ -29,15 +29,15 @@ npm install lambdaorm-cli -g
 
 ## Documentation
 
-Full documentation is available in the [Wiki](https://github.com/FlavioLionelRita/lambdaorm-cli/wiki).
+Full documentation is available in the [Wiki](https://github.com/lambda-orm/lambdaorm-cli/wiki).
 
 ## Related projects
 
 - [Lambda ORM](https://www.npmjs.com/package/lambdaorm)
-- [Lambda ORM Service](https://github.com/FlavioLionelRita/lambdaorm-svc)
+- [Lambda ORM Service](https://github.com/lambda-orm/lambdaorm-svc)
 - [Client Node](https://www.npmjs.com/package/lambdaorm-client-node)
-- [Client Kotlin](https://github.com/FlavioLionelRita/lambdaorm-client-kotlin)
+- [Client Kotlin](https://github.com/lambda-orm/lambdaorm-client-kotlin)
 
 ## Labs
 
-You can access various labs at [github.com/FlavioLionelRita/lambdaorm-labs](https://github.com/FlavioLionelRita/lambdaorm-labs)
+You can access various labs at [github.com/lambda-orm/lambdaorm-labs](https://github.com/lambda-orm/lambdaorm-labs)

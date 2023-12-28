@@ -15,9 +15,9 @@
     * [[Constraints]]
   * Related Projects
     * [Lambda ORM](https://www.npmjs.com/package/lambdaorm)
-    * [Lambda ORM Service](https://github.com/FlavioLionelRita/lambdaorm-svc)
+    * [Lambda ORM Service](https://github.com/lambda-orm/lambdaorm-svc)
     * [Client Node](https://www.npmjs.com/package/lambdaorm-client-node)
-    * [Client Kotlin](https://github.com/FlavioLionelRita/lambdaorm-client-kotlin)
-  * [Labs](https://github.com/FlavioLionelRita/lambdaorm-labs)
-  * [Source Code Documentation](https://github.com/FlavioLionelRita/lambdaorm-cli/tree/main/doc/source)  
-  * [Change log](https://github.com/FlavioLionelRita/lambdaorm-cli/blob/main/CHANGELOG.md)
+    * [Client Kotlin](https://github.com/lambda-orm/lambdaorm-client-kotlin)
+  * [Labs](https://github.com/lambda-orm/lambdaorm-labs)
+  * [Source Code Documentation](https://github.com/lambda-orm/lambdaorm-cli/tree/main/doc/source)  
+  * [Change log](https://github.com/lambda-orm/lambdaorm-cli/blob/main/CHANGELOG.md)
