@@ -4,6 +4,8 @@ All notable changes to this project will be documented in this file.
 
 ## Versions
 
+### [0.9.32](https://github.com/lambda-orm/lambdaorm-cli/compare/v0.9.31...v0.9.32) (2023-12-28)
+
 ### [0.9.31](https://github.com/lambda-orm/lambdaorm-cli/compare/v0.9.30...v0.9.31) (2023-12-28)
 
 ### [0.9.30](https://github.com/lambda-orm/lambdaorm-cli/compare/v0.9.29...v0.9.30) (2023-12-27)
