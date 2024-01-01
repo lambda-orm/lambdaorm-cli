@@ -4,6 +4,13 @@ All notable changes to this project will be documented in this file.
 
 ## Versions
 
+### [0.9.33](https://github.com/lambda-orm/lambdaorm-cli/compare/v0.9.32...v0.9.33) (2024-01-01)
+
+
+### Features
+
+* add schema command ([5395a39](https://github.com/lambda-orm/lambdaorm-cli/commit/5395a393ccbe73421b138b861cfe4c9691c502ff)), closes [#223](https://github.com/lambda-orm/lambdaorm-cli/issues/223)
+
 ### [0.9.32](https://github.com/lambda-orm/lambdaorm-cli/compare/v0.9.31...v0.9.32) (2023-12-28)
 
 ### [0.9.31](https://github.com/lambda-orm/lambdaorm-cli/compare/v0.9.30...v0.9.31) (2023-12-28)
