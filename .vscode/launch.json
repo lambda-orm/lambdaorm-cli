@@ -27,43 +27,7 @@
 			"args": [
 				"help"
 			]
-		},
-		// lab-06 ----------------------------------------------------------------------------------		
-		{
-			"name": "lab 06 build",
-			"type": "node",
-			"request": "launch",
-			"skipFiles": [
-				"<node_internals>/**"
-			],
-			"program": "${workspaceFolder}/src/lib/index.ts",
-			"args": [
-				"build",
-				"-w",
-				"src/labs/06-ci-northwind-multiples-datasources/lab",
-				"--all"					
-			]
-		},
-		{
-			"name": "lab 06 plan",
-			"type": "node",
-			"request": "launch",
-			"skipFiles": [
-				"<node_internals>/**"
-			],
-			"program": "${workspaceFolder}/src/lib/index.ts",
-			"args": [
-				"plan",
-				"-w",
-				"src/labs/06-ci-northwind-multiples-datasources/lab",
-				"-s",
-				"default",
-				"-q",
-				"Customers.filter(p=>p.id=='ALFKI')",
-				"-o",
-				"beautiful"					
-			]
-		},
+		},		
 		// lab-01 ----------------------------------------------------------------------------------		
 		{
 			"name": "lab 01 init",
@@ -91,6 +55,38 @@
 				"version",
 				"-w",
 				"src/labs/lab_01"					
+			]
+		},
+		{
+			"name": "lab 01 schema version",
+			"type": "node",
+			"request": "launch",
+			"skipFiles": [
+				"<node_internals>/**"
+			],
+			"program": "${workspaceFolder}/src/lib/index.ts",
+			"args": [
+				"schema",
+				"-w",
+				"src/labs/lab_01",
+				"-p",
+				"schema/version"					
+			]
+		},
+		{
+			"name": "lab 01 schema domain",
+			"type": "node",
+			"request": "launch",
+			"skipFiles": [
+				"<node_internals>/**"
+			],
+			"program": "${workspaceFolder}/src/lib/index.ts",
+			"args": [
+				"schema",
+				"-w",
+				"src/labs/lab_01",
+				"-p",
+				"domain"					
 			]
 		},
 		{

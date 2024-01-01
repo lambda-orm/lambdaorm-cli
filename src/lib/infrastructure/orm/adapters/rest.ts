@@ -21,6 +21,10 @@ export class ClientSchemaService implements SchemaService {
 		return this.schemaService.sources()
 	}
 
+	public async source (source:string): Promise<{ name: string; dialect: string }> {
+		return this.schemaService.source(source)
+	}
+
 	public async entities (): Promise<Entity[]> {
 		return this.schemaService.entities()
 	}
@@ -38,7 +42,7 @@ export class ClientSchemaService implements SchemaService {
 	}
 
 	public async mappings (): Promise<Mapping[]> {
-		throw new Error('Method not implemented.')
+		return await this.schemaService.mappings()
 	}
 
 	public async schema (): Promise<Schema> {

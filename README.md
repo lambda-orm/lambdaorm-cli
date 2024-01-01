@@ -22,6 +22,7 @@ npm install lambdaorm-cli -g
 | parameters	|	Return parameters of query expression.															|
 | model				|	Return model of query expression.																		|
 | plan				|	Return plan execution of query expression.													|
+| schema	    |	Return schema information.															            |
 |	import			| Import data from file to database.																	|
 |	export			| Export data from a database. 																				|
 |	build				| add configuration, model and repositories according to the language.|

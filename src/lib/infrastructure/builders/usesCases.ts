@@ -1,7 +1,7 @@
 import { CliFacadeBuilder } from './facade'
 import {
 	Build, Init, Drop, Execute, Import, Export, Synchronize,
-	Version, VersionGlobal, Plan, Metadata, Parameters, Constraints, Model
+	Version, VersionGlobal, Plan, Metadata, Parameters, Constraints, Model, Schema
 } from '../../application'
 
 const ormCliService = new CliFacadeBuilder().build()
@@ -19,3 +19,4 @@ export const model = new Model(ormCliService)
 export const _import = new Import(ormCliService)
 export const _export = new Export(ormCliService)
 export const drop = new Drop(ormCliService)
+export const schema = new Schema(ormCliService)

@@ -11,6 +11,15 @@ export class LibSchemaService implements SchemaService {
 		return Promise.resolve(this.schemaFacade.schema.infrastructure?.sources?.map(s => ({ name: s.name, dialect: s.dialect })) || [])
 	}
 
+	public async source (source:string): Promise<{ name: string; dialect: string }> {
+		const sources = await this.sources()
+		if (sources !== undefined) {
+			return sources.find(s => s.name === source) || { name: source, dialect: 'unknown' }
+		} else {
+			return { name: source, dialect: 'unknown' }
+		}
+	}
+
 	public async version (): Promise<{ version: string }> {
 		return Promise.resolve({ version: this.schemaFacade.schema.version })
 	}
@@ -21,13 +30,6 @@ export class LibSchemaService implements SchemaService {
 
 	public async domain (): Promise<DomainSchema> {
 		return Promise.resolve(this.schemaFacade.schema.domain)
-	}
-
-	public async dataSources (): Promise<{ name: string; dialect: string }[]> {
-		if (this.schemaFacade.schema.infrastructure === undefined || this.schemaFacade.schema.infrastructure.sources === undefined) {
-			return Promise.resolve([])
-		}
-		return Promise.resolve(this.schemaFacade.schema.infrastructure.sources.map(s => ({ name: s.name, dialect: s.dialect })))
 	}
 
 	public async entities (): Promise<Entity[]> {

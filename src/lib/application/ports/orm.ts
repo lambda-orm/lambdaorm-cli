@@ -9,6 +9,7 @@ export interface SchemaService {
 	schema (): Promise<Schema>
 	domain (): Promise<DomainSchema>
 	sources ():Promise<{name:string, dialect:string}[]>
+	source (source:string): Promise<{ name: string; dialect: string }>
 	entities (): Promise<Entity[]>
 	entity (entity:string): Promise<Entity|undefined>
 	enums (): Promise<Enum[]>
@@ -28,7 +29,6 @@ export interface StageService {
 	drop (stage: string, sentence: boolean, force:boolean): Promise<any>
 	sync (stage: string, sentence: boolean, force:boolean): Promise<any>
 }
-
 export interface BuildArgs {
 	workspace:string
 	url?:string
@@ -38,7 +38,6 @@ export interface BuildArgs {
 	dataPath?: string
 	domainPath?:string
 }
-
 export interface OrmService
 {
 	init ():Promise<any>
