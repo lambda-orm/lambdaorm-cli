@@ -17,5 +17,6 @@ Lambda ORM
 - [ModelCommand](classes/ModelCommand.md)
 - [ParametersCommand](classes/ParametersCommand.md)
 - [PlanCommand](classes/PlanCommand.md)
+- [SchemaCommand](classes/SchemaCommand.md)
 - [SyncCommand](classes/SyncCommand.md)
 - [VersionCommand](classes/VersionCommand.md)
