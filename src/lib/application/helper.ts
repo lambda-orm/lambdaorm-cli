@@ -1,4 +1,5 @@
 import { H3lp, IUtils, IFsHelper } from 'h3lp'
+import { Logger, OrmH3lp } from 'lambdaorm'
 import path from 'path'
 const Util = require('util')
 const exec = Util.promisify(require('child_process').exec)
@@ -58,10 +59,10 @@ class CliHelper {
 	}
 }
 
-export class Helper extends H3lp {
+export class Helper extends OrmH3lp {
 	public cli:CliHelper
-	constructor (h3lp: H3lp) {
-		super(h3lp.utils, h3lp.val, h3lp.fs, h3lp.http, h3lp.obj, h3lp.str, h3lp.test, h3lp.array)
+	constructor (h3lp: H3lp, logger: Logger) {
+		super(h3lp, logger)
 		this.cli = new CliHelper(h3lp.utils, h3lp.fs)
 	}
 }

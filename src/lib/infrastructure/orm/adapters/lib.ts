@@ -1,14 +1,14 @@
 import {
 	MetadataModel, MetadataParameter, MetadataConstraint, Metadata, QueryOptions, QueryPlan, IOrm, DomainSchema, Entity, EntityMapping
-	, Enum, Mapping, Schema, Stage, SchemaFacade, SchemaConfig, Orm
+	, Enum, Mapping, Schema, Stage, SchemaData, Orm, SchemaState
 } from 'lambdaorm'
 import { OrmService, SchemaService, StageService } from '../../../application'
 
 export class LibSchemaService implements SchemaService {
 	// eslint-disable-next-line no-useless-constructor
-	public constructor (private readonly schemaFacade: SchemaFacade) {}
+	public constructor (private readonly schemaState: SchemaState) {}
 	public async sources (): Promise<{ name: string; dialect: string }[]> {
-		return Promise.resolve(this.schemaFacade.schema.infrastructure?.sources?.map(s => ({ name: s.name, dialect: s.dialect })) || [])
+		return Promise.resolve(this.schemaState.schema.infrastructure?.sources?.map(s => ({ name: s.name, dialect: s.dialect })) || [])
 	}
 
 	public async source (source:string): Promise<{ name: string; dialect: string }> {
@@ -21,64 +21,64 @@ export class LibSchemaService implements SchemaService {
 	}
 
 	public async version (): Promise<{ version: string }> {
-		return Promise.resolve({ version: this.schemaFacade.schema.version })
+		return Promise.resolve({ version: this.schemaState.schema.version })
 	}
 
 	public async schema (): Promise<Schema> {
-		return Promise.resolve(this.schemaFacade.schema)
+		return Promise.resolve(this.schemaState.schema)
 	}
 
 	public async domain (): Promise<DomainSchema> {
-		return Promise.resolve(this.schemaFacade.schema.domain)
+		return Promise.resolve(this.schemaState.schema.domain)
 	}
 
 	public async entities (): Promise<Entity[]> {
-		return Promise.resolve(this.schemaFacade.schema.domain.entities)
+		return Promise.resolve(this.schemaState.schema.domain.entities)
 	}
 
 	public async entity (entity: string): Promise<Entity | undefined> {
-		return Promise.resolve(this.schemaFacade.schema.domain.entities.find(e => e.name === entity))
+		return Promise.resolve(this.schemaState.schema.domain.entities.find(e => e.name === entity))
 	}
 
 	public async enums (): Promise<Enum[]> {
-		return Promise.resolve(this.schemaFacade.schema.domain.enums)
+		return Promise.resolve(this.schemaState.schema.domain.enums || [])
 	}
 
 	public async enum (_enum: string): Promise<Enum | undefined> {
-		return Promise.resolve(this.schemaFacade.schema.domain.enums.find(e => e.name === _enum))
+		return Promise.resolve(this.schemaState.schema.domain.enums?.find(e => e.name === _enum))
 	}
 
 	public async mappings (): Promise<Mapping[]> {
-		return Promise.resolve(this.schemaFacade.schema.infrastructure?.mappings || [])
+		return Promise.resolve(this.schemaState.schema.infrastructure?.mappings || [])
 	}
 
 	public async mapping (mapping: string): Promise<Mapping | undefined> {
-		if (this.schemaFacade.schema.infrastructure === undefined || this.schemaFacade.schema.infrastructure.mappings === undefined) {
+		if (this.schemaState.schema.infrastructure === undefined || this.schemaState.schema.infrastructure.mappings === undefined) {
 			return Promise.resolve(undefined)
 		}
-		return Promise.resolve(this.schemaFacade.schema.infrastructure.mappings.find(m => m.name === mapping))
+		return Promise.resolve(this.schemaState.schema.infrastructure.mappings.find(m => m.name === mapping))
 	}
 
 	public async entityMapping (mapping: string, entity: string): Promise<EntityMapping | undefined> {
-		if (this.schemaFacade.schema.infrastructure === undefined || this.schemaFacade.schema.infrastructure.mappings === undefined) {
+		if (this.schemaState.schema.infrastructure === undefined || this.schemaState.schema.infrastructure.mappings === undefined) {
 			return Promise.resolve(undefined)
 		}
-		return Promise.resolve(this.schemaFacade.schema.infrastructure.mappings.find(m => m.name === mapping)?.entities.find(e => e.name === entity))
+		return Promise.resolve(this.schemaState.schema.infrastructure.mappings.find(m => m.name === mapping)?.entities?.find(e => e.name === entity))
 	}
 
 	public async stages (): Promise<Stage[]> {
-		return Promise.resolve(this.schemaFacade.schema.infrastructure?.stages || [])
+		return Promise.resolve(this.schemaState.schema.infrastructure?.stages || [])
 	}
 
 	public async stage (stage: string): Promise<Stage | undefined> {
-		if (this.schemaFacade.schema.infrastructure === undefined || this.schemaFacade.schema.infrastructure.stages === undefined) {
+		if (this.schemaState.schema.infrastructure === undefined || this.schemaState.schema.infrastructure.stages === undefined) {
 			return Promise.resolve(undefined)
 		}
-		return Promise.resolve(this.schemaFacade.schema.infrastructure?.stages.find(s => s.name === stage))
+		return Promise.resolve(this.schemaState.schema.infrastructure?.stages.find(s => s.name === stage))
 	}
 
 	public async views (): Promise<string[]> {
-		return Promise.resolve(this.schemaFacade.schema.infrastructure?.views?.map(p => p.name) || [])
+		return Promise.resolve(this.schemaState.schema.infrastructure?.views?.map(p => p.name) || [])
 	}
 }
 
@@ -89,7 +89,7 @@ export class LibStageService implements StageService {
 		return this.orm.stage.exists(stage)
 	}
 
-	public async export (stage: string, force: boolean): Promise<SchemaConfig> {
+	public async export (stage: string, force: boolean): Promise<SchemaData> {
 		return this.orm.stage.export({ stage, tryAllCan: force }).execute()
 	}
 
@@ -106,12 +106,12 @@ export class LibStageService implements StageService {
 	}
 
 	public async sync (stage: string, sentence: boolean, force:boolean): Promise<any> {
-		const schema = await this.orm.schema.get(this.workspace)
+		const schema = await this.orm.state.load(this.workspace)
 		if (schema === null) {
 			throw new Error(`Can't found schema in ${this.workspace}`)
 		}
 		// await this.orm.init(schema)
-		const _stage = this.orm.schema.stage.get(stage)
+		const _stage = this.orm.state.stage.get(stage)
 		if (sentence) {
 			return await this.orm.stage.sync({ stage: _stage.name }).sentence()
 		} else {
@@ -126,7 +126,7 @@ export class LibOrmService implements OrmService {
 	private readonly orm: IOrm
 	public constructor (private readonly workspace:string) {
 		this.orm = new Orm(workspace)
-		this._schema = new LibSchemaService(this.orm.schema)
+		this._schema = new LibSchemaService(this.orm.state)
 		this._stage = new LibStageService(this.orm, workspace)
 	}
 
@@ -149,11 +149,11 @@ export class LibOrmService implements OrmService {
 	}
 
 	public async getStageName (stage?:string):Promise<string> {
-		const schema = await this.orm.schema.get(this.workspace)
+		const schema = await this.orm.state.load(this.workspace)
 		if (schema === null) {
 			throw new Error(`Can't found schema in ${this.workspace}`)
 		}
-		const _stage = this.orm.schema.stage.get(stage)
+		const _stage = this.orm.state.stage.get(stage)
 		return _stage.name
 	}
 

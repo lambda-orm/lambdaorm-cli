@@ -1,10 +1,11 @@
-import { Dialect, Mapping, Schema, SchemaFacade, Source } from 'lambdaorm'
+import { Dialect, Mapping, Schema, SchemaState, SchemaFacade, Source } from 'lambdaorm'
 import { Helper, InitArgs, WorkspaceService } from '../../../application'
 import path from 'path'
 
 export class LocalWorkspaceService implements WorkspaceService {
 	// eslint-disable-next-line no-useless-constructor
 	constructor (private readonly workspace:string,
+		private readonly schemaState:SchemaState,
 		private readonly schemaFacade:SchemaFacade,
 		private readonly helper:Helper
 	) {}
@@ -13,12 +14,12 @@ export class LocalWorkspaceService implements WorkspaceService {
 		// create workspace
 		await this.helper.fs.create(this.workspace)
 		// get or create config file
-		let sourceSchema = await this.schemaFacade.get(this.workspace)
+		let sourceSchema = await this.schemaState.load(this.workspace)
 		if (sourceSchema === null) {
-			sourceSchema = await this.schemaFacade.create()
+			sourceSchema = this.schemaFacade.create()
 		}
 		// complete schema config
-		const targetSchema = this.completeSchema(sourceSchema, args.source, args.dialect, args.connection)
+		const targetSchema = await this.completeSchema(sourceSchema, args.source, args.dialect, args.connection)
 		// write lambdaorm config
 		const configPath = path.join(this.workspace, 'lambdaORM.yaml')
 		const _dataPath = args.dataPath || targetSchema.infrastructure?.paths?.data || 'data'
@@ -27,9 +28,8 @@ export class LocalWorkspaceService implements WorkspaceService {
 		await this.createStructure(this.workspace, _dataPath)
 	}
 
-	private completeSchema (_schema: Schema, sourceName?: string, dialect?: Dialect, connection?: any): Schema {
-		const schema:Schema = this.helper.obj.clone(_schema)
-		this.schemaFacade.complete(schema)
+	private async completeSchema (_schema: Schema, sourceName?: string, dialect?: Dialect, connection?: any): Promise<Schema> {
+		const schema = await this.schemaState.load(this.helper.obj.clone(_schema))
 		let source:Source|undefined
 		let mapping:Mapping|undefined
 		if (schema.infrastructure === undefined) {

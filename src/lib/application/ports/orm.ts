@@ -1,7 +1,7 @@
 /* eslint-disable @typescript-eslint/ban-types */
 import {
 	QueryPlan, QueryOptions, Metadata, MetadataModel, MetadataConstraint, MetadataParameter
-	, DomainSchema, SchemaConfig, Entity, Enum, Schema, Mapping, EntityMapping, Stage
+	, DomainSchema, SchemaData, Entity, Enum, Schema, Mapping, EntityMapping, Stage
 } from 'lambdaorm'
 
 export interface SchemaService {
@@ -24,7 +24,7 @@ export interface SchemaService {
 
 export interface StageService {
 	exists (stage:string): Promise<boolean>
-	export (stage:string, force: boolean): Promise<SchemaConfig>
+	export (stage:string, force: boolean): Promise<SchemaData>
 	import (stage:string, schemaData:any): Promise<void>
 	drop (stage: string, sentence: boolean, force:boolean): Promise<any>
 	sync (stage: string, sentence: boolean, force:boolean): Promise<any>

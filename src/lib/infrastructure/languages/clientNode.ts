@@ -1,4 +1,4 @@
-import { SchemaFacade } from 'lambdaorm'
+import { SchemaState } from 'lambdaorm'
 import { Helper, BuildArgs } from '../../application'
 import { NodeLanguageService } from './node'
 import * as client from 'lambdaorm-client-node'
@@ -6,8 +6,8 @@ import path from 'path'
 import { ClientSchema } from 'lambdaorm-client-node'
 
 export class ClientNodeLanguageService extends NodeLanguageService {
-	public constructor (schemaFacade:SchemaFacade, helper:Helper) {
-		super(schemaFacade, helper)
+	public constructor (schemaState:SchemaState, helper:Helper) {
+		super(schemaState, helper)
 		this.library = 'lambdaorm-client-node'
 	}
 
@@ -16,7 +16,7 @@ export class ClientNodeLanguageService extends NodeLanguageService {
 	}
 
 	public async build (args:BuildArgs): Promise<void> {
-		const schema = await this.schemaFacade.get(args.workspace) as ClientSchema | null
+		const schema = await this.schemaState.load(args.workspace) as ClientSchema | null
 		if (schema === null) {
 			throw new Error(`Can't found schema in ${args.workspace}`)
 		}
@@ -34,7 +34,7 @@ export class ClientNodeLanguageService extends NodeLanguageService {
 				schema.domain = serviceDomainSchema
 			}
 			if (schema.infrastructure.paths === undefined) {
-				schema.infrastructure.paths = this.schemaFacade.createService.newPathsApp()
+				schema.infrastructure.paths = {}
 			}
 			schema.infrastructure.paths.src = args.srcPath || schema.infrastructure.paths.src || 'src'
 			schema.infrastructure.paths.domain = args.domainPath || schema.infrastructure.paths.domain || 'domain'

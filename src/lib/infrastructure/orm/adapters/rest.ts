@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 import {
-	MetadataModel, MetadataParameter, MetadataConstraint, Metadata, QueryOptions, QueryPlan, DomainSchema, Entity, Enum, Mapping, Relation, Dependent, SchemaConfig, Schema, EntityMapping, Stage
+	MetadataModel, MetadataParameter, MetadataConstraint, Metadata, QueryOptions, QueryPlan, DomainSchema, Entity, Enum, Mapping, SchemaData, Schema, EntityMapping, Stage
 } from 'lambdaorm'
 import { OrmService, SchemaService, StageService } from '../../../application/ports/orm'
 import * as client from 'lambdaorm-client-node'
@@ -78,7 +78,7 @@ export class ClientStageService implements StageService {
 		return this.stageService.exists(stage)
 	}
 
-	public async export (stage: string, force: boolean): Promise<SchemaConfig> {
+	public async export (stage: string, force: boolean): Promise<SchemaData> {
 		return this.stageService.export(stage)
 	}
 

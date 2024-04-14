@@ -1,10 +1,10 @@
-import { Dialect, Entity, DomainSchema, InfrastructureSchema, SchemaFacade } from 'lambdaorm'
+import { Dialect, Entity, DomainSchema, InfrastructureSchema, SchemaState } from 'lambdaorm'
 import path from 'path'
 import { BuildArgs, Helper, LanguageService } from '../../application'
 
 export class NodeLanguageService implements LanguageService {
 	protected library: string
-	public constructor (protected readonly schemaFacade:SchemaFacade, protected readonly helper:Helper) {
+	public constructor (protected readonly schemaState:SchemaState, protected readonly helper:Helper) {
 		this.library = 'lambdaorm'
 	}
 
@@ -13,23 +13,22 @@ export class NodeLanguageService implements LanguageService {
 	}
 
 	public async build (args:BuildArgs): Promise<void> {
-		let schema = await this.schemaFacade.get(args.workspace)
+		let schema = await this.schemaState.load(args.workspace)
 		if (schema === null) {
 			throw new Error(`Can't found schema in ${args.workspace}`)
 		}
 		if (!schema.infrastructure) {
-			schema.infrastructure = { paths: this.schemaFacade.createService.newPathsApp() }
+			schema.infrastructure = { }
 		}
 		const _srcPath = args.srcPath || schema.infrastructure?.paths?.src || 'src'
 		const _dataPath = args.dataPath || schema.infrastructure?.paths?.data || 'data'
 		const _domainPath = args.domainPath || schema.infrastructure?.paths?.domain || 'domain'
-		schema = await this.schemaFacade.initialize(schema)
+		schema = await this.schemaState.load(schema)
 		await this.updateStructure(args.workspace, _srcPath, _dataPath)
 		// add libraries for dialect
 		if (schema.infrastructure && schema.infrastructure.sources && schema.infrastructure.sources.length > 0) {
 			await this.addDialects(args.workspace, schema.infrastructure)
 		}
-		this.schemaFacade.complete(schema)
 		if (_domainPath) {
 			const __domainPath = path.join(args.workspace, _srcPath, _domainPath)
 			if (args.options.includes('model')) {
