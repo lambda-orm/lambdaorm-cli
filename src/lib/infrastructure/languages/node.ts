@@ -1,10 +1,10 @@
 import { Dialect, Entity, DomainSchema, InfrastructureSchema, SchemaState } from 'lambdaorm'
 import path from 'path'
-import { BuildArgs, Helper, LanguageService } from '../../application'
+import { BuildArgs, OrmCliH3lp, LanguageService } from '../../application'
 
 export class NodeLanguageService implements LanguageService {
 	protected library: string
-	public constructor (protected readonly schemaState:SchemaState, protected readonly helper:Helper) {
+	public constructor (protected readonly schemaState:SchemaState, protected readonly helper:OrmCliH3lp) {
 		this.library = 'lambdaorm'
 	}
 
@@ -71,7 +71,7 @@ export class NodeLanguageService implements LanguageService {
 	protected async installTypescript (workspace:string): Promise<void> {
 		const typescriptLib = await this.helper.cli.getPackage('typescript', workspace)
 		if (typescriptLib === '') {
-			await this.helper.cli.exec('npm install typescript -D', workspace)
+			await this.helper.utils.exec('npm install typescript -D', workspace)
 		}
 	}
 
@@ -81,7 +81,7 @@ export class NodeLanguageService implements LanguageService {
 	protected async installLibrary (workspace:string): Promise<void> {
 		const lambdaormLib = await this.helper.cli.getPackage(this.library, workspace)
 		if (lambdaormLib === '') {
-			await this.helper.cli.exec(`npm install ${this.library}`, workspace)
+			await this.helper.utils.exec(`npm install ${this.library}`, workspace)
 		}
 	}
 
@@ -106,7 +106,7 @@ export class NodeLanguageService implements LanguageService {
 				const lib = libs[p]
 				const localLib = await this.helper.cli.getPackage(lib, path)
 				if (localLib === '') {
-					await this.helper.cli.exec(`npm install ${lib}`, path)
+					await this.helper.utils.exec(`npm install ${lib}`, path)
 				}
 			}
 		}

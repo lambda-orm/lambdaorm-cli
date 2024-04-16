@@ -1,16 +1,7 @@
-import { Dialect } from 'lambdaorm'
-
-export interface InitArgs {
-	workspace:string
-	url?:string
-	source?:string
-	dialect?:Dialect
-	connection?:string
-	dataPath?:string
-}
+import { InitializeSchemaArgs } from 'lambdaorm'
 
 export interface WorkspaceService {
-	init (args:InitArgs): Promise<void>
+	init (args:InitializeSchemaArgs): Promise<void>
 }
 
 export interface WorkspaceFactory {

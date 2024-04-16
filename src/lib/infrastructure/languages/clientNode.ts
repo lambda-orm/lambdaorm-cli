@@ -1,12 +1,12 @@
-import { SchemaState } from 'lambdaorm'
-import { Helper, BuildArgs } from '../../application'
+import { SchemaState, SchemaFacade } from 'lambdaorm'
+import { OrmCliH3lp, BuildArgs } from '../../application'
 import { NodeLanguageService } from './node'
 import * as client from 'lambdaorm-client-node'
 import path from 'path'
 import { ClientSchema } from 'lambdaorm-client-node'
 
 export class ClientNodeLanguageService extends NodeLanguageService {
-	public constructor (schemaState:SchemaState, helper:Helper) {
+	public constructor (private readonly schemaFacade:SchemaFacade, schemaState:SchemaState, helper:OrmCliH3lp) {
 		super(schemaState, helper)
 		this.library = 'lambdaorm-client-node'
 	}
@@ -39,7 +39,7 @@ export class ClientNodeLanguageService extends NodeLanguageService {
 			schema.infrastructure.paths.src = args.srcPath || schema.infrastructure.paths.src || 'src'
 			schema.infrastructure.paths.domain = args.domainPath || schema.infrastructure.paths.domain || 'domain'
 			// save schema
-			await this.helper.cli.writeSchema(path.join(args.workspace, 'lambdaORM.yaml'), schema)
+			await this.schemaFacade.write(schema, path.join(args.workspace, 'lambdaORM.yaml'))
 			await this.updateStructure(args.workspace, schema.infrastructure.paths.src)
 
 			if (schema.infrastructure.paths.domain) {
