@@ -5,7 +5,9 @@ import {
 } from 'lambdaorm'
 
 export interface SchemaService {
+	introspect (data:any, name:string): Promise<void>
 	version ():Promise<{version:string| undefined }>
+	originalSchema (): Promise<Schema>
 	schema (): Promise<Schema>
 	domain (): Promise<DomainSchema>
 	sources ():Promise<{name:string, dialect:string}[]>
@@ -26,6 +28,9 @@ export interface StageService {
 	exists (stage:string): Promise<boolean>
 	export (stage:string, force: boolean): Promise<SchemaData>
 	import (stage:string, schemaData:any): Promise<void>
+	fetch (stage:string): Promise<Mapping[]>
+	incorporate (data: any, name:string, stage?: string): Promise<void>
+	match (stage: string): Promise<void>
 	drop (stage: string, sentence: boolean, force:boolean): Promise<any>
 	sync (stage: string, sentence: boolean, force:boolean): Promise<any>
 }

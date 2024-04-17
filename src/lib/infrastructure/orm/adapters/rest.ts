@@ -8,6 +8,14 @@ import * as client from 'lambdaorm-client-node'
 export class ClientSchemaService implements SchemaService {
 	// eslint-disable-next-line no-useless-constructor
 	public constructor (private readonly schemaService: client.SchemaService) {}
+	public introspect (data: any, name: string): Promise<void> {
+		throw new Error('Method not support in Rest Service.')
+	}
+
+	public originalSchema (): Promise<Schema> {
+		// TODO: Change for Original Schema
+		return this.schemaService.schema()
+	}
 
 	public async version (): Promise<{ version: string }> {
 		return this.schemaService.version()
@@ -86,12 +94,27 @@ export class ClientStageService implements StageService {
 		return this.stageService.import(stage, schemaData)
 	}
 
+	public incorporate (data: any, name: string, stage?: string | undefined): Promise<void> {
+		// TODO: implement incorporate
+		throw new Error('Functionality not support by rest client.')
+	}
+
+	public fetch (stage: string): Promise<Mapping[]> {
+		// TODO: implement fetch
+		throw new Error('Functionality not support by rest client.')
+	}
+
+	public match (stage: string): Promise<void> {
+		// TODO: implement match
+		throw new Error('Functionality not support by rest client.')
+	}
+
 	public async drop (stage: string, sentence: boolean, force:boolean): Promise<any> {
-		throw new Error('Functionality not support by client.')
+		throw new Error('Functionality not support by rest client.')
 	}
 
 	public async sync (stage: string, sentence: boolean, force:boolean): Promise<any> {
-		throw new Error('Functionality not support by client.')
+		throw new Error('Functionality not support by rest client.')
 	}
 }
 

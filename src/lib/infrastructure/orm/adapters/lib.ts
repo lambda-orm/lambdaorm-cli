@@ -7,6 +7,11 @@ import { OrmService, SchemaService, StageService } from '../../../application'
 export class LibSchemaService implements SchemaService {
 	// eslint-disable-next-line no-useless-constructor
 	public constructor (private readonly schemaState: SchemaState) {}
+
+	public async introspect (data:any, name:string): Promise<void> {
+		this.schemaState.introspect(data, name)
+	}
+
 	public async sources (): Promise<{ name: string; dialect: string }[]> {
 		return Promise.resolve(this.schemaState.getSchemaSources())
 	}
@@ -21,6 +26,10 @@ export class LibSchemaService implements SchemaService {
 
 	public async schema (): Promise<Schema> {
 		return Promise.resolve(this.schemaState.schema)
+	}
+
+	public async originalSchema (): Promise<Schema> {
+		return Promise.resolve(this.schemaState.originalSchema)
 	}
 
 	public async domain (): Promise<DomainSchema> {
@@ -71,8 +80,21 @@ export class LibSchemaService implements SchemaService {
 export class LibStageService implements StageService {
 	// eslint-disable-next-line no-useless-constructor
 	public constructor (private readonly orm:IOrm, private readonly workspace:string) {}
+
 	public async exists (stage: string): Promise<boolean> {
 		return this.orm.stage.exists(stage)
+	}
+
+	public async fetch (stage: string): Promise<Mapping[]> {
+		return this.orm.stage.fetch({ stage })
+	}
+
+	public async match (stage: string): Promise<void> {
+		await this.orm.stage.match({ stage })
+	}
+
+	public async incorporate (stage: string, data: any, name:string): Promise<void> {
+		await this.orm.stage.incorporate(data, name, { stage })
 	}
 
 	public async export (stage: string, force: boolean): Promise<SchemaData> {

@@ -1,11 +1,11 @@
 /* eslint-disable no-mixed-spaces-and-tabs */
 import { CommandModule, Argv, Arguments } from 'yargs'
 import path from 'path'
-import { schema } from '../builders/usesCases'
+import { incorporate } from '../builders/usesCases'
 
-export class SchemaCommand implements CommandModule {
-	command = 'schema'
-	describe = 'Return schema information'
+export class Incorporate implements CommandModule {
+	command = 'incorporate'
+	describe = 'Update schema and sync source and import data.'
 
 	builder (args: Argv) {
 		return args
@@ -15,29 +15,34 @@ export class SchemaCommand implements CommandModule {
 			})
 			.option('u', {
 				alias: 'url',
-				describe: 'Url of service.'
+				describe: 'Url of service'
 			})
-			.option('p', {
-				alias: 'path',
-				describe: 'data path'
+			.option('s', {
+				alias: 'stage',
+				describe: 'Name of stage'
 			})
 			.option('e', {
 				alias: 'envfile',
 				describe: 'Read in a file of environment variables'
 			})
-			.option('o', {
-				alias: 'output',
-				describe: 'Generates an output according to the following possible values [json|beautiful|light|yaml]'
+			.option('d', {
+				alias: 'data',
+				describe: 'Data file to incorporate'
+			})
+			.option('n', {
+				alias: 'name',
+				describe: 'Name of root entity'
 			})
 	}
 
 	async handler (args: Arguments) {
 		const workspace = path.resolve(process.cwd(), args.workspace as string || '.')
-		const dataPath = args.path as string
-		const output = args.output as string
 		const url = args.url as string|undefined
+		const stage = args.stage as string
+		const data = args.data || {}
+		const name = args.name as string
 		try {
-			await schema.execute(workspace, dataPath, output, url)
+			await incorporate.execute(workspace, data, name, stage, url)
 		} catch (error) {
 			console.error(`error: ${error}`)
 		}

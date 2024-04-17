@@ -24,6 +24,11 @@ class CliHelper {
 		return data
 	}
 
+	public nameFromFile (filePath:string):string {
+		const parsedPath = path.parse(filePath)
+		return parsedPath.name
+	}
+
 	public async getPackage (name:string, workspace:string): Promise<string> {
 		const exp = new RegExp(`${name}@(.*)\n`)
 		const localNpmList = await this.utils.exec('npm list --depth=0', workspace)
