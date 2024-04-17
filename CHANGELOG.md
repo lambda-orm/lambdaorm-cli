@@ -4,6 +4,14 @@ All notable changes to this project will be documented in this file.
 
 ## Versions
 
+## [1.1.0](https://github.com/lambda-orm/lambdaorm-cli/compare/v0.9.34...v1.1.0) (2024-04-17)
+
+
+### Features
+
+* adjust for update dependences ([49f4585](https://github.com/lambda-orm/lambdaorm-cli/commit/49f4585d4bf96cb51e0244298e55cb0d45555a08)), closes [#0](https://github.com/lambda-orm/lambdaorm-cli/issues/0)
+* update lib local schema ([28e2a3b](https://github.com/lambda-orm/lambdaorm-cli/commit/28e2a3b89c46bb863a4f422bc081a7c4d74baed3)), closes [#0](https://github.com/lambda-orm/lambdaorm-cli/issues/0)
+
 ### [0.9.34](https://github.com/lambda-orm/lambdaorm-cli/compare/v0.9.33...v0.9.34) (2024-04-14)
 
 ### [0.9.33](https://github.com/lambda-orm/lambdaorm-cli/compare/v0.9.32...v0.9.33) (2024-01-01)
