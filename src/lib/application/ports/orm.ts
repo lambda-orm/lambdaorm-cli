@@ -5,7 +5,7 @@ import {
 } from 'lambdaorm'
 
 export interface SchemaService {
-	version ():Promise<{version:string}>
+	version ():Promise<{version:string| undefined }>
 	schema (): Promise<Schema>
 	domain (): Promise<DomainSchema>
 	sources ():Promise<{name:string, dialect:string}[]>

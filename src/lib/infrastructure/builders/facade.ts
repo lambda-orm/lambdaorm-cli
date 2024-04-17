@@ -19,7 +19,7 @@ export class CliFacadeBuilder {
 		languages.add(new NodeLanguageService(schemaState, helper))
 		languages.add(new ClientNodeLanguageService(schemaFacade, schemaState, helper))
 		const ormFactory = new OrmFactoryImp()
-		const workspaceFactory = new WorkspaceFactoryImp(schemaState, schemaFacade, helper)
+		const workspaceFactory = new WorkspaceFactoryImp(schemaState, helper)
 		const service = new CliFacade(languages, ormFactory, workspaceFactory, outputService, helper, schemaFacade)
 		return service
 	}

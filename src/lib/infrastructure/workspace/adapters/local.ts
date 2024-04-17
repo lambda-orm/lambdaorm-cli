@@ -4,7 +4,7 @@ import { OrmCliH3lp, WorkspaceService } from '../../../application'
 export class LocalWorkspaceService implements WorkspaceService {
 	// eslint-disable-next-line no-useless-constructor
 	constructor (private readonly workspace:string,
-		private readonly schemaState:SchemaState,
+		private readonly state:SchemaState,
 		private readonly helper:OrmCliH3lp
 	) {}
 
@@ -13,7 +13,8 @@ export class LocalWorkspaceService implements WorkspaceService {
 		if (!await this.helper.fs.exists(workspace)) {
 			await this.helper.fs.create(workspace)
 		}
-		await this.schemaState.initialize({
+
+		this.state.initialize({
 			workspace,
 			source: args.source,
 			dialect: args.dialect,

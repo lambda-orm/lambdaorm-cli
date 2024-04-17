@@ -1,10 +1,10 @@
-version: 1.0.0
 domain:
-  version: 1.0.0
   entities:
     - name: Countries
-      primaryKey: ["iso3"]
-      uniqueKey: ["name"]
+      primaryKey:
+        - iso3
+      uniqueKey:
+        - name
       properties:
         - name: name
           required: true
@@ -19,8 +19,11 @@ domain:
           entity: States
           to: countryCode
     - name: States
-      primaryKey: ["id"]
-      uniqueKey: ["countryCode", "name"]
+      primaryKey:
+        - id
+      uniqueKey:
+        - countryCode
+        - name
       properties:
         - name: id
           type: integer
@@ -38,7 +41,6 @@ domain:
 infrastructure:
   mappings:
     - name: test
-      entities: []
   sources:
     - name: test
       dialect: MySQL
