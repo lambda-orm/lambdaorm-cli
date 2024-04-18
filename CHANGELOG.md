@@ -4,6 +4,14 @@ All notable changes to this project will be documented in this file.
 
 ## Versions
 
+## [1.2.0](https://github.com/lambda-orm/lambdaorm-cli/compare/v1.1.0...v1.2.0) (2024-04-18)
+
+
+### Features
+
+* add fetch, match, incorporate and introspect commands ([900ce02](https://github.com/lambda-orm/lambdaorm-cli/commit/900ce023968e46fc83e0f297bcdd7c7cc027624c)), closes [#0](https://github.com/lambda-orm/lambdaorm-cli/issues/0)
+* add introspect and incorporate ([a6147ee](https://github.com/lambda-orm/lambdaorm-cli/commit/a6147ee02cd2fb5a492da7e5ac6abc4b0595e847)), closes [#0](https://github.com/lambda-orm/lambdaorm-cli/issues/0)
+
 ## [1.1.0](https://github.com/lambda-orm/lambdaorm-cli/compare/v0.9.34...v1.1.0) (2024-04-17)
 
 **Features:**
