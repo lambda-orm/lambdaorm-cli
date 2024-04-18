@@ -118,7 +118,6 @@ export class LibStageService implements StageService {
 		if (schema === null) {
 			throw new Error(`Can't found schema in ${this.workspace}`)
 		}
-		// await this.orm.init(schema)
 		const _stage = this.orm.state.stage.get(stage)
 		if (sentence) {
 			return await this.orm.stage.sync({ stage: _stage.name }).sentence()

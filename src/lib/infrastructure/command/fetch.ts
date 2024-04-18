@@ -1,10 +1,10 @@
 /* eslint-disable no-mixed-spaces-and-tabs */
 import { CommandModule, Argv, Arguments } from 'yargs'
 import path from 'path'
-import { introspect } from '../builders/usesCases'
+import { fetch } from '../builders/usesCases'
 
-export class IntrospectCommand implements CommandModule {
-	command = 'introspect'
+export class FetchCommand implements CommandModule {
+	command = 'fetch'
 	describe = 'Read and analyze data and update schemas'
 
 	builder (args: Argv) {
@@ -21,13 +21,9 @@ export class IntrospectCommand implements CommandModule {
 				alias: 'envfile',
 				describe: 'Read in a file of environment variables'
 			})
-			.option('d', {
-				alias: 'data',
-				describe: 'Data file to introspect.'
-			})
-			.option('n', {
-				alias: 'name',
-				describe: 'Name of root entity'
+			.option('s', {
+				alias: 'stage',
+				describe: 'Name of stage'
 			})
 			.option('o', {
 				alias: 'output',
@@ -37,12 +33,11 @@ export class IntrospectCommand implements CommandModule {
 
 	async handler (args: Arguments) {
 		const workspace = path.resolve(process.cwd(), args.workspace as string || '.')
-		const data = args.data || {}
-		const name = args.name as string
+		const stage = args.stage as string
 		const url = args.url as string|undefined
 		const output = args.output as string
 		try {
-			await introspect.execute(workspace, data, name, output, url)
+			await fetch.execute(workspace, stage, output, url)
 		} catch (error) {
 			console.error(`error: ${error}`)
 		}

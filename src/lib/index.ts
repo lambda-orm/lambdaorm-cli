@@ -1,10 +1,10 @@
 #!/usr/bin/env node
 import {
-	InitCommand, VersionCommand, DropCommand, SyncCommand,
-	ImportCommand, ExportCommand, ExecuteCommand, BuildCommand, PlanCommand, MetadataCommand,
-	ParametersCommand, ModelCommand, ConstraintsCommand, SchemaCommand
+	InitCommand, VersionCommand, DropCommand, SyncCommand, ImportCommand, ExportCommand, ExecuteCommand, BuildCommand, PlanCommand,
+	MetadataCommand, ParametersCommand, ModelCommand, ConstraintsCommand, SchemaCommand, IncorporateCommand, IntrospectCommand
 } from './infrastructure'
 import yargs from 'yargs'
+import { FetchCommand } from './infrastructure/command/fetch'
 
 // eslint-disable-next-line no-unused-expressions
 yargs
@@ -23,6 +23,10 @@ yargs
 	.command(new ConstraintsCommand())
 	.command(new BuildCommand())
 	.command(new SchemaCommand())
+	.command(new IncorporateCommand())
+	.command(new IntrospectCommand())
+	.command(new FetchCommand())
+	.command(new FetchCommand())
 	.recommendCommands()
 	.demandCommand(1)
 	.strict()

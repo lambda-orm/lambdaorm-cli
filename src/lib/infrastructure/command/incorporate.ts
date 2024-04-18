@@ -3,7 +3,7 @@ import { CommandModule, Argv, Arguments } from 'yargs'
 import path from 'path'
 import { incorporate } from '../builders/usesCases'
 
-export class Incorporate implements CommandModule {
+export class IncorporateCommand implements CommandModule {
 	command = 'incorporate'
 	describe = 'Update schema and sync source and import data.'
 
