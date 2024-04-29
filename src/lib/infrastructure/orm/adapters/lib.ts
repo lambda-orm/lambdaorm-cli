@@ -2,9 +2,9 @@ import {
 	MetadataModel, MetadataParameter, MetadataConstraint, Metadata, QueryOptions, QueryPlan, IOrm, DomainSchema, Entity, EntityMapping
 	, Enum, Mapping, Schema, Stage, SchemaData, Orm, SchemaState
 } from 'lambdaorm'
-import { OrmService, SchemaService, StageService } from '../../../application'
+import { OrmService, CliSchemaService, CliStageService } from '../../../application'
 
-export class LibSchemaService implements SchemaService {
+export class LibSchemaService implements CliSchemaService {
 	// eslint-disable-next-line no-useless-constructor
 	public constructor (private readonly schemaState: SchemaState) {}
 
@@ -77,7 +77,7 @@ export class LibSchemaService implements SchemaService {
 	}
 }
 
-export class LibStageService implements StageService {
+export class LibStageService implements CliStageService {
 	// eslint-disable-next-line no-useless-constructor
 	public constructor (private readonly orm:IOrm, private readonly workspace:string) {}
 
@@ -128,8 +128,8 @@ export class LibStageService implements StageService {
 }
 
 export class LibOrmService implements OrmService {
-	private _schema?: SchemaService
-	private _stage?: StageService
+	private _schema?: CliSchemaService
+	private _stage?: CliStageService
 	private readonly orm: IOrm
 	public constructor (private readonly workspace:string) {
 		this.orm = new Orm(workspace)
@@ -141,14 +141,14 @@ export class LibOrmService implements OrmService {
 		return this.orm.init(this.workspace)
 	}
 
-	public get schema (): SchemaService {
+	public get schema (): CliSchemaService {
 		if (!this._schema) {
 			throw new Error('Schema not initialized')
 		}
 		return this._schema
 	}
 
-	get stage (): StageService {
+	get stage (): CliStageService {
 		if (!this._stage) {
 			throw new Error('Stage not initialized')
 		}

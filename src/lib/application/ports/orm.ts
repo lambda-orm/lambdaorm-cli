@@ -4,7 +4,7 @@ import {
 	, DomainSchema, SchemaData, Entity, Enum, Schema, Mapping, EntityMapping, Stage
 } from 'lambdaorm'
 
-export interface SchemaService {
+export interface CliSchemaService {
 	introspect (data:any, name:string): Promise<void>
 	version ():Promise<{version:string| undefined }>
 	originalSchema (): Promise<Schema>
@@ -24,7 +24,7 @@ export interface SchemaService {
 	views (): Promise<string[]>
 }
 
-export interface StageService {
+export interface CliStageService {
 	exists (stage:string): Promise<boolean>
 	export (stage:string, force: boolean): Promise<SchemaData>
 	import (stage:string, schemaData:any): Promise<void>
@@ -50,8 +50,8 @@ export interface OrmService
 	// build (args:BuildArgs): Promise<void>
 	getStageName (stage?:string):Promise<string>
 
-	get schema() : SchemaService
-	get stage() : StageService
+	get schema() : CliSchemaService
+	get stage() : CliStageService
 	/**
 		* Get model of expression
 		* @returns Model of expression

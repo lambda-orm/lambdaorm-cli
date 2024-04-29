@@ -2,12 +2,12 @@
 import {
 	MetadataModel, MetadataParameter, MetadataConstraint, Metadata, QueryOptions, QueryPlan, DomainSchema, Entity, Enum, Mapping, SchemaData, Schema, EntityMapping, Stage
 } from 'lambdaorm'
-import { OrmService, SchemaService, StageService } from '../../../application/ports/orm'
+import { OrmService, CliSchemaService, CliStageService } from '../../../application/ports/orm'
 import * as client from 'lambdaorm-client-node'
 
-export class ClientSchemaService implements SchemaService {
+export class ClientSchemaService implements CliSchemaService {
 	// eslint-disable-next-line no-useless-constructor
-	public constructor (private readonly schemaService: client.SchemaService) {}
+	public constructor (private readonly schemaService: client.ClientSchemaService) {}
 	public introspect (data: any, name: string): Promise<void> {
 		throw new Error('Method not support in Rest Service.')
 	}
@@ -78,9 +78,9 @@ export class ClientSchemaService implements SchemaService {
 	}
 }
 
-export class ClientStageService implements StageService {
+export class ClientStageService implements CliStageService {
 	// eslint-disable-next-line no-useless-constructor
-	public constructor (private readonly stageService: client.StageService) {}
+	public constructor (private readonly stageService: client.ClientStageService) {}
 
 	public async exists (stage: string): Promise<boolean> {
 		return this.stageService.exists(stage)
@@ -119,8 +119,8 @@ export class ClientStageService implements StageService {
 }
 
 export class RestOrmService implements OrmService {
-	private _schema?: SchemaService
-	private _stage?: StageService
+	private _schema?: CliSchemaService
+	private _stage?: CliStageService
 	private orm: client.Orm
 	public constructor (private readonly url:string) {
 		this.orm = new client.Orm(url)
@@ -133,14 +133,14 @@ export class RestOrmService implements OrmService {
 		return null
 	}
 
-	public get schema (): SchemaService {
+	public get schema (): CliSchemaService {
 		if (!this._schema) {
 			throw new Error('Schema not initialized')
 		}
 		return this._schema
 	}
 
-	get stage (): StageService {
+	get stage (): CliStageService {
 		if (!this._stage) {
 			throw new Error('Stage not initialized')
 		}
