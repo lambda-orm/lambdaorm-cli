@@ -44,7 +44,7 @@ CommandModule.command
 
 #### Defined in
 
-[src/lib/infrastructure/command/introspect.ts:7](https://github.com/lambda-orm/lambdaorm-cli/blob/900ce023968e46fc83e0f297bcdd7c7cc027624c/src/lib/infrastructure/command/introspect.ts#L7)
+[src/lib/infrastructure/command/introspect.ts:7](https://github.com/lambda-orm/lambdaorm-cli/blob/dcf97f325baa52ff5af37395f843d59d7ba1abee/src/lib/infrastructure/command/introspect.ts#L7)
 
 ___
 
@@ -58,7 +58,7 @@ CommandModule.describe
 
 #### Defined in
 
-[src/lib/infrastructure/command/introspect.ts:8](https://github.com/lambda-orm/lambdaorm-cli/blob/900ce023968e46fc83e0f297bcdd7c7cc027624c/src/lib/infrastructure/command/introspect.ts#L8)
+[src/lib/infrastructure/command/introspect.ts:8](https://github.com/lambda-orm/lambdaorm-cli/blob/dcf97f325baa52ff5af37395f843d59d7ba1abee/src/lib/infrastructure/command/introspect.ts#L8)
 
 ## Methods
 
@@ -82,7 +82,7 @@ CommandModule.builder
 
 #### Defined in
 
-[src/lib/infrastructure/command/introspect.ts:10](https://github.com/lambda-orm/lambdaorm-cli/blob/900ce023968e46fc83e0f297bcdd7c7cc027624c/src/lib/infrastructure/command/introspect.ts#L10)
+[src/lib/infrastructure/command/introspect.ts:10](https://github.com/lambda-orm/lambdaorm-cli/blob/dcf97f325baa52ff5af37395f843d59d7ba1abee/src/lib/infrastructure/command/introspect.ts#L10)
 
 ___
 
@@ -108,4 +108,4 @@ CommandModule.handler
 
 #### Defined in
 
-[src/lib/infrastructure/command/introspect.ts:38](https://github.com/lambda-orm/lambdaorm-cli/blob/900ce023968e46fc83e0f297bcdd7c7cc027624c/src/lib/infrastructure/command/introspect.ts#L38)
+[src/lib/infrastructure/command/introspect.ts:38](https://github.com/lambda-orm/lambdaorm-cli/blob/dcf97f325baa52ff5af37395f843d59d7ba1abee/src/lib/infrastructure/command/introspect.ts#L38)
