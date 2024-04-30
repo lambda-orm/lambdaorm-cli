@@ -40,7 +40,7 @@
 			"args": [
 				"init",
 				"-w",
-				"src/labs/lab_01"					
+				"lab"					
 			]
 		},
 		{

@@ -14,7 +14,7 @@ export class LocalWorkspaceService implements WorkspaceService {
 			await this.helper.fs.create(workspace)
 		}
 
-		this.state.initialize({
+		await this.state.initialize({
 			workspace,
 			source: args.source,
 			dialect: args.dialect,
