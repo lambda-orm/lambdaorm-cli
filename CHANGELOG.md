@@ -6,8 +6,7 @@ All notable changes to this project will be documented in this file.
 
 ## [1.3.0](https://github.com/lambda-orm/lambdaorm-cli/compare/v1.2.6...v1.3.0) (2024-05-01)
 
-
-### Features
+**Features:**
 
 * add match command ([94ec9d1](https://github.com/lambda-orm/lambdaorm-cli/commit/94ec9d1f8b81f6b4ae4a7409478ad6a2a53b5d17)), closes [#0](https://github.com/lambda-orm/lambdaorm-cli/issues/0)
 
