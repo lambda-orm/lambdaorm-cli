@@ -1,15 +1,10 @@
-# CLI Lab - Simple
+# CLI Lab - Fetch
 
 **In this laboratory we will see:**
 
-- How to use the λORM CLI commands
+- How to use λORM CLI commands
 - how to create a project that uses lambda ORM
-- How to define a schema
-- how to run a bulkInsert from a file
-- how to export data from a schema
-- how to import data into a schema from a previously generated export file
-
-## Schema diagram
+- How to obtain the mapping schema from a database with the fetch command
 
 ## Install lambda ORM CLI
 
@@ -95,80 +90,20 @@ docker exec lab-mysql mysql --host 127.0.0.1 --port 3306 -uroot -proot -e "use t
 
 ### Fetch
 
-```sh
-lambdaorm fetch
-```
+The fetch command allows you to obtain the mapping of the database tables. \
+Using the -o argument you can specify the output format, in this case yaml. \
+The mapping.yaml file will contain the mapping of the database tables. \
 
-Files generated:
-
-```sh
-├── data
-│   ├── default-ddl-20231122T154351640Z-sync-test.sql
-│   └── default-model.json
-```
-
-Verify that the database was created:
+Ejecución del comando fetch
 
 ```sh
-docker exec lab-mysql  mysql --host 127.0.0.1 --port 3306 -utest -ptest -e "use test;show tables;"
-```
-
-### Populate Data
-
-for the import we will download the following file.
-
-```sh
-wget https://raw.githubusercontent.com/lambda-orm/lambdaorm-labs/main/source/countries/data.json
-```
-
-then we will execute the following command
-
-```sh
-lambdaorm execute -q "Countries.bulkInsert().include(p => p.states)" -d ./data.json
-```
-
-### Export Data
-
-We proceed to export the data from the database with the following command
-
-```sh
-lambdaorm export 
-```
-
-will generate a file called "default-export.json"
-
-### Import Data
-
-Before importing we are going to delete all the records:
-
-```sh
-lambdaorm execute -q "States.deleteAll()"
-lambdaorm execute -q "Countries.deleteAll()"
-```
-
-We verify that there are no records left:
-
-```sh
-lambdaorm execute -q "Countries.page(1,10).include(p=>p.states)"
-```
-
-we import the file that we generate when exporting
-
-```sh
-lambdaorm import -d ./default-export.json
-```
-
-We verify that the data was imported.
-
-```sh
-lambdaorm execute -q "Countries.page(1,10).include(p => p.states)"
+lambdaorm fetch -o yaml  > mapping.yaml
 ```
 
 ## End
 
-To finish the lab we execute the following commands to drop the tables and remove the containers
+To finish the lab we execute the following command to eliminate the containers.
 
 ```sh
-lambdaorm drop
 docker-compose -p lambdaorm-lab down
 ```
