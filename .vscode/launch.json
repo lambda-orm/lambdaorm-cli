@@ -36,10 +36,9 @@
 				"<node_internals>/**"
 			],
 			"program": "${workspaceFolder}/src/lib/index.ts",
+			"cwd": "${workspaceFolder}/src/labs/fetch/lab",
 			"args": [
-				"fetch",
-				"-w",
-				"src/labs/fetch/lab"						
+				"fetch"					
 			]
 		},			
 		// lab-01 ----------------------------------------------------------------------------------		
