@@ -13,7 +13,6 @@ export class LocalWorkspaceService implements WorkspaceService {
 		if (!await this.helper.fs.exists(workspace)) {
 			await this.helper.fs.create(workspace)
 		}
-
 		await this.state.initialize({
 			workspace,
 			source: args.source,
