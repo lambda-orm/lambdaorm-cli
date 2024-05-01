@@ -1,6 +1,6 @@
 {
 	"name": "lambdaorm-cli",
-	"version": "1.2.4",
+	"version": "1.2.5",
 	"description": "The lambdaorm command line interface",
 	"author": "Flavio Lionel Rita <flaviolrita@hotmail.com>",
 	"license": "MIT",
@@ -35,7 +35,6 @@
 		"js-yaml": "^4.1.0",
 		"json-light": "^1.0.8",
 		"lambdaorm": "^1.12.0",
-		"lambdaorm-cli": "^1.2.3",
 		"lambdaorm-client-node": "^0.7.39",
 		"mongodb": "^6.3.0",
 		"mysql2": "^3.9.3",
