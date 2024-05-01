@@ -1,0 +1,174 @@
+# CLI Lab - Simple
+
+**In this laboratory we will see:**
+
+- How to use the λORM CLI commands
+- how to create a project that uses lambda ORM
+- How to define a schema
+- how to run a bulkInsert from a file
+- how to export data from a schema
+- how to import data into a schema from a previously generated export file
+
+## Schema diagram
+
+## Install lambda ORM CLI
+
+Install the package globally to use the CLI commands to help you create and maintain projects
+
+```sh
+npm install lambdaorm-cli -g
+```
+
+## Create project
+
+will create the project folder with the basic structure.
+
+```sh
+lambdaorm init -w lab
+```
+
+position inside the project folder.
+
+```sh
+cd lab
+```
+
+## Crete environment
+
+### Configure docker-compose
+
+Configure docker-compose to create the following containers:
+
+- mysql: MySQL database
+
+Create file "docker-compose.yaml"
+
+```yaml
+version: '3'
+services:
+  mysql:
+    container_name: lab-mysql
+    image: mysql:5.7
+    restart: always
+    environment:
+      - MYSQL_DATABASE=test
+      - MYSQL_USER=test
+      - MYSQL_PASSWORD=test
+      - MYSQL_ROOT_PASSWORD=root
+    ports:
+      - 3306:3306
+```
+
+Create MySql database for test:
+
+```sh
+docker-compose -p lambdaorm-lab up -d
+```
+
+create user and define character set:
+
+```sh
+docker exec lab-mysql mysql --host 127.0.0.1 --port 3306 -uroot -proot -e "ALTER DATABASE test CHARACTER SET utf8 COLLATE utf8_general_ci;"
+docker exec lab-mysql mysql --host 127.0.0.1 --port 3306 -uroot -proot -e "GRANT ALL ON *.* TO 'test'@'%' with grant option; FLUSH PRIVILEGES;"
+```
+
+### Create tables and Import data
+
+```sh
+# download the northwind-mysql.sql file
+wget https://raw.githubusercontent.com/lambda-orm/lambdaorm-labs/main/source/northwind/northwind-mysql.sql
+# copy the file to the container
+docker cp northwind-mysql.sql lab-mysql:/northwind-mysql.sql
+# connect to the container
+docker exec -it lab-mysql bash
+# ejecute the script in test database
+mysql -uroot -proot -D test < ./northwind-mysql.sql
+# exit from the container
+exit
+```
+
+Verify that teh tables were created:
+
+```sh
+docker exec lab-mysql mysql --host 127.0.0.1 --port 3306 -uroot -proot -e "use test;show tables;"
+```
+
+### Fetch
+
+```sh
+lambdaorm fetch
+```
+
+Files generated:
+
+```sh
+├── data
+│   ├── default-ddl-20231122T154351640Z-sync-test.sql
+│   └── default-model.json
+```
+
+Verify that the database was created:
+
+```sh
+docker exec lab-mysql  mysql --host 127.0.0.1 --port 3306 -utest -ptest -e "use test;show tables;"
+```
+
+### Populate Data
+
+for the import we will download the following file.
+
+```sh
+wget https://raw.githubusercontent.com/lambda-orm/lambdaorm-labs/main/source/countries/data.json
+```
+
+then we will execute the following command
+
+```sh
+lambdaorm execute -q "Countries.bulkInsert().include(p => p.states)" -d ./data.json
+```
+
+### Export Data
+
+We proceed to export the data from the database with the following command
+
+```sh
+lambdaorm export 
+```
+
+will generate a file called "default-export.json"
+
+### Import Data
+
+Before importing we are going to delete all the records:
+
+```sh
+lambdaorm execute -q "States.deleteAll()"
+lambdaorm execute -q "Countries.deleteAll()"
+```
+
+We verify that there are no records left:
+
+```sh
+lambdaorm execute -q "Countries.page(1,10).include(p=>p.states)"
+```
+
+we import the file that we generate when exporting
+
+```sh
+lambdaorm import -d ./default-export.json
+```
+
+We verify that the data was imported.
+
+```sh
+lambdaorm execute -q "Countries.page(1,10).include(p => p.states)"
+```
+
+## End
+
+To finish the lab we execute the following commands to drop the tables and remove the containers
+
+```sh
+lambdaorm drop
+docker-compose -p lambdaorm-lab down
+```

@@ -33,9 +33,11 @@
 		"npmjs",
 		"nullable",
 		"oracledb",
+		"proot",
 		"rpad",
 		"rtrim",
-		"sqlite"
+		"sqlite",
+		"uroot"
 	],
 	"editor.inlineSuggest.showToolbar": "onHover"
 }
