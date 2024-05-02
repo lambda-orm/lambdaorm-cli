@@ -29,6 +29,7 @@ export interface CliStageService {
 	export (stage:string, force: boolean): Promise<SchemaData>
 	import (stage:string, schemaData:any): Promise<void>
 	fetch (stage:string): Promise<Mapping[]>
+	introspect (data: any, name:string, stage?: string): Promise<void>
 	incorporate (data: any, name:string, stage?: string): Promise<void>
 	match (stage: string): Promise<void>
 	drop (stage: string, sentence: boolean, force:boolean): Promise<any>

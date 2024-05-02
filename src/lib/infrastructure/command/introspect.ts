@@ -17,6 +17,10 @@ export class IntrospectCommand implements CommandModule {
 				alias: 'url',
 				describe: 'Url of service.'
 			})
+			.option('s', {
+				alias: 'stage',
+				describe: 'Name of stage'
+			})
 			.option('e', {
 				alias: 'envfile',
 				describe: 'Read in a file of environment variables'
@@ -29,10 +33,6 @@ export class IntrospectCommand implements CommandModule {
 				alias: 'name',
 				describe: 'Name of root entity'
 			})
-			.option('o', {
-				alias: 'output',
-				describe: 'Generates an output according to the following possible values [json|beautiful|light|yaml]'
-			})
 	}
 
 	async handler (args: Arguments) {
@@ -40,9 +40,9 @@ export class IntrospectCommand implements CommandModule {
 		const data = args.data || {}
 		const name = args.name as string
 		const url = args.url as string|undefined
-		const output = args.output as string
+		const stage = args.stage as string
 		try {
-			await introspect.execute(workspace, data, name, output, url)
+			await introspect.execute(workspace, data, name, stage, url)
 		} catch (error) {
 			console.error(`error: ${error}`)
 		}

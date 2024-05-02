@@ -93,6 +93,10 @@ export class LibStageService implements CliStageService {
 		await this.orm.stage.match({ stage })
 	}
 
+	public async introspect (data: any, name:string, stage?: string): Promise<void> {
+		await this.orm.stage.introspect(data, name, { stage })
+	}
+
 	public async incorporate (data: any, name:string, stage?: string): Promise<void> {
 		await this.orm.stage.incorporate(data, name, { stage })
 	}

@@ -94,6 +94,11 @@ export class ClientStageService implements CliStageService {
 		return this.stageService.import(stage, schemaData)
 	}
 
+	public introspect (data: any, name: string, stage?: string | undefined): Promise<void> {
+		// TODO: implement introspect
+		throw new Error('Functionality not support by rest client.')
+	}
+
 	public incorporate (data: any, name: string, stage?: string | undefined): Promise<void> {
 		// TODO: implement incorporate
 		throw new Error('Functionality not support by rest client.')
