@@ -11,17 +11,16 @@ class CliHelper {
 		if (typeof data === 'string') {
 			const _data = this.utils.tryParse(data as string)
 			if (_data !== null) {
-				data = _data
+				return _data
 			} else {
 				try {
-					data = await this.fs.read(path.join(process.cwd(), data as string))
-					data = JSON.parse(data as string)
+					const strData = await this.fs.read(path.join(process.cwd(), data as string))
+					return JSON.parse(strData as string)
 				} catch (error) {
 					throw new Error(`Error to read context: ${error}`)
 				}
 			}
 		}
-		return data
 	}
 
 	public nameFromFile (filePath:string):string {

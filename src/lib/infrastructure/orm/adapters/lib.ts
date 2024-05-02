@@ -93,7 +93,7 @@ export class LibStageService implements CliStageService {
 		await this.orm.stage.match({ stage })
 	}
 
-	public async incorporate (stage: string, data: any, name:string): Promise<void> {
+	public async incorporate (data: any, name:string, stage?: string): Promise<void> {
 		await this.orm.stage.incorporate(data, name, { stage })
 	}
 
