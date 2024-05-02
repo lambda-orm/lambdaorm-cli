@@ -44,7 +44,7 @@ CommandModule.command
 
 #### Defined in
 
-[src/lib/infrastructure/command/execute.ts:8](https://github.com/lambda-orm/lambdaorm-cli/blob/94ec9d1f8b81f6b4ae4a7409478ad6a2a53b5d17/src/lib/infrastructure/command/execute.ts#L8)
+[src/lib/infrastructure/command/execute.ts:8](https://github.com/lambda-orm/lambdaorm-cli/blob/7db48812c7d2da3e01e8d90266ea3bdbfc2eed04/src/lib/infrastructure/command/execute.ts#L8)
 
 ___
 
@@ -58,7 +58,7 @@ CommandModule.describe
 
 #### Defined in
 
-[src/lib/infrastructure/command/execute.ts:9](https://github.com/lambda-orm/lambdaorm-cli/blob/94ec9d1f8b81f6b4ae4a7409478ad6a2a53b5d17/src/lib/infrastructure/command/execute.ts#L9)
+[src/lib/infrastructure/command/execute.ts:9](https://github.com/lambda-orm/lambdaorm-cli/blob/7db48812c7d2da3e01e8d90266ea3bdbfc2eed04/src/lib/infrastructure/command/execute.ts#L9)
 
 ## Methods
 
@@ -82,7 +82,7 @@ CommandModule.builder
 
 #### Defined in
 
-[src/lib/infrastructure/command/execute.ts:11](https://github.com/lambda-orm/lambdaorm-cli/blob/94ec9d1f8b81f6b4ae4a7409478ad6a2a53b5d17/src/lib/infrastructure/command/execute.ts#L11)
+[src/lib/infrastructure/command/execute.ts:11](https://github.com/lambda-orm/lambdaorm-cli/blob/7db48812c7d2da3e01e8d90266ea3bdbfc2eed04/src/lib/infrastructure/command/execute.ts#L11)
 
 ___
 
@@ -108,4 +108,4 @@ CommandModule.handler
 
 #### Defined in
 
-[src/lib/infrastructure/command/execute.ts:43](https://github.com/lambda-orm/lambdaorm-cli/blob/94ec9d1f8b81f6b4ae4a7409478ad6a2a53b5d17/src/lib/infrastructure/command/execute.ts#L43)
+[src/lib/infrastructure/command/execute.ts:43](https://github.com/lambda-orm/lambdaorm-cli/blob/7db48812c7d2da3e01e8d90266ea3bdbfc2eed04/src/lib/infrastructure/command/execute.ts#L43)
