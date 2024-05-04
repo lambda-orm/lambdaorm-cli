@@ -31,9 +31,9 @@ export interface CliStageService {
 	fetch (stage:string): Promise<Mapping[]>
 	introspect (data: any, name:string, stage?: string): Promise<void>
 	incorporate (data: any, name:string, stage?: string): Promise<void>
-	match (stage: string): Promise<void>
+	pull (stage: string): Promise<void>
 	drop (stage: string, sentence: boolean, force:boolean): Promise<any>
-	sync (stage: string, sentence: boolean, force:boolean): Promise<any>
+	push (stage: string, sentence: boolean, force:boolean): Promise<any>
 }
 export interface BuildArgs {
 	workspace:string

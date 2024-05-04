@@ -89,8 +89,8 @@ export class LibStageService implements CliStageService {
 		return this.orm.stage.fetch({ stage })
 	}
 
-	public async match (stage: string): Promise<void> {
-		await this.orm.stage.match({ stage })
+	public async pull (stage: string): Promise<void> {
+		await this.orm.stage.pull({ stage })
 	}
 
 	public async introspect (data: any, name:string, stage?: string): Promise<void> {
@@ -117,16 +117,16 @@ export class LibStageService implements CliStageService {
 		}
 	}
 
-	public async sync (stage: string, sentence: boolean, force:boolean): Promise<any> {
+	public async push (stage: string, sentence: boolean, force:boolean): Promise<any> {
 		const schema = await this.orm.state.load(this.workspace)
 		if (schema === null) {
 			throw new Error(`Can't found schema in ${this.workspace}`)
 		}
 		const _stage = this.orm.state.stage.get(stage)
 		if (sentence) {
-			return await this.orm.stage.sync({ stage: _stage.name }).sentence()
+			return await this.orm.stage.push({ stage: _stage.name }).sentence()
 		} else {
-			return await this.orm.stage.sync({ stage: _stage.name, tryAllCan: force }).execute()
+			return await this.orm.stage.push({ stage: _stage.name, tryAllCan: force }).execute()
 		}
 	}
 }

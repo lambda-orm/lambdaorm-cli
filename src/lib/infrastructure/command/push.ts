@@ -2,10 +2,10 @@
 import { CommandModule, Argv, Arguments } from 'yargs'
 import path from 'path'
 import dotenv from 'dotenv'
-import { synchronize } from '../builders/usesCases'
+import { push } from '../builders/usesCases'
 
-export class SyncCommand implements CommandModule {
-	command = 'sync'
+export class PushCommand implements CommandModule {
+	command = 'push'
 	describe = 'Synchronize database/s.'
 
 	builder (args: Argv) {
@@ -41,6 +41,6 @@ export class SyncCommand implements CommandModule {
 			const fullPath = path.resolve(process.cwd(), envfile)
 			dotenv.config({ path: fullPath, override: true })
 		}
-		await synchronize.execute(workspace, stage, output, force)
+		await push.execute(workspace, stage, output, force)
 	}
 }

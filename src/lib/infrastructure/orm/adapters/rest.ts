@@ -109,8 +109,8 @@ export class ClientStageService implements CliStageService {
 		throw new Error('Functionality not support by rest client.')
 	}
 
-	public match (stage: string): Promise<void> {
-		// TODO: implement match
+	public pull (stage: string): Promise<void> {
+		// TODO: implement pull
 		throw new Error('Functionality not support by rest client.')
 	}
 
@@ -118,7 +118,7 @@ export class ClientStageService implements CliStageService {
 		throw new Error('Functionality not support by rest client.')
 	}
 
-	public async sync (stage: string, sentence: boolean, force:boolean): Promise<any> {
+	public async push (stage: string, sentence: boolean, force:boolean): Promise<any> {
 		throw new Error('Functionality not support by rest client.')
 	}
 }

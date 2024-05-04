@@ -1,6 +1,6 @@
 import { CliFacade } from '../cli'
 
-export class Synchronize {
+export class Push {
 	// eslint-disable-next-line no-useless-constructor
 	constructor (private readonly service:CliFacade) {}
 
@@ -10,7 +10,7 @@ export class Synchronize {
 		try {
 			await orm.init()
 			const stageName = await orm.getStageName(stage)
-			const result = await orm.stage.sync(stageName, _output, force)
+			const result = await orm.stage.push(stageName, _output, force)
 			console.log(result)
 		} catch (error) {
 			console.error(`error: ${error}`)

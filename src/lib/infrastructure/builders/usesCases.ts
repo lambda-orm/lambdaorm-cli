@@ -1,14 +1,14 @@
 import { CliFacadeBuilder } from './facade'
 import {
-	Build, Init, Drop, Execute, Import, Export, Synchronize, Version, VersionGlobal, Plan, Metadata,
-	Parameters, Constraints, Model, Schema, Introspect, Incorporate, Match, Fetch
+	Build, Init, Drop, Execute, Import, Export, Push, Version, VersionGlobal, Plan, Metadata,
+	Parameters, Constraints, Model, Schema, Introspect, Incorporate, Pull, Fetch
 } from '../../application'
 
 const ormCliService = new CliFacadeBuilder().build()
 export const version = new Version(ormCliService)
 export const versionGlobal = new VersionGlobal(ormCliService)
 export const init = new Init(ormCliService)
-export const synchronize = new Synchronize(ormCliService)
+export const push = new Push(ormCliService)
 export const build = new Build(ormCliService)
 export const execute = new Execute(ormCliService)
 export const plan = new Plan(ormCliService)
@@ -22,5 +22,5 @@ export const drop = new Drop(ormCliService)
 export const schema = new Schema(ormCliService)
 export const introspect = new Introspect(ormCliService)
 export const incorporate = new Incorporate(ormCliService)
-export const match = new Match(ormCliService)
+export const pull = new Pull(ormCliService)
 export const fetch = new Fetch(ormCliService)

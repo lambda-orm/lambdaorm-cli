@@ -1,7 +1,7 @@
 #!/usr/bin/env node
 import {
-	InitCommand, VersionCommand, DropCommand, SyncCommand, ImportCommand, ExportCommand, ExecuteCommand, BuildCommand, PlanCommand,
-	MetadataCommand, ParametersCommand, ModelCommand, ConstraintsCommand, MatchCommand, SchemaCommand, IncorporateCommand, IntrospectCommand
+	InitCommand, VersionCommand, DropCommand, PushCommand, ImportCommand, ExportCommand, ExecuteCommand, BuildCommand, PlanCommand,
+	MetadataCommand, ParametersCommand, ModelCommand, ConstraintsCommand, PullCommand, SchemaCommand, IncorporateCommand, IntrospectCommand
 } from './infrastructure'
 import yargs from 'yargs'
 import { FetchCommand } from './infrastructure/command/fetch'
@@ -12,7 +12,7 @@ yargs
 	.command(new InitCommand())
 	.command(new VersionCommand())
 	.command(new DropCommand())
-	.command(new SyncCommand())
+	.command(new PushCommand())
 	.command(new ImportCommand())
 	.command(new ExportCommand())
 	.command(new ExecuteCommand())
@@ -26,7 +26,7 @@ yargs
 	.command(new IncorporateCommand())
 	.command(new IntrospectCommand())
 	.command(new FetchCommand())
-	.command(new MatchCommand())
+	.command(new PullCommand())
 	.recommendCommands()
 	.demandCommand(1)
 	.strict()

@@ -5,7 +5,7 @@ import { incorporate } from '../builders/usesCases'
 
 export class IncorporateCommand implements CommandModule {
 	command = 'incorporate'
-	describe = 'Update schema and sync source and import data.'
+	describe = 'Update schema and push source and import data.'
 
 	builder (args: Argv) {
 		return args

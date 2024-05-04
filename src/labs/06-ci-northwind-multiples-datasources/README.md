@@ -500,10 +500,10 @@ infrastructure:
           condition: entity.in(["Orders","Orders.details"])
 ```
 
-### Sync
+### Push
 
 ```sh
-lambdaorm sync -e .env
+lambdaorm push -e .env
 ```
 
 It will generate:

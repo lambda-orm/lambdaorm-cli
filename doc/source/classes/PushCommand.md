@@ -1,6 +1,6 @@
-[Lambda ORM](../README.md) / SyncCommand
+[Lambda ORM](../README.md) / PushCommand
 
-# Class: SyncCommand
+# Class: PushCommand
 
 ## Implements
 
@@ -10,33 +10,33 @@
 
 ### Constructors
 
-- [constructor](SyncCommand.md#constructor)
+- [constructor](PushCommand.md#constructor)
 
 ### Properties
 
-- [command](SyncCommand.md#command)
-- [describe](SyncCommand.md#describe)
+- [command](PushCommand.md#command)
+- [describe](PushCommand.md#describe)
 
 ### Methods
 
-- [builder](SyncCommand.md#builder)
-- [handler](SyncCommand.md#handler)
+- [builder](PushCommand.md#builder)
+- [handler](PushCommand.md#handler)
 
 ## Constructors
 
 ### constructor
 
-• **new SyncCommand**(): [`SyncCommand`](SyncCommand.md)
+• **new PushCommand**(): [`PushCommand`](PushCommand.md)
 
 #### Returns
 
-[`SyncCommand`](SyncCommand.md)
+[`PushCommand`](PushCommand.md)
 
 ## Properties
 
 ### command
 
-• **command**: `string` = `'sync'`
+• **command**: `string` = `'push'`
 
 #### Implementation of
 
@@ -44,7 +44,7 @@ CommandModule.command
 
 #### Defined in
 
-[src/lib/infrastructure/command/sync.ts:8](https://github.com/lambda-orm/lambdaorm-cli/blob/c3d941920149f3313c114d966471af58639b5720/src/lib/infrastructure/command/sync.ts#L8)
+src/lib/infrastructure/command/push.ts:8
 
 ___
 
@@ -58,7 +58,7 @@ CommandModule.describe
 
 #### Defined in
 
-[src/lib/infrastructure/command/sync.ts:9](https://github.com/lambda-orm/lambdaorm-cli/blob/c3d941920149f3313c114d966471af58639b5720/src/lib/infrastructure/command/sync.ts#L9)
+src/lib/infrastructure/command/push.ts:9
 
 ## Methods
 
@@ -82,7 +82,7 @@ CommandModule.builder
 
 #### Defined in
 
-[src/lib/infrastructure/command/sync.ts:11](https://github.com/lambda-orm/lambdaorm-cli/blob/c3d941920149f3313c114d966471af58639b5720/src/lib/infrastructure/command/sync.ts#L11)
+src/lib/infrastructure/command/push.ts:11
 
 ___
 
@@ -108,4 +108,4 @@ CommandModule.handler
 
 #### Defined in
 
-[src/lib/infrastructure/command/sync.ts:34](https://github.com/lambda-orm/lambdaorm-cli/blob/c3d941920149f3313c114d966471af58639b5720/src/lib/infrastructure/command/sync.ts#L34)
+src/lib/infrastructure/command/push.ts:34

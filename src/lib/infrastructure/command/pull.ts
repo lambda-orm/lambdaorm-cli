@@ -1,11 +1,11 @@
 /* eslint-disable no-mixed-spaces-and-tabs */
 import { CommandModule, Argv, Arguments } from 'yargs'
 import path from 'path'
-import { match } from '../builders/usesCases'
+import { pull } from '../builders/usesCases'
 
-export class MatchCommand implements CommandModule {
-	command = 'match'
-	describe = 'Match the stage with the sources'
+export class PullCommand implements CommandModule {
+	command = 'pull'
+	describe = 'Pull the stage with the sources'
 
 	builder (args: Argv) {
 		return args
@@ -32,7 +32,7 @@ export class MatchCommand implements CommandModule {
 		const stage = args.stage as string
 		const url = args.url as string|undefined
 		try {
-			await match.execute(workspace, stage, url)
+			await pull.execute(workspace, stage, url)
 		} catch (error) {
 			console.error(`error: ${error}`)
 		}

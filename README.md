@@ -16,7 +16,11 @@ npm install lambdaorm-cli -g
 |:------------|:--------------------------------------------------------------------|
 |	version	 		| Prints lambdaorm version this project uses.													|
 |	init				| Generates lambdaorm project structure.															|
-|	sync				|	Synchronize database.																								|
+|	push				|	Synchronize sources with schema																		  |
+|	pull				|	Synchronize schema whit sources																		  |
+|	fetch				|	Show differences the schema whit sources													  |
+|	introspect  |	Update schema with structure of data and push  				              |
+|	incorporate |	Update schema with structure of data, push and importa data  	      |
 |	execute			| Execute an expression lambda.																				|
 | metadata		|	Return metadata of query expression.																|
 | parameters	|	Return parameters of query expression.															|
@@ -75,21 +79,21 @@ It will generate:
 └── lambdaORM.yaml
 ```
 
-### sync
+### push
 
 Synchronize Stage configured in lambdaORM schema with database/s.
 
 ```sh
-lambdaorm sync
+lambdaorm push
 ```
 
 In the case the default stage is associated with several data sources, it generates a file for each data source and a file with the current model.
 
 ```sh
 data
-├── default-ddl-20231201T191054280Z-sync-Catalog.sql
-├── default-ddl-20231201T191054280Z-sync-Crm.sql
-├── default-ddl-20231201T191054281Z-sync-Ordering.json
+├── default-ddl-20231201T191054280Z-push-Catalog.sql
+├── default-ddl-20231201T191054280Z-push-Crm.sql
+├── default-ddl-20231201T191054281Z-push-Ordering.json
 ├── default-model.json
 ```
 
@@ -299,13 +303,13 @@ Result:
 
 ```sh
 data
-├── default-ddl-20231129T110712162Z-sync-Catalog.sql
-├── default-ddl-20231129T110712163Z-sync-Crm.sql
-├── default-ddl-20231129T110712163Z-sync-Ordering.json
+├── default-ddl-20231129T110712162Z-push-Catalog.sql
+├── default-ddl-20231129T110712163Z-push-Crm.sql
+├── default-ddl-20231129T110712163Z-push-Ordering.json
 ├── default-ddl-20231129T111730593Z-clean-Catalog.sql
 ├── default-ddl-20231129T111730594Z-clean-Crm.sql
 ├── default-ddl-20231129T111730594Z-clean-Ordering.json
-├── insights-ddl-20231129T110303423Z-sync-Insights.sql
+├── insights-ddl-20231129T110303423Z-push-Insights.sql
 └── insights-ddl-20231129T111738316Z-clean-Insights.sql
 ```
 
