@@ -95,22 +95,18 @@ export class ClientStageService implements CliStageService {
 	}
 
 	public introspect (data: any, name: string, stage?: string | undefined): Promise<void> {
-		// TODO: implement introspect
 		throw new Error('Functionality not support by rest client.')
 	}
 
 	public incorporate (data: any, name: string, stage?: string | undefined): Promise<void> {
-		// TODO: implement incorporate
 		throw new Error('Functionality not support by rest client.')
 	}
 
 	public fetch (stage: string): Promise<Mapping[]> {
-		// TODO: implement fetch
 		throw new Error('Functionality not support by rest client.')
 	}
 
 	public pull (stage: string): Promise<void> {
-		// TODO: implement pull
 		throw new Error('Functionality not support by rest client.')
 	}
 
