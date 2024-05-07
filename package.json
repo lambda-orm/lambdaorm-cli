@@ -36,7 +36,7 @@
 		"json-light": "^1.0.8",
 		"lambdaorm": "^1.13.9",
 		"lambdaorm-client-node": "^0.7.40",
-		"mongodb": "^6.3.0",
+		"mongodb": "^6.6.0",
 		"mysql2": "^3.9.3",
 		"oracledb": "^6.5.0",
 		"pg": "^8.11.3",
