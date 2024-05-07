@@ -1,3 +1,7 @@
+[**Lambda ORM**](../README.md) • **Docs**
+
+***
+
 [Lambda ORM](../README.md) / PushCommand
 
 # Class: PushCommand
@@ -6,27 +10,11 @@
 
 - `CommandModule`
 
-## Table of contents
-
-### Constructors
-
-- [constructor](PushCommand.md#constructor)
-
-### Properties
-
-- [command](PushCommand.md#command)
-- [describe](PushCommand.md#describe)
-
-### Methods
-
-- [builder](PushCommand.md#builder)
-- [handler](PushCommand.md#handler)
-
 ## Constructors
 
-### constructor
+### new PushCommand()
 
-• **new PushCommand**(): [`PushCommand`](PushCommand.md)
+> **new PushCommand**(): [`PushCommand`](PushCommand.md)
 
 #### Returns
 
@@ -36,67 +24,69 @@
 
 ### command
 
-• **command**: `string` = `'push'`
+> **command**: `string` = `'push'`
 
 #### Implementation of
 
-CommandModule.command
+`CommandModule.command`
 
-#### Defined in
+#### Source
 
-src/lib/infrastructure/command/push.ts:8
+[src/lib/infrastructure/command/push.ts:8](https://github.com/lambda-orm/lambdaorm-cli/blob/bf280932c596613f9722830e8420d4049d392855/src/lib/infrastructure/command/push.ts#L8)
 
-___
+***
 
 ### describe
 
-• **describe**: `string` = `'Synchronize database/s.'`
+> **describe**: `string` = `'Synchronize database/s.'`
 
 #### Implementation of
 
-CommandModule.describe
+`CommandModule.describe`
 
-#### Defined in
+#### Source
 
-src/lib/infrastructure/command/push.ts:9
+[src/lib/infrastructure/command/push.ts:9](https://github.com/lambda-orm/lambdaorm-cli/blob/bf280932c596613f9722830e8420d4049d392855/src/lib/infrastructure/command/push.ts#L9)
 
 ## Methods
 
-### builder
+### builder()
 
-▸ **builder**(`args`): `Argv`\<\{ `w`: `unknown`  } & \{ `s`: `unknown`  } & \{ `e`: `unknown`  } & \{ `o`: `unknown`  } & \{ `f`: `unknown`  }\>
+> **builder**(`args`): `Argv`\<`object` & `object` & `object` & `object` & `object`\>
 
 #### Parameters
 
-| Name | Type |
-| :------ | :------ |
-| `args` | `Argv`\<{}\> |
+• **args**: `Argv`\<`object`\>
 
 #### Returns
 
-`Argv`\<\{ `w`: `unknown`  } & \{ `s`: `unknown`  } & \{ `e`: `unknown`  } & \{ `o`: `unknown`  } & \{ `f`: `unknown`  }\>
+`Argv`\<`object` & `object` & `object` & `object` & `object`\>
 
 #### Implementation of
 
-CommandModule.builder
+`CommandModule.builder`
 
-#### Defined in
+#### Source
 
-src/lib/infrastructure/command/push.ts:11
+[src/lib/infrastructure/command/push.ts:11](https://github.com/lambda-orm/lambdaorm-cli/blob/bf280932c596613f9722830e8420d4049d392855/src/lib/infrastructure/command/push.ts#L11)
 
-___
+***
 
-### handler
+### handler()
 
-▸ **handler**(`args`): `Promise`\<`void`\>
+> **handler**(`args`): `Promise`\<`void`\>
 
 #### Parameters
 
-| Name | Type | Description |
-| :------ | :------ | :------ |
-| `args` | `Object` | - |
-| `args.$0` | `string` | The script name or node command |
-| `args._` | (`string` \| `number`)[] | Non-option arguments |
+• **args**
+
+• **args.$0**: `string`
+
+The script name or node command
+
+• **args.\_**: (`string` \| `number`)[]
+
+Non-option arguments
 
 #### Returns
 
@@ -104,8 +94,8 @@ ___
 
 #### Implementation of
 
-CommandModule.handler
+`CommandModule.handler`
 
-#### Defined in
+#### Source
 
-src/lib/infrastructure/command/push.ts:34
+[src/lib/infrastructure/command/push.ts:34](https://github.com/lambda-orm/lambdaorm-cli/blob/bf280932c596613f9722830e8420d4049d392855/src/lib/infrastructure/command/push.ts#L34)

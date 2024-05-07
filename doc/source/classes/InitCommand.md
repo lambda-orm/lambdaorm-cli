@@ -1,3 +1,7 @@
+[**Lambda ORM**](../README.md) • **Docs**
+
+***
+
 [Lambda ORM](../README.md) / InitCommand
 
 # Class: InitCommand
@@ -6,27 +10,11 @@
 
 - `CommandModule`
 
-## Table of contents
-
-### Constructors
-
-- [constructor](InitCommand.md#constructor)
-
-### Properties
-
-- [command](InitCommand.md#command)
-- [describe](InitCommand.md#describe)
-
-### Methods
-
-- [builder](InitCommand.md#builder)
-- [handler](InitCommand.md#handler)
-
 ## Constructors
 
-### constructor
+### new InitCommand()
 
-• **new InitCommand**(): [`InitCommand`](InitCommand.md)
+> **new InitCommand**(): [`InitCommand`](InitCommand.md)
 
 #### Returns
 
@@ -36,67 +24,69 @@
 
 ### command
 
-• **command**: `string` = `'init'`
+> **command**: `string` = `'init'`
 
 #### Implementation of
 
-CommandModule.command
+`CommandModule.command`
 
-#### Defined in
+#### Source
 
-[src/lib/infrastructure/command/init.ts:6](https://github.com/lambda-orm/lambdaorm-cli/blob/69e31d926d5054336afed48c21ea9331eca00a05/src/lib/infrastructure/command/init.ts#L6)
+[src/lib/infrastructure/command/init.ts:6](https://github.com/lambda-orm/lambdaorm-cli/blob/bf280932c596613f9722830e8420d4049d392855/src/lib/infrastructure/command/init.ts#L6)
 
-___
+***
 
 ### describe
 
-• **describe**: `string` = `'Generates lambdaorm project structure.'`
+> **describe**: `string` = `'Generates lambdaorm project structure.'`
 
 #### Implementation of
 
-CommandModule.describe
+`CommandModule.describe`
 
-#### Defined in
+#### Source
 
-[src/lib/infrastructure/command/init.ts:7](https://github.com/lambda-orm/lambdaorm-cli/blob/69e31d926d5054336afed48c21ea9331eca00a05/src/lib/infrastructure/command/init.ts#L7)
+[src/lib/infrastructure/command/init.ts:7](https://github.com/lambda-orm/lambdaorm-cli/blob/bf280932c596613f9722830e8420d4049d392855/src/lib/infrastructure/command/init.ts#L7)
 
 ## Methods
 
-### builder
+### builder()
 
-▸ **builder**(`args`): `Argv`\<\{ `w`: `string`  } & \{ `s`: `unknown`  } & \{ `d`: `unknown`  } & \{ `c`: `unknown`  } & \{ `data-path`: `unknown`  } & \{ `u`: `unknown`  }\>
+> **builder**(`args`): `Argv`\<`object` & `object` & `object` & `object` & `object` & `object`\>
 
 #### Parameters
 
-| Name | Type |
-| :------ | :------ |
-| `args` | `Argv`\<{}\> |
+• **args**: `Argv`\<`object`\>
 
 #### Returns
 
-`Argv`\<\{ `w`: `string`  } & \{ `s`: `unknown`  } & \{ `d`: `unknown`  } & \{ `c`: `unknown`  } & \{ `data-path`: `unknown`  } & \{ `u`: `unknown`  }\>
+`Argv`\<`object` & `object` & `object` & `object` & `object` & `object`\>
 
 #### Implementation of
 
-CommandModule.builder
+`CommandModule.builder`
 
-#### Defined in
+#### Source
 
-[src/lib/infrastructure/command/init.ts:9](https://github.com/lambda-orm/lambdaorm-cli/blob/69e31d926d5054336afed48c21ea9331eca00a05/src/lib/infrastructure/command/init.ts#L9)
+[src/lib/infrastructure/command/init.ts:9](https://github.com/lambda-orm/lambdaorm-cli/blob/bf280932c596613f9722830e8420d4049d392855/src/lib/infrastructure/command/init.ts#L9)
 
-___
+***
 
-### handler
+### handler()
 
-▸ **handler**(`args`): `Promise`\<`void`\>
+> **handler**(`args`): `Promise`\<`void`\>
 
 #### Parameters
 
-| Name | Type | Description |
-| :------ | :------ | :------ |
-| `args` | `Object` | - |
-| `args.$0` | `string` | The script name or node command |
-| `args._` | (`string` \| `number`)[] | Non-option arguments |
+• **args**
+
+• **args.$0**: `string`
+
+The script name or node command
+
+• **args.\_**: (`string` \| `number`)[]
+
+Non-option arguments
 
 #### Returns
 
@@ -104,8 +94,8 @@ ___
 
 #### Implementation of
 
-CommandModule.handler
+`CommandModule.handler`
 
-#### Defined in
+#### Source
 
-[src/lib/infrastructure/command/init.ts:38](https://github.com/lambda-orm/lambdaorm-cli/blob/69e31d926d5054336afed48c21ea9331eca00a05/src/lib/infrastructure/command/init.ts#L38)
+[src/lib/infrastructure/command/init.ts:38](https://github.com/lambda-orm/lambdaorm-cli/blob/bf280932c596613f9722830e8420d4049d392855/src/lib/infrastructure/command/init.ts#L38)

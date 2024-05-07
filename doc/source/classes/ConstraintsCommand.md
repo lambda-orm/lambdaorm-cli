@@ -1,3 +1,7 @@
+[**Lambda ORM**](../README.md) • **Docs**
+
+***
+
 [Lambda ORM](../README.md) / ConstraintsCommand
 
 # Class: ConstraintsCommand
@@ -6,27 +10,11 @@
 
 - `CommandModule`
 
-## Table of contents
-
-### Constructors
-
-- [constructor](ConstraintsCommand.md#constructor)
-
-### Properties
-
-- [command](ConstraintsCommand.md#command)
-- [describe](ConstraintsCommand.md#describe)
-
-### Methods
-
-- [builder](ConstraintsCommand.md#builder)
-- [handler](ConstraintsCommand.md#handler)
-
 ## Constructors
 
-### constructor
+### new ConstraintsCommand()
 
-• **new ConstraintsCommand**(): [`ConstraintsCommand`](ConstraintsCommand.md)
+> **new ConstraintsCommand**(): [`ConstraintsCommand`](ConstraintsCommand.md)
 
 #### Returns
 
@@ -36,67 +24,69 @@
 
 ### command
 
-• **command**: `string` = `'constraints'`
+> **command**: `string` = `'constraints'`
 
 #### Implementation of
 
-CommandModule.command
+`CommandModule.command`
 
-#### Defined in
+#### Source
 
-[src/lib/infrastructure/command/constraints.ts:8](https://github.com/lambda-orm/lambdaorm-cli/blob/69e31d926d5054336afed48c21ea9331eca00a05/src/lib/infrastructure/command/constraints.ts#L8)
+[src/lib/infrastructure/command/constraints.ts:8](https://github.com/lambda-orm/lambdaorm-cli/blob/bf280932c596613f9722830e8420d4049d392855/src/lib/infrastructure/command/constraints.ts#L8)
 
-___
+***
 
 ### describe
 
-• **describe**: `string` = `'Return constraints associated with the query expression'`
+> **describe**: `string` = `'Return constraints associated with the query'`
 
 #### Implementation of
 
-CommandModule.describe
+`CommandModule.describe`
 
-#### Defined in
+#### Source
 
-[src/lib/infrastructure/command/constraints.ts:9](https://github.com/lambda-orm/lambdaorm-cli/blob/69e31d926d5054336afed48c21ea9331eca00a05/src/lib/infrastructure/command/constraints.ts#L9)
+[src/lib/infrastructure/command/constraints.ts:9](https://github.com/lambda-orm/lambdaorm-cli/blob/bf280932c596613f9722830e8420d4049d392855/src/lib/infrastructure/command/constraints.ts#L9)
 
 ## Methods
 
-### builder
+### builder()
 
-▸ **builder**(`args`): `Argv`\<\{ `w`: `unknown`  } & \{ `q`: `unknown`  } & \{ `e`: `unknown`  } & \{ `o`: `unknown`  } & \{ `u`: `unknown`  }\>
+> **builder**(`args`): `Argv`\<`object` & `object` & `object` & `object` & `object`\>
 
 #### Parameters
 
-| Name | Type |
-| :------ | :------ |
-| `args` | `Argv`\<{}\> |
+• **args**: `Argv`\<`object`\>
 
 #### Returns
 
-`Argv`\<\{ `w`: `unknown`  } & \{ `q`: `unknown`  } & \{ `e`: `unknown`  } & \{ `o`: `unknown`  } & \{ `u`: `unknown`  }\>
+`Argv`\<`object` & `object` & `object` & `object` & `object`\>
 
 #### Implementation of
 
-CommandModule.builder
+`CommandModule.builder`
 
-#### Defined in
+#### Source
 
-[src/lib/infrastructure/command/constraints.ts:11](https://github.com/lambda-orm/lambdaorm-cli/blob/69e31d926d5054336afed48c21ea9331eca00a05/src/lib/infrastructure/command/constraints.ts#L11)
+[src/lib/infrastructure/command/constraints.ts:11](https://github.com/lambda-orm/lambdaorm-cli/blob/bf280932c596613f9722830e8420d4049d392855/src/lib/infrastructure/command/constraints.ts#L11)
 
-___
+***
 
-### handler
+### handler()
 
-▸ **handler**(`args`): `Promise`\<`void`\>
+> **handler**(`args`): `Promise`\<`void`\>
 
 #### Parameters
 
-| Name | Type | Description |
-| :------ | :------ | :------ |
-| `args` | `Object` | - |
-| `args.$0` | `string` | The script name or node command |
-| `args._` | (`string` \| `number`)[] | Non-option arguments |
+• **args**
+
+• **args.$0**: `string`
+
+The script name or node command
+
+• **args.\_**: (`string` \| `number`)[]
+
+Non-option arguments
 
 #### Returns
 
@@ -104,8 +94,8 @@ ___
 
 #### Implementation of
 
-CommandModule.handler
+`CommandModule.handler`
 
-#### Defined in
+#### Source
 
-[src/lib/infrastructure/command/constraints.ts:35](https://github.com/lambda-orm/lambdaorm-cli/blob/69e31d926d5054336afed48c21ea9331eca00a05/src/lib/infrastructure/command/constraints.ts#L35)
+[src/lib/infrastructure/command/constraints.ts:35](https://github.com/lambda-orm/lambdaorm-cli/blob/bf280932c596613f9722830e8420d4049d392855/src/lib/infrastructure/command/constraints.ts#L35)

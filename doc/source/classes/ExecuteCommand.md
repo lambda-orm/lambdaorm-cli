@@ -1,3 +1,7 @@
+[**Lambda ORM**](../README.md) • **Docs**
+
+***
+
 [Lambda ORM](../README.md) / ExecuteCommand
 
 # Class: ExecuteCommand
@@ -6,27 +10,11 @@
 
 - `CommandModule`
 
-## Table of contents
-
-### Constructors
-
-- [constructor](ExecuteCommand.md#constructor)
-
-### Properties
-
-- [command](ExecuteCommand.md#command)
-- [describe](ExecuteCommand.md#describe)
-
-### Methods
-
-- [builder](ExecuteCommand.md#builder)
-- [handler](ExecuteCommand.md#handler)
-
 ## Constructors
 
-### constructor
+### new ExecuteCommand()
 
-• **new ExecuteCommand**(): [`ExecuteCommand`](ExecuteCommand.md)
+> **new ExecuteCommand**(): [`ExecuteCommand`](ExecuteCommand.md)
 
 #### Returns
 
@@ -36,67 +24,69 @@
 
 ### command
 
-• **command**: `string` = `'execute'`
+> **command**: `string` = `'execute'`
 
 #### Implementation of
 
-CommandModule.command
+`CommandModule.command`
 
-#### Defined in
+#### Source
 
-[src/lib/infrastructure/command/execute.ts:8](https://github.com/lambda-orm/lambdaorm-cli/blob/69e31d926d5054336afed48c21ea9331eca00a05/src/lib/infrastructure/command/execute.ts#L8)
+[src/lib/infrastructure/command/execute.ts:8](https://github.com/lambda-orm/lambdaorm-cli/blob/bf280932c596613f9722830e8420d4049d392855/src/lib/infrastructure/command/execute.ts#L8)
 
-___
+***
 
 ### describe
 
-• **describe**: `string` = `'Execute an query expression'`
+> **describe**: `string` = `'Execute an query'`
 
 #### Implementation of
 
-CommandModule.describe
+`CommandModule.describe`
 
-#### Defined in
+#### Source
 
-[src/lib/infrastructure/command/execute.ts:9](https://github.com/lambda-orm/lambdaorm-cli/blob/69e31d926d5054336afed48c21ea9331eca00a05/src/lib/infrastructure/command/execute.ts#L9)
+[src/lib/infrastructure/command/execute.ts:9](https://github.com/lambda-orm/lambdaorm-cli/blob/bf280932c596613f9722830e8420d4049d392855/src/lib/infrastructure/command/execute.ts#L9)
 
 ## Methods
 
-### builder
+### builder()
 
-▸ **builder**(`args`): `Argv`\<\{ `w`: `unknown`  } & \{ `s`: `unknown`  } & \{ `q`: `unknown`  } & \{ `d`: `unknown`  } & \{ `e`: `unknown`  } & \{ `o`: `unknown`  } & \{ `u`: `unknown`  }\>
+> **builder**(`args`): `Argv`\<`object` & `object` & `object` & `object` & `object` & `object` & `object`\>
 
 #### Parameters
 
-| Name | Type |
-| :------ | :------ |
-| `args` | `Argv`\<{}\> |
+• **args**: `Argv`\<`object`\>
 
 #### Returns
 
-`Argv`\<\{ `w`: `unknown`  } & \{ `s`: `unknown`  } & \{ `q`: `unknown`  } & \{ `d`: `unknown`  } & \{ `e`: `unknown`  } & \{ `o`: `unknown`  } & \{ `u`: `unknown`  }\>
+`Argv`\<`object` & `object` & `object` & `object` & `object` & `object` & `object`\>
 
 #### Implementation of
 
-CommandModule.builder
+`CommandModule.builder`
 
-#### Defined in
+#### Source
 
-[src/lib/infrastructure/command/execute.ts:11](https://github.com/lambda-orm/lambdaorm-cli/blob/69e31d926d5054336afed48c21ea9331eca00a05/src/lib/infrastructure/command/execute.ts#L11)
+[src/lib/infrastructure/command/execute.ts:11](https://github.com/lambda-orm/lambdaorm-cli/blob/bf280932c596613f9722830e8420d4049d392855/src/lib/infrastructure/command/execute.ts#L11)
 
-___
+***
 
-### handler
+### handler()
 
-▸ **handler**(`args`): `Promise`\<`void`\>
+> **handler**(`args`): `Promise`\<`void`\>
 
 #### Parameters
 
-| Name | Type | Description |
-| :------ | :------ | :------ |
-| `args` | `Object` | - |
-| `args.$0` | `string` | The script name or node command |
-| `args._` | (`string` \| `number`)[] | Non-option arguments |
+• **args**
+
+• **args.$0**: `string`
+
+The script name or node command
+
+• **args.\_**: (`string` \| `number`)[]
+
+Non-option arguments
 
 #### Returns
 
@@ -104,8 +94,8 @@ ___
 
 #### Implementation of
 
-CommandModule.handler
+`CommandModule.handler`
 
-#### Defined in
+#### Source
 
-[src/lib/infrastructure/command/execute.ts:43](https://github.com/lambda-orm/lambdaorm-cli/blob/69e31d926d5054336afed48c21ea9331eca00a05/src/lib/infrastructure/command/execute.ts#L43)
+[src/lib/infrastructure/command/execute.ts:43](https://github.com/lambda-orm/lambdaorm-cli/blob/bf280932c596613f9722830e8420d4049d392855/src/lib/infrastructure/command/execute.ts#L43)

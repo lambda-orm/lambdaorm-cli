@@ -1,3 +1,7 @@
+[**Lambda ORM**](../README.md) • **Docs**
+
+***
+
 [Lambda ORM](../README.md) / BuildCommand
 
 # Class: BuildCommand
@@ -6,27 +10,11 @@
 
 - `CommandModule`
 
-## Table of contents
-
-### Constructors
-
-- [constructor](BuildCommand.md#constructor)
-
-### Properties
-
-- [command](BuildCommand.md#command)
-- [describe](BuildCommand.md#describe)
-
-### Methods
-
-- [builder](BuildCommand.md#builder)
-- [handler](BuildCommand.md#handler)
-
 ## Constructors
 
-### constructor
+### new BuildCommand()
 
-• **new BuildCommand**(): [`BuildCommand`](BuildCommand.md)
+> **new BuildCommand**(): [`BuildCommand`](BuildCommand.md)
 
 #### Returns
 
@@ -36,67 +24,69 @@
 
 ### command
 
-• **command**: `string` = `'build'`
+> **command**: `string` = `'build'`
 
 #### Implementation of
 
-CommandModule.command
+`CommandModule.command`
 
-#### Defined in
+#### Source
 
-[src/lib/infrastructure/command/build.ts:7](https://github.com/lambda-orm/lambdaorm-cli/blob/69e31d926d5054336afed48c21ea9331eca00a05/src/lib/infrastructure/command/build.ts#L7)
+[src/lib/infrastructure/command/build.ts:7](https://github.com/lambda-orm/lambdaorm-cli/blob/bf280932c596613f9722830e8420d4049d392855/src/lib/infrastructure/command/build.ts#L7)
 
-___
+***
 
 ### describe
 
-• **describe**: `string` = `'build model, repositories'`
+> **describe**: `string` = `'build model, repositories'`
 
 #### Implementation of
 
-CommandModule.describe
+`CommandModule.describe`
 
-#### Defined in
+#### Source
 
-[src/lib/infrastructure/command/build.ts:8](https://github.com/lambda-orm/lambdaorm-cli/blob/69e31d926d5054336afed48c21ea9331eca00a05/src/lib/infrastructure/command/build.ts#L8)
+[src/lib/infrastructure/command/build.ts:8](https://github.com/lambda-orm/lambdaorm-cli/blob/bf280932c596613f9722830e8420d4049d392855/src/lib/infrastructure/command/build.ts#L8)
 
 ## Methods
 
-### builder
+### builder()
 
-▸ **builder**(`args`): `Argv`\<\{ `w`: `undefined` \| `string`  } & \{ `l`: `unknown`  } & \{ `m`: `unknown`  } & \{ `r`: `unknown`  } & \{ `a`: `unknown`  } & \{ `src-path`: `unknown`  } & \{ `data-path`: `unknown`  } & \{ `domain-path`: `unknown`  } & \{ `u`: `unknown`  }\>
+> **builder**(`args`): `Argv`\<`object` & `object` & `object` & `object` & `object` & `object` & `object` & `object` & `object`\>
 
 #### Parameters
 
-| Name | Type |
-| :------ | :------ |
-| `args` | `Argv`\<{}\> |
+• **args**: `Argv`\<`object`\>
 
 #### Returns
 
-`Argv`\<\{ `w`: `undefined` \| `string`  } & \{ `l`: `unknown`  } & \{ `m`: `unknown`  } & \{ `r`: `unknown`  } & \{ `a`: `unknown`  } & \{ `src-path`: `unknown`  } & \{ `data-path`: `unknown`  } & \{ `domain-path`: `unknown`  } & \{ `u`: `unknown`  }\>
+`Argv`\<`object` & `object` & `object` & `object` & `object` & `object` & `object` & `object` & `object`\>
 
 #### Implementation of
 
-CommandModule.builder
+`CommandModule.builder`
 
-#### Defined in
+#### Source
 
-[src/lib/infrastructure/command/build.ts:10](https://github.com/lambda-orm/lambdaorm-cli/blob/69e31d926d5054336afed48c21ea9331eca00a05/src/lib/infrastructure/command/build.ts#L10)
+[src/lib/infrastructure/command/build.ts:10](https://github.com/lambda-orm/lambdaorm-cli/blob/bf280932c596613f9722830e8420d4049d392855/src/lib/infrastructure/command/build.ts#L10)
 
-___
+***
 
-### handler
+### handler()
 
-▸ **handler**(`args`): `Promise`\<`void`\>
+> **handler**(`args`): `Promise`\<`void`\>
 
 #### Parameters
 
-| Name | Type | Description |
-| :------ | :------ | :------ |
-| `args` | `Object` | - |
-| `args.$0` | `string` | The script name or node command |
-| `args._` | (`string` \| `number`)[] | Non-option arguments |
+• **args**
+
+• **args.$0**: `string`
+
+The script name or node command
+
+• **args.\_**: (`string` \| `number`)[]
+
+Non-option arguments
 
 #### Returns
 
@@ -104,8 +94,8 @@ ___
 
 #### Implementation of
 
-CommandModule.handler
+`CommandModule.handler`
 
-#### Defined in
+#### Source
 
-[src/lib/infrastructure/command/build.ts:47](https://github.com/lambda-orm/lambdaorm-cli/blob/69e31d926d5054336afed48c21ea9331eca00a05/src/lib/infrastructure/command/build.ts#L47)
+[src/lib/infrastructure/command/build.ts:47](https://github.com/lambda-orm/lambdaorm-cli/blob/bf280932c596613f9722830e8420d4049d392855/src/lib/infrastructure/command/build.ts#L47)

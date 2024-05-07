@@ -1,3 +1,7 @@
+[**Lambda ORM**](../README.md) • **Docs**
+
+***
+
 [Lambda ORM](../README.md) / IntrospectCommand
 
 # Class: IntrospectCommand
@@ -6,27 +10,11 @@
 
 - `CommandModule`
 
-## Table of contents
-
-### Constructors
-
-- [constructor](IntrospectCommand.md#constructor)
-
-### Properties
-
-- [command](IntrospectCommand.md#command)
-- [describe](IntrospectCommand.md#describe)
-
-### Methods
-
-- [builder](IntrospectCommand.md#builder)
-- [handler](IntrospectCommand.md#handler)
-
 ## Constructors
 
-### constructor
+### new IntrospectCommand()
 
-• **new IntrospectCommand**(): [`IntrospectCommand`](IntrospectCommand.md)
+> **new IntrospectCommand**(): [`IntrospectCommand`](IntrospectCommand.md)
 
 #### Returns
 
@@ -36,67 +24,69 @@
 
 ### command
 
-• **command**: `string` = `'introspect'`
+> **command**: `string` = `'introspect'`
 
 #### Implementation of
 
-CommandModule.command
+`CommandModule.command`
 
-#### Defined in
+#### Source
 
-[src/lib/infrastructure/command/introspect.ts:7](https://github.com/lambda-orm/lambdaorm-cli/blob/69e31d926d5054336afed48c21ea9331eca00a05/src/lib/infrastructure/command/introspect.ts#L7)
+[src/lib/infrastructure/command/introspect.ts:7](https://github.com/lambda-orm/lambdaorm-cli/blob/bf280932c596613f9722830e8420d4049d392855/src/lib/infrastructure/command/introspect.ts#L7)
 
-___
+***
 
 ### describe
 
-• **describe**: `string` = `'Read and analyze data and update schemas'`
+> **describe**: `string` = `'Read and analyze data and update schemas'`
 
 #### Implementation of
 
-CommandModule.describe
+`CommandModule.describe`
 
-#### Defined in
+#### Source
 
-[src/lib/infrastructure/command/introspect.ts:8](https://github.com/lambda-orm/lambdaorm-cli/blob/69e31d926d5054336afed48c21ea9331eca00a05/src/lib/infrastructure/command/introspect.ts#L8)
+[src/lib/infrastructure/command/introspect.ts:8](https://github.com/lambda-orm/lambdaorm-cli/blob/bf280932c596613f9722830e8420d4049d392855/src/lib/infrastructure/command/introspect.ts#L8)
 
 ## Methods
 
-### builder
+### builder()
 
-▸ **builder**(`args`): `Argv`\<\{ `w`: `unknown`  } & \{ `u`: `unknown`  } & \{ `s`: `unknown`  } & \{ `e`: `unknown`  } & \{ `d`: `unknown`  } & \{ `n`: `unknown`  }\>
+> **builder**(`args`): `Argv`\<`object` & `object` & `object` & `object` & `object` & `object`\>
 
 #### Parameters
 
-| Name | Type |
-| :------ | :------ |
-| `args` | `Argv`\<{}\> |
+• **args**: `Argv`\<`object`\>
 
 #### Returns
 
-`Argv`\<\{ `w`: `unknown`  } & \{ `u`: `unknown`  } & \{ `s`: `unknown`  } & \{ `e`: `unknown`  } & \{ `d`: `unknown`  } & \{ `n`: `unknown`  }\>
+`Argv`\<`object` & `object` & `object` & `object` & `object` & `object`\>
 
 #### Implementation of
 
-CommandModule.builder
+`CommandModule.builder`
 
-#### Defined in
+#### Source
 
-[src/lib/infrastructure/command/introspect.ts:10](https://github.com/lambda-orm/lambdaorm-cli/blob/69e31d926d5054336afed48c21ea9331eca00a05/src/lib/infrastructure/command/introspect.ts#L10)
+[src/lib/infrastructure/command/introspect.ts:10](https://github.com/lambda-orm/lambdaorm-cli/blob/bf280932c596613f9722830e8420d4049d392855/src/lib/infrastructure/command/introspect.ts#L10)
 
-___
+***
 
-### handler
+### handler()
 
-▸ **handler**(`args`): `Promise`\<`void`\>
+> **handler**(`args`): `Promise`\<`void`\>
 
 #### Parameters
 
-| Name | Type | Description |
-| :------ | :------ | :------ |
-| `args` | `Object` | - |
-| `args.$0` | `string` | The script name or node command |
-| `args._` | (`string` \| `number`)[] | Non-option arguments |
+• **args**
+
+• **args.$0**: `string`
+
+The script name or node command
+
+• **args.\_**: (`string` \| `number`)[]
+
+Non-option arguments
 
 #### Returns
 
@@ -104,8 +94,8 @@ ___
 
 #### Implementation of
 
-CommandModule.handler
+`CommandModule.handler`
 
-#### Defined in
+#### Source
 
-[src/lib/infrastructure/command/introspect.ts:38](https://github.com/lambda-orm/lambdaorm-cli/blob/69e31d926d5054336afed48c21ea9331eca00a05/src/lib/infrastructure/command/introspect.ts#L38)
+[src/lib/infrastructure/command/introspect.ts:38](https://github.com/lambda-orm/lambdaorm-cli/blob/bf280932c596613f9722830e8420d4049d392855/src/lib/infrastructure/command/introspect.ts#L38)

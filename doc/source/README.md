@@ -1,10 +1,10 @@
-Lambda ORM
+**Lambda ORM** • **Docs**
+
+***
 
 # Lambda ORM
 
-## Table of contents
-
-### Classes
+## Classes
 
 - [BuildCommand](classes/BuildCommand.md)
 - [ConstraintsCommand](classes/ConstraintsCommand.md)

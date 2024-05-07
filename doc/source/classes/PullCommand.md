@@ -1,3 +1,7 @@
+[**Lambda ORM**](../README.md) • **Docs**
+
+***
+
 [Lambda ORM](../README.md) / PullCommand
 
 # Class: PullCommand
@@ -6,27 +10,11 @@
 
 - `CommandModule`
 
-## Table of contents
-
-### Constructors
-
-- [constructor](PullCommand.md#constructor)
-
-### Properties
-
-- [command](PullCommand.md#command)
-- [describe](PullCommand.md#describe)
-
-### Methods
-
-- [builder](PullCommand.md#builder)
-- [handler](PullCommand.md#handler)
-
 ## Constructors
 
-### constructor
+### new PullCommand()
 
-• **new PullCommand**(): [`PullCommand`](PullCommand.md)
+> **new PullCommand**(): [`PullCommand`](PullCommand.md)
 
 #### Returns
 
@@ -36,67 +24,69 @@
 
 ### command
 
-• **command**: `string` = `'pull'`
+> **command**: `string` = `'pull'`
 
 #### Implementation of
 
-CommandModule.command
+`CommandModule.command`
 
-#### Defined in
+#### Source
 
-src/lib/infrastructure/command/pull.ts:7
+[src/lib/infrastructure/command/pull.ts:7](https://github.com/lambda-orm/lambdaorm-cli/blob/bf280932c596613f9722830e8420d4049d392855/src/lib/infrastructure/command/pull.ts#L7)
 
-___
+***
 
 ### describe
 
-• **describe**: `string` = `'Pull the stage with the sources'`
+> **describe**: `string` = `'Pull the stage with the sources'`
 
 #### Implementation of
 
-CommandModule.describe
+`CommandModule.describe`
 
-#### Defined in
+#### Source
 
-src/lib/infrastructure/command/pull.ts:8
+[src/lib/infrastructure/command/pull.ts:8](https://github.com/lambda-orm/lambdaorm-cli/blob/bf280932c596613f9722830e8420d4049d392855/src/lib/infrastructure/command/pull.ts#L8)
 
 ## Methods
 
-### builder
+### builder()
 
-▸ **builder**(`args`): `Argv`\<\{ `w`: `unknown`  } & \{ `u`: `unknown`  } & \{ `e`: `unknown`  } & \{ `s`: `unknown`  }\>
+> **builder**(`args`): `Argv`\<`object` & `object` & `object` & `object`\>
 
 #### Parameters
 
-| Name | Type |
-| :------ | :------ |
-| `args` | `Argv`\<{}\> |
+• **args**: `Argv`\<`object`\>
 
 #### Returns
 
-`Argv`\<\{ `w`: `unknown`  } & \{ `u`: `unknown`  } & \{ `e`: `unknown`  } & \{ `s`: `unknown`  }\>
+`Argv`\<`object` & `object` & `object` & `object`\>
 
 #### Implementation of
 
-CommandModule.builder
+`CommandModule.builder`
 
-#### Defined in
+#### Source
 
-src/lib/infrastructure/command/pull.ts:10
+[src/lib/infrastructure/command/pull.ts:10](https://github.com/lambda-orm/lambdaorm-cli/blob/bf280932c596613f9722830e8420d4049d392855/src/lib/infrastructure/command/pull.ts#L10)
 
-___
+***
 
-### handler
+### handler()
 
-▸ **handler**(`args`): `Promise`\<`void`\>
+> **handler**(`args`): `Promise`\<`void`\>
 
 #### Parameters
 
-| Name | Type | Description |
-| :------ | :------ | :------ |
-| `args` | `Object` | - |
-| `args.$0` | `string` | The script name or node command |
-| `args._` | (`string` \| `number`)[] | Non-option arguments |
+• **args**
+
+• **args.$0**: `string`
+
+The script name or node command
+
+• **args.\_**: (`string` \| `number`)[]
+
+Non-option arguments
 
 #### Returns
 
@@ -104,8 +94,8 @@ ___
 
 #### Implementation of
 
-CommandModule.handler
+`CommandModule.handler`
 
-#### Defined in
+#### Source
 
-src/lib/infrastructure/command/pull.ts:30
+[src/lib/infrastructure/command/pull.ts:30](https://github.com/lambda-orm/lambdaorm-cli/blob/bf280932c596613f9722830e8420d4049d392855/src/lib/infrastructure/command/pull.ts#L30)
