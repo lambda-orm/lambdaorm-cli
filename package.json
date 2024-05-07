@@ -29,12 +29,12 @@
 		"release": "grunt release"
 	},
 	"dependencies": {
-		"3xpr": "^1.15.15",
+		"3xpr": "^1.15.20",
 		"dotenv": "^16.3.1",
 		"h3lp": "^1.10.1",
 		"js-yaml": "^4.1.0",
 		"json-light": "^1.0.8",
-		"lambdaorm": "^1.13.2",
+		"lambdaorm": "^2.0.1",
 		"lambdaorm-client-node": "^0.7.40",
 		"mongodb": "^6.3.0",
 		"mysql2": "^3.9.3",
