@@ -172,27 +172,27 @@ export class LibOrmService implements OrmService {
 		return this.orm.end()
 	}
 
-	public async model (expression: string): Promise<MetadataModel[]> {
-		return Promise.resolve(this.orm.model(expression))
+	public async model (query: string): Promise<MetadataModel[]> {
+		return Promise.resolve(this.orm.model(query))
 	}
 
-	public async parameters (expression: string): Promise<MetadataParameter[]> {
-		return Promise.resolve(this.orm.parameters(expression))
+	public async parameters (query: string): Promise<MetadataParameter[]> {
+		return Promise.resolve(this.orm.parameters(query))
 	}
 
-	public async constraints (expression: string): Promise<MetadataConstraint> {
-		return Promise.resolve(this.orm.constraints(expression))
+	public async constraints (query: string): Promise<MetadataConstraint> {
+		return Promise.resolve(this.orm.constraints(query))
 	}
 
-	public async metadata (expression: string): Promise<Metadata> {
-		return Promise.resolve(this.orm.metadata(expression))
+	public async metadata (query: string): Promise<Metadata> {
+		return Promise.resolve(this.orm.metadata(query))
 	}
 
-	public async plan (expression: string, options?: QueryOptions | undefined): Promise<QueryPlan> {
-		return Promise.resolve(this.orm.plan(expression, options))
+	public async plan (query: string, options?: QueryOptions | undefined): Promise<QueryPlan> {
+		return Promise.resolve(this.orm.plan(query, options))
 	}
 
-	public async execute (expression: string, data?: any, options?: QueryOptions | undefined): Promise<any> {
-		return this.orm.execute(expression, data, options)
+	public async execute (query: string, data?: any, options?: QueryOptions | undefined): Promise<any> {
+		return this.orm.execute(query, data, options)
 	}
 }

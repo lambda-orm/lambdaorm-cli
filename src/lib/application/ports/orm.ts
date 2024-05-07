@@ -54,44 +54,44 @@ export interface OrmService
 	get schema() : CliSchemaService
 	get stage() : CliStageService
 	/**
-		* Get model of expression
-		* @returns Model of expression
+		* Get model of query
+		* @returns Model of query
 		*/
-	model(expression:string): Promise<MetadataModel[]>
+	model(query:string): Promise<MetadataModel[]>
 
 	/**
-		* Get parameters of expression
-		* @returns Parameters of expression
+		* Get parameters of query
+		* @returns Parameters of query
 		*/
-	parameters(expression: string): Promise<MetadataParameter[]>
+	parameters(query: string): Promise<MetadataParameter[]>
 
 	/**
-	 * Get constraints of expression
-	 * @returns Constraints of expression
+	 * Get constraints of query
+	 * @returns Constraints of query
 	 */
-	constraints(expression:string): Promise<MetadataConstraint>
+	constraints(query:string): Promise<MetadataConstraint>
 
 	/**
-		* Get metadata of expression
-		* @returns metadata of expression
+		* Get metadata of query
+		* @returns metadata of query
 		*/
-	metadata (expression:string):Promise<Metadata>
+	metadata (query:string):Promise<Metadata>
 
 	/**
 	 *
-	 * @param expression
+	 * @param query
 	 * @param stage
 	 */
-	plan(expression: string, options?: QueryOptions): Promise<QueryPlan>
+	plan(query: string, options?: QueryOptions): Promise<QueryPlan>
 
 	/**
-		* Execute expression
+		* Execute query
 		* @param data Data with variables
 		* @param stage Stage name
 	  * @param view View name
 		* @returns Result of execution
 		*/
-	execute(expression: string, data?: any, options?: QueryOptions): Promise<any>
+	execute(query: string, data?: any, options?: QueryOptions): Promise<any>
 }
 
 export interface OrmFactoryArgs {

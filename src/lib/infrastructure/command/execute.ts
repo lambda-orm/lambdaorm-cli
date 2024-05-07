@@ -6,7 +6,7 @@ import dotenv from 'dotenv'
 
 export class ExecuteCommand implements CommandModule {
 	command = 'execute'
-	describe = 'Execute an query expression'
+	describe = 'Execute an query'
 
 	builder (args: Argv) {
 		return args
@@ -24,7 +24,7 @@ export class ExecuteCommand implements CommandModule {
 			})
 			.option('d', {
 				alias: 'data',
-				describe: 'Data used to execute expression'
+				describe: 'Data used to execute query'
 			})
 			.option('e', {
 				alias: 'envfile',

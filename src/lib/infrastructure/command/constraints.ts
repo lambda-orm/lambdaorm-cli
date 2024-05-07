@@ -6,7 +6,7 @@ import dotenv from 'dotenv'
 
 export class ConstraintsCommand implements CommandModule {
 	command = 'constraints'
-	describe = 'Return constraints associated with the query expression'
+	describe = 'Return constraints associated with the query'
 
 	builder (args: Argv) {
 		return args

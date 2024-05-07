@@ -171,27 +171,27 @@ export class RestOrmService implements OrmService {
 		return _stage.name
 	}
 
-	public async model (expression: string): Promise<MetadataModel[]> {
-		return this.orm.model(expression)
+	public async model (query: string): Promise<MetadataModel[]> {
+		return this.orm.model(query)
 	}
 
-	public async parameters (expression: string): Promise<MetadataParameter[]> {
-		return this.orm.parameters(expression)
+	public async parameters (query: string): Promise<MetadataParameter[]> {
+		return this.orm.parameters(query)
 	}
 
-	public async constraints (expression: string): Promise<MetadataConstraint> {
-		return this.orm.constraints(expression)
+	public async constraints (query: string): Promise<MetadataConstraint> {
+		return this.orm.constraints(query)
 	}
 
-	public async metadata (expression: string): Promise<Metadata> {
-		return this.orm.metadata(expression) as Promise<Metadata>
+	public async metadata (query: string): Promise<Metadata> {
+		return this.orm.metadata(query) as Promise<Metadata>
 	}
 
-	public async plan (expression: string, options?: QueryOptions | undefined): Promise<QueryPlan> {
-		return this.orm.plan(expression, options)
+	public async plan (query: string, options?: QueryOptions | undefined): Promise<QueryPlan> {
+		return this.orm.plan(query, options)
 	}
 
-	public async execute (expression: string, data?: any, options?: QueryOptions | undefined): Promise<any> {
-		return this.orm.execute(expression, data, options)
+	public async execute (query: string, data?: any, options?: QueryOptions | undefined): Promise<any> {
+		return this.orm.execute(query, data, options)
 	}
 }

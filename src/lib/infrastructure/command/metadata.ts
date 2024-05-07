@@ -6,7 +6,7 @@ import dotenv from 'dotenv'
 
 export class MetadataCommand implements CommandModule {
 	command = 'metadata'
-	describe = 'Return metadata associated with the query expression'
+	describe = 'Return metadata associated with the query'
 
 	builder (args: Argv) {
 		return args

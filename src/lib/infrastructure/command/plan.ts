@@ -6,7 +6,7 @@ import dotenv from 'dotenv'
 
 export class PlanCommand implements CommandModule {
 	command = 'plan'
-	describe = 'Return plan execution of query expression'
+	describe = 'Return plan execution of query'
 
 	builder (args: Argv) {
 		return args

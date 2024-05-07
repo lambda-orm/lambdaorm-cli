@@ -6,7 +6,7 @@ export class Metadata {
 
 	public async execute (workspace:string, query:string, output?:string, url?:string): Promise<void> {
 		if (query === undefined) {
-			console.error('the query expression argument is required')
+			console.error('the query argument is required')
 			return
 		}
 		const orm = this.service.orm.create({ workspace, url })
