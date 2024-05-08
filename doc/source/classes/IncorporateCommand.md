@@ -32,7 +32,7 @@
 
 #### Source
 
-[src/lib/infrastructure/command/incorporate.ts:7](https://github.com/lambda-orm/lambdaorm-cli/blob/d5554afc4e4763ea3d1d8e820758bddace551b98/src/lib/infrastructure/command/incorporate.ts#L7)
+[src/lib/infrastructure/command/incorporate.ts:7](https://github.com/lambda-orm/lambdaorm-cli/blob/080307b936cf037d40e7a34519e601bc1e08bc51/src/lib/infrastructure/command/incorporate.ts#L7)
 
 ***
 
@@ -46,7 +46,7 @@
 
 #### Source
 
-[src/lib/infrastructure/command/incorporate.ts:8](https://github.com/lambda-orm/lambdaorm-cli/blob/d5554afc4e4763ea3d1d8e820758bddace551b98/src/lib/infrastructure/command/incorporate.ts#L8)
+[src/lib/infrastructure/command/incorporate.ts:8](https://github.com/lambda-orm/lambdaorm-cli/blob/080307b936cf037d40e7a34519e601bc1e08bc51/src/lib/infrastructure/command/incorporate.ts#L8)
 
 ## Methods
 
@@ -68,7 +68,7 @@
 
 #### Source
 
-[src/lib/infrastructure/command/incorporate.ts:10](https://github.com/lambda-orm/lambdaorm-cli/blob/d5554afc4e4763ea3d1d8e820758bddace551b98/src/lib/infrastructure/command/incorporate.ts#L10)
+[src/lib/infrastructure/command/incorporate.ts:10](https://github.com/lambda-orm/lambdaorm-cli/blob/080307b936cf037d40e7a34519e601bc1e08bc51/src/lib/infrastructure/command/incorporate.ts#L10)
 
 ***
 
@@ -98,4 +98,4 @@ Non-option arguments
 
 #### Source
 
-[src/lib/infrastructure/command/incorporate.ts:38](https://github.com/lambda-orm/lambdaorm-cli/blob/d5554afc4e4763ea3d1d8e820758bddace551b98/src/lib/infrastructure/command/incorporate.ts#L38)
+[src/lib/infrastructure/command/incorporate.ts:38](https://github.com/lambda-orm/lambdaorm-cli/blob/080307b936cf037d40e7a34519e601bc1e08bc51/src/lib/infrastructure/command/incorporate.ts#L38)
