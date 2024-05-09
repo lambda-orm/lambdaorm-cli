@@ -6,8 +6,7 @@ All notable changes to this project will be documented in this file.
 
 ## [1.4.0](https://github.com/lambda-orm/lambdaorm-cli/compare/v1.3.10...v1.4.0) (2024-05-09)
 
-
-### Features
+**Features:**
 
 * show result in stages commands ([3dd4e71](https://github.com/lambda-orm/lambdaorm-cli/commit/3dd4e71487d712defd5e9b16aec23b71ec8cb5c4)), closes [#0](https://github.com/lambda-orm/lambdaorm-cli/issues/0)
 
