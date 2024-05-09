@@ -14,7 +14,8 @@ export class Incorporate {
 			await orm.init()
 			const _data = await this.service.helper.cli.readData(data)
 			const _name = name || this.service.helper.cli.nameFromFile(data)
-			await orm.stage.incorporate(_data, _name, stage)
+			const result = await orm.stage.incorporate(_data, _name, stage)
+			this.service.output.showExecuteResult(result)
 		} catch (error) {
 			console.error(`error: ${error}`)
 		} finally {

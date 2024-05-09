@@ -1,6 +1,7 @@
 import {
 	MetadataModel, MetadataParameter, MetadataConstraint, Metadata, QueryOptions, QueryPlan, IOrm, DomainSchema, Entity, EntityMapping
-	, Enum, Mapping, Schema, Stage, SchemaData, Orm, SchemaState
+	, Enum, Mapping, Schema, Stage, SchemaData, Orm, SchemaState,
+	ExecuteResult
 } from 'lambdaorm'
 import { OrmService, CliSchemaService, CliStageService } from '../../../application'
 
@@ -89,16 +90,16 @@ export class LibStageService implements CliStageService {
 		return this.orm.stage.fetch({ stage })
 	}
 
-	public async pull (stage: string): Promise<void> {
-		await this.orm.stage.pull({ stage })
+	public async pull (stage: string): Promise<ExecuteResult[]> {
+		return this.orm.stage.pull({ stage })
 	}
 
-	public async introspect (data: any, name:string, stage?: string): Promise<void> {
-		await this.orm.stage.introspect(data, name, { stage })
+	public async introspect (data: any, name:string, stage?: string): Promise<ExecuteResult[]> {
+		return this.orm.stage.introspect(data, name, { stage })
 	}
 
-	public async incorporate (data: any, name:string, stage?: string): Promise<void> {
-		await this.orm.stage.incorporate(data, name, { stage })
+	public async incorporate (data: any, name:string, stage?: string): Promise<ExecuteResult[]> {
+		return this.orm.stage.incorporate(data, name, { stage })
 	}
 
 	public async export (stage: string, force: boolean): Promise<SchemaData> {
@@ -109,7 +110,7 @@ export class LibStageService implements CliStageService {
 		return this.orm.stage.import({ stage }).execute(schemaData)
 	}
 
-	public async drop (stage: string, sentence: boolean, force:boolean): Promise<any> {
+	public async drop (stage: string, sentence: boolean, force:boolean): Promise<ExecuteResult[]|any[]> {
 		if (sentence) {
 			return await this.orm.stage.drop({ stage }).sentence()
 		} else {
@@ -117,7 +118,7 @@ export class LibStageService implements CliStageService {
 		}
 	}
 
-	public async push (stage: string, sentence: boolean, force:boolean): Promise<any> {
+	public async push (stage: string, sentence: boolean, force:boolean): Promise<ExecuteResult[]|any[]> {
 		const schema = await this.orm.state.load(this.workspace)
 		if (schema === null) {
 			throw new Error(`Can't found schema in ${this.workspace}`)
@@ -136,9 +137,9 @@ export class LibOrmService implements OrmService {
 	private _stage?: CliStageService
 	private readonly orm: IOrm
 	public constructor (private readonly workspace:string) {
-		this.orm = new Orm(workspace)
+		this.orm = new Orm()
 		this._schema = new LibSchemaService(this.orm.state)
-		this._stage = new LibStageService(this.orm, workspace)
+		this._stage = new LibStageService(this.orm, this.workspace)
 	}
 
 	public async init (): Promise<any> {

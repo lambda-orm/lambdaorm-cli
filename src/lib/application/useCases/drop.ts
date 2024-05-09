@@ -11,7 +11,7 @@ export class Drop {
 			await orm.init()
 			const stageName = await orm.getStageName(stage)
 			const result = await orm.stage.drop(stageName, _output, force)
-			console.log(JSON.stringify(result, null, 2))
+			this.service.output.showExecuteResult(result)
 		} catch (error) {
 			console.error(`error: ${error}`)
 		} finally {

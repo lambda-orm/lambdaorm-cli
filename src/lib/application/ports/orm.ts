@@ -1,7 +1,8 @@
 /* eslint-disable @typescript-eslint/ban-types */
 import {
 	QueryPlan, QueryOptions, Metadata, MetadataModel, MetadataConstraint, MetadataParameter
-	, DomainSchema, SchemaData, Entity, Enum, Schema, Mapping, EntityMapping, Stage
+	, DomainSchema, SchemaData, Entity, Enum, Schema, Mapping, EntityMapping, Stage,
+	ExecuteResult
 } from 'lambdaorm'
 
 export interface CliSchemaService {
@@ -29,11 +30,11 @@ export interface CliStageService {
 	export (stage:string, force: boolean): Promise<SchemaData>
 	import (stage:string, schemaData:any): Promise<void>
 	fetch (stage:string): Promise<Mapping[]>
-	introspect (data: any, name:string, stage?: string): Promise<void>
-	incorporate (data: any, name:string, stage?: string): Promise<void>
-	pull (stage: string): Promise<void>
-	drop (stage: string, sentence: boolean, force:boolean): Promise<any>
-	push (stage: string, sentence: boolean, force:boolean): Promise<any>
+	introspect (data: any, name:string, stage?: string): Promise<ExecuteResult[]>
+	incorporate (data: any, name:string, stage?: string): Promise<ExecuteResult[]>
+	pull (stage: string): Promise<ExecuteResult[]>
+	drop (stage: string, sentence: boolean, force:boolean): Promise<ExecuteResult[]>
+	push (stage: string, sentence: boolean, force:boolean): Promise<ExecuteResult[]>
 }
 export interface BuildArgs {
 	workspace:string

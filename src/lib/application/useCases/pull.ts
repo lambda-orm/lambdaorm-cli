@@ -9,7 +9,8 @@ export class Pull {
 		try {
 			await orm.init()
 			const stageName = await orm.getStageName(stage)
-			await orm.stage.pull(stageName)
+			const result = await orm.stage.pull(stageName)
+			this.service.output.showExecuteResult(result)
 		} catch (error) {
 			console.error(`error: ${error}`)
 		} finally {

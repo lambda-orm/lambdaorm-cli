@@ -1,4 +1,5 @@
 import { JsonLight } from 'json-light'
+import { ExecuteResult } from 'lambdaorm'
 const yaml = require('js-yaml')
 
 export class OutputService {
@@ -24,5 +25,15 @@ export class OutputService {
 		} catch (error) {
 			console.error(`error: ${error}`)
 		}
+	}
+
+	public showExecuteResult (results:ExecuteResult[]) {
+		results.forEach((result) => {
+			if (result.error) {
+				console.error(`${result.description}: ${result.error}`)
+			} else {
+				console.log(`${result.description}: ${result.result}`)
+			}
+		})
 	}
 }

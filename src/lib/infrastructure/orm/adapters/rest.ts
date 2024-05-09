@@ -1,6 +1,7 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 import {
-	MetadataModel, MetadataParameter, MetadataConstraint, Metadata, QueryOptions, QueryPlan, DomainSchema, Entity, Enum, Mapping, SchemaData, Schema, EntityMapping, Stage
+	MetadataModel, MetadataParameter, MetadataConstraint, Metadata, QueryOptions, QueryPlan, DomainSchema, Entity, Enum, Mapping, SchemaData, Schema, EntityMapping, Stage,
+	ExecuteResult
 } from 'lambdaorm'
 import { OrmService, CliSchemaService, CliStageService } from '../../../application/ports/orm'
 import * as client from 'lambdaorm-client-node'
@@ -94,11 +95,11 @@ export class ClientStageService implements CliStageService {
 		return this.stageService.import(stage, schemaData)
 	}
 
-	public introspect (data: any, name: string, stage?: string | undefined): Promise<void> {
+	public introspect (data: any, name: string, stage?: string | undefined): Promise<ExecuteResult[]> {
 		throw new Error('Functionality not support by rest client.')
 	}
 
-	public incorporate (data: any, name: string, stage?: string | undefined): Promise<void> {
+	public incorporate (data: any, name: string, stage?: string | undefined): Promise<ExecuteResult[]> {
 		throw new Error('Functionality not support by rest client.')
 	}
 
@@ -106,7 +107,7 @@ export class ClientStageService implements CliStageService {
 		throw new Error('Functionality not support by rest client.')
 	}
 
-	public pull (stage: string): Promise<void> {
+	public pull (stage: string): Promise<ExecuteResult[]> {
 		throw new Error('Functionality not support by rest client.')
 	}
 
