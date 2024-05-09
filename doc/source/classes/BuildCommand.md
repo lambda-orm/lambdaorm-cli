@@ -32,7 +32,7 @@
 
 #### Source
 
-[src/lib/infrastructure/command/build.ts:7](https://github.com/lambda-orm/lambdaorm-cli/blob/3dd4e71487d712defd5e9b16aec23b71ec8cb5c4/src/lib/infrastructure/command/build.ts#L7)
+[src/lib/infrastructure/command/build.ts:7](https://github.com/lambda-orm/lambdaorm-cli/blob/30101ce1a86702ef155744728c8b0f15d7d5e344/src/lib/infrastructure/command/build.ts#L7)
 
 ***
 
@@ -46,7 +46,7 @@
 
 #### Source
 
-[src/lib/infrastructure/command/build.ts:8](https://github.com/lambda-orm/lambdaorm-cli/blob/3dd4e71487d712defd5e9b16aec23b71ec8cb5c4/src/lib/infrastructure/command/build.ts#L8)
+[src/lib/infrastructure/command/build.ts:8](https://github.com/lambda-orm/lambdaorm-cli/blob/30101ce1a86702ef155744728c8b0f15d7d5e344/src/lib/infrastructure/command/build.ts#L8)
 
 ## Methods
 
@@ -68,7 +68,7 @@
 
 #### Source
 
-[src/lib/infrastructure/command/build.ts:10](https://github.com/lambda-orm/lambdaorm-cli/blob/3dd4e71487d712defd5e9b16aec23b71ec8cb5c4/src/lib/infrastructure/command/build.ts#L10)
+[src/lib/infrastructure/command/build.ts:10](https://github.com/lambda-orm/lambdaorm-cli/blob/30101ce1a86702ef155744728c8b0f15d7d5e344/src/lib/infrastructure/command/build.ts#L10)
 
 ***
 
@@ -98,4 +98,4 @@ Non-option arguments
 
 #### Source
 
-[src/lib/infrastructure/command/build.ts:47](https://github.com/lambda-orm/lambdaorm-cli/blob/3dd4e71487d712defd5e9b16aec23b71ec8cb5c4/src/lib/infrastructure/command/build.ts#L47)
+[src/lib/infrastructure/command/build.ts:47](https://github.com/lambda-orm/lambdaorm-cli/blob/30101ce1a86702ef155744728c8b0f15d7d5e344/src/lib/infrastructure/command/build.ts#L47)
