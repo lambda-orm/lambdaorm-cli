@@ -21,7 +21,7 @@ export class NodeLanguageService implements LanguageService {
 			schema.infrastructure = { }
 		}
 		const _srcPath = args.srcPath || schema.infrastructure?.paths?.src || 'src'
-		const _dataPath = args.dataPath || schema.infrastructure?.paths?.data || 'data'
+		const _dataPath = args.dataPath || schema.infrastructure?.paths?.state || 'orm_state'
 		const _domainPath = args.domainPath || schema.infrastructure?.paths?.domain || 'domain'
 		schema = await this.schemaState.load(schema)
 		await this.updateStructure(args.workspace, _srcPath, _dataPath)
