@@ -60,7 +60,7 @@ lambdaorm init -w lab
 It will generate:
 
 ```sh
-├── data
+├── orm_state
 └── lambdaORM.yaml
 ```
 
@@ -75,7 +75,7 @@ lambdaorm init -w client-lab -u http://localhost:9291
 It will generate:
 
 ```sh
-├── data
+├── orm_state
 └── lambdaORM.yaml
 ```
 
@@ -253,7 +253,7 @@ lambdaorm build -l node
 Result:
 
 ```sh
-├── data
+├── orm_state
 ├── lambdaORM.yaml
 ├── package.json
 ├── src
@@ -274,7 +274,7 @@ lambdaorm build -l client-node --all -u http://localhost:9291
 Result:
 
 ```sh
-├── data
+├── orm_state
 ├── lambdaORM.yaml
 ├── package.json
 ├── src

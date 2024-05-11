@@ -28,12 +28,16 @@ export class OutputService {
 	}
 
 	public showExecuteResult (results:ExecuteResult[]) {
-		results.forEach((result) => {
-			if (result.error) {
-				console.error(`${result.description}: ${result.error}`)
-			} else {
-				console.log(`${result.description}: ${result.result}`)
-			}
-		})
+		if (!results || results.length === 0) {
+			console.log('No results')
+		} else {
+			results.forEach((result) => {
+				if (result.error) {
+					console.error(`${result.description}: ${result.error.message}`)
+				} else {
+					console.log(result.description)
+				}
+			})
+		}
 	}
 }

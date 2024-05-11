@@ -285,8 +285,8 @@ services:
 ### Service Structure
 
 ```sh
-├── data
-├── data.json
+├── orm_state
+├── orm_state.json
 ├── docker-compose.yaml
 ├── .env
 └── lambdaORM.yaml
@@ -389,7 +389,7 @@ import { Orders } from './domain/model'
 ### Structure
 
 ```sh
-├── data
+├── orm_state
 ├── lambdaORM.yaml
 ├── package.json
 ├── package-lock.json
