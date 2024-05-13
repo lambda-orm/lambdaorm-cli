@@ -1,6 +1,6 @@
 {
 	"name": "lambdaorm-cli",
-	"version": "1.4.3",
+	"version": "1.4.4",
 	"description": "The lambdaorm command line interface",
 	"author": "Flavio Lionel Rita <flaviolrita@hotmail.com>",
 	"license": "MIT",
