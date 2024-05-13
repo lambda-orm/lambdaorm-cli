@@ -32,7 +32,7 @@
 
 #### Source
 
-[src/lib/infrastructure/command/introspect.ts:7](https://github.com/lambda-orm/lambdaorm-cli/blob/78ab04c128a3d9bf0e85700413d1f74a4878565a/src/lib/infrastructure/command/introspect.ts#L7)
+[src/lib/infrastructure/command/introspect.ts:7](https://github.com/lambda-orm/lambdaorm-cli/blob/dace2b05c77d16db7d4083f062bd769d40136970/src/lib/infrastructure/command/introspect.ts#L7)
 
 ***
 
@@ -46,7 +46,7 @@
 
 #### Source
 
-[src/lib/infrastructure/command/introspect.ts:8](https://github.com/lambda-orm/lambdaorm-cli/blob/78ab04c128a3d9bf0e85700413d1f74a4878565a/src/lib/infrastructure/command/introspect.ts#L8)
+[src/lib/infrastructure/command/introspect.ts:8](https://github.com/lambda-orm/lambdaorm-cli/blob/dace2b05c77d16db7d4083f062bd769d40136970/src/lib/infrastructure/command/introspect.ts#L8)
 
 ## Methods
 
@@ -68,7 +68,7 @@
 
 #### Source
 
-[src/lib/infrastructure/command/introspect.ts:10](https://github.com/lambda-orm/lambdaorm-cli/blob/78ab04c128a3d9bf0e85700413d1f74a4878565a/src/lib/infrastructure/command/introspect.ts#L10)
+[src/lib/infrastructure/command/introspect.ts:10](https://github.com/lambda-orm/lambdaorm-cli/blob/dace2b05c77d16db7d4083f062bd769d40136970/src/lib/infrastructure/command/introspect.ts#L10)
 
 ***
 
@@ -98,4 +98,4 @@ Non-option arguments
 
 #### Source
 
-[src/lib/infrastructure/command/introspect.ts:38](https://github.com/lambda-orm/lambdaorm-cli/blob/78ab04c128a3d9bf0e85700413d1f74a4878565a/src/lib/infrastructure/command/introspect.ts#L38)
+[src/lib/infrastructure/command/introspect.ts:38](https://github.com/lambda-orm/lambdaorm-cli/blob/dace2b05c77d16db7d4083f062bd769d40136970/src/lib/infrastructure/command/introspect.ts#L38)
