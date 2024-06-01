@@ -33,7 +33,7 @@
 		"json-light": "^1.0.11",
 		"3xpr": "^1.15.23",
 		"lambdaorm-client-node": "^0.7.45",
-		"lambdaorm": "^2.2.8",
+		"lambdaorm": "^2.3.1",
 		"dotenv": "^16.3.1",
 		"js-yaml": "^4.1.0",
 		"mongodb": "^6.6.1",
