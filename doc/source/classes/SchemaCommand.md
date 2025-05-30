@@ -1,4 +1,4 @@
-[**Lambda ORM**](../README.md) • **Docs**
+[**Lambda ORM**](../README.md)
 
 ***
 
@@ -6,19 +6,21 @@
 
 # Class: SchemaCommand
 
+Defined in: [src/lib/infrastructure/command/schema.ts:6](https://github.com/lambda-orm/lambdaorm-cli/blob/b8ee889fdad9545e7f0fffaaf64675194aadfffd/src/lib/infrastructure/command/schema.ts#L6)
+
 ## Implements
 
 - `CommandModule`
 
 ## Constructors
 
-### new SchemaCommand()
+### Constructor
 
-> **new SchemaCommand**(): [`SchemaCommand`](SchemaCommand.md)
+> **new SchemaCommand**(): `SchemaCommand`
 
 #### Returns
 
-[`SchemaCommand`](SchemaCommand.md)
+`SchemaCommand`
 
 ## Properties
 
@@ -26,13 +28,13 @@
 
 > **command**: `string` = `'schema'`
 
+Defined in: [src/lib/infrastructure/command/schema.ts:7](https://github.com/lambda-orm/lambdaorm-cli/blob/b8ee889fdad9545e7f0fffaaf64675194aadfffd/src/lib/infrastructure/command/schema.ts#L7)
+
+string (or array of strings) that executes this command when given on the command line, first string may contain positional args
+
 #### Implementation of
 
 `CommandModule.command`
-
-#### Source
-
-[src/lib/infrastructure/command/schema.ts:7](https://github.com/lambda-orm/lambdaorm-cli/blob/c851a8bb292deae2db02453930bc8e326462dbb4/src/lib/infrastructure/command/schema.ts#L7)
 
 ***
 
@@ -40,13 +42,13 @@
 
 > **describe**: `string` = `'Return schema information'`
 
+Defined in: [src/lib/infrastructure/command/schema.ts:8](https://github.com/lambda-orm/lambdaorm-cli/blob/b8ee889fdad9545e7f0fffaaf64675194aadfffd/src/lib/infrastructure/command/schema.ts#L8)
+
+string used as the description for the command in help text, use `false` for a hidden command
+
 #### Implementation of
 
 `CommandModule.describe`
-
-#### Source
-
-[src/lib/infrastructure/command/schema.ts:8](https://github.com/lambda-orm/lambdaorm-cli/blob/c851a8bb292deae2db02453930bc8e326462dbb4/src/lib/infrastructure/command/schema.ts#L8)
 
 ## Methods
 
@@ -54,9 +56,15 @@
 
 > **builder**(`args`): `Argv`\<`object` & `object` & `object` & `object` & `object`\>
 
+Defined in: [src/lib/infrastructure/command/schema.ts:10](https://github.com/lambda-orm/lambdaorm-cli/blob/b8ee889fdad9545e7f0fffaaf64675194aadfffd/src/lib/infrastructure/command/schema.ts#L10)
+
+object declaring the options the command accepts, or a function accepting and returning a yargs instance
+
 #### Parameters
 
-• **args**: `Argv`\<`object`\>
+##### args
+
+`Argv`
 
 #### Returns
 
@@ -66,27 +74,31 @@
 
 `CommandModule.builder`
 
-#### Source
-
-[src/lib/infrastructure/command/schema.ts:10](https://github.com/lambda-orm/lambdaorm-cli/blob/c851a8bb292deae2db02453930bc8e326462dbb4/src/lib/infrastructure/command/schema.ts#L10)
-
 ***
 
 ### handler()
 
 > **handler**(`args`): `Promise`\<`void`\>
 
+Defined in: [src/lib/infrastructure/command/schema.ts:34](https://github.com/lambda-orm/lambdaorm-cli/blob/b8ee889fdad9545e7f0fffaaf64675194aadfffd/src/lib/infrastructure/command/schema.ts#L34)
+
+a function which will be passed the parsed argv.
+
 #### Parameters
 
-• **args**
+##### args
 
-• **args.$0**: `string`
+###### _
 
-The script name or node command
-
-• **args.\_**: (`string` \| `number`)[]
+(`string` \| `number`)[]
 
 Non-option arguments
+
+###### $0
+
+`string`
+
+The script name or node command
 
 #### Returns
 
@@ -95,7 +107,3 @@ Non-option arguments
 #### Implementation of
 
 `CommandModule.handler`
-
-#### Source
-
-[src/lib/infrastructure/command/schema.ts:34](https://github.com/lambda-orm/lambdaorm-cli/blob/c851a8bb292deae2db02453930bc8e326462dbb4/src/lib/infrastructure/command/schema.ts#L34)

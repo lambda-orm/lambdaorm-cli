@@ -1,4 +1,4 @@
-[**Lambda ORM**](../README.md) • **Docs**
+[**Lambda ORM**](../README.md)
 
 ***
 
@@ -6,19 +6,21 @@
 
 # Class: DropCommand
 
+Defined in: [src/lib/infrastructure/command/drop.ts:7](https://github.com/lambda-orm/lambdaorm-cli/blob/b8ee889fdad9545e7f0fffaaf64675194aadfffd/src/lib/infrastructure/command/drop.ts#L7)
+
 ## Implements
 
 - `CommandModule`
 
 ## Constructors
 
-### new DropCommand()
+### Constructor
 
-> **new DropCommand**(): [`DropCommand`](DropCommand.md)
+> **new DropCommand**(): `DropCommand`
 
 #### Returns
 
-[`DropCommand`](DropCommand.md)
+`DropCommand`
 
 ## Properties
 
@@ -26,13 +28,13 @@
 
 > **command**: `string` = `'drop'`
 
+Defined in: [src/lib/infrastructure/command/drop.ts:8](https://github.com/lambda-orm/lambdaorm-cli/blob/b8ee889fdad9545e7f0fffaaf64675194aadfffd/src/lib/infrastructure/command/drop.ts#L8)
+
+string (or array of strings) that executes this command when given on the command line, first string may contain positional args
+
 #### Implementation of
 
 `CommandModule.command`
-
-#### Source
-
-[src/lib/infrastructure/command/drop.ts:8](https://github.com/lambda-orm/lambdaorm-cli/blob/c851a8bb292deae2db02453930bc8e326462dbb4/src/lib/infrastructure/command/drop.ts#L8)
 
 ***
 
@@ -40,13 +42,13 @@
 
 > **describe**: `string` = `'Removes all database objects but not the database.'`
 
+Defined in: [src/lib/infrastructure/command/drop.ts:9](https://github.com/lambda-orm/lambdaorm-cli/blob/b8ee889fdad9545e7f0fffaaf64675194aadfffd/src/lib/infrastructure/command/drop.ts#L9)
+
+string used as the description for the command in help text, use `false` for a hidden command
+
 #### Implementation of
 
 `CommandModule.describe`
-
-#### Source
-
-[src/lib/infrastructure/command/drop.ts:9](https://github.com/lambda-orm/lambdaorm-cli/blob/c851a8bb292deae2db02453930bc8e326462dbb4/src/lib/infrastructure/command/drop.ts#L9)
 
 ## Methods
 
@@ -54,9 +56,15 @@
 
 > **builder**(`args`): `Argv`\<`object` & `object` & `object` & `object` & `object` & `object`\>
 
+Defined in: [src/lib/infrastructure/command/drop.ts:11](https://github.com/lambda-orm/lambdaorm-cli/blob/b8ee889fdad9545e7f0fffaaf64675194aadfffd/src/lib/infrastructure/command/drop.ts#L11)
+
+object declaring the options the command accepts, or a function accepting and returning a yargs instance
+
 #### Parameters
 
-• **args**: `Argv`\<`object`\>
+##### args
+
+`Argv`
 
 #### Returns
 
@@ -66,27 +74,31 @@
 
 `CommandModule.builder`
 
-#### Source
-
-[src/lib/infrastructure/command/drop.ts:11](https://github.com/lambda-orm/lambdaorm-cli/blob/c851a8bb292deae2db02453930bc8e326462dbb4/src/lib/infrastructure/command/drop.ts#L11)
-
 ***
 
 ### handler()
 
 > **handler**(`args`): `Promise`\<`void`\>
 
+Defined in: [src/lib/infrastructure/command/drop.ts:43](https://github.com/lambda-orm/lambdaorm-cli/blob/b8ee889fdad9545e7f0fffaaf64675194aadfffd/src/lib/infrastructure/command/drop.ts#L43)
+
+a function which will be passed the parsed argv.
+
 #### Parameters
 
-• **args**
+##### args
 
-• **args.$0**: `string`
+###### _
 
-The script name or node command
-
-• **args.\_**: (`string` \| `number`)[]
+(`string` \| `number`)[]
 
 Non-option arguments
+
+###### $0
+
+`string`
+
+The script name or node command
 
 #### Returns
 
@@ -95,7 +107,3 @@ Non-option arguments
 #### Implementation of
 
 `CommandModule.handler`
-
-#### Source
-
-[src/lib/infrastructure/command/drop.ts:43](https://github.com/lambda-orm/lambdaorm-cli/blob/c851a8bb292deae2db02453930bc8e326462dbb4/src/lib/infrastructure/command/drop.ts#L43)

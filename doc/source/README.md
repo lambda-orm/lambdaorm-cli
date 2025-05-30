@@ -1,4 +1,4 @@
-**Lambda ORM** • **Docs**
+**Lambda ORM**
 
 ***
 
