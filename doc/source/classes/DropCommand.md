@@ -6,7 +6,7 @@
 
 # Class: DropCommand
 
-Defined in: [src/lib/infrastructure/command/drop.ts:7](https://github.com/lambda-orm/lambdaorm-cli/blob/b8ee889fdad9545e7f0fffaaf64675194aadfffd/src/lib/infrastructure/command/drop.ts#L7)
+Defined in: [src/lib/infrastructure/command/drop.ts:7](https://github.com/lambda-orm/lambdaorm-cli/blob/691de9d83e6a6eaee062e55c63d94349c5c73948/src/lib/infrastructure/command/drop.ts#L7)
 
 ## Implements
 
@@ -28,7 +28,7 @@ Defined in: [src/lib/infrastructure/command/drop.ts:7](https://github.com/lambda
 
 > **command**: `string` = `'drop'`
 
-Defined in: [src/lib/infrastructure/command/drop.ts:8](https://github.com/lambda-orm/lambdaorm-cli/blob/b8ee889fdad9545e7f0fffaaf64675194aadfffd/src/lib/infrastructure/command/drop.ts#L8)
+Defined in: [src/lib/infrastructure/command/drop.ts:8](https://github.com/lambda-orm/lambdaorm-cli/blob/691de9d83e6a6eaee062e55c63d94349c5c73948/src/lib/infrastructure/command/drop.ts#L8)
 
 string (or array of strings) that executes this command when given on the command line, first string may contain positional args
 
@@ -42,7 +42,7 @@ string (or array of strings) that executes this command when given on the comman
 
 > **describe**: `string` = `'Removes all database objects but not the database.'`
 
-Defined in: [src/lib/infrastructure/command/drop.ts:9](https://github.com/lambda-orm/lambdaorm-cli/blob/b8ee889fdad9545e7f0fffaaf64675194aadfffd/src/lib/infrastructure/command/drop.ts#L9)
+Defined in: [src/lib/infrastructure/command/drop.ts:9](https://github.com/lambda-orm/lambdaorm-cli/blob/691de9d83e6a6eaee062e55c63d94349c5c73948/src/lib/infrastructure/command/drop.ts#L9)
 
 string used as the description for the command in help text, use `false` for a hidden command
 
@@ -56,7 +56,7 @@ string used as the description for the command in help text, use `false` for a h
 
 > **builder**(`args`): `Argv`\<`object` & `object` & `object` & `object` & `object` & `object`\>
 
-Defined in: [src/lib/infrastructure/command/drop.ts:11](https://github.com/lambda-orm/lambdaorm-cli/blob/b8ee889fdad9545e7f0fffaaf64675194aadfffd/src/lib/infrastructure/command/drop.ts#L11)
+Defined in: [src/lib/infrastructure/command/drop.ts:11](https://github.com/lambda-orm/lambdaorm-cli/blob/691de9d83e6a6eaee062e55c63d94349c5c73948/src/lib/infrastructure/command/drop.ts#L11)
 
 object declaring the options the command accepts, or a function accepting and returning a yargs instance
 
@@ -80,7 +80,7 @@ object declaring the options the command accepts, or a function accepting and re
 
 > **handler**(`args`): `Promise`\<`void`\>
 
-Defined in: [src/lib/infrastructure/command/drop.ts:43](https://github.com/lambda-orm/lambdaorm-cli/blob/b8ee889fdad9545e7f0fffaaf64675194aadfffd/src/lib/infrastructure/command/drop.ts#L43)
+Defined in: [src/lib/infrastructure/command/drop.ts:43](https://github.com/lambda-orm/lambdaorm-cli/blob/691de9d83e6a6eaee062e55c63d94349c5c73948/src/lib/infrastructure/command/drop.ts#L43)
 
 a function which will be passed the parsed argv.
 

@@ -499,6 +499,35 @@
 				"src/labs/countries/.env"
 			]
 		},
+		// cclc ----------------------------------------------------------------------------------
+		{
+			"name": "cclc init",
+			"type": "node",
+			"request": "launch",
+			"skipFiles": [
+				"<node_internals>/**"
+			],
+			"program": "${workspaceFolder}/src/lib/index.ts",
+			"args": [
+				"init",
+				"-w",
+				"src/labs/cclc"				
+			]
+		},
+		{
+			"name": "cclc build",
+			"type": "node",
+			"request": "launch",
+			"skipFiles": [
+				"<node_internals>/**"
+			],
+			"program": "${workspaceFolder}/src/lib/index.ts",
+			"args": [
+				"build",
+				"-w",
+				"src/labs/cclc"								
+			]
+		},		
 		// collections ----------------------------------------------------------------------------------
 		{
 			"name": "collections sync",

@@ -4,10 +4,12 @@ import {
 	MetadataCommand, ParametersCommand, ModelCommand, ConstraintsCommand, PullCommand, SchemaCommand, IncorporateCommand, IntrospectCommand
 } from './infrastructure'
 import yargs from 'yargs'
+import { hideBin } from 'yargs/helpers'
 import { FetchCommand } from './infrastructure/command/fetch'
 
 // eslint-disable-next-line no-unused-expressions
-yargs
+
+yargs(hideBin(process.argv))
 	.usage('Usage: $0 <command> [options]')
 	.command(new InitCommand())
 	.command(new VersionCommand())
@@ -33,4 +35,4 @@ yargs
 	.alias('v', 'version')
 	.help('h')
 	.alias('h', 'help')
-	.argv
+	.parse()
