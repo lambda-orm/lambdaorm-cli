@@ -2,10 +2,10 @@ version: 1.0.0
 domain:
   version: 1.0.0
   entities:
+    # Abstracts
     - name: SrbReferences
       abstract: true
-      primaryKey:
-        - id
+      primaryKey: ["id"]
       properties:
         - name: id
           type: integer
@@ -19,11 +19,10 @@ domain:
           required: true
         - name: name
           length: 200
+    # Location settings
     - name: LocCountries
-      primaryKey:
-        - id
-      uniqueKey:
-        - iso3
+      primaryKey: ["id"]
+      uniqueKey: ["iso3"]
       properties:
         - name: id
           type: integer
@@ -42,10 +41,8 @@ domain:
           length: 5
           required: true
     - name: LocAreaTypes
-      primaryKey:
-        - id
-      uniqueKey:
-        - code
+      primaryKey: ["id"]
+      uniqueKey: ["code"]
       properties:
         - name: id
           type: integer
@@ -58,10 +55,8 @@ domain:
           length: 100
           required: true
     - name: LocAreas
-      primaryKey:
-        - id
-      uniqueKey:
-        - code
+      primaryKey: ["id"]
+      uniqueKey: ["code"]
       properties:
         - name: id
           type: integer
@@ -82,9 +77,9 @@ domain:
           entity: LocAreaTypes
           to: id
           target: areas
+    # Location business
     - name: LocAddresses
-      primaryKey:
-        - id
+      primaryKey: ["id"]
       properties:
         - name: id
           type: integer
@@ -109,11 +104,8 @@ domain:
           entity: LocCountries
           to: id
     - name: LocAddressAreas
-      primaryKey:
-        - id
-      uniqueKey:
-        - addressId
-        - areaId
+      primaryKey: ["id"]
+      uniqueKey: ["addressId", "areaId"]
       properties:
         - name: id
           type: integer
@@ -135,11 +127,10 @@ domain:
           from: areaId
           entity: LocAreas
           to: id
+    # Party settings
     - name: PmPartyStatuses
-      primaryKey:
-        - id
-      uniqueKey:
-        - code
+      primaryKey: ["id"]
+      uniqueKey: ["code"]
       properties:
         - name: id
           type: integer
@@ -154,10 +145,8 @@ domain:
         - name: exclusiveType
           length: 30
     - name: PmMaritalStatuses
-      primaryKey:
-        - id
-      uniqueKey:
-        - code
+      primaryKey: ["id"]
+      uniqueKey: ["code"]
       properties:
         - name: id
           type: integer
@@ -170,10 +159,8 @@ domain:
           length: 50
           required: true
     - name: PmIdentificationTypes
-      primaryKey:
-        - id
-      uniqueKey:
-        - code
+      primaryKey: ["id"]
+      uniqueKey: ["code"]
       properties:
         - name: id
           type: integer
@@ -186,10 +173,8 @@ domain:
           length: 80
           required: true
     - name: PmIndustryTypes
-      primaryKey:
-        - id
-      uniqueKey:
-        - code
+      primaryKey: ["id"]
+      uniqueKey: ["code"]
       properties:
         - name: id
           type: integer
@@ -202,10 +187,8 @@ domain:
           length: 255
           required: true
     - name: PmContactMediumTypes
-      primaryKey:
-        - id
-      uniqueKey:
-        - code
+      primaryKey: ["id"]
+      uniqueKey: ["code"]
       properties:
         - name: id
           type: integer
@@ -218,10 +201,8 @@ domain:
           length: 50
           required: true
     - name: PmGenders
-      primaryKey:
-        - id
-      uniqueKey:
-        - code
+      primaryKey: ["id"]
+      uniqueKey: ["code"]
       properties:
         - name: id
           type: integer
@@ -233,6 +214,8 @@ domain:
         - name: name
           length: 50
           required: true
+
+    # Party business
     - name: PmReferences
       extends: SrbReferences
     - name: PmNationalReferences
@@ -242,8 +225,7 @@ domain:
         - name: refType
           key: Nation
     - name: PmParties
-      primaryKey:
-        - id
+      primaryKey: ["id"]
       properties:
         - name: id
           type: integer
@@ -266,8 +248,7 @@ domain:
           entity: PmPartyStatuses
           to: id
     - name: PmIdentifications
-      primaryKey:
-        - id
+      primaryKey: ["id"]
       properties:
         - name: id
           type: integer
@@ -295,8 +276,7 @@ domain:
           to: id
           target: indentifications
     - name: PmPartyContactMediums
-      primaryKey:
-        - id
+      primaryKey: ["id"]
       properties:
         - name: id
           type: integer
@@ -334,8 +314,7 @@ domain:
           to: id
           target: contactMediums
     - name: PmIndividuals
-      primaryKey:
-        - id
+      primaryKey: ["id"]
       properties:
         - name: id
           type: integer
@@ -370,8 +349,7 @@ domain:
           entity: PmNationalReferences
           to: id
     - name: PmIndividualNames
-      primaryKey:
-        - id
+      primaryKey: ["id"]
       properties:
         - name: id
           type: integer
@@ -395,8 +373,7 @@ domain:
           to: id
           target: names
     - name: PmOrganizations
-      primaryKey:
-        - id
+      primaryKey: ["id"]
       properties:
         - name: id
           type: integer
@@ -429,8 +406,7 @@ domain:
           entity: PmIndustryTypes
           to: id
     - name: PmOrganizationNames
-      primaryKey:
-        - id
+      primaryKey: ["id"]
       properties:
         - name: id
           type: integer
@@ -447,11 +423,10 @@ domain:
           entity: PmOrganizations
           to: id
           target: names
+    # PartyRole settings
     - name: PrPartyRoleSpecs
-      primaryKey:
-        - id
-      uniqueKey:
-        - code
+      primaryKey: ["id"]
+      uniqueKey: ["code"]
       properties:
         - name: id
           type: integer
@@ -466,10 +441,8 @@ domain:
         - name: validFrom
           type: dateTime
     - name: PrPartyRoleStatuses
-      primaryKey:
-        - id
-      uniqueKey:
-        - code
+      primaryKey: ["id"]
+      uniqueKey: ["code"]
       properties:
         - name: id
           type: integer
@@ -481,6 +454,7 @@ domain:
         - name: name
           length: 50
           required: true
+    # PartyRole business
     - name: PrReferences
       extends: SrbReferences
     - name: PrIndividualReferences
@@ -526,8 +500,7 @@ domain:
           entity: LocAddresses
           to: id
     - name: PrPartyRoles
-      primaryKey:
-        - id
+      primaryKey: ["id"]
       properties:
         - name: id
           type: integer
@@ -566,8 +539,7 @@ domain:
           entity: PrOrganizationReferences
           to: id
     - name: PrPartyRolePlaces
-      primaryKey:
-        - id
+      primaryKey: ["id"]
       properties:
         - name: id
           type: integer
@@ -590,11 +562,10 @@ domain:
           from: placeRefId
           entity: PrAddressReferences
           to: id
+    # LedgerAccount settings
     - name: LamAccountTypes
-      primaryKey:
-        - id
-      uniqueKey:
-        - code
+      primaryKey: ["id"]
+      uniqueKey: ["code"]
       properties:
         - name: id
           type: integer
@@ -618,10 +589,8 @@ domain:
           type: integer
           required: true
     - name: LamStatementCycles
-      primaryKey:
-        - id
-      uniqueKey:
-        - code
+      primaryKey: ["id"]
+      uniqueKey: ["code"]
       properties:
         - name: id
           type: integer
@@ -640,6 +609,7 @@ domain:
           length: 150
         - name: disabled
           type: boolean
+    # LedgerAccount business
     - name: LamReferences
       extends: SrbReferences
     - name: LamCurrencyReferences
@@ -659,12 +629,10 @@ domain:
       view: true
       properties:
         - name: refType
-          key: AccountHolder
+          key: "AccountHolder"
     - name: LamCreditors
-      primaryKey:
-        - id
-      uniqueKey:
-        - creditorCode
+      primaryKey: ["id"]
+      uniqueKey: ["creditorCode"]
       properties:
         - name: id
           type: integer
@@ -707,10 +675,8 @@ domain:
           type: integer
           required: true
     - name: LamAccounts
-      primaryKey:
-        - id
-      uniqueKey:
-        - accountNumber
+      primaryKey: ["id"]
+      uniqueKey: ["accountNumber"]
       properties:
         - name: id
           type: integer
@@ -730,6 +696,10 @@ domain:
           required: true
         - name: accountStatusId
           type: integer
+        # - name: accountHolderRefId
+        #   type: string
+        #   length: 100
+        #   required: true
         - name: balance
           type: decimal
           required: true
@@ -754,6 +724,10 @@ domain:
           from: accountStatusId
           entity: LamAccountStatusHistories
           to: id
+        # - name: accountHolderRef
+        #   from: accountHolderRefId
+        #   entity: LamAccountHolderReferences
+        #   to: id
         - name: statementCycle
           from: statementCycleId
           entity: LamStatementCycles
@@ -763,8 +737,7 @@ domain:
           entity: LamCreditors
           to: id
     - name: LamAccountStatusHistories
-      primaryKey:
-        - id
+      primaryKey: ["id"]
       properties:
         - name: id
           type: integer
@@ -798,11 +771,10 @@ domain:
           entity: LamAccounts
           to: id
           target: statusHistories
+    # Debtor settings
     - name: DbDebtorTypes
-      primaryKey:
-        - id
-      uniqueKey:
-        - code
+      primaryKey: ["id"]
+      uniqueKey: ["code"]
       properties:
         - name: id
           type: integer
@@ -821,10 +793,8 @@ domain:
           type: boolean
           required: true
     - name: DbBanks
-      primaryKey:
-        - id
-      uniqueKey:
-        - bic
+      primaryKey: ["id"]
+      uniqueKey: ["bic"]
       properties:
         - name: id
           type: integer
@@ -840,10 +810,8 @@ domain:
           type: boolean
           required: true
     - name: DbPaymentMethodTypes
-      primaryKey:
-        - id
-      uniqueKey:
-        - code
+      primaryKey: ["id"]
+      uniqueKey: ["code"]
       properties:
         - name: id
           type: integer
@@ -863,10 +831,8 @@ domain:
         - name: autoPay
           type: boolean
     - name: DbDebtorStages
-      primaryKey:
-        - id
-      uniqueKey:
-        - code
+      primaryKey: ["id"]
+      uniqueKey: ["code"]
       properties:
         - name: id
           type: integer
@@ -889,6 +855,7 @@ domain:
         - name: disabled
           type: boolean
           required: true
+    # Debtor business
     - name: DbReferences
       extends: SrbReferences
     - name: DbIndividualReferences
@@ -896,21 +863,21 @@ domain:
       view: true
       properties:
         - name: refType
-          key: Individual
+          key: "Individual"
         - name: refId
-          readExp: toNumber(refId)
+          readExp: toNumber(refId)          
       relations:
         - name: individual
           type: oneToOne
           from: refId
           entity: PmIndividuals
-          to: id
+          to: id    
     - name: DbLedgerAccountReferences
       extends: SrbReferences
       view: true
       properties:
         - name: refType
-          key: LedgerAccount
+          key: "LedgerAccount"
         - name: refId
           readExp: toNumber(refId)
       relations:
@@ -924,13 +891,13 @@ domain:
       view: true
       properties:
         - name: refType
-          key: User
+          key: "User"
     - name: DbAddressReferences
       extends: SrbReferences
       view: true
       properties:
         - name: refType
-          key: Address
+          key: "Address"
         - name: refId
           readExp: toNumber(refId)
       relations:
@@ -940,8 +907,8 @@ domain:
           entity: LocAddresses
           to: id
     - name: DbDebtors
-      primaryKey:
-        - id
+      primaryKey: ["id"]
+      # uniqueKey: ["debtorNumber"]
       properties:
         - name: id
           type: integer
@@ -983,14 +950,13 @@ domain:
         - name: additionalInfo3
           length: 150
       relations:
-        - name: partyRef
+        - name: individualRef
           type: oneToOne
           from: partyRefId
           entity: DbIndividualReferences
           to: id
     - name: DbDebtorStatusHistories
-      primaryKey:
-        - id
+      primaryKey: ["id"]
       properties:
         - name: id
           type: integer
@@ -1025,8 +991,7 @@ domain:
           to: id
           target: statusHistories
     - name: DbAccountServices
-      primaryKey:
-        - id
+      primaryKey: ["id"]
       properties:
         - name: id
           type: integer
@@ -1066,10 +1031,8 @@ domain:
           to: id
           target: services
     - name: DbDebtorAccounts
-      primaryKey:
-        - id
-      uniqueKey:
-        - accountNumber
+      primaryKey: ["id"]
+      uniqueKey: ["accountNumber"]
       properties:
         - name: id
           type: integer
@@ -1095,6 +1058,7 @@ domain:
           type: integer
         - name: registrationDate
           type: dateTime
+        # TODO: Pending solver
         - name: currencyRefId
           type: integer
         - name: activeSegmentId
@@ -1111,8 +1075,7 @@ domain:
           entity: DbLedgerAccountReferences
           to: id
     - name: DbAccountStatusHistories
-      primaryKey:
-        - id
+      primaryKey: ["id"]
       properties:
         - name: id
           type: integer
@@ -1150,8 +1113,7 @@ domain:
           to: id
           target: statusHistories
     - name: DbAccountPaymentResps
-      primaryKey:
-        - id
+      primaryKey: ["id"]
       properties:
         - name: id
           type: integer
@@ -1194,8 +1156,7 @@ domain:
           entity: DbPaymentResponsibleMethods
           to: id
     - name: DbPaymentResponsibles
-      primaryKey:
-        - id
+      primaryKey: ["id"]
       properties:
         - name: id
           type: integer
@@ -1207,8 +1168,7 @@ domain:
         - name: referenceNumber
           length: 50
     - name: DbPaymentResponsibleMethods
-      primaryKey:
-        - id
+      primaryKey: ["id"]
       properties:
         - name: id
           type: integer
@@ -1251,6 +1211,7 @@ infrastructure:
   mappings:
     - name: default
       entities:
+        # General
         - name: SrbReferences
           abstract: true
           mapping: TBL_SRB_REFERENCE
@@ -1263,6 +1224,7 @@ infrastructure:
               mapping: REF_ID
             - name: name
               mapping: NAME
+        # Location
         - name: LocCountries
           mapping: TBL_LOC_COUNTRY
           properties:
@@ -1322,6 +1284,7 @@ infrastructure:
               mapping: ADDRESS_ID
             - name: areaId
               mapping: AREA_ID
+        #  Party
         - name: PmReferences
           extends: SrbReferences
         - name: PmNationalReferences
@@ -1487,6 +1450,7 @@ infrastructure:
               mapping: ORGANIZATION_ID
             - name: tradingName
               mapping: TRADING_NAME
+        # PartyRole
         - name: PrPartyRoleSpecs
           mapping: TBL_PR_PARTY_ROLE_SPEC
           properties:
@@ -1539,6 +1503,7 @@ infrastructure:
               mapping: PARTY_ROLE_ID
             - name: placeRefId
               mapping: PLACE_REF_ID
+        # LedgerAccount
         - name: LamAccountTypes
           mapping: TBL_LAM_ACCOUNT_TYPE
           properties:
@@ -1615,6 +1580,8 @@ infrastructure:
               mapping: ACCOUNT_TYPE_ID
             - name: accountStatusId
               mapping: ACCOUNT_STATUS_ID
+            # - name: accountHolderRefId
+            #   mapping: ACCOUNT_HOLDER_REF
             - name: balance
               mapping: BALANCE
             - name: statementCycleId
@@ -1650,6 +1617,7 @@ infrastructure:
               mapping: REMARKS
             - name: accountId
               mapping: ACCOUNT_ID
+        # Debtor
         - name: DbDebtorTypes
           mapping: TBL_DB_DEBTOR_TYPE
           properties:
@@ -1706,6 +1674,7 @@ infrastructure:
               mapping: STAGE_POSITION
             - name: disabled
               mapping: DISABLED
+
         - name: DbReferences
           extends: SrbReferences
         - name: DbIndividualReferences
@@ -1716,6 +1685,7 @@ infrastructure:
           extends: SrbReferences
         - name: DbAddressReferences
           extends: SrbReferences
+
         - name: DbDebtors
           mapping: TBL_DB_DEBTOR
           properties:
@@ -1892,8 +1862,10 @@ infrastructure:
     - name: Oracle
       extends: default
       entities:
+        # General
         - name: SrbReferences
           sequence: SQ_SRB_REFERENCE
+        # Location
         - name: LocCountries
           sequence: SQ_LOC_COUNTRY
         - name: LocAreaTypes
@@ -1904,6 +1876,7 @@ infrastructure:
           sequence: SQ_LOC_ADDRESS
         - name: LocAddressAreas
           sequence: SQ_LOC_ADDRESS_AREA
+        #  Party
         - name: PmReferences
           extends: SrbReferences
           sequence: SQ_SRB_REFERENCE
@@ -1936,6 +1909,7 @@ infrastructure:
           sequence: SQ_PM_ORGANIZATION
         - name: PmOrganizationNames
           sequence: SQ_PM_ORGANIZATION_NAME
+        # PartyRole
         - name: PrReferences
           extends: SrbReferences
           sequence: SQ_SRB_REFERENCE
@@ -1948,6 +1922,7 @@ infrastructure:
         - name: PrAddressReferences
           extends: SrbReferences
           sequence: SQ_SRB_REFERENCE
+
         - name: PrPartyRoleSpecs
           sequence: SQ_PR_PARTY_ROLE_SPEC
         - name: PrPartyRoleStatuses
@@ -1956,6 +1931,7 @@ infrastructure:
           sequence: SQ_PR_PARTY_ROLE
         - name: PrPartyRolePlaces
           sequence: SQ_PR_PARTY_ROLE_PLACE
+        # LedgerAccount
         - name: LamAccountTypes
           sequence: SQ_LAM_ACCOUNT_TYPE
         - name: LamStatementCycles
@@ -1978,6 +1954,7 @@ infrastructure:
           sequence: SQ_SRB_REFERENCE
         - name: LamAccountStatusHistories
           sequence: SQ_LAM_ACCOUNT_STATUS_HISTORY
+        # Debtor
         - name: DbReferences
           extends: SrbReferences
           sequence: SQ_SRB_REFERENCE
@@ -2068,6 +2045,7 @@ infrastructure:
             - name: registrationDate
               readMappingExp: dateTime(registrationDate)
   sources:
+    # CCLP sources
     - name: cclpLocations
       mapping: Oracle
       dialect: Oracle
@@ -2088,6 +2066,7 @@ infrastructure:
       mapping: Oracle
       dialect: Oracle
       connection: ${CCLP_DEBTORS}
+    # KPN sources
     - name: kpnLocations
       mapping: PostgreSQL
       dialect: PostgreSQL
@@ -2107,7 +2086,7 @@ infrastructure:
     - name: kpnDebtors
       mapping: PostgreSQL
       dialect: PostgreSQL
-      connection: ${KPN_DEBTORS}
+      connection: ${KPN_DEBTORS}  
   stages:
     - name: cclp
       sources:

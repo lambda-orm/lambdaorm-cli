@@ -6,7 +6,7 @@
 
 # Class: InitCommand
 
-Defined in: [src/lib/infrastructure/command/init.ts:5](https://github.com/lambda-orm/lambdaorm-cli/blob/691de9d83e6a6eaee062e55c63d94349c5c73948/src/lib/infrastructure/command/init.ts#L5)
+Defined in: [src/lib/infrastructure/command/init.ts:5](https://github.com/lambda-orm/lambdaorm-cli/blob/13ba67f82da56ad016f8e1dfde55096d88f4a8c9/src/lib/infrastructure/command/init.ts#L5)
 
 ## Implements
 
@@ -28,7 +28,7 @@ Defined in: [src/lib/infrastructure/command/init.ts:5](https://github.com/lambda
 
 > **command**: `string` = `'init'`
 
-Defined in: [src/lib/infrastructure/command/init.ts:6](https://github.com/lambda-orm/lambdaorm-cli/blob/691de9d83e6a6eaee062e55c63d94349c5c73948/src/lib/infrastructure/command/init.ts#L6)
+Defined in: [src/lib/infrastructure/command/init.ts:6](https://github.com/lambda-orm/lambdaorm-cli/blob/13ba67f82da56ad016f8e1dfde55096d88f4a8c9/src/lib/infrastructure/command/init.ts#L6)
 
 string (or array of strings) that executes this command when given on the command line, first string may contain positional args
 
@@ -42,7 +42,7 @@ string (or array of strings) that executes this command when given on the comman
 
 > **describe**: `string` = `'Generates lambdaorm project structure.'`
 
-Defined in: [src/lib/infrastructure/command/init.ts:7](https://github.com/lambda-orm/lambdaorm-cli/blob/691de9d83e6a6eaee062e55c63d94349c5c73948/src/lib/infrastructure/command/init.ts#L7)
+Defined in: [src/lib/infrastructure/command/init.ts:7](https://github.com/lambda-orm/lambdaorm-cli/blob/13ba67f82da56ad016f8e1dfde55096d88f4a8c9/src/lib/infrastructure/command/init.ts#L7)
 
 string used as the description for the command in help text, use `false` for a hidden command
 
@@ -56,7 +56,7 @@ string used as the description for the command in help text, use `false` for a h
 
 > **builder**(`args`): `Argv`\<`object` & `object` & `object` & `object` & `object` & `object`\>
 
-Defined in: [src/lib/infrastructure/command/init.ts:9](https://github.com/lambda-orm/lambdaorm-cli/blob/691de9d83e6a6eaee062e55c63d94349c5c73948/src/lib/infrastructure/command/init.ts#L9)
+Defined in: [src/lib/infrastructure/command/init.ts:9](https://github.com/lambda-orm/lambdaorm-cli/blob/13ba67f82da56ad016f8e1dfde55096d88f4a8c9/src/lib/infrastructure/command/init.ts#L9)
 
 object declaring the options the command accepts, or a function accepting and returning a yargs instance
 
@@ -80,7 +80,7 @@ object declaring the options the command accepts, or a function accepting and re
 
 > **handler**(`args`): `Promise`\<`void`\>
 
-Defined in: [src/lib/infrastructure/command/init.ts:38](https://github.com/lambda-orm/lambdaorm-cli/blob/691de9d83e6a6eaee062e55c63d94349c5c73948/src/lib/infrastructure/command/init.ts#L38)
+Defined in: [src/lib/infrastructure/command/init.ts:38](https://github.com/lambda-orm/lambdaorm-cli/blob/13ba67f82da56ad016f8e1dfde55096d88f4a8c9/src/lib/infrastructure/command/init.ts#L38)
 
 a function which will be passed the parsed argv.
 
